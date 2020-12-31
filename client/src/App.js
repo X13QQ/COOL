@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 function App() {
   return (
     <>
-      <div className="App">ppp</div>
+      <div className="App">Main</div>
     </>
   )
 }
