@@ -5,39 +5,28 @@ import { MemberSidebarData } from './MemberSidebarData'
 function MemberSidebar() {
   return (
     <>
-      <Container>
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="#">我的首頁</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href="#">會員管理</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-              我的信箱
-            </li>
-          </ol>
-        </nav>
-
-        <div className="Sidebar">
-          <ul className="SidebarList">
+      <div className="Sidebar">
+        <ul className="SidebarList">
+          <a href="/">
             <div className="my-3">我的COOL</div>
-            <p class="solid-bottom"></p>
-            {MemberSidebarData.map((val, key) => {
-              return (
-                <li
-                  key={key}
-                  className="row w-100 d-flex flex-row justify-content-center align-items-center"
-                >
-                  <div className="col-2">{val.icon}</div>
-                  <div>{val.title}</div>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      </Container>
+          </a>
+          <p class="solid-bottom"></p>
+          {MemberSidebarData.map((val, key) => {
+            return (
+              <li
+                key={key}
+                className="row w-100 m-0 d-flex justify-content-center align-items-center"
+                onClick={() => {
+                  window.location.pathname = val.link
+                }}
+              >
+                <div className="mr-2 icon">{val.icon}</div>
+                <div className="">{val.title}</div>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
     </>
   )
 }

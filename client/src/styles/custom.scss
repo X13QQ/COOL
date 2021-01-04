@@ -9,17 +9,23 @@
 // 其它要導入覆蓋掉原本的預設bootstrap樣式要放在這下面
 .breadcrumb {
   background: white;
+  font-size: 12px;
+  font-family: MontserratRegular;
 }
 
 .Sidebar {
   height: 100%;
-  width: 250px;
+  width: 20%;
   font-size: 20px;
   font-family: MontserratBoldItalic;
   .SidebarList {
     padding: 0;
     width: 100%;
     text-align: center;
+    a {
+      text-decoration: none;
+      color: black;
+    }
     .solid-bottom {
       width: 75%;
       margin: 0 auto;
@@ -27,11 +33,26 @@
     }
     .row {
       height: 60px;
+      .icon {
+        transform: translate(0, -2px);
+      }
+    }
+    .row:hover {
+      cursor: pointer;
+      background-color: rgba(243, 112, 34, 0.3);
     }
   }
 }
 
+.main {
+  width: 80%;
+}
 @font-face {
   font-family: 'MontserratBoldItalic';
   src: url('../fonts/Montserrat-BoldItalic.ttf');
+}
+
+@font-face {
+  font-family: 'MontserratRegular';
+  src: url('../fonts/Montserrat-Regular.ttf');
 }
