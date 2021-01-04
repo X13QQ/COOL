@@ -7,3 +7,31 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
 // 其它要導入覆蓋掉原本的預設bootstrap樣式要放在這下面
+.breadcrumb {
+  background: white;
+}
+
+.Sidebar {
+  height: 100%;
+  width: 250px;
+  font-size: 20px;
+  font-family: MontserratBoldItalic;
+  .SidebarList {
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    .solid-bottom {
+      width: 75%;
+      margin: 0 auto;
+      border: solid #acc0d8 1px;
+    }
+    .row {
+      height: 60px;
+    }
+  }
+}
+
+@font-face {
+  font-family: 'MontserratBoldItalic';
+  src: url('../fonts/Montserrat-BoldItalic.ttf');
+}

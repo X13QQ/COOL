@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
+import MemberSidebar from './components/MemberSidebar'
 
 function App() {
   return (
     <>
-      <div className="App">Main</div>
-      <div className="App">Sheng</div>
-      <div className="App">ting</div>
-      <div className="App">hhhhh</div>
+      <MemberSidebar />
     </>
   )
 }
-// hi
+
 export default App
