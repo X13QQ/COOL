@@ -1,12 +1,14 @@
 import React from 'react'
-import { ReactComponent as MailIcon } from '../images/Mail.svg'
-import { ReactComponent as RefundIcon } from '../images/Refund.svg'
-import { ReactComponent as MemberIcon } from '../images/Member.svg'
-import { ReactComponent as FavoritesIcon } from '../images/Favorites.svg'
-import { ReactComponent as CouponIcon } from '../images/Coupon.svg'
-import { ReactComponent as RecordIcon } from '../images/Record.svg'
-import { ReactComponent as SettingIcon } from '../images/Setting.svg'
-import { ReactComponent as ContactIcon } from '../images/Contact.svg'
+import {
+  MailIcon,
+  RefundIcon,
+  MemberIcon,
+  FavoritesIcon,
+  CouponIcon,
+  RecordIcon,
+  SettingIcon,
+  ContactIcon,
+} from './icons'
 
 export const MemberSidebarData = [
   {

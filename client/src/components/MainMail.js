@@ -1,16 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
-import logo from '../images/Logo.png'
-import no from '../images/No.svg'
-
-const Logo = styled.img`
-  width: 60px;
-  height: 60px;
-`
-const No = styled.img`
-  width: 20px;
-  height: 20px;
-`
+import { Logo, No } from './icons'
 
 function MainMail(props) {
   return (
@@ -22,7 +11,7 @@ function MainMail(props) {
           <ul className="MailList list-group list-group-flush">
             <li className="MailListItem list-group-item d-flex">
               <div className="w-100 d-flex align-items-center">
-                <Logo className="mx-4" src={logo} />
+                <Logo className="mx-4" />
                 <div className="mx-4">酷飛鳥</div>
                 <ul className="mx-4 list-unstyled flex-grow-1">
                   <li>最新優惠!!</li>
@@ -30,7 +19,7 @@ function MainMail(props) {
                   <li className="newstime">2020/12/15 17:00</li>
                 </ul>
                 <button type="button" className="close">
-                  <No className="ml-auto" src={no} />
+                  <No className="ml-auto" />
                 </button>
               </div>
             </li>
