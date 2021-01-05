@@ -1,10 +1,21 @@
-import { Home, Mail, Refund } from '../pages/Member'
+import {
+  Home,
+  Mail,
+  Refund,
+  Member,
+  Favorites,
+  Coupon,
+  Record,
+  Setting,
+  Contact,
+} from '../pages/Member'
+
 const routes = [
   {
-    path: '/',
+    path: '/home',
     component: Home,
     exact: true,
-    breadcrumbName: '首頁',
+    breadcrumbName: '會員首頁',
   },
   {
     path: '/mail',
@@ -15,6 +26,36 @@ const routes = [
     path: '/refund',
     component: Refund,
     breadcrumbName: '退款申請',
+  },
+  {
+    path: '/member',
+    component: Member,
+    breadcrumbName: '會員專區',
+  },
+  {
+    path: '/favorites',
+    component: Favorites,
+    breadcrumbName: '蒐藏清單',
+  },
+  {
+    path: '/coupon',
+    component: Coupon,
+    breadcrumbName: '優惠券',
+  },
+  {
+    path: '/record',
+    component: Record,
+    breadcrumbName: '交易紀錄',
+  },
+  {
+    path: '/setting',
+    component: Setting,
+    breadcrumbName: '帳號設定',
+  },
+  {
+    path: '/contact',
+    component: Contact,
+    breadcrumbName: '聯絡我們',
   },
 ]
 

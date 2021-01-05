@@ -1,28 +1,40 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
+import { Link, withRouter } from 'react-router-dom'
+
 import { MemberSidebarData } from './MemberSidebarData'
 
-function MemberSidebar() {
+function MemberSidebar(props) {
+  const locationPath = props.location.pathname
+
   return (
     <>
       <div className="Sidebar">
         <ul className="SidebarList">
-          <a href="/">
+          <Link to="/home">
             <div className="my-3">我的COOL</div>
-          </a>
-          <p class="solid-bottom"></p>
+          </Link>
+          <p className="solid-bottom"></p>
           {MemberSidebarData.map((val, key) => {
-            return (
-              <li
+            const isActive = val.link === locationPath
+
+            return isActive ? (
+              <Link
                 key={key}
-                className="row w-100 m-0 d-flex justify-content-center align-items-center"
-                onClick={() => {
-                  window.location.pathname = val.link
-                }}
+                className="row w-100 m-0 d-flex justify-content-center align-items-center active"
+                to={val.link}
               >
                 <div className="mr-2 icon">{val.icon}</div>
                 <div className="">{val.title}</div>
-              </li>
+              </Link>
+            ) : (
+              <Link
+                key={key}
+                className="row w-100 m-0 d-flex justify-content-center align-items-center"
+                to={val.link}
+              >
+                <div className="mr-2 icon">{val.icon}</div>
+                <div className="">{val.title}</div>
+              </Link>
             )
           })}
         </ul>
@@ -31,4 +43,4 @@ function MemberSidebar() {
   )
 }
 
-export default MemberSidebar
+export default withRouter(MemberSidebar)
