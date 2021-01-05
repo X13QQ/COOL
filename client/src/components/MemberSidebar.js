@@ -17,20 +17,12 @@ function MemberSidebar(props) {
           {MemberSidebarData.map((val, key) => {
             const isActive = val.link === locationPath
 
-            return isActive ? (
-              <Link
-                key={key}
-                className="row w-100 m-0 d-flex justify-content-center align-items-center active"
-                to={val.link}
-              >
-                <div className="mr-2 icon">{val.icon}</div>
-                <div className="">{val.title}</div>
-              </Link>
-            ) : (
+            return (
               <Link
                 key={key}
                 className="row w-100 m-0 d-flex justify-content-center align-items-center"
                 to={val.link}
+                id={isActive ? 'active' : ''}
               >
                 <div className="mr-2 icon">{val.icon}</div>
                 <div className="">{val.title}</div>
