@@ -6,8 +6,8 @@ function MainMail(props) {
     <>
       <div className="main">
         <div className="title ml-3 my-2">我的信箱</div>
-        <div className="mailamount ml-3 my-2">共有1/1信件</div>
-        <div className="mails overflow-auto">
+        <div className="mailamount ml-3 my-2s">共有1/1信件</div>
+        <div className="mx-2 mails overflow-auto">
           <ul className="MailList list-group list-group-flush">
             <li className="MailListItem list-group-item d-flex">
               <div className="w-100 d-flex align-items-center">
