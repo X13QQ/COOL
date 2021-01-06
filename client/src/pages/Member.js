@@ -1,14 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { renderRoutes, matchRoutes } from 'react-router-config'
-import routes from '../routes/routes'
-import { Container } from 'react-bootstrap'
 
 import Banner from '../components/Banner'
-import MainMail from '../components/MainMail'
 import MemberSidebar from '../components/MemberSidebar'
 import Breadcrumb from '../components/Breadcrumb'
-import MainRefund from '../components/MainRefund'
+import MainMail from './MainMail'
+import MainRefund from './MainRefund'
 
 const onMatchedRoutes = (matchedRoutes) => {
   console.log(matchedRoutes)
