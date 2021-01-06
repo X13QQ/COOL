@@ -8,6 +8,7 @@ import { ReactComponent as CouponIcon } from '../images/Coupon.svg'
 import { ReactComponent as RecordIcon } from '../images/Record.svg'
 import { ReactComponent as SettingIcon } from '../images/Setting.svg'
 import { ReactComponent as ContactIcon } from '../images/Contact.svg'
+import { ReactComponent as ArrowDown } from '../images/arrow-down.svg'
 // MainMail
 import logo from '../images/Logo.png'
 import no from '../images/No.svg'
@@ -37,4 +38,5 @@ export {
   RecordIcon,
   SettingIcon,
   ContactIcon,
+  ArrowDown,
 }
