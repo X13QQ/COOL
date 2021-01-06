@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter, Switch } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
 
 import routes from './routes/routes'
