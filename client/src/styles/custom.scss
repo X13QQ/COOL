@@ -7,6 +7,10 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
 // 其它要導入覆蓋掉原本的預設bootstrap樣式要放在這下面
+* {
+  box-sizing: border-box;
+}
+
 .breadcrumb {
   background: white;
   font-size: 12px;
@@ -63,6 +67,20 @@
     height: 75vh;
     border: 1px solid #707070;
   }
+  .MailList {
+    width: 100%;
+    .MailListItem {
+      height: 120px;
+      div {
+        font-size: 20px;
+        font-family: MontserratBoldItalic;
+        ul .newstime {
+          font-size: 16px;
+          font-family: MontserratLight;
+        }
+      }
+    }
+  }
   .refunds {
     height: 75vh;
     .refundlist {
@@ -76,18 +94,52 @@
       }
     }
   }
-  .MailList {
-    width: 100%;
-    .MailListItem {
-      height: 120px;
-      div {
+  .member1 {
+    height: 160px;
+    border: solid #707070 1px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    .memberlist {
+      width: 30%;
+      .listtitle {
         font-size: 20px;
         font-family: MontserratBoldItalic;
-        ul .newstime {
-          font-size: 16px;
-          font-family: MontserratLight;
-        }
       }
+      .listtitle1 {
+        font-size: 16px;
+        font-family: MontserratMedium;
+      }
+      .listnum {
+        font-size: 50px;
+        font-family: MontserratBold;
+      }
+    }
+  }
+  .circle {
+    border: 5px solid #666;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
+    .circle-icon1 {
+      top: calc(50% - 45px);
+      left: calc(50% - 50px);
+      position: absolute;
+    }
+    .circle-icon2 {
+      top: calc(50% - 55px);
+      left: calc(50% - 60px);
+      position: absolute;
+    }
+  }
+  .memberlv {
+    border: 3px solid #666;
+    border-radius: 10px 10px;
+    .solid-bottom {
+      width: 90%;
+      margin: 0 auto;
+      border: 2px solid #666;
     }
   }
 }
@@ -103,6 +155,11 @@
 }
 
 @font-face {
+  font-family: 'MontserratBold';
+  src: url('../fonts/Montserrat-Bold.ttf');
+}
+
+@font-face {
   font-family: 'MontserratRegular';
   src: url('../fonts/Montserrat-Regular.ttf');
 }
@@ -110,4 +167,8 @@
 @font-face {
   font-family: 'MontserratSemiBold';
   src: url('../fonts/Montserrat-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'MontserratMedium';
+  src: url('../fonts/Montserrat-Medium.ttf');
 }

@@ -9,9 +9,14 @@ import { ReactComponent as RecordIcon } from '../images/Record.svg'
 import { ReactComponent as SettingIcon } from '../images/Setting.svg'
 import { ReactComponent as ContactIcon } from '../images/Contact.svg'
 import { ReactComponent as ArrowDown } from '../images/arrow-down.svg'
+import arrowup from '../images/arrow-down.svg'
 // MainMail
 import logo from '../images/Logo.png'
 import no from '../images/No.svg'
+// MainMember
+import lv1 from '../images/lv1.svg'
+import lv2 from '../images/lv2.svg'
+import lv3 from '../images/lv3.svg'
 
 const Logo = styled.img.attrs({
   src: `${logo}`,
@@ -27,6 +32,29 @@ const No = styled.img.attrs({
   height: 20px;
 `
 
+const ArrowUp = styled.img.attrs({
+  src: `${arrowup}`,
+})`
+  transform: rotate(180deg);
+`
+
+const Lv1 = styled.img.attrs({
+  src: `${lv1}`,
+})`
+  width: 80px;
+`
+
+const LV1 = styled.img.attrs({
+  src: `${lv1}`,
+})`
+  width: 100px;
+`
+
+const LV2 = styled.img.attrs({
+  src: `${lv2}`,
+})`
+  width: 120px;
+`
 export {
   Logo,
   No,
@@ -39,4 +67,8 @@ export {
   SettingIcon,
   ContactIcon,
   ArrowDown,
+  ArrowUp,
+  Lv1,
+  LV1,
+  LV2,
 }

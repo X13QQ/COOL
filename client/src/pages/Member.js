@@ -5,6 +5,7 @@ import MemberSidebar from '../components/MemberSidebar'
 import Breadcrumb from '../components/Breadcrumb'
 import MainMail from './MainMail'
 import MainRefund from './MainRefund'
+import MainMember from './MainMember'
 
 const onMatchedRoutes = (matchedRoutes) => {
   console.log(matchedRoutes)
@@ -67,7 +68,7 @@ const Member = ({ route, location }) => {
         onMatchedRoutes={onMatchedRoutes}
       />
       <MemberSidebar />
-      <Banner pagename="會員專區" />
+      <MainMember />
     </>
   )
 }
