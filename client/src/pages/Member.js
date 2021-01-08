@@ -6,6 +6,7 @@ import Breadcrumb from '../components/Breadcrumb'
 import MainMail from './MainMail'
 import MainRefund from './MainRefund'
 import MainMember from './MainMember'
+import MainFavorites from './MainFavorites'
 
 const onMatchedRoutes = (matchedRoutes) => {
   console.log(matchedRoutes)
@@ -81,7 +82,7 @@ const Favorites = ({ route, location }) => {
         onMatchedRoutes={onMatchedRoutes}
       />
       <MemberSidebar />
-      <Banner pagename="蒐藏清單" />
+      <MainFavorites />
     </>
   )
 }
