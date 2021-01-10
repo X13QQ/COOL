@@ -18,6 +18,7 @@
     /* background: plum; */
     background-image: url("images/頁面採用照片/穿搭集/首頁/20201117144735709.jpg");
     /* background-size: cover; */
+    position: relative;
 }
 .h_box2-1{
     height: 400px;
@@ -38,8 +39,34 @@
     top: 50%;
     transform: translateY(-50%);
     font-family: 'Montserrat', sans-serif;
-
 }
+.h_box1_title1{
+    background: #000000;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight:900;
+    margin: 20px 60px;
+    position: absolute; 
+    top: 60%;
+    transform: translateY(-50%);
+    transform:rotate(-5deg);
+}
+
+
+.h_box1_title2{
+    background: #F37022;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 45px;
+    font-weight:900;
+    margin: 20px 60px;
+    position: absolute; 
+    top: 75%;
+    transform: translateY(-50%);
+    transform:rotate(0.5deg);
+}
+
 
 /* 標題-------------------------------- */
 .newsTitle {
@@ -194,3 +221,26 @@ h3{
     /* background: brown; */
     background-size: cover;
 }
+
+/* Top-------------------------------- */
+.go-top {
+    bottom: 30px;
+    right: 30px;
+  }
+  
+  .go-top i {
+    color: white;
+    font-size: 20px;
+    width: 55px;
+    height: 55px;
+    background-color: #f37022;
+    border-radius: 50%;
+    line-height: 55px;
+  }
+  
+  .go-top span {
+    color: black;
+    font-style: italic;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+  }
