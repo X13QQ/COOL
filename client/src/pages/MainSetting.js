@@ -1,7 +1,7 @@
 import React from 'react'
 import Setting from '../components/Setting'
 
-function MainRefund(props) {
+function MainSetting(props) {
   return (
     <>
       <div className="main col-9">
@@ -14,4 +14,4 @@ function MainRefund(props) {
   )
 }
 
-export default MainRefund
+export default MainSetting
