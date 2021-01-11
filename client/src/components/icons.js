@@ -1,11 +1,10 @@
 import styled from 'styled-components'
 // MemberSidebar
 import { ReactComponent as MailIcon } from '../images/Mail.svg'
-import { ReactComponent as RefundIcon } from '../images/Refund.svg'
+import { ReactComponent as OrderIcon } from '../images/Order.svg'
 import { ReactComponent as MemberIcon } from '../images/Member.svg'
 import { ReactComponent as FavoritesIcon } from '../images/Favorites.svg'
 import { ReactComponent as CouponIcon } from '../images/Coupon.svg'
-import { ReactComponent as RecordIcon } from '../images/Record.svg'
 import { ReactComponent as SettingIcon } from '../images/Setting.svg'
 import { ReactComponent as ContactIcon } from '../images/Contact.svg'
 import { ReactComponent as ArrowDown } from '../images/arrow-down.svg'
@@ -70,11 +69,10 @@ export {
   Logo,
   No,
   MailIcon,
-  RefundIcon,
+  OrderIcon,
   MemberIcon,
   FavoritesIcon,
   CouponIcon,
-  RecordIcon,
   SettingIcon,
   ContactIcon,
   ArrowDown,

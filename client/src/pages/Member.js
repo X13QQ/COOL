@@ -4,7 +4,7 @@ import Banner from '../components/Banner'
 import MemberSidebar from '../components/MemberSidebar'
 import Breadcrumb from '../components/Breadcrumb'
 import MainMail from './MainMail'
-import MainRefund from './MainRefund'
+import MainOrder from './MainOrder'
 import MainMember from './MainMember'
 import MainFavorites from './MainFavorites'
 import MainSetting from './MainSetting'
@@ -50,7 +50,7 @@ const Mail = ({ route, location }) => {
   )
 }
 
-const Refund = ({ route, location }) => {
+const Order = ({ route, location }) => {
   return (
     <>
       <Breadcrumb
@@ -58,7 +58,7 @@ const Refund = ({ route, location }) => {
         onMatchedRoutes={onMatchedRoutes}
       />
       <MemberSidebar />
-      <MainRefund />
+      <MainOrder />
     </>
   )
 }
@@ -144,7 +144,7 @@ const Contact = ({ route, location }) => {
 export {
   Home,
   Mail,
-  Refund,
+  Order,
   Member,
   Favorites,
   Coupon,
