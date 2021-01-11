@@ -102,19 +102,6 @@ const Coupon = ({ route, location }) => {
   )
 }
 
-const Record = ({ route, location }) => {
-  return (
-    <>
-      <Breadcrumb
-        locationPath={location.pathname}
-        onMatchedRoutes={onMatchedRoutes}
-      />
-      <MemberSidebar />
-      <Banner pagename="交易紀錄" />
-    </>
-  )
-}
-
 const Setting = ({ route, location }) => {
   return (
     <>
@@ -141,14 +128,4 @@ const Contact = ({ route, location }) => {
   )
 }
 
-export {
-  Home,
-  Mail,
-  Order,
-  Member,
-  Favorites,
-  Coupon,
-  Record,
-  Setting,
-  Contact,
-}
+export { Home, Mail, Order, Member, Favorites, Coupon, Setting, Contact }

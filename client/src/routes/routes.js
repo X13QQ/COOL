@@ -43,11 +43,6 @@ const routes = [
     breadcrumbName: '優惠券',
   },
   {
-    path: '/record',
-    component: Record,
-    breadcrumbName: '交易紀錄',
-  },
-  {
     path: '/setting',
     component: Setting,
     breadcrumbName: '帳號設定',
