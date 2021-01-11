@@ -9,7 +9,7 @@ import MainMember from './MainMember'
 import MainFavorites from './MainFavorites'
 
 const onMatchedRoutes = (matchedRoutes) => {
-  console.log(matchedRoutes)
+  // console.log(matchedRoutes)
 
   return [
     {
