@@ -71,4 +71,11 @@ export const FavoritesData = [
     price: '1500',
     image: '../images/product-0001.png',
   },
+  {
+    id: '10',
+    brand: 'Adidas',
+    name: '兩雙一組/右手超人襪',
+    price: '1500',
+    image: '../images/product-0001.png',
+  },
 ]

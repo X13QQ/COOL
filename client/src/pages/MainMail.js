@@ -4,7 +4,7 @@ import { Logo, No } from '../components/icons'
 function MainMail(props) {
   return (
     <>
-      <div className="main">
+      <div className="main col-9">
         <div className="title ml-3 my-2">我的信箱</div>
         <div className="mailamount ml-3 my-2s">共有1/1信件</div>
         <div className="mx-2 mails overflow-auto">

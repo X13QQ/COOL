@@ -17,6 +17,9 @@ import no from '../images/No.svg'
 import lv1 from '../images/lv1.svg'
 import lv2 from '../images/lv2.svg'
 import lv3 from '../images/lv3.svg'
+//Main Favorites
+import search from '../images/search.png'
+import { ReactComponent as Heart } from '../images/Heart.svg'
 
 const Logo = styled.img.attrs({
   src: `${logo}`,
@@ -55,6 +58,14 @@ const LV2 = styled.img.attrs({
 })`
   width: 120px;
 `
+
+const Search = styled.img.attrs({
+  src: `${search}`,
+})`
+  width: 20px;
+  height: 20px;
+`
+
 export {
   Logo,
   No,
@@ -71,4 +82,6 @@ export {
   Lv1,
   LV1,
   LV2,
+  Search,
+  Heart,
 }
