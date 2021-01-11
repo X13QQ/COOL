@@ -1,26 +1,27 @@
 import React from 'react'
-import { InputGroup, FormControl, Button, Form, Row } from 'react-bootstrap'
+import { InputGroup, FormControl, Form, Row } from 'react-bootstrap'
 import Favorites from '../components/Favorites'
+import { Search } from '../components/icons'
 
 function MainFavorites(props) {
   return (
     <>
-      <div className="main">
+      <div className="main col-9">
         <div className="title ml-3 my-2">蒐藏清單</div>
         <Row>
-          <InputGroup className="mx-3">
-            <FormControl placeholder="搜尋蒐藏清單商品" />
-            <InputGroup.Append className="col-3 px-0">
-              <Button variant="outline-secondary">Button</Button>
-            </InputGroup.Append>
-            <Form.Control className="col-3" as="select" custom>
-              <option>依加入順序</option>
-            </Form.Control>
+          <InputGroup className="m-2 row justify-content-between">
+            <div className="col-6 d-flex align-items-center">
+              <FormControl placeholder="搜尋商品" />
+              <Search style={{ transform: 'translate(-25px, 0px)' }} />
+            </div>
+            <div className="col-3">
+              <Form.Control className="" as="select" custom>
+                <option>依加入順序</option>
+              </Form.Control>
+            </div>
           </InputGroup>
         </Row>
-        <div className="favorites d-flex flex-wrap mx-1">
-          <Favorites />
-        </div>
+        <Favorites />
       </div>
     </>
   )

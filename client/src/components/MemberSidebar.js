@@ -7,7 +7,7 @@ function MemberSidebar(props) {
 
   return (
     <>
-      <div className="Sidebar">
+      <div className="Sidebar col-3">
         <ul className="SidebarList">
           <Link to="/home">
             <div className="my-3">我的COOL</div>

@@ -7,6 +7,7 @@ import MainMail from './MainMail'
 import MainRefund from './MainRefund'
 import MainMember from './MainMember'
 import MainFavorites from './MainFavorites'
+import MainSetting from './MainSetting'
 
 const onMatchedRoutes = (matchedRoutes) => {
   console.log(matchedRoutes)
@@ -121,7 +122,7 @@ const Setting = ({ route, location }) => {
         onMatchedRoutes={onMatchedRoutes}
       />
       <MemberSidebar />
-      <Banner pagename="帳號設定" />
+      <MainSetting />
     </>
   )
 }
