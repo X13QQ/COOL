@@ -1,7 +1,7 @@
 import React from 'react'
-import { InputGroup, FormControl, Button, Form, Row } from 'react-bootstrap'
+import { InputGroup, FormControl, Form, Row } from 'react-bootstrap'
 import Favorites from '../components/Favorites'
-import { Search, Heart } from '../components/icons'
+import { Search } from '../components/icons'
 
 function MainFavorites(props) {
   return (
