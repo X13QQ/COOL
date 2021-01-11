@@ -8,6 +8,7 @@ import MainRefund from './MainRefund'
 import MainMember from './MainMember'
 import MainFavorites from './MainFavorites'
 import MainSetting from './MainSetting'
+import MainContact from './MainContact'
 
 const onMatchedRoutes = (matchedRoutes) => {
   console.log(matchedRoutes)
@@ -135,7 +136,7 @@ const Contact = ({ route, location }) => {
         onMatchedRoutes={onMatchedRoutes}
       />
       <MemberSidebar />
-      <Banner pagename="聯絡我們" />
+      <MainContact />
     </>
   )
 }
