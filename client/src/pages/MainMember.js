@@ -1,14 +1,14 @@
 import React from 'react'
-import { Row, Col, Card } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
 import { Lv1, LV1, LV2 } from '../components/icons'
 
 function MainMember(props) {
   return (
     <>
-      <div className="main">
+      <div className="main col-9">
         <div className="title ml-3 my-2">會員專區</div>
         <Row className="member1 mx-2 d-flex justify-content-center align-items-start">
-          <div className="memberlist m-1">
+          <div className="memberlist col-4">
             <ul className="m-0 list-unstyled d-flex flex-column align-items-center">
               <li className="listtitle">會員等級</li>
               <li className="listtitle1">一般會員</li>
@@ -17,11 +17,11 @@ function MainMember(props) {
               </li>
             </ul>
           </div>
-          <div className="memberlist m-1 text-center">
+          <div className="memberlist col-4 text-center">
             <div className="listtitle">消費次數</div>
             <div className="listnum mt-3">5</div>
           </div>
-          <div className="memberlist m-1 text-center">
+          <div className="memberlist col-4 text-center">
             <div className="listtitle">升級還需消費</div>
             <div className="listnum mt-3">$3000</div>
           </div>
