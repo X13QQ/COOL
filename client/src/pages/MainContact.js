@@ -10,7 +10,7 @@ function MainContact(props) {
       <div className="main col-9">
         <div className="title ml-3 my-2">聯絡我們</div>
         <div className="mx-2 border border-top-0"></div>
-        <div className="mx-2 box1">
+        <div className="mx-2 box1 contact">
           <div className="row mx-5 contentBox text-conter ">
             <div className="titleIcon"></div>
             <div className="titleContent ">

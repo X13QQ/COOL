@@ -148,9 +148,126 @@
   // 蒐藏清單
   .favorites {
   }
+
   // 帳號設定
+  .titleContent {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    height: 37px;
+    padding: 12px 0px 0px 0px;
+  }
+
+  .btn {
+    background: #353c1d;
+    color: #ffffff;
+    margin: 30px 0px;
+    padding: 6px 50px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+  }
+
+  .btn:hover {
+    background: #353c1d;
+    opacity: 0.8;
+    color: #ffffff;
+    animation: 0.5s;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  .phonebox {
+    padding: 0px;
+  }
+  .datebox {
+    /* padding: 0px; */
+  }
+
+  .usernamebox {
+    padding: 0px;
+  }
+
+  .useraccountbox {
+    padding: 0px;
+  }
+
+  .userpasswordbox {
+    padding: 0px;
+  }
 
   // 聯絡我們
+  .contact {
+    .title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+    .box1 {
+      /* background: cadetblue; */
+      border: #d3d3d3 1px solid;
+      /* height: 1000px; */
+      padding: 15px 0px;
+      margin: 0px 0px 50px 0px;
+    }
+
+    .titleIcon {
+      height: 37px;
+      width: 20px;
+      background: #353c1d;
+      margin: 0px 15px 0px 0px;
+    }
+    .titleContent {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      height: 37px;
+      padding: 12px 0px 0px 0px;
+    }
+    .linkTop {
+      width: 95%;
+      height: 1px;
+      margin: 10px auto;
+      border-top: solid #d3d3d3 2px;
+    }
+    .question {
+      .form-control {
+        resize: none;
+        height: 300px;
+      }
+    }
+
+    .form-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    .invalid-feedback {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+    }
+
+    .btn {
+      background: #353c1d;
+      color: #ffffff;
+      margin: 30px 0px;
+      padding: 6px 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background: #353c1d;
+      opacity: 0.8;
+      color: #ffffff;
+      animation: 0.5s;
+    }
+  }
 }
 
 @font-face {
