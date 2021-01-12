@@ -35,3 +35,15 @@ input[type='number'] {
 .datebox {
   /* padding: 0px; */
 }
+
+.usernamebox {
+  padding: 0px;
+}
+
+.useraccountbox {
+  padding: 0px;
+}
+
+.userpasswordbox {
+  padding: 0px;
+}

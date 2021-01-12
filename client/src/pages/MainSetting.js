@@ -16,7 +16,7 @@ function MainSetting(props) {
           </div>
           <div className="linkTop"></div>
 
-          <div className="mb-3 mx-5">
+          <div className="mb-3 mx-5 col-4 usernamebox">
             {/* <label for="exampleInputEmail1" class="form-label">
               *Email
             </label> */}
@@ -27,6 +27,36 @@ function MainSetting(props) {
               // aria-describedby="emailHelp"
               maxlength="10"
               placeholder="使用者姓名"
+              required
+            />
+          </div>
+
+          <div className="mb-3 mx-5 col-4 useraccountbox">
+            {/* <label for="exampleInputEmail1" class="form-label">
+              *Email
+            </label> */}
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="username"
+              // aria-describedby="emailHelp"
+              maxlength="10"
+              placeholder="使用者帳號"
+              required
+            />
+          </div>
+
+          <div className="mb-3 mx-5 col-4 userpasswordbox">
+            {/* <label for="exampleInputEmail1" class="form-label">
+              *Email
+            </label> */}
+            <input
+              type="test"
+              class="form-control form-control-lg"
+              id="username"
+              // aria-describedby="emailHelp"
+              maxlength="10"
+              placeholder="使用者密碼"
               required
             />
           </div>
