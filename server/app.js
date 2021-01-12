@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 
-app.get("/member/refund/:status", function (req, res) {
+app.get("/member/order/:status", function (req, res) {
   //   console.log(req.params.status);
   let status = ""
   if ("processing" === req.params.status) status = 1

@@ -17,22 +17,22 @@ function CustomToggle({ children, eventKey }) {
 }
 
 const Order = (props) => {
-  const [RefundDataProcessing, setRefundDataProcessing] = useState([])
-  const [RefundDataSolved, setRefundDataSolved] = useState([])
-  const [RefundDataRefundlist, setRefundDataRefundlist] = useState([])
+  const [OrderDataProcessing, setOrderDataProcessing] = useState([])
+  const [OrderDataSolved, setOrderDataSolved] = useState([])
+  const [OrderDataRefundlist, setOrderDataRefundlist] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3001/member/refund/processing')
+    fetch('http://localhost:3001/member/order/processing')
       .then((res) => res.json())
-      .then((data) => setRefundDataProcessing(data))
+      .then((data) => setOrderDataProcessing(data))
       .catch((err) => console.log('錯誤:', err))
-    fetch('http://localhost:3001/member/refund/solved')
+    fetch('http://localhost:3001/member/order/solved')
       .then((res) => res.json())
-      .then((data) => setRefundDataSolved(data))
+      .then((data) => setOrderDataSolved(data))
       .catch((err) => console.log('錯誤:', err))
-    fetch('http://localhost:3001/member/refund/refundlist')
+    fetch('http://localhost:3001/member/order/refundlist')
       .then((res) => res.json())
-      .then((data) => setRefundDataRefundlist(data))
+      .then((data) => setOrderDataRefundlist(data))
       .catch((err) => console.log('錯誤:', err))
   }, [])
 
@@ -45,13 +45,13 @@ const Order = (props) => {
         id=""
       >
         <Tab
-          className="refunds overflow-auto"
+          className="orders overflow-auto"
           eventKey="processing"
           title="處理中"
         >
-          {RefundDataProcessing.map((val, key) => {
+          {OrderDataProcessing.map((val, key) => {
             return (
-              <div className="refundlist m-3" key={key} id={key}>
+              <div className="orderlist m-3" key={key} id={key}>
                 <ul className="m-2 d-flex flex-row list-unstyled d-flex justify-content-around">
                   <li className="">訂單編號:　{val.no}</li>
                   <li className="">購買日期:　{val.date}</li>
@@ -73,10 +73,10 @@ const Order = (props) => {
           })}
         </Tab>
 
-        <Tab className="refunds overflow-auto" eventKey="solved" title="已完成">
-          {RefundDataSolved.map((val, key) => {
+        <Tab className="orders overflow-auto" eventKey="solved" title="已完成">
+          {OrderDataSolved.map((val, key) => {
             return (
-              <div className="refundlist m-3" key={key} id={key}>
+              <div className="orderlist m-3" key={key} id={key}>
                 <ul className="m-2 d-flex flex-row list-unstyled d-flex justify-content-around">
                   <li className="">訂單編號:　{val.no}</li>
                   <li className="">購買日期:　{val.date}</li>
@@ -99,13 +99,13 @@ const Order = (props) => {
         </Tab>
 
         <Tab
-          className="refunds overflow-auto"
-          eventKey="refundlist"
+          className="orders overflow-auto"
+          eventKey="orderlist"
           title="退款紀錄"
         >
-          {RefundDataRefundlist.map((val, key) => {
+          {OrderDataRefundlist.map((val, key) => {
             return (
-              <div className="refundlist m-3" key={key} id={key}>
+              <div className="orderlist m-3" key={key} id={key}>
                 <ul className="m-2 d-flex flex-row list-unstyled d-flex justify-content-around">
                   <li className="">訂單編號:　{val.no}</li>
                   <li className="">購買日期:　{val.date}</li>
