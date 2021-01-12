@@ -32,9 +32,8 @@ function MainContact(props) {
               required
             />
             <div id="emailHelp" class="form-text">
-              為了讓您順利收到 plain-me 回信，請務必確認 EMAIL
-              填寫正確，並避免使用 Yahoo、Hotmail
-              等免費信箱，以免發生擋信、漏信的狀況。
+              為了讓您順利收到 cool 回信，請務必確認 EMAIL 填寫正確，並避免使用
+              Yahoo、Hotmail 等免費信箱，以免發生擋信、漏信的狀況。
             </div>
           </div>
           <label for="exampleInputSelect" class="form-label mb-3 mx-5">

@@ -31,7 +31,7 @@ function MainSetting(props) {
             />
           </div>
 
-          <div className="mb-3 mx-5">
+          <div className="mb-3 mx-5 col-4 phonebox">
             {/* <label for="exampleInputEmail1" class="form-label">
               *Email
             </label> */}
@@ -65,7 +65,7 @@ function MainSetting(props) {
           <div className="mb-3 mx-5">
             <input
               type="date"
-              class="form-control form-control-lg"
+              class="form-control form-control-lg col-5 datebox"
               id="exampleInputEmail1"
               placeholder="生日"
               required

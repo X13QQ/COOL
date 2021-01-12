@@ -28,3 +28,10 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+.phonebox {
+  padding: 0px;
+}
+.datebox {
+  /* padding: 0px; */
+}
