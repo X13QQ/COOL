@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import img from '../images/product-0001.png'
 import { Heart } from '../components/icons'
 
 function Favorites(props) {
@@ -39,7 +38,7 @@ function Favorites(props) {
             <>
               <div key={key} className="col-12 col-sm-6 col-md-4 col-lg-3">
                 <div className="text-center border position-relative">
-                  <img src={img} alt=""></img>
+                  <img src={val.image} alt=""></img>
                   <Heart
                     className="position-absolute"
                     style={{ bottom: '6%', right: '12%' }}

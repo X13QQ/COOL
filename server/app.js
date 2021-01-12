@@ -28,7 +28,7 @@ app.get("/member/order/:status", function (req, res) {
 })
 
 app.get("/member/favorites", function (req, res) {
-  const sqlSelect = "SELECT * FROM favorites WHERE member_no = ? AND valid = ? "
+  const sqlSelect = "SELECT member_no,product_no,valid,'/images/product/product-0001.png' as image FROM favorites WHERE member_no = ? AND valid = ? "
   db.query(sqlSelect, [req.query.memberNo, req.query.valid], (req, result, fields) => {
     res.send(result)
   })
