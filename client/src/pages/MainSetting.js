@@ -14,59 +14,47 @@ function MainSetting(props) {
           <div className="linkTop"></div>
 
           <div className="mb-3 mx-5 col-4 usernamebox">
-            {/* <label for="exampleInputEmail1" class="form-label">
-              *Email
-            </label> */}
             <input
               type="text"
-              class="form-control form-control-lg"
-              id="username"
+              className="form-control form-control-lg"
+              id="username1"
               // aria-describedby="emailHelp"
-              maxlength="10"
+              maxLength="10"
               placeholder="使用者姓名"
               required
             />
           </div>
 
           <div className="mb-3 mx-5 col-4 useraccountbox">
-            {/* <label for="exampleInputEmail1" class="form-label">
-              *Email
-            </label> */}
             <input
               type="text"
-              class="form-control form-control-lg"
-              id="username"
+              className="form-control form-control-lg"
+              id="username2"
               // aria-describedby="emailHelp"
-              maxlength="10"
+              maxLength="10"
               placeholder="使用者帳號"
               required
             />
           </div>
 
           <div className="mb-3 mx-5 col-4 userpasswordbox">
-            {/* <label for="exampleInputEmail1" class="form-label">
-              *Email
-            </label> */}
             <input
               type="test"
-              class="form-control form-control-lg"
-              id="username"
+              className="form-control form-control-lg"
+              id="username3"
               // aria-describedby="emailHelp"
-              maxlength="10"
+              maxLength="10"
               placeholder="使用者密碼"
               required
             />
           </div>
 
           <div className="mb-3 mx-5 col-4 phonebox">
-            {/* <label for="exampleInputEmail1" class="form-label">
-              *Email
-            </label> */}
             <input
               type="number"
-              class="form-control form-control-lg"
+              className="form-control form-control-lg"
               id="userphone"
-              maxlength="30"
+              maxLength="30"
               placeholder="連絡電話"
               required
             />
@@ -74,7 +62,7 @@ function MainSetting(props) {
           <div className="mb-3 mx-5">
             <input
               type="email"
-              class="form-control form-control-lg"
+              className="form-control form-control-lg"
               id="exampleInputEmail1"
               placeholder="電子郵件地址"
               required
@@ -83,8 +71,8 @@ function MainSetting(props) {
           <div className="mb-3 mx-5">
             <input
               type="text"
-              class="form-control form-control-lg"
-              id="exampleInputEmail1"
+              className="form-control form-control-lg"
+              id="exampleInputEmail2"
               placeholder="聯絡地址"
               required
             />
@@ -92,13 +80,13 @@ function MainSetting(props) {
           <div className="mb-3 mx-5">
             <input
               type="date"
-              class="form-control form-control-lg col-5 datebox"
-              id="exampleInputEmail1"
+              className="form-control form-control-lg col-5 datebox"
+              id="exampleInputEmail3"
               placeholder="生日"
               required
             />
-            <div class="d-grid gap-2 col-3 mx-auto ">
-              <button class="btn" type="button">
+            <div className="d-grid gap-2 col-3 mx-auto">
+              <button className="btn" type="button">
                 更新
               </button>
             </div>
