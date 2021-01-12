@@ -52,13 +52,13 @@
   }
 }
 
+//會員後台
 .main {
-  // width: 80%;
-  // height: 80vh;
   .title {
     font-size: 26px;
     font-family: MontserratBoldItalic;
   }
+  // 我的信箱
   .mailamount {
     font-size: 20px;
     font-family: MontserratLight;
@@ -81,9 +81,10 @@
       }
     }
   }
-  .refunds {
+  // 訂單紀錄
+  .orders {
     height: 75vh;
-    .refundlist {
+    .orderlist {
       border: 1px solid #707070;
       font-size: 24px;
       font-family: MontserratSemiBold;
@@ -94,6 +95,8 @@
       }
     }
   }
+
+  // 會員專區
   .member1 {
     height: 160px;
     border: solid #707070 1px;
@@ -141,8 +144,149 @@
       border: 2px solid #666;
     }
   }
+
+  // 蒐藏清單
   .favorites {
-    // height: 75vh;
+  }
+
+  // 帳號設定
+  .setting {
+    /* background: cadetblue; */
+    border: #d3d3d3 1px solid;
+    /* height: 1000px; */
+    padding: 15px 0px;
+    margin: 0px 0px 50px 0px;
+    div {
+      .titleIcon {
+        height: 37px;
+        width: 20px;
+        background: #353c1d;
+        margin: 0px 15px 0px 0px;
+      }
+      .titleContent {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 20px;
+        height: 37px;
+        padding: 12px 0px 0px 0px;
+      }
+    }
+    .linkTop {
+      width: 95%;
+      height: 1px;
+      margin: 10px auto;
+      border-top: solid #d3d3d3 2px;
+    }
+
+    .btn {
+      background: #353c1d;
+      color: #ffffff;
+      margin: 30px 0px;
+      padding: 6px 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background: #353c1d;
+      opacity: 0.8;
+      color: #ffffff;
+      animation: 0.5s;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+    input[type='number'] {
+      -moz-appearance: textfield;
+    }
+
+    .phonebox {
+      padding: 0px;
+    }
+    .datebox {
+      /* padding: 0px; */
+    }
+
+    .usernamebox {
+      padding: 0px;
+    }
+
+    .useraccountbox {
+      padding: 0px;
+    }
+
+    .userpasswordbox {
+      padding: 0px;
+    }
+  }
+
+  // 聯絡我們
+  .contact {
+    /* background: cadetblue; */
+    border: #d3d3d3 1px solid;
+    /* height: 1000px; */
+    padding: 15px 0px;
+    margin: 0px 0px 50px 0px;
+
+    .title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+
+    .titleIcon {
+      height: 37px;
+      width: 20px;
+      background: #353c1d;
+      margin: 0px 15px 0px 0px;
+    }
+    .titleContent {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      height: 37px;
+      padding: 12px 0px 0px 0px;
+    }
+    .linkTop {
+      width: 95%;
+      height: 1px;
+      margin: 10px auto;
+      border-top: solid #d3d3d3 2px;
+    }
+    .question {
+      .form-control {
+        resize: none;
+        height: 300px;
+      }
+    }
+
+    .form-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    .invalid-feedback {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+    }
+
+    .btn {
+      background: #353c1d;
+      color: #ffffff;
+      margin: 30px 0px;
+      padding: 6px 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      background: #353c1d;
+      opacity: 0.8;
+      color: #ffffff;
+      animation: 0.5s;
+    }
   }
 }
 
