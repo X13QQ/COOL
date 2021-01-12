@@ -5,7 +5,6 @@ import {
   Member,
   Favorites,
   Coupon,
-  Record,
   Setting,
   Contact,
 } from '../pages/Member'

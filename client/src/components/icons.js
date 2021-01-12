@@ -15,7 +15,7 @@ import no from '../images/No.svg'
 // MainMember
 import lv1 from '../images/lv1.svg'
 import lv2 from '../images/lv2.svg'
-import lv3 from '../images/lv3.svg'
+// import lv3 from '../images/lv3.svg'
 //Main Favorites
 import search from '../images/search.png'
 import { ReactComponent as Heart } from '../images/Heart.svg'
