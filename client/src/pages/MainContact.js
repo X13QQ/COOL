@@ -39,7 +39,7 @@ function MainContact(props) {
             <select
               defaultValue={'DEFAULT'}
               className="form-select form-control form-control-lg"
-              aria-label="Default select example"
+              // aria-label="Default select example"
               required
             >
               <option value="DEFAULT">請選擇服務類別</option>

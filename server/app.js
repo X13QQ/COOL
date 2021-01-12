@@ -28,8 +28,15 @@ app.get("/member/order/:status", function (req, res) {
 })
 
 app.get("/member/favorites", function (req, res) {
-  const sqlSelect = "SELECT member_no,product_no,valid,'/images/product/product-0001.png' as image FROM favorites WHERE member_no = ? AND valid = ? "
+  const sqlSelect = "SELECT id,member_no,product_no,valid,'/images/product/product-0001.png' as image FROM favorites WHERE member_no = ? AND valid = ? "
   db.query(sqlSelect, [req.query.memberNo, req.query.valid], (req, result, fields) => {
+    res.send(result)
+  })
+})
+
+app.delete("/member/favorites", function (req, res) {
+  const sqlDelete = "UPDATE favorites SET valid = ? WHERE id = ? "
+  db.query(sqlDelete, [req.body.valid, req.body.id], (req, result, fields) => {
     res.send(result)
   })
 })
