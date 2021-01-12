@@ -1,8 +1,4 @@
 import React from 'react'
-import { InputGroup, FormControl, Form, Row } from 'react-bootstrap'
-import './Contact.css'
-
-// import Setting from '../components/Setting'
 
 function MainContact(props) {
   return (
@@ -59,7 +55,6 @@ function MainContact(props) {
               type="text"
               class="form-control form-control-lg"
               id="formGroupExampleInput"
-              placeholder="Example input placeholder"
               placeholder="請輸入您的問題"
               maxlength="30"
               required

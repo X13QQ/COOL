@@ -1,7 +1,4 @@
 import React from 'react'
-import { InputGroup, FormControl, Form, Row } from 'react-bootstrap'
-import './Setting.css'
-// import Setting from '../components/Setting'
 
 function MainSetting(props) {
   return (
@@ -9,8 +6,8 @@ function MainSetting(props) {
       <div className="main col-9">
         <div className="title ml-3 my-2">帳號設定</div>
         <div className="mx-2 border border-top-0"></div>
-        <div className="mx-2 box1">
-          <div className="row mx-5 contentBox text-conter ">
+        <div className="mx-2 setting">
+          <div className="row mx-5 text-center ">
             <div className="titleIcon"></div>
             <div className="titleContent ">聯絡資訊</div>
           </div>
