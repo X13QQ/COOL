@@ -4,13 +4,14 @@ import Banner from '../components/Banner'
 import MemberSidebar from '../components/MemberSidebar'
 import Breadcrumb from '../components/Breadcrumb'
 import MainMail from './MainMail'
-import MainRefund from './MainRefund'
+import MainOrder from './MainOrder'
 import MainMember from './MainMember'
 import MainFavorites from './MainFavorites'
 import MainSetting from './MainSetting'
+import MainContact from './MainContact'
 
 const onMatchedRoutes = (matchedRoutes) => {
-  console.log(matchedRoutes)
+  // console.log(matchedRoutes)
 
   return [
     {
@@ -49,7 +50,7 @@ const Mail = ({ route, location }) => {
   )
 }
 
-const Refund = ({ route, location }) => {
+const Order = ({ route, location }) => {
   return (
     <>
       <Breadcrumb
@@ -57,7 +58,7 @@ const Refund = ({ route, location }) => {
         onMatchedRoutes={onMatchedRoutes}
       />
       <MemberSidebar />
-      <MainRefund />
+      <MainOrder />
     </>
   )
 }
@@ -101,19 +102,6 @@ const Coupon = ({ route, location }) => {
   )
 }
 
-const Record = ({ route, location }) => {
-  return (
-    <>
-      <Breadcrumb
-        locationPath={location.pathname}
-        onMatchedRoutes={onMatchedRoutes}
-      />
-      <MemberSidebar />
-      <Banner pagename="交易紀錄" />
-    </>
-  )
-}
-
 const Setting = ({ route, location }) => {
   return (
     <>
@@ -135,19 +123,9 @@ const Contact = ({ route, location }) => {
         onMatchedRoutes={onMatchedRoutes}
       />
       <MemberSidebar />
-      <Banner pagename="聯絡我們" />
+      <MainContact />
     </>
   )
 }
 
-export {
-  Home,
-  Mail,
-  Refund,
-  Member,
-  Favorites,
-  Coupon,
-  Record,
-  Setting,
-  Contact,
-}
+export { Home, Mail, Order, Member, Favorites, Coupon, Setting, Contact }

@@ -1,7 +1,7 @@
 import {
   Home,
   Mail,
-  Refund,
+  Order,
   Member,
   Favorites,
   Coupon,
@@ -23,9 +23,9 @@ const routes = [
     breadcrumbName: '我的信箱',
   },
   {
-    path: '/refund',
-    component: Refund,
-    breadcrumbName: '退款申請',
+    path: '/order',
+    component: Order,
+    breadcrumbName: '訂單紀錄',
   },
   {
     path: '/member',
@@ -41,11 +41,6 @@ const routes = [
     path: '/coupon',
     component: Coupon,
     breadcrumbName: '優惠券',
-  },
-  {
-    path: '/record',
-    component: Record,
-    breadcrumbName: '交易紀錄',
   },
   {
     path: '/setting',
