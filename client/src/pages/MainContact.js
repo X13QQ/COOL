@@ -1,8 +1,4 @@
 import React from 'react'
-import { InputGroup, FormControl, Form, Row } from 'react-bootstrap'
-import './Contact.css'
-
-// import Setting from '../components/Setting'
 
 function MainContact(props) {
   return (
@@ -10,7 +6,7 @@ function MainContact(props) {
       <div className="main col-9">
         <div className="title ml-3 my-2">聯絡我們</div>
         <div className="mx-2 border border-top-0"></div>
-        <div className="mx-2 box1">
+        <div className="mx-2 box1 contact">
           <div className="row mx-5 contentBox text-conter ">
             <div className="titleIcon"></div>
             <div className="titleContent ">
@@ -59,7 +55,6 @@ function MainContact(props) {
               type="text"
               class="form-control form-control-lg"
               id="formGroupExampleInput"
-              placeholder="Example input placeholder"
               placeholder="請輸入您的問題"
               maxlength="30"
               required
