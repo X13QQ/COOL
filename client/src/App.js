@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Container, Row } from 'react-bootstrap'
 import { BrowserRouter, Switch } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
@@ -6,6 +6,8 @@ import { renderRoutes } from 'react-router-config'
 import routes from './routes/routes'
 
 function App() {
+  localStorage.memberNo = '1'
+  // console.log(localStorage)
   return (
     <BrowserRouter>
       <>

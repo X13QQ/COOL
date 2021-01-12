@@ -52,13 +52,13 @@
   }
 }
 
+//會員後台
 .main {
-  // width: 80%;
-  // height: 80vh;
   .title {
     font-size: 26px;
     font-family: MontserratBoldItalic;
   }
+  // 我的信箱
   .mailamount {
     font-size: 20px;
     font-family: MontserratLight;
@@ -81,9 +81,10 @@
       }
     }
   }
-  .refunds {
+  // 訂單紀錄
+  .orders {
     height: 75vh;
-    .refundlist {
+    .orderlist {
       border: 1px solid #707070;
       font-size: 24px;
       font-family: MontserratSemiBold;
@@ -94,6 +95,8 @@
       }
     }
   }
+
+  // 會員專區
   .member1 {
     height: 160px;
     border: solid #707070 1px;
@@ -141,9 +144,13 @@
       border: 2px solid #666;
     }
   }
+
+  // 蒐藏清單
   .favorites {
-    // height: 75vh;
   }
+  // 帳號設定
+
+  // 聯絡我們
 }
 
 @font-face {
