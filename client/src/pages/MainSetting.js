@@ -12,7 +12,7 @@ function MainSetting(props) {
         <div className="mx-2 box1">
           <div className="row mx-5 contentBox text-conter ">
             <div className="titleIcon"></div>
-            <div className="titleContent ">聯絡資訊</div>
+            <div className="titleContent">聯絡資訊</div>
           </div>
           <div className="linkTop"></div>
 
