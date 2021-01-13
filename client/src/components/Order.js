@@ -22,19 +22,43 @@ const Order = (props) => {
   const [OrderDataRefundlist, setOrderDataRefundlist] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3001/member/order/processing')
-      .then((res) => res.json())
-      .then((data) => setOrderDataProcessing(data))
-      .catch((err) => console.log('錯誤:', err))
-    fetch('http://localhost:3001/member/order/solved')
-      .then((res) => res.json())
-      .then((data) => setOrderDataSolved(data))
-      .catch((err) => console.log('錯誤:', err))
-    fetch('http://localhost:3001/member/order/refundlist')
-      .then((res) => res.json())
-      .then((data) => setOrderDataRefundlist(data))
-      .catch((err) => console.log('錯誤:', err))
-  }, [])
+    const getOrderDataProcessing = () => {
+      return fetch(
+        'http://localhost:3001/member/order/processing?' +
+          new URLSearchParams({
+            memberNo: props.memberNo,
+          })
+      )
+        .then((res) => res.json())
+        .then((data) => setOrderDataProcessing(data))
+        .catch((err) => console.log('錯誤:', err))
+    }
+    const getOrderDataSolved = () => {
+      return fetch(
+        'http://localhost:3001/member/order/solved?' +
+          new URLSearchParams({
+            memberNo: props.memberNo,
+          })
+      )
+        .then((res) => res.json())
+        .then((data) => setOrderDataSolved(data))
+        .catch((err) => console.log('錯誤:', err))
+    }
+    const getOrderDataRefundlist = () => {
+      return fetch(
+        'http://localhost:3001/member/order/refundlist?' +
+          new URLSearchParams({
+            memberNo: props.memberNo,
+          })
+      )
+        .then((res) => res.json())
+        .then((data) => setOrderDataRefundlist(data))
+        .catch((err) => console.log('錯誤:', err))
+    }
+    getOrderDataProcessing()
+    getOrderDataSolved()
+    getOrderDataRefundlist()
+  }, [props])
 
   return (
     <>
@@ -53,7 +77,7 @@ const Order = (props) => {
             return (
               <div className="orderlist m-3" key={key} id={key}>
                 <ul className="m-2 d-flex flex-row list-unstyled d-flex justify-content-around">
-                  <li className="">訂單編號:　{val.no}</li>
+                  <li className="">訂單編號:　{val.order_no}</li>
                   <li className="">購買日期:　{val.date}</li>
                   <li className="">付款金額:　{val.price}</li>
                 </ul>
@@ -78,7 +102,7 @@ const Order = (props) => {
             return (
               <div className="orderlist m-3" key={key} id={key}>
                 <ul className="m-2 d-flex flex-row list-unstyled d-flex justify-content-around">
-                  <li className="">訂單編號:　{val.no}</li>
+                  <li className="">訂單編號:　{val.order_no}</li>
                   <li className="">購買日期:　{val.date}</li>
                   <li className="">付款金額:　{val.price}</li>
                 </ul>
@@ -107,7 +131,7 @@ const Order = (props) => {
             return (
               <div className="orderlist m-3" key={key} id={key}>
                 <ul className="m-2 d-flex flex-row list-unstyled d-flex justify-content-around">
-                  <li className="">訂單編號:　{val.no}</li>
+                  <li className="">訂單編號:　{val.order_no}</li>
                   <li className="">購買日期:　{val.date}</li>
                   <li className="">付款金額:　{val.price}</li>
                 </ul>

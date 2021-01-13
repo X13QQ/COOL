@@ -4,6 +4,7 @@ import Favorites from '../components/Favorites'
 import { Search } from '../components/icons'
 
 function MainFavorites(props) {
+  const memberNo = localStorage.getItem('memberNo')
   return (
     <>
       <div className="main col-9">
@@ -21,7 +22,7 @@ function MainFavorites(props) {
             </div>
           </InputGroup>
         </Row>
-        <Favorites />
+        <Favorites memberNo={memberNo} />
       </div>
     </>
   )

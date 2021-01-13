@@ -1,6 +1,6 @@
 import React from 'react'
 
-function MainContact(props) {
+function MainContact() {
   return (
     <>
       <div className="main col-9">

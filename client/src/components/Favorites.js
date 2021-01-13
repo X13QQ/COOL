@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { Heart } from '../components/icons'
 
-function Favorites() {
+function Favorites(props) {
   const [FavoritesData, setFavoritesData] = useState([])
 
   useEffect(() => {
-    getFavoritesData()
-  }, [])
+    const getFavoritesData = () => {
+      let url = new URL('http://localhost:3001/member/favorites')
+      let params = {
+        memberNo: props.memberNo,
+        valid: 1,
+      }
+      url.search = new URLSearchParams(params).toString()
 
-  const getFavoritesData = () => {
-    let url = new URL('http://localhost:3001/member/favorites')
-    let params = {
-      memberNo: localStorage.getItem('memberNo'),
-      valid: 1,
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => setFavoritesData(data))
+        .catch((err) => console.log('錯誤:', err))
     }
-    url.search = new URLSearchParams(params).toString()
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => setFavoritesData(data))
-      .catch((err) => console.log('錯誤:', err))
-  }
+    getFavoritesData()
+  }, [props])
 
   const deleteFavoritesData = (id) => {
     const data = {

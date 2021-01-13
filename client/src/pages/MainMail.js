@@ -1,7 +1,7 @@
 import React from 'react'
 import { Logo, No } from '../components/icons'
 
-function MainMail(props) {
+function MainMail() {
   return (
     <>
       <div className="main col-9">
