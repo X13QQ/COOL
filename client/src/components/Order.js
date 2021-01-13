@@ -22,43 +22,30 @@ const Order = (props) => {
   const [OrderDataRefundlist, setOrderDataRefundlist] = useState([])
 
   useEffect(() => {
-    const getOrderDataProcessing = () => {
+    const url = 'http://localhost:3001/member/order/'
+    const type = ['processing', 'solved', 'refundlist']
+
+    const getOrderData = (url, type) => {
       return fetch(
-        'http://localhost:3001/member/order/processing?' +
+        url +
           new URLSearchParams({
             memberNo: props.memberNo,
           })
       )
         .then((res) => res.json())
-        .then((data) => setOrderDataProcessing(data))
+        .then((data) => {
+          if (type === 'processing') setOrderDataProcessing(data)
+          if (type === 'solved') setOrderDataSolved(data)
+          if (type === 'refundlist') setOrderDataRefundlist(data)
+        })
         .catch((err) => console.log('錯誤:', err))
     }
-    const getOrderDataSolved = () => {
-      return fetch(
-        'http://localhost:3001/member/order/solved?' +
-          new URLSearchParams({
-            memberNo: props.memberNo,
-          })
-      )
-        .then((res) => res.json())
-        .then((data) => setOrderDataSolved(data))
-        .catch((err) => console.log('錯誤:', err))
-    }
-    const getOrderDataRefundlist = () => {
-      return fetch(
-        'http://localhost:3001/member/order/refundlist?' +
-          new URLSearchParams({
-            memberNo: props.memberNo,
-          })
-      )
-        .then((res) => res.json())
-        .then((data) => setOrderDataRefundlist(data))
-        .catch((err) => console.log('錯誤:', err))
-    }
-    getOrderDataProcessing()
-    getOrderDataSolved()
-    getOrderDataRefundlist()
-  }, [props])
+
+    type.forEach((type) => {
+      const newUrl = url + type + '?'
+      getOrderData(newUrl, type)
+    })
+  }, [props.memberNo])
 
   return (
     <>
