@@ -171,6 +171,13 @@
         padding: 12px 0px 0px 0px;
       }
     }
+
+    .form-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+    }
+
     .linkTop {
       width: 95%;
       height: 1px;
@@ -181,8 +188,6 @@
     .btn {
       background: #353c1d;
       color: #ffffff;
-      margin: 30px 0px;
-      padding: 6px 50px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
     }
@@ -199,25 +204,6 @@
     }
     input[type='number'] {
       -moz-appearance: textfield;
-    }
-
-    .phonebox {
-      padding: 0px;
-    }
-    .datebox {
-      /* padding: 0px; */
-    }
-
-    .usernamebox {
-      padding: 0px;
-    }
-
-    .useraccountbox {
-      padding: 0px;
-    }
-
-    .userpasswordbox {
-      padding: 0px;
     }
   }
 
@@ -253,11 +239,10 @@
       margin: 10px auto;
       border-top: solid #d3d3d3 2px;
     }
-    .question {
-      .form-control {
-        resize: none;
-        height: 300px;
-      }
+
+    #content {
+      resize: none;
+      height: 200px;
     }
 
     .form-label {
@@ -275,8 +260,6 @@
     .btn {
       background: #353c1d;
       color: #ffffff;
-      margin: 30px 0px;
-      padding: 6px 50px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
     }

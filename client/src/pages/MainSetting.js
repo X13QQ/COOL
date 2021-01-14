@@ -53,7 +53,7 @@ function MainSetting() {
     }
     let url = new URL('http://localhost:3001/member/setting')
     fetch(url, updateMethod)
-      .then((res) => alert('update success'))
+      .then(() => alert('update success'))
       .catch((err) => console.log('錯誤:', err))
   }
 
@@ -61,115 +61,137 @@ function MainSetting() {
     <>
       <div className="main col-9">
         <div className="title ml-3 my-2">帳號設定</div>
-        <div className="mx-2 border border-top-0"></div>
         <div className="mx-2 setting">
-          <div className="row mx-5 text-center ">
+          <div className="row mx-5 text-center">
             <div className="titleIcon"></div>
             <div className="titleContent">聯絡資訊</div>
           </div>
           <div className="linkTop"></div>
 
-          <div className="mb-3 mx-5 col-4 usernamebox">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              id="name"
-              // aria-describedby="emailHelp"
-              maxLength="20"
-              placeholder="使用者姓名"
-              value={name}
-              onChange={(event) => {
-                setName(event.target.value)
-              }}
-            />
-          </div>
+          <form>
+            <div className="form-group mx-5 my-2 p-0 col-4">
+              <label htmlFor="name" className="form-label">
+                *使用者姓名
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                // aria-describedby="emailHelp"
+                maxLength="20"
+                placeholder="使用者姓名"
+                value={name}
+                onChange={(event) => {
+                  setName(event.target.value)
+                }}
+              />
+            </div>
 
-          <div className="mb-3 mx-5 col-4 useraccountbox">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              id="account"
-              // aria-describedby="emailHelp"
-              maxLength="20"
-              placeholder="使用者帳號"
-              value={account}
-              readOnly
-            />
-          </div>
+            <div className="form-group mx-5 my-2 p-0 col-4">
+              <label htmlFor="account" className="form-label">
+                *使用者帳號
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="account"
+                // aria-describedby="emailHelp"
+                maxLength="20"
+                placeholder="使用者帳號"
+                value={account}
+                readOnly
+              />
+            </div>
 
-          <div className="mb-3 mx-5 col-4 userpasswordbox">
-            <input
-              type="password"
-              className="form-control form-control-lg"
-              id="password"
-              // aria-describedby="emailHelp"
-              maxLength="20"
-              placeholder="使用者密碼"
-              value={password}
-              onChange={(event) => {
-                setPassword(event.target.value)
-              }}
-            />
-          </div>
+            <div className="form-group mx-5 my-2 p-0 col-4">
+              <label htmlFor="password" className="form-label">
+                *使用者密碼
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                // aria-describedby="emailHelp"
+                maxLength="20"
+                placeholder="使用者密碼"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value)
+                }}
+              />
+            </div>
 
-          <div className="mb-3 mx-5 col-4 phonebox">
-            <input
-              type="number"
-              className="form-control form-control-lg"
-              id="phone"
-              maxLength="20"
-              placeholder="連絡電話"
-              value={phone}
-              onChange={(event) => {
-                setPhone(event.target.value)
-              }}
-            />
-          </div>
-          <div className="mb-3 mx-5">
-            <input
-              type="email"
-              className="form-control form-control-lg"
-              id="email"
-              placeholder="電子郵件地址"
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value)
-              }}
-            />
-          </div>
-          <div className="mb-3 mx-5">
-            <input
-              type="text"
-              className="form-control form-control-lg"
-              id="address"
-              placeholder="聯絡地址"
-              value={address}
-              onChange={(event) => {
-                setAddress(event.target.value)
-              }}
-            />
-          </div>
-          <div className="mb-3 mx-5">
-            <input
-              type="date"
-              className="form-control form-control-lg col-5 datebox"
-              id="birth"
-              placeholder="生日"
-              value={birth}
-              onChange={(event) => {
-                setBirth(event.target.value)
-              }}
-            />
-            <div className="d-grid gap-2 col-3 mx-auto">
+            <div className="form-group mx-5 my-2 p-0 col-4">
+              <label htmlFor="phone" className="form-label">
+                *連絡電話
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="phone"
+                maxLength="20"
+                placeholder="連絡電話"
+                value={phone}
+                onChange={(event) => {
+                  setPhone(event.target.value)
+                }}
+              />
+            </div>
+            <div className="form-group mx-5 my-2 p-0">
+              <label htmlFor="email" className="form-label">
+                *電子郵件地址
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="電子郵件地址"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value)
+                }}
+              />
+            </div>
+            <div className="form-group mx-5 my-2 p-0">
+              <label htmlFor="address" className="form-label">
+                *聯絡地址
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="address"
+                placeholder="聯絡地址"
+                value={address}
+                onChange={(event) => {
+                  setAddress(event.target.value)
+                }}
+              />
+            </div>
+            <div className="form-group mx-5 my-2 p-0">
+              <label htmlFor="birth" className="form-label">
+                *生日
+              </label>
+              <input
+                type="date"
+                className="form-control col-5"
+                id="birth"
+                placeholder="生日"
+                value={birth}
+                onChange={(event) => {
+                  setBirth(event.target.value)
+                }}
+              />
+            </div>
+            <div className="mx-5 my-2 p-0 text-center">
               <button
-                className="btn"
+                className="btn px-5 py-2"
                 type="button"
                 onClick={() => updateSettingData()}
               >
                 更新
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </>
