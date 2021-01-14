@@ -10,29 +10,26 @@ function MainSetting() {
   const [address, setAddress] = useState('')
   const [birth, setBirth] = useState('')
 
-  useEffect(() => {
-    const getSettingData = () => {
-      let url = new URL('http://localhost:3001/member/setting')
-      let params = {
-        id: id,
-      }
-      url.search = new URLSearchParams(params).toString()
-
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-          setName(data[0].name)
-          setAccount(data[0].account)
-          setPassword(data[0].password)
-          setPhone(data[0].phone)
-          setEmail(data[0].email)
-          setAddress(data[0].address)
-          setBirth(data[0].birth)
-        })
-        .catch((err) => console.log('錯誤:', err))
+  const getSettingData = (id) => {
+    let url = new URL('http://localhost:3001/member/setting')
+    let params = {
+      id: id,
     }
-    getSettingData()
-  }, [id])
+    url.search = new URLSearchParams(params).toString()
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setName(data[0].name)
+        setAccount(data[0].account)
+        setPassword(data[0].password)
+        setPhone(data[0].phone)
+        setEmail(data[0].email)
+        setAddress(data[0].address)
+        setBirth(data[0].birth)
+      })
+      .catch((err) => console.log('錯誤:', err))
+  }
 
   const updateSettingData = () => {
     const data = {
@@ -57,6 +54,25 @@ function MainSetting() {
       .catch((err) => console.log('錯誤:', err))
   }
 
+  const checkValue = (change) => {
+    let bool = true
+    if (!!change) {
+      document.getElementById(change).classList.remove('is-invalid')
+      return false
+    }
+    const array = ['name', 'password', 'birth', 'phone', 'email', 'address']
+
+    array.forEach((element) => {
+      console.log(element)
+    })
+
+    return bool
+  }
+
+  useEffect(() => {
+    getSettingData(id)
+  }, [id])
+
   return (
     <>
       <div className="main col-9">
@@ -69,7 +85,7 @@ function MainSetting() {
           <div className="linkTop"></div>
 
           <form>
-            <div className="form-group mx-5 my-2 p-0 col-4">
+            <div className="form-group mx-5 my-2 p-0 col-5">
               <label htmlFor="name" className="form-label">
                 *使用者姓名
               </label>
@@ -87,7 +103,7 @@ function MainSetting() {
               />
             </div>
 
-            <div className="form-group mx-5 my-2 p-0 col-4">
+            <div className="form-group mx-5 my-2 p-0 col-5">
               <label htmlFor="account" className="form-label">
                 *使用者帳號
               </label>
@@ -103,7 +119,7 @@ function MainSetting() {
               />
             </div>
 
-            <div className="form-group mx-5 my-2 p-0 col-4">
+            <div className="form-group mx-5 my-2 p-0 col-5">
               <label htmlFor="password" className="form-label">
                 *使用者密碼
               </label>
@@ -121,22 +137,41 @@ function MainSetting() {
               />
             </div>
 
-            <div className="form-group mx-5 my-2 p-0 col-4">
-              <label htmlFor="phone" className="form-label">
-                *連絡電話
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                id="phone"
-                maxLength="20"
-                placeholder="連絡電話"
-                value={phone}
-                onChange={(event) => {
-                  setPhone(event.target.value)
-                }}
-              />
+            <div className="form-row mx-5 my-0 justify-content-between">
+              <div className="form-group my-2 px-0 pr-1 col-6">
+                <label htmlFor="birth" className="form-label">
+                  *生日
+                </label>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="birth"
+                  placeholder="生日"
+                  value={birth}
+                  onChange={(event) => {
+                    setBirth(event.target.value)
+                  }}
+                />
+              </div>
+
+              <div className="form-group my-2 px-0 pl-1 col-6">
+                <label htmlFor="phone" className="form-label">
+                  *連絡電話
+                </label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="phone"
+                  maxLength="20"
+                  placeholder="連絡電話"
+                  value={phone}
+                  onChange={(event) => {
+                    setPhone(event.target.value)
+                  }}
+                />
+              </div>
             </div>
+
             <div className="form-group mx-5 my-2 p-0">
               <label htmlFor="email" className="form-label">
                 *電子郵件地址
@@ -167,28 +202,24 @@ function MainSetting() {
                 }}
               />
             </div>
-            <div className="form-group mx-5 my-2 p-0">
-              <label htmlFor="birth" className="form-label">
-                *生日
-              </label>
-              <input
-                type="date"
-                className="form-control col-5"
-                id="birth"
-                placeholder="生日"
-                value={birth}
-                onChange={(event) => {
-                  setBirth(event.target.value)
-                }}
-              />
-            </div>
-            <div className="mx-5 my-2 p-0 text-center">
+
+            <div className="my-2 p-0 text-center">
               <button
                 className="btn px-5 py-2"
                 type="button"
                 onClick={() => updateSettingData()}
               >
                 更新
+              </button>
+            </div>
+
+            <div className="my-2 p-0 text-center">
+              <button
+                className="btn px-5 py-2"
+                type="button"
+                onClick={() => checkValue()}
+              >
+                測試
               </button>
             </div>
           </form>
