@@ -8,6 +8,7 @@ import {
   Setting,
   Contact,
 } from '../pages/Member'
+import Clothing from '../pages/Clothing'
 
 const routes = [
   {
@@ -50,6 +51,12 @@ const routes = [
     path: '/contact',
     component: Contact,
     breadcrumbName: '聯絡我們',
+  },
+  //穿搭集 -------------
+  {
+    path: '/clothing',
+    component: Clothing,
+    breadcrumbName: '穿搭集',
   },
 ]
 
