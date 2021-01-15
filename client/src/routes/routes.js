@@ -1,5 +1,6 @@
+import Home from '../pages/Home'
 import {
-  Home,
+  MemberHome,
   Mail,
   Order,
   Member,
@@ -11,9 +12,13 @@ import {
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     component: Home,
     exact: true,
+  },
+  {
+    path: '/memberhome',
+    component: MemberHome,
     breadcrumbName: '會員首頁',
   },
   {

@@ -9,7 +9,7 @@ function MemberSidebar(props) {
     <>
       <div className="Sidebar col-3">
         <ul className="SidebarList">
-          <Link to="/home">
+          <Link to="/memberhome">
             <div className="my-3">我的COOL</div>
           </Link>
           <p className="solid-bottom"></p>

@@ -24,7 +24,7 @@ const onMatchedRoutes = (matchedRoutes) => {
   ]
 }
 
-const Home = ({ route, location }) => {
+const MemberHome = ({ route, location }) => {
   return (
     <>
       <Breadcrumb
@@ -128,4 +128,4 @@ const Contact = ({ route, location }) => {
   )
 }
 
-export { Home, Mail, Order, Member, Favorites, Coupon, Setting, Contact }
+export { MemberHome, Mail, Order, Member, Favorites, Coupon, Setting, Contact }
