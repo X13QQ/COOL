@@ -11,6 +11,7 @@ import {
   Setting,
   Contact,
 } from '../pages/Member'
+import clothing from '../pages/Clothing'
 
 const routes = [
   {
@@ -68,6 +69,12 @@ const routes = [
     path: '/contact',
     component: Contact,
     breadcrumbName: '聯絡我們',
+  },
+  //穿搭集 -------------
+  {
+    path: '/clothing',
+    component: clothing,
+    breadcrumbName: '穿搭集',
   },
 ]
 
