@@ -1,5 +1,6 @@
 import Home from '../pages/Home'
 import Clothing from '../pages/Clothing'
+import About from '../pages/About'
 
 import {
   Mail,
@@ -23,7 +24,7 @@ const routes = [
   },
   {
     path: '/about',
-    // component: ,
+    component: About,
   },
   {
     path: '/news',
