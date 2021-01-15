@@ -1,6 +1,7 @@
 import Home from '../pages/Home'
 import Clothing from '../pages/Clothing'
 import About from '../pages/About'
+import Product from '../pages/Product'
 
 import {
   Mail,
@@ -21,7 +22,11 @@ const routes = [
   },
   {
     path: '/product',
-    // component: ,
+    component: Product,
+  }, 
+  {
+    path: '/detail',
+    // component: ProductDetail,
   },
   {
     path: '/about',
