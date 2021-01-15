@@ -2,6 +2,7 @@ import Home from '../pages/Home'
 import Clothing from '../pages/Clothing'
 import About from '../pages/About'
 import Product from '../pages/Product'
+import Detail from '../pages/Detail'
 
 import {
   Mail,
@@ -26,7 +27,7 @@ const routes = [
   }, 
   {
     path: '/detail',
-    // component: ProductDetail,
+    component: Detail,
   },
   {
     path: '/about',
