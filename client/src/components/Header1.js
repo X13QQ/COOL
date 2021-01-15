@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Header1() {
+  const [signUp, setSignUp] = useState(false)
+
+  // const showModal = (el) => {
+  //   el = document.querySelector(el)
+  //   el.classList.value.replace('d-none', 'd-flex')
+  // }
+
   return (
     <>
       <header className="product-detail-header position-relative">
@@ -37,17 +44,21 @@ function Header1() {
                   </Link>
                 </li>
               </ul>
+
               <ul className="navbar-icon navbar-nav ml-auto flex-row">
+                {/* 搜尋欄 */}
                 <li className="d-flex nav-item mx-2 mx-sm-3 mx-lg-2">
                   <div className="d-flex align-items-end search-icon-input-wrap mx-2">
                     <input type="text" className="px-2"></input>
                   </div>
-                  <a className="nav-link active" aria-current="page" href="/#">
+                  <a className="nav-link active" aria-current="page" href="#!">
                     <img src={'images/素材/icon/Search_G.svg'} alt={''}></img>
                   </a>
                 </li>
+
+                {/* 購物車 */}
                 <li className="nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-                  <a className="nav-link" href="/#">
+                  <a className="nav-link" href="#!">
                     <img
                       src={'images/素材/icon/shopping_cart_G.svg'}
                       alt={''}
@@ -65,7 +76,7 @@ function Header1() {
                         <div className="row m-0 pb-2">
                           <div className="col-3 pl-0 content-img">
                             <div>
-                              <a className="d-block" href="/#">
+                              <a className="d-block" href="#!">
                                 <img
                                   className="img-fluid"
                                   src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
@@ -100,6 +111,7 @@ function Header1() {
                           </div>
                         </div>
                       </li>
+
                       <li
                         style={{ borderBottom: '1px solid gray' }}
                         className="my-2"
@@ -107,7 +119,7 @@ function Header1() {
                         <div className="row m-0 pb-2">
                           <div className="col-3 pl-0 content-img">
                             <div>
-                              <a className="d-block" href="/#">
+                              <a className="d-block" href="#!">
                                 <img
                                   className="img-fluid"
                                   src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
@@ -151,14 +163,14 @@ function Header1() {
                     </div>
                     <div className="checkout-btn-wrap d-flex flex-column">
                       <a
-                        href="/#"
+                        href="#!"
                         style={{ color: 'black' }}
                         className="my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
                       >
                         查看購物車
                       </a>
                       <a
-                        href="/#"
+                        href="#!"
                         style={{ color: 'white', backgroundColor: 'black' }}
                         className="my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
                       >
@@ -168,8 +180,13 @@ function Header1() {
                   </div>
                 </li>
 
+                {/* 會員 */}
                 <li className="nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-                  <a className="nav-link" href="/#">
+                  <a
+                    className="nav-link"
+                    href="#!"
+                    onClick={() => setSignUp(true)}
+                  >
                     <img src="images/素材/icon/Profile_G.svg" alt={''}></img>
                   </a>
                   <div
@@ -207,13 +224,13 @@ function Header1() {
                         </Link>
                         <ul className="list-unstyled text-left">
                           <li>
-                            <Link
+                            <div
                               to="/member"
                               className="py-1 pr-3 pl-1"
                               style={{ color: 'gray', fontSize: '12px' }}
                             >
                               黃金會員
-                            </Link>
+                            </div>
                           </li>
                           <li>
                             <div
@@ -248,7 +265,7 @@ function Header1() {
                         style={{ borderBottom: '1px solid black' }}
                       >
                         <Link
-                          href="/setting"
+                          to="/setting"
                           className="font-weight-bold d-inline-block py-1"
                         >
                           帳號設定
@@ -256,7 +273,7 @@ function Header1() {
                       </li>
                       <li className="d-flex justify-content-start">
                         <a
-                          href="/#"
+                          href="#!"
                           className="font-weight-bold d-inline-block py-1"
                         >
                           登出
@@ -264,6 +281,7 @@ function Header1() {
                       </li>
                     </ul>
                   </div>
+
                   {/* 註冊 */}
                   <div className="sign-up-modal position-fixed d-none justify-content-center align-items-center">
                     <div className="sign-up-content">
@@ -362,7 +380,7 @@ function Header1() {
                           </div>
                           <div className="already-have-account-wrap mb-2">
                             <a
-                              href="/#"
+                              href="#!"
                               className="font-weight-bold"
                               style={{ fontSize: '14px' }}
                             >
@@ -371,7 +389,7 @@ function Header1() {
                           </div>
                           <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4">
                             <a
-                              href="/#"
+                              href="#!"
                               className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                               style={{
                                 width: '45%',
@@ -382,7 +400,7 @@ function Header1() {
                               取消
                             </a>
                             <a
-                              href="/#"
+                              href="#!"
                               className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                               style={{
                                 width: '45%',
@@ -407,7 +425,7 @@ function Header1() {
                             </p>
                             <div className="d-flex justify-content-center align-items-center">
                               <a
-                                href="/#"
+                                href="#!"
                                 className="mx-2 rounded d-flex justify-content-center align-items-center"
                                 style={{
                                   width: '25px',
@@ -422,7 +440,7 @@ function Header1() {
                                 ></img>
                               </a>
                               <a
-                                href="/#"
+                                href="#!"
                                 className="mx-2 rounded d-flex justify-content-center align-items-center"
                                 style={{
                                   width: '25px',
@@ -442,8 +460,13 @@ function Header1() {
                       </div>
                     </div>
                   </div>
+
                   {/* 登入 */}
-                  <div className="log-in-modal position-fixed d-none justify-content-center align-items-center">
+                  <div
+                    className={`log-in-modal position-fixed ${
+                      signUp ? 'd-flex' : 'd-none'
+                    } justify-content-center align-items-center`}
+                  >
                     <div className="log-in-content">
                       <div className="content-top mb-1 d-flex justify-content-center align-items-center">
                         <img
@@ -506,7 +529,7 @@ function Header1() {
                           </div>
                           <div className="forget-password-wrap mb-2">
                             <a
-                              href="/#"
+                              href="#!"
                               className="font-weight-bold"
                               style={{ fontSize: '14px' }}
                             >
@@ -515,7 +538,7 @@ function Header1() {
                           </div>
                           <div className="create-account-wrap mb-2">
                             <a
-                              href="/#"
+                              href="#!"
                               className="font-weight-bold"
                               style={{ fontSize: '14px' }}
                             >
@@ -524,7 +547,7 @@ function Header1() {
                           </div>
                           <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4">
                             <a
-                              href="/#"
+                              href="#!"
                               className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                               style={{
                                 width: '45%',
@@ -535,7 +558,7 @@ function Header1() {
                               取消
                             </a>
                             <a
-                              href="/#"
+                              href="#!"
                               className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                               style={{
                                 width: '45%',
@@ -560,7 +583,7 @@ function Header1() {
                             </p>
                             <div className="d-flex justify-content-center align-items-center">
                               <a
-                                href="/#"
+                                href="#!"
                                 className="mx-2 rounded d-flex justify-content-center align-items-center"
                                 style={{
                                   width: '25px',
@@ -575,7 +598,7 @@ function Header1() {
                                 ></img>
                               </a>
                               <a
-                                href="/#"
+                                href="#!"
                                 className="mx-2 rounded d-flex justify-content-center align-items-center"
                                 style={{
                                   width: '25px',
@@ -595,6 +618,8 @@ function Header1() {
                       </div>
                     </div>
                   </div>
+
+                  {/* 忘記密碼 */}
                   <div className="certificate-modal position-fixed d-none justify-content-center align-items-center">
                     <div className="certificate-content">
                       <div className="content-top mb-1 d-flex justify-content-center align-items-center">
@@ -633,7 +658,7 @@ function Header1() {
                           </div>
                           <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4">
                             <a
-                              href="/#"
+                              href="#!"
                               className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                               style={{
                                 width: '45%',
@@ -644,7 +669,7 @@ function Header1() {
                               返回
                             </a>
                             <a
-                              href="/#"
+                              href="#!"
                               className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                               style={{
                                 width: '45%',
@@ -670,7 +695,7 @@ function Header1() {
                             </p>
                             <div className="d-flex justify-content-center align-items-center">
                               <a
-                                href="/#"
+                                href="#!"
                                 className="mx-2 rounded d-flex justify-content-center align-items-center"
                                 style={{
                                   width: '25px',
@@ -685,7 +710,7 @@ function Header1() {
                                 ></img>
                               </a>
                               <a
-                                href="/#"
+                                href="#!"
                                 className="mx-2 rounded d-flex justify-content-center align-items-center"
                                 style={{
                                   width: '25px',
@@ -705,6 +730,8 @@ function Header1() {
                       </div>
                     </div>
                   </div>
+
+                  {/* 送出成功 */}
                   <div className="certificate-send-modal position-fixed d-none justify-content-center align-items-center">
                     <div className="certificate-send-content">
                       <div className="content-top mb-1 d-flex justify-content-center align-items-center">
@@ -734,7 +761,7 @@ function Header1() {
                   </div>
                 </li>
                 <li className="nav-item mx-2 mx-sm-3 mx-lg-2 d-block d-lg-none">
-                  <a className="nav-link" href="/#">
+                  <a className="nav-link" href="#!">
                     <img src="images/素材/icon/Menu_W.svg" alt={''}></img>
                   </a>
                 </li>
@@ -760,34 +787,34 @@ function Header1() {
                     <h6 className="font-weight-bold mb-3">商品分類</h6>
                     <ul className="list-unstyled">
                       <li>
-                        <a href="/#">新品</a>
+                        <a href="#!">新品</a>
                       </li>
                       <li>
-                        <a href="/#">外套</a>
+                        <a href="#!">外套</a>
                       </li>
                       <li>
-                        <a href="/#">長褲</a>
+                        <a href="#!">長褲</a>
                       </li>
                       <li>
-                        <a href="/#">短褲</a>
+                        <a href="#!">短褲</a>
                       </li>
                       <li>
-                        <a href="/#">牛仔褲</a>
+                        <a href="#!">牛仔褲</a>
                       </li>
                       <li>
-                        <a href="/#">西裝褲</a>
+                        <a href="#!">西裝褲</a>
                       </li>
                       <li>
-                        <a href="/#">衣服</a>
+                        <a href="#!">衣服</a>
                       </li>
                       <li>
-                        <a href="/#">褲子</a>
+                        <a href="#!">褲子</a>
                       </li>
                       <li>
-                        <a href="/#">鞋子</a>
+                        <a href="#!">鞋子</a>
                       </li>
                       <li>
-                        <a href="/#">配件</a>
+                        <a href="#!">配件</a>
                       </li>
                     </ul>
                   </div>
@@ -795,34 +822,34 @@ function Header1() {
                     <h6 className="font-weight-bold mb-3">品牌</h6>
                     <ul className="list-unstyled">
                       <li>
-                        <a href="/#">undefeated</a>
+                        <a href="#!">undefeated</a>
                       </li>
                       <li>
-                        <a href="/#">OnlyNY</a>
+                        <a href="#!">OnlyNY</a>
                       </li>
                       <li>
-                        <a href="/#">NOAH</a>
+                        <a href="#!">NOAH</a>
                       </li>
                       <li>
-                        <a href="/#">BBCICECREAM</a>
+                        <a href="#!">BBCICECREAM</a>
                       </li>
                       <li>
-                        <a href="/#">Tribal</a>
+                        <a href="#!">Tribal</a>
                       </li>
                       <li>
-                        <a href="/#">Palace</a>
+                        <a href="#!">Palace</a>
                       </li>
                       <li>
-                        <a href="/#">Wckdthghts</a>
+                        <a href="#!">Wckdthghts</a>
                       </li>
                       <li>
-                        <a href="/#">studio-seven</a>
+                        <a href="#!">studio-seven</a>
                       </li>
                       <li>
-                        <a href="/#">Products</a>
+                        <a href="#!">Products</a>
                       </li>
                       <li>
-                        <a href="/#">424</a>
+                        <a href="#!">424</a>
                       </li>
                     </ul>
                   </div>
@@ -830,16 +857,16 @@ function Header1() {
                     <h6 className="font-weight-bold mb-3">活動</h6>
                     <ul className="list-unstyled">
                       <li>
-                        <a href="/#">十二月新品上市</a>
+                        <a href="#!">十二月新品上市</a>
                       </li>
                       <li>
-                        <a href="/#">免運活動</a>
+                        <a href="#!">免運活動</a>
                       </li>
                       <li>
-                        <a href="/#">換季出清</a>
+                        <a href="#!">換季出清</a>
                       </li>
                       <li>
-                        <a href="/#">VIP商品區</a>
+                        <a href="#!">VIP商品區</a>
                       </li>
                     </ul>
                   </div>

@@ -16,9 +16,9 @@ function MemberSidebar(props) {
 
             return (
               <Link
+                to={val.link}
                 key={key}
                 className="row w-100 m-0 d-flex justify-content-center align-items-center"
-                to={val.link}
                 id={isActive ? 'active' : ''}
               >
                 <div className="mr-2 icon">{val.icon}</div>
