@@ -1,7 +1,9 @@
 import React from 'react'
 
+import Header1 from '../components/Header1'
 import Banner from '../components/Banner'
 import MemberSidebar from '../components/MemberSidebar'
+import { Row, Container } from 'react-bootstrap'
 import Breadcrumb from '../components/Breadcrumb'
 import MainMail from './MainMail'
 import MainOrder from './MainOrder'
@@ -16,7 +18,7 @@ const onMatchedRoutes = (matchedRoutes) => {
   return [
     {
       route: {
-        path: '/home',
+        path: '/setting',
         breadcrumbName: '會員首頁',
       },
     },
@@ -24,15 +26,20 @@ const onMatchedRoutes = (matchedRoutes) => {
   ]
 }
 
-const MemberHome = ({ route, location }) => {
+const Setting = ({ route, location }) => {
   return (
     <>
-      <Breadcrumb
-        locationPath={location.pathname}
-        // onMatchedRoutes={onMatchedRoutes}
-      />
-      <MemberSidebar />
-      <Banner pagename="會員首頁" />
+      <Header1 />
+      <Container>
+        <Row>
+          <Breadcrumb
+            locationPath={location.pathname}
+            // onMatchedRoutes={onMatchedRoutes}
+          />
+          <MemberSidebar />
+          <MainSetting />
+        </Row>
+      </Container>
     </>
   )
 }
@@ -40,12 +47,17 @@ const MemberHome = ({ route, location }) => {
 const Mail = ({ route, location }) => {
   return (
     <>
-      <Breadcrumb
-        locationPath={location.pathname}
-        onMatchedRoutes={onMatchedRoutes}
-      />
-      <MemberSidebar />
-      <MainMail />
+      <Header1 />
+      <Container>
+        <Row>
+          <Breadcrumb
+            locationPath={location.pathname}
+            onMatchedRoutes={onMatchedRoutes}
+          />
+          <MemberSidebar />
+          <MainMail />
+        </Row>
+      </Container>
     </>
   )
 }
@@ -53,12 +65,17 @@ const Mail = ({ route, location }) => {
 const Order = ({ route, location }) => {
   return (
     <>
-      <Breadcrumb
-        locationPath={location.pathname}
-        onMatchedRoutes={onMatchedRoutes}
-      />
-      <MemberSidebar />
-      <MainOrder />
+      <Header1 />
+      <Container>
+        <Row>
+          <Breadcrumb
+            locationPath={location.pathname}
+            onMatchedRoutes={onMatchedRoutes}
+          />
+          <MemberSidebar />
+          <MainOrder />
+        </Row>
+      </Container>
     </>
   )
 }
@@ -66,12 +83,17 @@ const Order = ({ route, location }) => {
 const Member = ({ route, location }) => {
   return (
     <>
-      <Breadcrumb
-        locationPath={location.pathname}
-        onMatchedRoutes={onMatchedRoutes}
-      />
-      <MemberSidebar />
-      <MainMember />
+      <Header1 />
+      <Container>
+        <Row>
+          <Breadcrumb
+            locationPath={location.pathname}
+            onMatchedRoutes={onMatchedRoutes}
+          />
+          <MemberSidebar />
+          <MainMember />
+        </Row>
+      </Container>
     </>
   )
 }
@@ -79,12 +101,17 @@ const Member = ({ route, location }) => {
 const Favorites = ({ route, location }) => {
   return (
     <>
-      <Breadcrumb
-        locationPath={location.pathname}
-        onMatchedRoutes={onMatchedRoutes}
-      />
-      <MemberSidebar />
-      <MainFavorites />
+      <Header1 />
+      <Container>
+        <Row>
+          <Breadcrumb
+            locationPath={location.pathname}
+            onMatchedRoutes={onMatchedRoutes}
+          />
+          <MemberSidebar />
+          <MainFavorites />
+        </Row>
+      </Container>
     </>
   )
 }
@@ -92,25 +119,17 @@ const Favorites = ({ route, location }) => {
 const Coupon = ({ route, location }) => {
   return (
     <>
-      <Breadcrumb
-        locationPath={location.pathname}
-        onMatchedRoutes={onMatchedRoutes}
-      />
-      <MemberSidebar />
-      <Banner pagename="優惠券" />
-    </>
-  )
-}
-
-const Setting = ({ route, location }) => {
-  return (
-    <>
-      <Breadcrumb
-        locationPath={location.pathname}
-        onMatchedRoutes={onMatchedRoutes}
-      />
-      <MemberSidebar />
-      <MainSetting />
+      <Header1 />
+      <Container>
+        <Row>
+          <Breadcrumb
+            locationPath={location.pathname}
+            onMatchedRoutes={onMatchedRoutes}
+          />
+          <MemberSidebar />
+          <Banner pagename="優惠券" />
+        </Row>
+      </Container>
     </>
   )
 }
@@ -118,14 +137,19 @@ const Setting = ({ route, location }) => {
 const Contact = ({ route, location }) => {
   return (
     <>
-      <Breadcrumb
-        locationPath={location.pathname}
-        onMatchedRoutes={onMatchedRoutes}
-      />
-      <MemberSidebar />
-      <MainContact />
+      <Header1 />
+      <Container>
+        <Row>
+          <Breadcrumb
+            locationPath={location.pathname}
+            onMatchedRoutes={onMatchedRoutes}
+          />
+          <MemberSidebar />
+          <MainContact />
+        </Row>
+      </Container>
     </>
   )
 }
 
-export { MemberHome, Mail, Order, Member, Favorites, Coupon, Setting, Contact }
+export { Mail, Order, Member, Favorites, Coupon, Setting, Contact }

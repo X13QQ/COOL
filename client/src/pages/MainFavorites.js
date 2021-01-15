@@ -8,7 +8,7 @@ function MainFavorites(props) {
   return (
     <>
       <div className="main col-9">
-        <div className="title ml-3 my-2">蒐藏清單</div>
+        <div className="title ml-3 mb-2">蒐藏清單</div>
         <Row>
           <InputGroup className="m-2 row justify-content-between">
             <div className="col-6 d-flex align-items-center">

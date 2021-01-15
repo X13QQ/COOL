@@ -6,7 +6,7 @@ function MainMember() {
   return (
     <>
       <div className="main col-9">
-        <div className="title ml-3 my-2">會員專區</div>
+        <div className="title ml-3 mb-2">會員專區</div>
         <Row className="member1 mx-2 d-flex justify-content-center align-items-start">
           <div className="memberlist col-4">
             <ul className="m-0 list-unstyled d-flex flex-column align-items-center">
@@ -43,7 +43,7 @@ function MainMember() {
               <LV2 className="circle-icon2" />
             </div>
             <ul className="memberlv m-3 flex-fill list-unstyled d-flex flex-column">
-              <li className="mx-4 my-1">尊貴會員</li>
+              <li className="mx-4 my-1">黃金會員</li>
               <li className="mx-4 my-1">未達成</li>
               <li className="mx-4 my-1">享有特定商品優先購買權</li>
               <li className="mx-4 my-1">每次消費運費折免</li>

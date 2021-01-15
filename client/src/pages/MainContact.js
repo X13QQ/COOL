@@ -66,7 +66,7 @@ function MainContact() {
   return (
     <>
       <div className="main col-9">
-        <div className="title ml-3 my-2">聯絡我們</div>
+        <div className="title ml-3 mb-2">聯絡我們</div>
         <div className="mx-2 contact">
           <div className="row mx-5 text-center">
             <div className="titleIcon"></div>

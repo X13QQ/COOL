@@ -12,7 +12,7 @@ function Breadcrumb({ locationPath, onMatchedRoutes }) {
 
   return (
     <nav aria-label="breadcrumb" className="w-100 pl-5">
-      <ol className="breadcrumb  m-0">
+      <ol className="breadcrumb m-0">
         {matchedRoutes.map((matchRoute, i) => {
           const { path, breadcrumbName } = matchRoute.route
           const isActive = path === locationPath

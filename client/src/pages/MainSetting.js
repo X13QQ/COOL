@@ -76,7 +76,7 @@ function MainSetting() {
   return (
     <>
       <div className="main col-9">
-        <div className="title ml-3 my-2">帳號設定</div>
+        <div className="title ml-3 mb-2">帳號設定</div>
         <div className="mx-2 setting">
           <div className="row mx-5 text-center">
             <div className="titleIcon"></div>

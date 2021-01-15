@@ -9,9 +9,7 @@ function MemberSidebar(props) {
     <>
       <div className="Sidebar col-3">
         <ul className="SidebarList">
-          <Link to="/memberhome">
-            <div className="my-3">我的COOL</div>
-          </Link>
+          <div className="my-3">我的COOL</div>
           <p className="solid-bottom"></p>
           {MemberSidebarData.map((val, key) => {
             const isActive = val.link === locationPath
