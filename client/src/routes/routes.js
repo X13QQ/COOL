@@ -10,7 +10,7 @@ import {
   Setting,
   Contact,
 } from '../pages/Member'
-import Clothing from '../pages/Clothing'
+import clothing from '../pages/Clothing'
 
 const routes = [
   {
@@ -72,7 +72,7 @@ const routes = [
   //穿搭集 -------------
   {
     path: '/clothing',
-    component: Clothing,
+    component: clothing,
     breadcrumbName: '穿搭集',
   },
 ]

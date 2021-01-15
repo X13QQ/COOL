@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react'
 import Header1 from '../components/Header1'
 
@@ -6,17 +5,6 @@ function Clothing() {
   return (
     <>
       <Header1 />
-    </>
-  )
-}
-
-export default Clothing
-=======
-import React from 'react'
-
-function Clothing() {
-  return (
-    <>
       <main style={{ marginTop: '24px' }}>
         <div>
           <div className="row headerwrapper">
@@ -315,4 +303,3 @@ function Clothing() {
 }
 
 export default Clothing
->>>>>>> pinciao
