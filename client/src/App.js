@@ -6,6 +6,8 @@ import Footer from './components/Footer'
 import routes from './routes/routes'
 import { FormGroup } from 'react-bootstrap'
 
+import Footer from './components/Footer'
+
 function App() {
   localStorage.memberNo = '1'
   // console.log(localStorage)
