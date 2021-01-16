@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Header1() {
-  const [signUp, setSignUp] = useState(false)
+  const [show, setShow] = useState(false)
 
   // const showModal = (el) => {
   //   el = document.querySelector(el)
@@ -185,7 +185,7 @@ function Header1() {
                   <a
                     className="nav-link"
                     href="#!"
-                    onClick={() => setSignUp(true)}
+                    onClick={() => setShow(true)}
                   >
                     <img src="images/素材/icon/Profile_G.svg" alt={''}></img>
                   </a>
@@ -464,7 +464,7 @@ function Header1() {
                   {/* 登入 */}
                   <div
                     className={`log-in-modal position-fixed ${
-                      signUp ? 'd-flex' : 'd-none'
+                      show ? 'd-flex' : 'd-none'
                     } justify-content-center align-items-center`}
                   >
                     <div className="log-in-content">

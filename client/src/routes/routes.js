@@ -24,7 +24,7 @@ const routes = [
   {
     path: '/product',
     component: Product,
-  }, 
+  },
   {
     path: '/detail',
     component: Detail,
