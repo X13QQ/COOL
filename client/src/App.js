@@ -4,6 +4,8 @@ import { renderRoutes } from 'react-router-config'
 
 import routes from './routes/routes'
 
+import Footer from './components/Footer'
+
 function App() {
   localStorage.memberNo = '1'
   // console.log(localStorage)
@@ -11,6 +13,7 @@ function App() {
     <BrowserRouter>
       <>
         <Switch>{renderRoutes(routes)}</Switch>
+        <Footer />
       </>
     </BrowserRouter>
   )
