@@ -27,23 +27,6 @@ function footer() {
                 <ul className="d-flex mb-4 list-unstyled justify-content-between">
                   <li className="mx-3">
                     <a href="/#" className="text-decoration-none">
-                      會員制度
-                    </a>
-                  </li>
-                  <li className="mx-3">
-                    <a href="/#" className="text-decoration-none">
-                      積分制度
-                    </a>
-                  </li>
-                  <li className="mx-3">
-                    <a href="/#" className="text-decoration-none">
-                      聯絡我們
-                    </a>
-                  </li>
-                </ul>
-                <ul className="d-flex mb-4 list-unstyled justify-content-between">
-                  <li className="mx-3">
-                    <a href="/#" className="text-decoration-none">
                       首頁
                     </a>
                   </li>
@@ -112,3 +95,4 @@ function footer() {
     </>
   )
 }
+export default footer
