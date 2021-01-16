@@ -9,7 +9,6 @@ function Product() {
     <>
       <ProductContent></ProductContent>
       <Topbtn />
-      <Footer/>
     </>
   )
 }

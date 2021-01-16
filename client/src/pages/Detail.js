@@ -9,7 +9,6 @@ function Detail() {
     <>
       <DetailContent></DetailContent>
       <Topbtn />
-      <Footer/>
     </>
   )
 }

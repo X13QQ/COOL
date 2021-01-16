@@ -8,7 +8,6 @@ function About() {
     <>
       <AboutContent />
       <Topbtn />
-      <Footer />
     </>
   )
 }
