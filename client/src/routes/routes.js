@@ -8,6 +8,7 @@ import {
   Setting,
   Contact,
 } from '../pages/Member'
+import News from '../pages/News'
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
   {
     path: '/contact',
     component: Contact,
+    breadcrumbName: '聯絡我們',
+  },
+  {
+    path: '/news',
+    component: News,
     breadcrumbName: '聯絡我們',
   },
 ]
