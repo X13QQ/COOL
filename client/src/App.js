@@ -1,8 +1,10 @@
 import React from 'react'
 import { BrowserRouter, Switch } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
+import Footer from './components/Footer'
 
 import routes from './routes/routes'
+import { FormGroup } from 'react-bootstrap'
 
 function App() {
   localStorage.memberNo = '1'
@@ -11,6 +13,7 @@ function App() {
     <BrowserRouter>
       <>
         <Switch>{renderRoutes(routes)}</Switch>
+        <Footer />
       </>
     </BrowserRouter>
   )
