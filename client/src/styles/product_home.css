@@ -503,13 +503,24 @@ section.hot-sale {
 /*  */
 .main-content .accordion-ul div {
   border-bottom: 1px solid #000000;
+  cursor: pointer;
+  user-select: none;
 }
 
 .main-content .accordion-ul ul a {
   color: #f37022;
   font-size: 14px;
 }
+.event-accordion , .category-accordion , .brand-accordion{
+  max-height: 0px;
+  overflow: hidden;
+  transition: 0.15s;
+}
 
+.accordion-active{
+  max-height: 500px;
+}
+/*  */
 .main-content .dropdown a {
   color: #353c1d;
   font-size: 14px;
@@ -518,21 +529,31 @@ section.hot-sale {
 
 .main-content .dropdown a img {
   transform: rotate(-90deg);
-  width: 30px;
+  width: 25px;
   position: relative;
   top: -5.5px;
 }
+/*  */
+.main-content .dropdown .product-sort-wrap ,.main-content .dropdown  .items-per-page-wrap{
+  z-index: 1;
+  padding-top: 12px;
+  display: none;
+}
 
-.main-content .dropdown .sort-ul-wrap,
+.main-content .dropdown .product-sort-wrap {
+  left: 0px;
+}
+.main-content .dropdown .items-per-page-wrap {
+  left: 30px;
+}
+.main-content .dropdown .product-sort-ul-wrap,
 .main-content .dropdown .items-per-page-ul-wrap {
   background-color: white;
   border: 1px solid #353c1d;
-  z-index: 1;
-  top: 55px;
   text-align: center;
 }
 
-.main-content .dropdown .sort-ul-wrap::before,
+.main-content .dropdown .product-sort-ul-wrap::before,
 .main-content .dropdown .items-per-page-ul-wrap::before {
   content: "";
   width: 15px;
@@ -546,17 +567,12 @@ section.hot-sale {
   top: -8px;
   right: 23px;
 }
-.main-content .dropdown .sort-ul-wrap {
-  left: 0px;
-}
-.main-content .dropdown .items-per-page-ul-wrap {
-  left: 30px;
-}
-.sort-ul {
+
+.product-sort-ul {
   width: 120px;
 }
 
-.main-content .dropdown .sort-ul-wrap a,
+.main-content .dropdown .product-sort-ul-wrap a,
 .main-content .dropdown .items-per-page-ul-wrap a {
   font-weight: 700;
 }

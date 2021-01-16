@@ -5,8 +5,6 @@ import ScrollToTop from './components/ScrollToTop'
 
 import routes from './routes/routes'
 
-import Footer from './components/footer'
-
 function App() {
   localStorage.memberNo = '1'
   // console.log(localStorage)
@@ -16,7 +14,6 @@ function App() {
         <ScrollToTop>
           <Switch>{renderRoutes(routes)}</Switch>
         </ScrollToTop>
-        <Footer />
       </>
     </BrowserRouter>
   )

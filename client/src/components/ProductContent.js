@@ -11,7 +11,7 @@ function ProductContent() {
           <div className="list-unstyled row my-5">
             <Link
               to="/detail"
-              className="col-6 col-md-3 mb-3  mb-lg-0 d-block text-decoration-none"
+              className="col-6 col-md-3 mb-3  mb-lg-0 d-block "
             >
               <div className="m-3">
                 <img
@@ -29,7 +29,7 @@ function ProductContent() {
             </Link>
             <Link
               to="/detail"
-              className="col-6 col-md-3 mb-3  mb-lg-0 d-block text-decoration-none"
+              className="col-6 col-md-3 mb-3  mb-lg-0 d-block"
             >
               <div className="m-3">
                 <img
@@ -47,7 +47,7 @@ function ProductContent() {
             </Link>
             <Link
               to="/detail"
-              className="col-6 col-md-3 mb-3  mb-lg-0 d-block text-decoration-none"
+              className="col-6 col-md-3 mb-3  mb-lg-0 d-block"
             >
               <div className="m-3">
                 <img
@@ -65,7 +65,7 @@ function ProductContent() {
             </Link>
             <Link
               to="/detail"
-              className="col-6 col-md-3 mb-3 mb-lg-0  d-block text-decoration-none"
+              className="col-6 col-md-3 mb-3 mb-lg-0  d-block"
             >
               <div className="m-3">
                 <img
@@ -106,15 +106,22 @@ function ProductContent() {
               <div className="d-none d-lg-block col-lg-3 position-sticky">
                 <ul className="accordion-ul list-unstyled">
                   <li className="h5">
-                    <div className="d-flex justify-content-between py-2 font-weight-bold">
+                    <div className="d-flex justify-content-between py-2 font-weight-bold" onClick={() => {
+                      document.querySelector('.event-accordion').classList.toggle('accordion-active');
+                      if (document.querySelector('.event-span').textContent == '-') {
+                        document.querySelector('.event-span').textContent = '+'
+                      } else {
+                        document.querySelector('.event-span').textContent = '-'
+                      };
+                    }}>
                       <span>熱銷活動</span>
-                      <span>+</span>
+                      <span className="event-span">+</span>
                     </div>
-                    <ul className="list-unstyled">
+                    <ul className="event-accordion list-unstyled accordion-active">
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
                           優惠倒數-超值折扣
                         </a>
@@ -122,7 +129,7 @@ function ProductContent() {
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
                           STUDIO 7-買千送百
                         </a>
@@ -130,7 +137,7 @@ function ProductContent() {
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
                           CANDY-後背包第二件8折
                         </a>
@@ -138,7 +145,7 @@ function ProductContent() {
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
                           換季特賣
                         </a>
@@ -146,7 +153,7 @@ function ProductContent() {
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
                           免運活動
                         </a>
@@ -154,97 +161,183 @@ function ProductContent() {
                     </ul>
                   </li>
                   <li className="h5">
-                    <div className="d-flex justify-content-between py-2 font-weight-bold">
-                      <span>新品</span>
-                      <span>+</span>
+                    <div className="d-flex justify-content-between py-2 font-weight-bold" onClick={() => {
+                      document.querySelector('.category-accordion').classList.toggle('accordion-active');
+                      if (document.querySelector('.category-span').textContent == '-') {
+                        document.querySelector('.category-span').textContent = '+'
+                      } else {
+                        document.querySelector('.category-span').textContent = '-'
+                      };
+                    }}>
+                      <span>類別</span>
+                      <span className="category-span">+</span>
                     </div>
-                    <ul className="list-unstyled">
+                    <ul className="category-accordion list-unstyled accordion-active">
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
-                          優惠倒數-超值折扣
+                          十二月新品上市
                         </a>
                       </li>
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
-                          STUDIO 7-買千送百
+                          外套
                         </a>
                       </li>
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
-                          CANDY-後背包第二件8折
+                          長褲
                         </a>
                       </li>
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
-                          換季特賣
+                          短褲
                         </a>
                       </li>
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
-                          免運活動
+                          牛仔褲
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
+                        >
+                          西裝褲
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
+                        >
+                          衣服
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
+                        >
+                          褲子
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
+                        >
+                          鞋子
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
+                        >
+                          配件
                         </a>
                       </li>
                     </ul>
                   </li>
                   <li className="h5">
-                    <div className="d-flex justify-content-between py-2 font-weight-bold">
+                    <div className="d-flex justify-content-between py-2 font-weight-bold" onClick={() => {
+                      document.querySelector('.brand-accordion').classList.toggle('accordion-active');
+                      if (document.querySelector('.brand-span').textContent == '-') {
+                        document.querySelector('.brand-span').textContent = '+'
+                      } else {
+                        document.querySelector('.brand-span').textContent = '-'
+                      };
+                    }}>
                       <span>品牌</span>
-                      <span>+</span>
+                      <span className="brand-span">+</span>
                     </div>
-                    <ul className="list-unstyled">
+                    <ul className="brand-accordion list-unstyled accordion-active">
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
-                          優惠倒數-超值折扣
+                          undefeated
                         </a>
                       </li>
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
-                          STUDIO 7-買千送百
+                          OnlyNY
                         </a>
                       </li>
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
-                          CANDY-後背包第二件8折
+                          NOAH
                         </a>
                       </li>
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
-                          換季特賣
+                          BBCICECREAM
                         </a>
                       </li>
                       <li>
                         <a
                           href="#!"
-                          className="d-inline-block px-3 py-2 text-decoration-none font-weight-bold"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
                         >
-                          免運活動
+                          Tribal
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
+                        >
+                          Palace
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
+                        >
+                          Wckdthghts
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
+                        >
+                          studio-seven
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#!"
+                          className="d-inline-block px-3 py-2 font-weight-bold"
+                        >
+                          424
                         </a>
                       </li>
                     </ul>
@@ -254,9 +347,16 @@ function ProductContent() {
               <div className="col-12 col-lg-9 py-5 py-lg-0">
                 <div className="dropdown d-flex py-2">
                   <div className="position-relative">
-                    <a
+                    <a id="product-sort-link"
                       href="#!"
                       className="d-inline-block position-relative px-2 mx-3 text-decoration-none"
+                      onMouseEnter={()=>{document.getElementById('product-sort-wrap').style["display"]='block'}}
+                      onMouseLeave={(e)=>{
+                        if(e.target.id!='product-sort-wrap'){
+                          document.getElementById('product-sort-wrap').style["display"]='none'
+                        }
+                        }
+                        }
                     >
                       排序
                       <img
@@ -265,39 +365,55 @@ function ProductContent() {
                         alt={''}
                       ></img>
                     </a>
-                    <div className="sort-ul-wrap position-absolute py-2 rounded">
-                      <ul className="sort-ul  list-unstyled mb-0">
-                        <li>
-                          <a
-                            href="#!"
-                            className="d-inline-block py-2 px-3 text-decoration-none"
-                          >
-                            依上架順序
+                    <div id="product-sort-wrap" className="product-sort-wrap position-absolute"
+                    onMouseEnter={()=>{document.getElementById('product-sort-wrap').style["display"]='block'}}
+                    onMouseLeave={(e)=>{
+                      if(e.target.id!='product-sort-link'){
+                        document.getElementById('product-sort-wrap').style["display"]='none'
+                      }
+                      }
+                      }>
+                      <div className="product-sort-ul-wrap position-relative py-2 rounded">
+                        <ul className="product-sort-ul  list-unstyled mb-0">
+                          <li>
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                            >
+                              依上架順序
                           </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#!"
-                            className="d-inline-block py-2 px-3 text-decoration-none"
-                          >
-                            從價格最高
+                          </li>
+                          <li>
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                            >
+                              從價格最高
                           </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#!"
-                            className="d-inline-block py-2 px-3 text-decoration-none"
-                          >
-                            從價格最低
+                          </li>
+                          <li>
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                            >
+                              從價格最低
                           </a>
-                        </li>
-                      </ul>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                   <div className="position-relative">
-                    <a
+                    <a id="items-per-page-link"
                       href="#!"
-                      className="d-inline-block px-2 mx-3 text-decoration-none"
+                      className="d-inline-block px-2 mx-3 text-decoration-none" 
+                      onMouseEnter={()=>{document.getElementById('items-per-page-wrap').style["display"]='block'}}
+                      onMouseLeave={(e)=>{
+                        if(e.target.id!='items-per-page-wrap'){
+                          document.getElementById('items-per-page-wrap').style["display"]='none'
+                        }
+                        }
+                        }
                     >
                       顯示筆數
                       <img
@@ -306,40 +422,49 @@ function ProductContent() {
                         alt={''}
                       ></img>
                     </a>
-                    <div className="items-per-page-ul-wrap position-absolute py-2 rounded">
-                      <ul className="items-per-page-ul  list-unstyled mb-0">
-                        <li>
-                          <a
-                            href="#!"
-                            className="d-inline-block py-2 px-3 text-decoration-none"
-                          >
-                            40筆
+                    <div id="items-per-page-wrap" className="items-per-page-wrap position-absolute"
+                    onMouseEnter={()=>{document.getElementById('items-per-page-wrap').style["display"]='block'}}
+                    onMouseLeave={(e)=>{
+                      if(e.target.id!='items-per-page-link'){
+                        document.getElementById('items-per-page-wrap').style["display"]='none'
+                      }
+                      }
+                      }>
+                      <div className="items-per-page-ul-wrap position-relative py-2 rounded">
+                        <ul className="items-per-page-ul  list-unstyled mb-0">
+                          <li>
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                            >
+                              40筆
                           </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#!"
-                            className="d-inline-block py-2 px-3 text-decoration-none"
-                          >
-                            60筆
+                          </li>
+                          <li>
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                            >
+                              60筆
                           </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#!"
-                            className="d-inline-block py-2 px-3 text-decoration-none"
-                          >
-                            80筆
+                          </li>
+                          <li>
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                            >
+                              80筆
                           </a>
-                        </li>
-                      </ul>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="product-list row">
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -359,7 +484,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -379,7 +504,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -399,7 +524,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -419,7 +544,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -439,7 +564,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -459,7 +584,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -479,7 +604,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -499,7 +624,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -519,7 +644,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -539,7 +664,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -559,7 +684,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -579,7 +704,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -599,7 +724,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -619,7 +744,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img
@@ -639,7 +764,7 @@ function ProductContent() {
                   </Link>
                   <Link
                     to="/detail"
-                    className="col-6 col-md-3 text-decoration-none"
+                    className="col-6 col-md-3"
                   >
                     <div className="m-3">
                       <img

@@ -253,7 +253,7 @@ function HomeContent() {
                       ></img>
                       <Link
                         to="/product"
-                        className="h5 text-decoration-none w-100 d-flex justify-content-center align-items-center font-weight-bold"
+                        className="h5 w-100 d-flex justify-content-center align-items-center font-weight-bold"
                         style={{ color: '#353c1d', whiteSpace: 'nowrap' }}
                       >
                         GOLF花襯衫
@@ -266,7 +266,7 @@ function HomeContent() {
                       </Link>
                       <Link
                         to="/product"
-                        className="text-decoration-none w-100 d-flex justify-content-center align-items-center font-weight-bold"
+                        className="w-100 d-flex justify-content-center align-items-center font-weight-bold"
                         style={{ color: '#353c1d', whiteSpace: 'nowrap' }}
                       >
                         ADIDAS休閒褲
@@ -297,7 +297,7 @@ function HomeContent() {
                       ></img>
                       <Link
                         to="/product"
-                        className="text-decoration-none w-100 d-flex justify-content-center align-items-center font-weight-bold"
+                        className="w-100 d-flex justify-content-center align-items-center font-weight-bold"
                         style={{ color: '#353c1d', whiteSpace: 'nowrap' }}
                       >
                         花襯衫
@@ -364,7 +364,7 @@ function HomeContent() {
                   ></img>
                   <Link
                     to="/product"
-                    className="text-decoration-none w-100 d-flex justify-content-center align-items-center font-weight-bold"
+                    className=" w-100 d-flex justify-content-center align-items-center font-weight-bold"
                     style={{ color: '#353c1d', whiteSpace: 'nowrap' }}
                   >
                     GOLF花襯衫
@@ -377,7 +377,7 @@ function HomeContent() {
                   </Link>
                   <Link
                     to="/product"
-                    className="h5 text-decoration-none w-100 d-flex justify-content-center align-items-center font-weight-bold"
+                    className="h5 w-100 d-flex justify-content-center align-items-center font-weight-bold"
                     style={{ color: '#353c1d', whiteSpace: 'nowrap' }}
                   >
                     ADIDAS休閒褲
