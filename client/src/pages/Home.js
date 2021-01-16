@@ -9,7 +9,7 @@ function Home() {
     <>
       <HomeContent></HomeContent>
       <Topbtn />
-      <Footer/>
+      <Footer />
     </>
   )
 }
