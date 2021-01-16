@@ -1,6 +1,7 @@
 import React from 'react'
+// import { Link } from 'react-router-dom'
 
-function footer() {
+function Footer() {
   return (
     <>
       <footer className="main-footer">
@@ -95,4 +96,4 @@ function footer() {
     </>
   )
 }
-export default footer
+export default Footer
