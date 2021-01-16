@@ -1,5 +1,6 @@
 import React from 'react'
 import Header1 from '../components/Header1'
+import Topbtn from '../components/Topbtn'
 
 function Clothing() {
   return (
@@ -298,6 +299,7 @@ function Clothing() {
           </div>
         </div>
       </main>
+      <Topbtn />
     </>
   )
 }

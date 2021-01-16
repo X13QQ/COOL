@@ -4,7 +4,7 @@ function Topbtn() {
   return (
     <>
       <a
-        href="/#"
+        href="#!"
         class="go-top position-fixed d-flex flex-column jusify-content-center align-items-center text-decoration-none"
       >
         <i class="text-center mb-2 fas fa-arrow-up"></i>

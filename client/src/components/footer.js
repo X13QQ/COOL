@@ -1,5 +1,5 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
@@ -27,29 +27,29 @@ function Footer() {
               <div className="">
                 <ul className="d-flex mb-4 list-unstyled justify-content-between">
                   <li className="mx-3">
-                    <a href="#!" className="text-decoration-none">
+                    <Link to="/" className="text-decoration-none">
                       首頁
-                    </a>
+                    </Link>
                   </li>
                   <li className="mx-3">
-                    <a href="#!" className="text-decoration-none">
+                    <Link to="/about" className="text-decoration-none">
                       關於
-                    </a>
+                    </Link>
                   </li>
                   <li className="mx-3">
-                    <a href="#!" className="text-decoration-none">
+                    <Link to="/product" className="text-decoration-none">
                       商品
-                    </a>
+                    </Link>
                   </li>
                   <li className="mx-3">
-                    <a href="#!" className="text-decoration-none">
+                    <Link to="/news" className="text-decoration-none">
                       新聞
-                    </a>
+                    </Link>
                   </li>
                   <li className="mx-3">
-                    <a href="#!" className="text-decoration-none">
+                    <Link to="/clothing" className="text-decoration-none">
                       穿搭集
-                    </a>
+                    </Link>
                   </li>
                 </ul>
                 <ul className="list-unstyled mb-4 d-flex d-md-block">

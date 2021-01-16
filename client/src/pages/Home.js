@@ -1,10 +1,12 @@
 import React from 'react'
 import HomeContent from '../components/HomeContent'
-// 尚未導入header 及 footer 及 goTop
+import Topbtn from '../components/Topbtn'
+// 尚未導入header
 function Home() {
   return (
     <>
       <HomeContent></HomeContent>
+      <Topbtn />
     </>
   )
 }

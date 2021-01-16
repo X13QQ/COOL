@@ -1,10 +1,12 @@
 import React from 'react'
 import AboutContent from '../components/AboutContent'
-// 尚未導入header 及 footer 及 goTop
+import Topbtn from '../components/Topbtn'
+// 尚未導入header
 function About() {
   return (
     <>
       <AboutContent />
+      <Topbtn />
     </>
   )
 }

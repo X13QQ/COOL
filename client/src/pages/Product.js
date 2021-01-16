@@ -1,10 +1,12 @@
 import React from 'react'
 import ProductContent from '../components/ProductContent'
-// 尚未導入header 及 footer 及 goTop
+import Topbtn from '../components/Topbtn'
+// 尚未導入header
 function Product() {
   return (
     <>
       <ProductContent></ProductContent>
+      <Topbtn />
     </>
   )
 }
