@@ -13,7 +13,7 @@ function Footer() {
                   <img
                     src="images/cool_logo/LOGO_W.png"
                     width="85px"
-                    alt={' '}
+                    alt={''}
                   />
                 </div>
                 <div className="mx-2 mx-sm-4 mx-md-0 mt-md-5">
@@ -27,27 +27,27 @@ function Footer() {
               <div className="">
                 <ul className="d-flex mb-4 list-unstyled justify-content-between">
                   <li className="mx-3">
-                    <a href="/#" className="text-decoration-none">
+                    <a href="#!" className="text-decoration-none">
                       首頁
                     </a>
                   </li>
                   <li className="mx-3">
-                    <a href="/#" className="text-decoration-none">
+                    <a href="#!" className="text-decoration-none">
                       關於
                     </a>
                   </li>
                   <li className="mx-3">
-                    <a href="/#" className="text-decoration-none">
+                    <a href="#!" className="text-decoration-none">
                       商品
                     </a>
                   </li>
                   <li className="mx-3">
-                    <a href="/#" className="text-decoration-none">
+                    <a href="#!" className="text-decoration-none">
                       新聞
                     </a>
                   </li>
                   <li className="mx-3">
-                    <a href="/#" className="text-decoration-none">
+                    <a href="#!" className="text-decoration-none">
                       穿搭集
                     </a>
                   </li>
@@ -68,18 +68,18 @@ function Footer() {
                 </ul>
                 <ul className="footer-icon d-flex list-unstyled justify-content-between">
                   <li className="mx-3">
-                    <a href="/#">
-                      <img src="images/素材/icon/Instagram_W.svg" alt={' '} />
+                    <a href="#!">
+                      <img src="images/素材/icon/Instagram_W.svg" alt={''} />
                     </a>
                   </li>
                   <li className="mx-3">
-                    <a href="/#">
-                      <img src="images/素材/icon/facebook_W.svg" alt={' '} />
+                    <a href="#!">
+                      <img src="images/素材/icon/facebook_W.svg" alt={''} />
                     </a>
                   </li>
                   <li className="mx-3">
-                    <a href="/#">
-                      <img src="images/素材/icon/twitter_W.svg" alt={' '} />
+                    <a href="#!">
+                      <img src="images/素材/icon/twitter_W.svg" alt={''} />
                     </a>
                   </li>
                 </ul>
@@ -96,4 +96,5 @@ function Footer() {
     </>
   )
 }
+
 export default Footer
