@@ -213,7 +213,7 @@ body {
 }
 
 /*  */
-.product-home-header .category-choose {
+/* .product-home-header .category-choose {
   margin-top: 200px;
 }
 
@@ -241,7 +241,7 @@ body {
 .product-home-header .category-choose li a:hover {
   color: rgba(255, 255, 255, 1);
   text-decoration: underline;
-}
+} */
 /*  */
 .sign-up-modal,
 .log-in-modal,
@@ -294,7 +294,15 @@ body {
   cursor: pointer;
 }
 /*  */
+/*  */
+.log-in-cancel-btn-wrap a ,.sign-up-cancel-btn-wrap a ,.certificate-cancel-btn-wrap a{
+  transition: 0.15s;
+}
 
+.log-in-cancel-btn-wrap a:hover, .sign-up-cancel-btn-wrap a:hover ,.certificate-cancel-btn-wrap a:hover{
+  transform: scale(0.97);
+}
+/*  */
 .product-hover-menu-wrap{
   top: 145px;
   padding-top: 8.41px;
@@ -406,25 +414,51 @@ body {
   font-size: 12px;
 }
 
+.review-btn{
+  background-color: #353c1d;
+  color: white !important;
+  transition: 0.15s;
+  border: 1px solid #353c1d;
+}
+
+.review-btn:hover{
+  background-color: white;
+  color: #353c1d !important;
+}
+
 .size-tryon-content .table-choose {
   border-bottom: 3px solid black;
 }
 .size-tryon-content .table-choose a {
-  border: 3px solid black;
+  /* border: 3px solid black; */
+  color: black;
   position: relative;
   bottom: -3px;
   font-weight: 900;
   width: 50%;
 }
 
+.active-table-choose{
+  border: 3px solid black;
+}
+
+
+
 @media (min-width: 576px) {
   .size-tryon-content .table-choose a {
-    border: 3px solid black;
+    /* border: 3px solid black; */
     position: relative;
     bottom: -3px;
     font-weight: 900;
     width: 120px;
   }
+}
+.size-table , .tryon-table{
+  display: none;
+}
+
+.active-table{
+  display: block !important;
 }
 
 .size-tryon-content table th,
@@ -634,6 +668,19 @@ body {
   background-color: white;
   color: #353c1d;
 }
+
+.see-all-btn{
+    border: 3px solid #353c1d;
+    color: #353c1d;
+    background-color: white;
+    transition: 0.2s;
+  }
+  .see-all-btn:hover{
+    border: 3px solid #353c1d;
+    color: #353c1d;
+    background-color: white;
+    transform: scale(0.97);
+  }
 /*  */
 .browse-history {
   overflow-x: scroll;
@@ -650,12 +697,22 @@ body {
   border-right: 2px solid black;
   color: black;
 }
+
+.browse-history a:hover {
+  text-decoration: underline;
+  color: black;
+}
 /*  */
 .go-top {
   bottom: 30px;
   right: 30px;
+  transition: 0.15s;
+
 }
 
+.go-top:hover{
+  transform: scale(0.97);
+}
 .go-top i {
   color: white;
   font-size: 20px;

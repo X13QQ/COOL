@@ -25,7 +25,7 @@ function HomeContent() {
                     <img
                       className="img-fluid"
                       style={{ objectFit: 'cover', height: '520px' }}
-                      src="images/首頁/https___hypebeast.com_wp-content_blogs.dir_6_files_2019_08_tommy-jeans-hilfiger-fall-lookbook-music-iv-jay-glowie-saba-sneakers-release-2.jpg"
+                      src="images/首頁/Home_image_3-1.png"
                       alt={''}
                     ></img>
                     <p
@@ -427,7 +427,7 @@ function HomeContent() {
               </Link>
             </div>
           </section>
-          <section className="latest-article mb-5">
+          <section className="latest-article mt-5" style={{marginBottom:'100px'}}>
             <h2 className="h2 font-weight-bold">最新文章</h2>
             <h3 className="d-inline-block h1 mb-5 font-weight-bolder font-italic position-relative">
               LATEST ARTICLES

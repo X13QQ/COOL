@@ -269,15 +269,27 @@ body {
 }
 /*  */
 
-.product-hover-menu {
+/* .product-hover-menu {
   top: 145.406px;
 }
 
 .product-hover-menu ul li a {
   color: black;
   font-size: 12px;
+} */
+
+
+.product-hover-menu-wrap{
+  top: 145px;
+  padding-top: 8.41px;
+  display: none;
+  z-index: 9999;
 }
 
+.product-hover-menu ul li a {
+  color: black;
+  font-size: 12px;
+}
 /*  */
 .product-home-header .category-choose {
   margin-top: 200px;
@@ -286,15 +298,17 @@ body {
 .product-home-header .category-choose .category-choose-btn {
   font-size: 16px;
   color: rgba(255, 255, 255, 1);
-  border: 1px solid rgba(255, 255, 255, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 1);
+  border-right: 1px solid rgba(255, 255, 255, 1);
   transition: 0.15s;
-  text-decoration: none;
   font-weight: 700;
 }
 
 .product-home-header .category-choose .category-choose-btn:hover {
   color: white;
-  border: 1px solid rgba(255, 255, 255, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 1);
+  border-right: 1px solid rgba(255, 255, 255, 1);
+
 }
 
 .product-home-header .category-choose li a {
@@ -359,7 +373,15 @@ body {
 .certificate-send-content .content-bottom input {
   cursor: pointer;
 }
+/*  */
+.log-in-cancel-btn-wrap a ,.sign-up-cancel-btn-wrap a ,.certificate-cancel-btn-wrap a{
+  transition: 0.15s;
+}
 
+.log-in-cancel-btn-wrap a:hover, .sign-up-cancel-btn-wrap a:hover ,.certificate-cancel-btn-wrap a:hover{
+  transform: scale(0.97);
+}
+/*  */
 /*  */
 section.hot-sale {
   /* height: calc(100vh - 600px); */
@@ -521,7 +543,7 @@ section.hot-sale {
   max-height: 500px;
 }
 /*  */
-.main-content .dropdown a {
+.main-content .dropdown  a {
   color: #353c1d;
   font-size: 14px;
   font-weight: 700;
@@ -575,6 +597,7 @@ section.hot-sale {
 .main-content .dropdown .product-sort-ul-wrap a,
 .main-content .dropdown .items-per-page-ul-wrap a {
   font-weight: 700;
+  color: black;
 }
 
 .main-content .product-list a {
@@ -647,6 +670,11 @@ section.hot-sale {
 .go-top {
   bottom: 30px;
   right: 30px;
+  transition: 0.15s;
+}
+
+.go-top:hover{
+  transform: scale(0.97);
 }
 
 .go-top i {

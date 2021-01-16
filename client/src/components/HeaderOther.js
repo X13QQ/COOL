@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function Header1() {
+function HeaderOther() {
   const [show, setShow] = useState(false)
   const [modal, setModal] = useState(1)
   
@@ -136,7 +136,7 @@ function Header1() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -320,7 +320,7 @@ function Header1() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -437,7 +437,7 @@ function Header1() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -1420,4 +1420,4 @@ function Header1() {
   )
 }
 
-export default Header1
+export default HeaderOther

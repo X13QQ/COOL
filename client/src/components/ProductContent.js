@@ -93,11 +93,8 @@ function ProductContent() {
               <li className="breadcrumb-item">
                 <Link to="/">首頁</Link>
               </li>
-              <li className="breadcrumb-item">
-                <Link to="/product">商品首頁</Link>
-              </li>
               <li className="breadcrumb-item active" aria-current="page">
-                商品列表
+                商品
               </li>
             </ol>
           </nav>
@@ -108,14 +105,14 @@ function ProductContent() {
                   <li className="h5">
                     <div className="d-flex justify-content-between py-2 font-weight-bold" onClick={() => {
                       document.querySelector('.event-accordion').classList.toggle('accordion-active');
-                      if (document.querySelector('.event-span').textContent == '-') {
-                        document.querySelector('.event-span').textContent = '+'
-                      } else {
+                      if (document.querySelector('.event-span').textContent == '+') {
                         document.querySelector('.event-span').textContent = '-'
+                      } else {
+                        document.querySelector('.event-span').textContent = '+'
                       };
                     }}>
                       <span>熱銷活動</span>
-                      <span className="event-span">+</span>
+                      <span className="event-span">-</span>
                     </div>
                     <ul className="event-accordion list-unstyled accordion-active">
                       <li>
@@ -163,14 +160,14 @@ function ProductContent() {
                   <li className="h5">
                     <div className="d-flex justify-content-between py-2 font-weight-bold" onClick={() => {
                       document.querySelector('.category-accordion').classList.toggle('accordion-active');
-                      if (document.querySelector('.category-span').textContent == '-') {
-                        document.querySelector('.category-span').textContent = '+'
-                      } else {
+                      if (document.querySelector('.category-span').textContent == '+') {
                         document.querySelector('.category-span').textContent = '-'
+                      } else {
+                        document.querySelector('.category-span').textContent = '+'
                       };
                     }}>
                       <span>類別</span>
-                      <span className="category-span">+</span>
+                      <span className="category-span">-</span>
                     </div>
                     <ul className="category-accordion list-unstyled accordion-active">
                       <li>
@@ -258,14 +255,14 @@ function ProductContent() {
                   <li className="h5">
                     <div className="d-flex justify-content-between py-2 font-weight-bold" onClick={() => {
                       document.querySelector('.brand-accordion').classList.toggle('accordion-active');
-                      if (document.querySelector('.brand-span').textContent == '-') {
-                        document.querySelector('.brand-span').textContent = '+'
-                      } else {
+                      if (document.querySelector('.brand-span').textContent == '+') {
                         document.querySelector('.brand-span').textContent = '-'
+                      } else {
+                        document.querySelector('.brand-span').textContent = '+'
                       };
                     }}>
                       <span>品牌</span>
-                      <span className="brand-span">+</span>
+                      <span className="brand-span">-</span>
                     </div>
                     <ul className="brand-accordion list-unstyled accordion-active">
                       <li>
@@ -783,7 +780,7 @@ function ProductContent() {
                     </div>
                   </Link>
                 </div>
-                <div className="page-select position-relative d-none d-lg-flex justify-content-center align-items-center my-5">
+                <div className="page-select position-relative d-none d-lg-flex justify-content-center align-items-center mt-5" style={{marginBottom:'100px'}}>
                   <a
                     href="#!"
                     className=" font-weight-bold page-previous d-flex justify-content-between align-items-center px-2 mx-2 text-center text-decoration-none"
