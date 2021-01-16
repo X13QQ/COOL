@@ -1,4 +1,5 @@
 import React from 'react'
+// import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
@@ -24,23 +25,6 @@ function Footer() {
             </div>
             <div className="footer-contact d-flex justify-content-center justify-content-md-end order-1 order-md-2 col-12 col-md-6">
               <div className="">
-                <ul className="d-flex mb-4 list-unstyled justify-content-between">
-                  <li className="mx-3">
-                    <a href="/#" className="text-decoration-none">
-                      會員制度
-                    </a>
-                  </li>
-                  <li className="mx-3">
-                    <a href="/#" className="text-decoration-none">
-                      積分制度
-                    </a>
-                  </li>
-                  <li className="mx-3">
-                    <a href="/#" className="text-decoration-none">
-                      聯絡我們
-                    </a>
-                  </li>
-                </ul>
                 <ul className="d-flex mb-4 list-unstyled justify-content-between">
                   <li className="mx-3">
                     <a href="/#" className="text-decoration-none">
@@ -112,5 +96,4 @@ function Footer() {
     </>
   )
 }
-
 export default Footer
