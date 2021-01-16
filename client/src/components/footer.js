@@ -27,27 +27,27 @@ function Footer() {
               <div className="">
                 <ul className="d-flex mb-4 list-unstyled justify-content-between">
                   <li className="mx-3">
-                    <Link to="/" className="text-decoration-none">
+                    <Link to="/">
                       首頁
                     </Link>
                   </li>
                   <li className="mx-3">
-                    <Link to="/about" className="text-decoration-none">
+                    <Link to="/about">
                       關於
                     </Link>
                   </li>
                   <li className="mx-3">
-                    <Link to="/product" className="text-decoration-none">
+                    <Link to="/product">
                       商品
                     </Link>
                   </li>
                   <li className="mx-3">
-                    <Link to="/news" className="text-decoration-none">
+                    <Link to="/news">
                       新聞
                     </Link>
                   </li>
                   <li className="mx-3">
-                    <Link to="/clothing" className="text-decoration-none">
+                    <Link to="/clothing">
                       穿搭集
                     </Link>
                   </li>
