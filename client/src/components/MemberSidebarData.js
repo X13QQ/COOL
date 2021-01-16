@@ -11,6 +11,11 @@ import {
 
 export const MemberSidebarData = [
   {
+    title: '帳號設定',
+    icon: <SettingIcon />,
+    link: '/setting',
+  },
+  {
     title: '我的信箱',
     icon: <MailIcon />,
     link: '/mail',
@@ -34,11 +39,6 @@ export const MemberSidebarData = [
     title: '優惠券　',
     icon: <CouponIcon />,
     link: '/coupon',
-  },
-  {
-    title: '帳號設定',
-    icon: <SettingIcon />,
-    link: '/setting',
   },
   {
     title: '聯絡我們',

@@ -1,9 +1,11 @@
 import React from 'react'
-import { Container, Row } from 'react-bootstrap'
 import { BrowserRouter, Switch } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
+import ScrollToTop from './components/ScrollToTop'
 
 import routes from './routes/routes'
+
+import Footer from './components/Footer'
 
 function App() {
   localStorage.memberNo = '1'
@@ -11,11 +13,10 @@ function App() {
   return (
     <BrowserRouter>
       <>
-        <Container>
-          <Row>
-            <Switch>{renderRoutes(routes)}</Switch>
-          </Row>
-        </Container>
+        <ScrollToTop>
+          <Switch>{renderRoutes(routes)}</Switch>
+        </ScrollToTop>
+        <Footer />
       </>
     </BrowserRouter>
   )

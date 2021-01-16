@@ -21,7 +21,8 @@ app.get("/member/order/:status", function (req, res) {
   if ("processing" === req.params.status) status = 1;
   if ("solved" === req.params.status) status = 2;
   if ("refundlist" === req.params.status) status = 3;
-  const sqlSelect = "SELECT * FROM cool_order WHERE status = ? and member_no = ? ";
+  const sqlSelect =
+    "SELECT * FROM cool_order WHERE status = ? and member_no = ? ";
   db.query(sqlSelect, [status, req.query.memberNo], (err, result, fields) => {
     res.send(result);
   });
@@ -73,6 +74,20 @@ app.put("/member/setting", function (req, res) {
       req.body.birth,
       req.body.id,
     ],
+    (req, result, fields) => {
+      res.send(result);
+    }
+  );
+});
+
+// 聯絡我們
+app.post("/member/contact", function (req, res) {
+  const sqlInsert =
+    "INSERT INTO contact ( email, service, subject, content) " +
+    "VALUES (?, ?, ?, ?)";
+  db.query(
+    sqlInsert,
+    [req.body.email, req.body.service, req.body.subject, req.body.content],
     (req, result, fields) => {
       res.send(result);
     }

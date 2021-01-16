@@ -1,5 +1,10 @@
+import Home from '../pages/Home'
+import Clothing from '../pages/Clothing'
+import About from '../pages/About'
+import Product from '../pages/Product'
+import Detail from '../pages/Detail'
+
 import {
-  Home,
   Mail,
   Order,
   Member,
@@ -12,10 +17,34 @@ import News from '../pages/News'
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     component: Home,
     exact: true,
-    breadcrumbName: '會員首頁',
+  },
+  {
+    path: '/product',
+    component: Product,
+  },
+  {
+    path: '/detail',
+    component: Detail,
+  },
+  {
+    path: '/about',
+    component: About,
+  },
+  {
+    path: '/news',
+    // component: ,
+  },
+  {
+    path: '/clothing',
+    component: Clothing,
+  },
+  {
+    path: '/setting',
+    component: Setting,
+    breadcrumbName: '帳號設定',
   },
   {
     path: '/mail',
@@ -41,11 +70,6 @@ const routes = [
     path: '/coupon',
     component: Coupon,
     breadcrumbName: '優惠券',
-  },
-  {
-    path: '/setting',
-    component: Setting,
-    breadcrumbName: '帳號設定',
   },
   {
     path: '/contact',

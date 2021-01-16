@@ -5,8 +5,8 @@ function MainMail() {
   return (
     <>
       <div className="main col-9">
-        <div className="title ml-3 my-2">我的信箱</div>
-        <div className="mailamount ml-3 my-2s">共有1/1信件</div>
+        <div className="title ml-3 mb-2">我的信箱</div>
+        <div className="mailamount ml-3 my-2">共有1/1信件</div>
         <div className="mx-2 mails overflow-auto">
           <ul className="MailList list-group list-group-flush">
             <li className="MailListItem list-group-item d-flex">

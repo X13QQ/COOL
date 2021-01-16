@@ -6,7 +6,7 @@ function MainOrder() {
   return (
     <>
       <div className="main col-9">
-        <div className="title ml-3 my-2">訂單紀錄</div>
+        <div className="title ml-3 mb-2">訂單紀錄</div>
         <div className="mx-2 border border-top-0">
           <Order memberNo={memberNo} />
         </div>
