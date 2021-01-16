@@ -29,27 +29,27 @@ function Footer() {
                   <li className="mx-3">
                     <Link to="/">
                       首頁
-                    </Link>
+                      </Link>
                   </li>
                   <li className="mx-3">
                     <Link to="/about">
                       關於
-                    </Link>
+                      </Link>
                   </li>
                   <li className="mx-3">
                     <Link to="/product">
                       商品
-                    </Link>
+                      </Link>
                   </li>
                   <li className="mx-3">
                     <Link to="/news">
                       新聞
-                    </Link>
+                      </Link>
                   </li>
                   <li className="mx-3">
                     <Link to="/clothing">
                       穿搭集
-                    </Link>
+                      </Link>
                   </li>
                 </ul>
                 <ul className="list-unstyled mb-4 d-flex d-md-block">

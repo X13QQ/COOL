@@ -3,11 +3,503 @@ import { Link } from 'react-router-dom'
 
 function Header1() {
   const [show, setShow] = useState(false)
+  const [modal, setModal] = useState(1)
+  
+  const login = () => {
+    return (
+      <>
+        <div className="log-in-modal position-fixed d-flex justify-content-center align-items-center">
+          <div className="log-in-content">
+            <div className="content-top mb-1 d-flex justify-content-center align-items-center">
+              <img
+                src="images/cool_logo/LOGO-G.png"
+                width="150px"
+                alt={''}
+              ></img>
+            </div>
+            <div className="content-bottom py-4">
+              <form action="" className="w-75 mx-auto">
+                <div className="position-relative mb-4">
+                  <label
+                    className="font-weight-bold mb-0"
+                    htmlFor="log-in-account"
+                  >
+                    帳號
+                  </label>
+                  <input
+                    id="log-in-account"
+                    className="d-block py-1 font-weight-bold"
+                    type="text"
+                    placeholder="請輸入帳號"
+                    style={{ width: '100%', paddingLeft: '38px' }}
+                  ></input>
+                  <img
+                    className="position-absolute"
+                    src="images/素材/icon/Profile_G.svg"
+                    style={{
+                      width: '20px',
+                      bottom: '8px',
+                      left: '10px',
+                    }}
+                    alt={''}
+                  ></img>
+                </div>
+                <div className="position-relative mb-2">
+                  <label
+                    className="font-weight-bold mb-0"
+                    htmlFor="log-in-password"
+                  >
+                    密碼
+                  </label>
+                  <input
+                    id="log-in-password"
+                    className="d-block py-1 font-weight-bold"
+                    type="text"
+                    placeholder="請輸入密碼"
+                    style={{ width: '100%', paddingLeft: '38px' }}
+                  ></input>
+                  <img
+                    className="position-absolute"
+                    src="images/素材/icon/Attachment_G.svg"
+                    style={{
+                      width: '20px',
+                      bottom: '8px',
+                      left: '10px',
+                    }}
+                    alt={''}
+                  ></img>
+                </div>
+                <div className="forget-password-wrap mb-2">
+                  <a
+                    href="#!"
+                    className="font-weight-bold"
+                    style={{ fontSize: '14px' }}
+                    onClick={() => setModal(3)}
+                  >
+                    忘記密碼
+                  </a>
+                </div>
+                <div className="create-account-wrap mb-2">
+                  <a
+                    href="#!"
+                    className="font-weight-bold"
+                    style={{ fontSize: '14px' }}
+                    onClick={() => setModal(2)}
+                  >
+                    立即註冊新帳號
+                  </a>
+                </div>
+                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4">
+                  <a
+                    href="#!"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    style={{
+                      width: '45%',
+                      border: '1px solid #353c1d',
+                      color: '#353c1d',
+                    }}
+                  >
+                    取消
+                  </a>
+                  <a
+                    href="#!"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    style={{
+                      width: '45%',
+                      border: '1px solid #353c1d',
+                      color: 'white',
+                      backgroundColor: '#353c1d',
+                    }}
+                  >
+                    登入
+                  </a>
+                </div>
+                <hr
+                  className="mt-0 mb-4"
+                  style={{ backgroundColor: 'lightgray' }}
+                />
+                <div className="social-account-wrap">
+                  <p
+                    className="font-weight-bold text-center mb-2"
+                    style={{ fontSize: '12px' }}
+                  >
+                    使用社群帳號快速註冊
+                  </p>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <a
+                      href="#!"
+                      className="mx-2 rounded d-flex justify-content-center align-items-center"
+                      style={{
+                        width: '25px',
+                        height: '25px',
+                        border: '1px solid #353c1d',
+                      }}
+                    >
+                      <img
+                        src="images/素材/icon/Facebook_G.svg"
+                        alt={''}
+                        style={{ width: '15px' }}
+                      ></img>
+                    </a>
+                    <a
+                      href="#!"
+                      className="mx-2 rounded d-flex justify-content-center align-items-center"
+                      style={{
+                        width: '25px',
+                        height: '25px',
+                        border: '1px solid #353c1d',
+                      }}
+                    >
+                      <img
+                        src="images/素材/icon/Facebook_G.svg"
+                        alt={''}
+                        style={{ width: '15px' }}
+                      ></img>
+                    </a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+  const signUp = () => {
+    return (
+      <>
+        <div className="sign-up-modal position-fixed d-flex justify-content-center align-items-center">
+          <div className="sign-up-content">
+            <div className="content-top mb-1 d-flex justify-content-center align-items-center">
+              <img
+                src="images/cool_logo/LOGO-G.png"
+                width="150px"
+                alt={''}
+              ></img>
+            </div>
+            <div className="content-bottom py-4">
+              <form action="" className="w-75 mx-auto">
+                <div className="position-relative mb-4">
+                  <label
+                    className="font-weight-bold mb-0"
+                    htmlFor="sign-up-account"
+                  >
+                    帳號
+                  </label>
+                  <input
+                    id="sign-up-account"
+                    className="d-block py-1 font-weight-bold"
+                    type="text"
+                    placeholder="請輸入帳號"
+                    style={{ width: '100%', paddingLeft: '38px' }}
+                  ></input>
+                  <img
+                    className="position-absolute"
+                    src="images/素材/icon/Profile_G.svg"
+                    style={{
+                      width: '20px',
+                      bottom: '8px',
+                      left: '10px',
+                    }}
+                    alt={''}
+                  ></img>
+                </div>
+                <div className="position-relative mb-4">
+                  <label
+                    className="font-weight-bold mb-0"
+                    htmlFor="sign-up-password"
+                  >
+                    密碼
+                  </label>
+                  <input
+                    id="sign-up-password"
+                    className="d-block py-1 font-weight-bold"
+                    type="text"
+                    placeholder="請輸入密碼"
+                    style={{ width: '100%', paddingLeft: '38px' }}
+                  ></input>
+                  <img
+                    className="position-absolute"
+                    src="images/素材/icon/Attachment_G.svg"
+                    style={{
+                      width: '20px',
+                      bottom: '8px',
+                      left: '10px',
+                    }}
+                    alt={''}
+                  ></img>
+                </div>
+                <div className="position-relative mb-2">
+                  <label
+                    className="font-weight-bold mb-0"
+                    htmlFor="sign-up-email"
+                  >
+                    信箱
+                  </label>
+                  <input
+                    id="sign-up-email"
+                    className="d-block py-1 font-weight-bold"
+                    type="text"
+                    placeholder="請輸入信箱"
+                    style={{ width: '100%', paddingLeft: '38px' }}
+                  ></input>
+                  <img
+                    className="position-absolute"
+                    src="images/素材/icon/Messages_G.svg"
+                    style={{
+                      width: '20px',
+                      bottom: '8px',
+                      left: '10px',
+                    }}
+                    alt={''}
+                  ></img>
+                </div>
+                <div className="subscribe-wrap mb-2 d-flex align-items-center">
+                  <input type="checkbox"></input>
+                  <span
+                    className="font-weight-bold ml-1"
+                    style={{ fontSize: '14px' }}
+                  >
+                    我要訂閱電子報
+                  </span>
+                </div>
+                <div className="already-have-account-wrap mb-2">
+                  <a
+                    href="#!"
+                    className="font-weight-bold"
+                    style={{ fontSize: '14px' }}
+                  >
+                    已經有帳號了嗎？
+                  </a>
+                </div>
+                <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4">
+                  <a
+                    href="#!"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    style={{
+                      width: '45%',
+                      border: '1px solid #353c1d',
+                      color: '#353c1d',
+                    }}
+                  >
+                    取消
+                  </a>
+                  <a
+                    href="#!"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    style={{
+                      width: '45%',
+                      border: '1px solid #353c1d',
+                      color: 'white',
+                      backgroundColor: '#353c1d',
+                    }}
+                    onClick={() => setModal(4)}
+                  >
+                    註冊
+                  </a>
+                </div>
+                <hr
+                  className="mt-0 mb-4"
+                  style={{ backgroundColor: 'lightgray' }}
+                />
+                <div className="social-account-wrap">
+                  <p
+                    className="font-weight-bold text-center mb-2"
+                    style={{ fontSize: '12px' }}
+                  >
+                    使用社群帳號快速註冊
+                  </p>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <a
+                      href="#!"
+                      className="mx-2 rounded d-flex justify-content-center align-items-center"
+                      style={{
+                        width: '25px',
+                        height: '25px',
+                        border: '1px solid #353c1d',
+                      }}
+                    >
+                      <img
+                        src="images/素材/icon/Facebook_G.svg"
+                        alt={''}
+                        style={{ width: '15px' }}
+                      ></img>
+                    </a>
+                    <a
+                      href="#!"
+                      className="mx-2 rounded d-flex justify-content-center align-items-center"
+                      style={{
+                        width: '25px',
+                        height: '25px',
+                        border: '1px solid #353c1d',
+                      }}
+                    >
+                      <img
+                        src="images/素材/icon/Facebook_G.svg"
+                        style={{ width: '15px' }}
+                        alt={''}
+                      ></img>
+                    </a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+  const getPassword = () => {
+    return (
+      <>
+        {/* 忘記密碼 */}
+        <div className="certificate-modal position-fixed d-flex justify-content-center align-items-center">
+          <div className="certificate-content">
+            <div className="content-top mb-1 d-flex justify-content-center align-items-center">
+              <img
+                src="images/cool_logo/LOGO-G.png"
+                width="150px"
+                alt={''}
+              ></img>
+            </div>
+            <div className="content-bottom py-4">
+              <form action="" className="w-75 mx-auto">
+                <div className="position-relative mb-4">
+                  <label
+                    className="font-weight-bold mb-0"
+                    htmlFor="certificate-email"
+                  >
+                    信箱
+                  </label>
+                  <input
+                    id="certificate-email"
+                    className="d-block py-1 font-weight-bold"
+                    type="text"
+                    placeholder="請輸入信箱"
+                    style={{ width: '100%', paddingLeft: '38px' }}
+                  ></input>
+                  <img
+                    className="position-absolute"
+                    src="images/素材/icon/Messages_G.svg"
+                    style={{
+                      width: '20px',
+                      bottom: '8px',
+                      left: '10px',
+                    }}
+                    alt={''}
+                  ></img>
+                </div>
+                <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4">
+                  <a
+                    href="#!"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    style={{
+                      width: '45%',
+                      border: '1px solid #353c1d',
+                      color: '#353c1d',
+                    }}
+                  >
+                    返回
+                  </a>
+                  <a
+                    href="#!"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    style={{
+                      width: '45%',
+                      border: '1px solid #353c1d',
+                      color: 'white',
+                      backgroundColor: '#353c1d',
+                    }}
+                  >
+                    送出
+                  </a>
+                </div>
+                <hr
+                  className="mt-0 mb-4"
+                  style={{ backgroundColor: 'lightgray' }}
+                />
 
-  // const showModal = (el) => {
-  //   el = document.querySelector(el)
-  //   el.classList.value.replace('d-none', 'd-flex')
-  // }
+                <div className="social-account-wrap">
+                  <p
+                    className="font-weight-bold text-center mb-2"
+                    style={{ fontSize: '12px' }}
+                  >
+                    使用社群帳號快速註冊
+                  </p>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <a
+                      href="#!"
+                      className="mx-2 rounded d-flex justify-content-center align-items-center"
+                      style={{
+                        width: '25px',
+                        height: '25px',
+                        border: '1px solid #353c1d',
+                      }}
+                    >
+                      <img
+                        src="images/素材/icon/Facebook_G.svg"
+                        alt={''}
+                        style={{ width: '15px' }}
+                      ></img>
+                    </a>
+                    <a
+                      href="#!"
+                      className="mx-2 rounded d-flex justify-content-center align-items-center"
+                      style={{
+                        width: '25px',
+                        height: '25px',
+                        border: '1px solid #353c1d',
+                      }}
+                    >
+                      <img
+                        src="images/素材/icon/Facebook_G.svg"
+                        alt={''}
+                        style={{ width: '15px' }}
+                      ></img>
+                    </a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  const success = () => {
+    return (
+      <>
+        <div className="certificate-send-modal position-fixed d-flex justify-content-center align-items-center">
+          <div className="certificate-send-content">
+            <div className="content-top mb-1 d-flex justify-content-center align-items-center">
+              <img
+                src="images/cool_logo/LOGO-G.png"
+                width="150px"
+                alt={''}
+              ></img>
+            </div>
+            <div className="content-bottom py-4">
+              <div className="mx-auto d-flex justify-content-center align-items-center flex-column">
+                <img
+                  className="mb-4"
+                  style={{ width: '25%' }}
+                  src="images/素材/icon/check_big.svg"
+                  alt={''}
+                ></img>
+                <p
+                  className="text-center font-weight-bold"
+                  style={{ color: 'green', fontSize: '40px' }}
+                >
+                  送出成功！
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
@@ -779,6 +1271,16 @@ function Header1() {
             </div>
           </nav>
         </div>
+
+        {show && modal === 1
+          ? login()
+          : modal === 2
+          ? signUp()
+          : modal === 3
+          ? getPassword()
+          : modal === 4
+          ? success()
+          : ''}
 
         {/* mega menu */}
         <div id="product-hover-menu-wrap" className="product-hover-menu-wrap position-absolute" style={{
