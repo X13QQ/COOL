@@ -238,7 +238,7 @@ function Clothing() {
           className="horizon-line-sm position-relative my-5 mx-auto text-center h6"
           style={{ letterSpacing: '10px' }}
         >
-          <span className="font-weight-bold position-relative">2020 春/夏</span>
+          <span className="font-weight-bold position-relative" style={{ top: '-9.5px' }}>2020 春/夏</span>
         </div>
         <div>
           <div className="row wrapper px-5 mx-0">
