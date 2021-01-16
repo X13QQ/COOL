@@ -3,6 +3,7 @@ import Clothing from '../pages/Clothing'
 import About from '../pages/About'
 import Product from '../pages/Product'
 import Detail from '../pages/Detail'
+import News from '../pages/News'
 
 import {
   Mail,
@@ -13,7 +14,6 @@ import {
   Setting,
   Contact,
 } from '../pages/Member'
-import News from '../pages/News'
 
 const routes = [
   {
@@ -35,7 +35,7 @@ const routes = [
   },
   {
     path: '/news',
-    // component: ,
+    component: News,
   },
   {
     path: '/clothing',
@@ -74,11 +74,6 @@ const routes = [
   {
     path: '/contact',
     component: Contact,
-    breadcrumbName: '聯絡我們',
-  },
-  {
-    path: '/news',
-    component: News,
     breadcrumbName: '聯絡我們',
   },
 ]
