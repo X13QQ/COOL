@@ -5,7 +5,7 @@ import ScrollToTop from './components/ScrollToTop'
 
 import routes from './routes/routes'
 
-import Footer from './components/Footer'
+import Footer from './components/footer'
 
 function App() {
   localStorage.memberNo = '1'

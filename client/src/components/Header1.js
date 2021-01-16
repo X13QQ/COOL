@@ -21,9 +21,16 @@ function Header1() {
               <ul className="navbar-menu navbar-nav d-flex">
                 <li className="nav-item mx-4">
                   <Link
-                    to="/product"
-                    className="nav-link active"
-                    aria-current="page"
+                    to="/product" id="product-navbar-link"
+                    className="product-navbar-link nav-link active"
+                    aria-current="page" onMouseEnter={() => { 
+                      document.getElementById("product-hover-menu-wrap").style['display']='block'; 
+                      }} onMouseLeave={(e) => { 
+                        console.log(e.target.id)
+                        if(e.target.id!='product-hover-menu'){
+                          document.getElementById("product-hover-menu-wrap").style['display']='none'; 
+                        }
+                        }} 
                   >
                     商品
                   </Link>
@@ -57,131 +64,132 @@ function Header1() {
                 </li>
 
                 {/* 購物車 */}
-                <li className="nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-                  <a className="nav-link" href="#!">
+                <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
+                  <a className="cart-navbar-a nav-link" href="#!">
                     <img
                       src={'images/素材/icon/shopping_cart_G.svg'}
                       alt={''}
                     ></img>
                   </a>
-                  <div
-                    className="cart-icon-ul-wrap position-absolute rounded"
-                    style={{ padding: '8px 15px' }}
-                  >
-                    <ul className="cart-icon-ul list-unstyled">
-                      <li
-                        style={{ borderBottom: '1px solid gray' }}
-                        className="my-2"
-                      >
-                        <div className="row m-0 pb-2">
-                          <div className="col-3 pl-0 content-img">
-                            <div>
-                              <a className="d-block" href="#!">
-                                <img
-                                  className="img-fluid"
-                                  src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                                  alt={''}
-                                ></img>
-                              </a>
+                  <div className="cart-icon-wrap position-absolute pt-3">
+                    <div
+                      className="cart-icon-ul-wrap position-relative rounded"
+                      style={{ padding: '8px 15px' }}
+                    >
+                      <ul className="cart-icon-ul list-unstyled">
+                        <li
+                          style={{ borderBottom: '1px solid gray' }}
+                          className="my-2"
+                        >
+                          <div className="row m-0 pb-2">
+                            <div className="col-3 pl-0 content-img">
+                              <div>
+                                <a className="d-block" href="#!">
+                                  <img
+                                    className="img-fluid"
+                                    src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                                    alt={''}
+                                  ></img>
+                                </a>
+                              </div>
                             </div>
-                          </div>
-                          <div className="col-9 pr-0 content-word">
-                            <div>
-                              <p className="m-0 text-left font-weight-bold">
-                                GOFE兩雙一組 / 右手超人襪
+                            <div className="col-9 pr-0 content-word">
+                              <div>
+                                <p className="m-0 text-left font-weight-bold">
+                                  GOFE兩雙一組 / 右手超人襪
                               </p>
-                              <p className="m-0 text-left font-weight-bold">
-                                數量
+                                <p className="m-0 text-left font-weight-bold">
+                                  數量
                                 <span
-                                  className="mx-2"
-                                  style={{
-                                    width: '20px',
-                                    display: 'inline-block',
-                                    textAlign: 'center',
-                                    borderBottom: '1px solid black',
-                                  }}
-                                >
-                                  1
+                                    className="mx-2"
+                                    style={{
+                                      width: '20px',
+                                      display: 'inline-block',
+                                      textAlign: 'center',
+                                      borderBottom: '1px solid black',
+                                    }}
+                                  >
+                                    1
                                 </span>
+                                </p>
+                                <p className="m-0 text-left font-weight-bold">
+                                  NT$3,000
                               </p>
-                              <p className="m-0 text-left font-weight-bold">
-                                NT$3,000
-                              </p>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </li>
+                        </li>
 
-                      <li
-                        style={{ borderBottom: '1px solid gray' }}
-                        className="my-2"
-                      >
-                        <div className="row m-0 pb-2">
-                          <div className="col-3 pl-0 content-img">
-                            <div>
-                              <a className="d-block" href="#!">
-                                <img
-                                  className="img-fluid"
-                                  src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                                  alt={''}
-                                ></img>
-                              </a>
+                        <li
+                          style={{ borderBottom: '1px solid gray' }}
+                          className="my-2"
+                        >
+                          <div className="row m-0 pb-2">
+                            <div className="col-3 pl-0 content-img">
+                              <div>
+                                <a className="d-block" href="#!">
+                                  <img
+                                    className="img-fluid"
+                                    src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                                    alt={''}
+                                  ></img>
+                                </a>
+                              </div>
                             </div>
-                          </div>
-                          <div className="col-9 pr-0 content-word">
-                            <div>
-                              <p className="m-0 text-left font-weight-bold">
-                                GOFE兩雙一組 / 右手超人襪
+                            <div className="col-9 pr-0 content-word">
+                              <div>
+                                <p className="m-0 text-left font-weight-bold">
+                                  GOFE兩雙一組 / 右手超人襪
                               </p>
-                              <p className="m-0 text-left font-weight-bold">
-                                數量
+                                <p className="m-0 text-left font-weight-bold">
+                                  數量
                                 <span
-                                  className="mx-2"
-                                  style={{
-                                    width: '20px',
-                                    display: 'inline-block',
-                                    textAlign: 'center',
-                                    borderBottom: '1px solid black',
-                                  }}
-                                >
-                                  1
+                                    className="mx-2"
+                                    style={{
+                                      width: '20px',
+                                      display: 'inline-block',
+                                      textAlign: 'center',
+                                      borderBottom: '1px solid black',
+                                    }}
+                                  >
+                                    1
                                 </span>
+                                </p>
+                                <p className="m-0 text-left font-weight-bold">
+                                  NT$3,000
                               </p>
-                              <p className="m-0 text-left font-weight-bold">
-                                NT$3,000
-                              </p>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </li>
-                    </ul>
-                    <div className="total-price-wrap">
-                      <p className="d-flex justify-content-between font-weight-bold">
-                        <span>結帳金額：</span>
-                        <span>NT$3,000</span>
-                      </p>
-                    </div>
-                    <div className="checkout-btn-wrap d-flex flex-column">
-                      <a
-                        href="#!"
-                        style={{ color: 'black' }}
-                        className="my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                      >
-                        查看購物車
+                        </li>
+                      </ul>
+                      <div className="total-price-wrap">
+                        <p className="d-flex justify-content-between font-weight-bold">
+                          <span>結帳金額：</span>
+                          <span>NT$3,000</span>
+                        </p>
+                      </div>
+                      <div className="checkout-btn-wrap d-flex flex-column">
+                        <a
+                          href="#!"
+                          className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+                        >
+                          查看購物車
                       </a>
-                      <a
-                        href="#!"
-                        style={{ color: 'white', backgroundColor: 'black' }}
-                        className="my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                      >
-                        前往結帳
+                        <a
+                          href="#!"
+                          className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+                        >
+                          前往結帳
                       </a>
+                      </div>
                     </div>
                   </div>
+
                 </li>
 
                 {/* 會員 */}
-                <li className="nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
+                <li className="profile-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
                   <a
                     className="nav-link"
                     href="#!"
@@ -189,98 +197,100 @@ function Header1() {
                   >
                     <img src="images/素材/icon/Profile_G.svg" alt={''}></img>
                   </a>
-                  <div
-                    className="profile-icon-ul-wrap d-flex position-absolute rounded"
-                    style={{ padding: '8px 15px' }}
-                  >
-                    <ul className="profile-icon-ul  list-unstyled w-100">
-                      <li className="d-flex justify-content-start">
-                        <Link
-                          to="/setting"
-                          className="font-weight-bold d-flex justify-content-center align-items-center py-1"
-                        >
-                          江小明
+                  <div className="profile-icon-wrap position-absolute pt-3">
+                    <div
+                      className="profile-icon-ul-wrap position-relative rounded"
+                      style={{ padding: '8px 15px' }}
+                    >
+                      <ul className="profile-icon-ul  list-unstyled w-100">
+                        <li className="d-flex justify-content-start">
+                          <Link
+                            to="/setting"
+                            className="font-weight-bold d-flex justify-content-center align-items-center py-1"
+                          >
+                            江小明
                           <img
-                            src="images/素材/會員等級icon/winner.svg"
-                            alt={''}
-                            className="ml-2"
-                          ></img>
+                              src="images/素材/會員等級icon/winner.svg"
+                              alt={''}
+                              className="ml-2"
+                            ></img>
+                          </Link>
+                        </li>
+                        <li className="d-flex justify-content-start">
+                          <Link
+                            to="/mail"
+                            className="font-weight-bold d-inline-block py-1"
+                          >
+                            我的信箱
                         </Link>
-                      </li>
-                      <li className="d-flex justify-content-start">
-                        <Link
-                          to="/mail"
-                          className="font-weight-bold d-inline-block py-1"
-                        >
-                          我的信箱
+                        </li>
+                        <li className="d-flex align-items-start flex-column">
+                          <Link
+                            to="/member"
+                            className="font-weight-bold d-inline-block py-1"
+                          >
+                            會員專區
                         </Link>
-                      </li>
-                      <li className="d-flex align-items-start flex-column">
-                        <Link
-                          to="/member"
-                          className="font-weight-bold d-inline-block py-1"
-                        >
-                          會員專區
-                        </Link>
-                        <ul className="list-unstyled text-left">
-                          <li>
-                            <div
-                              to="/member"
-                              className="py-1 pr-3 pl-1"
-                              style={{ color: 'gray', fontSize: '12px' }}
-                            >
-                              黃金會員
+                          <ul className="list-unstyled text-left">
+                            <li>
+                              <div
+                                className="py-1 pr-3 pl-1"
+                                style={{ color: 'gray', fontSize: '12px' }}
+                              >
+                                黃金會員
                             </div>
-                          </li>
-                          <li>
-                            <div
-                              className="py-1 pr-3 pl-1"
-                              style={{ color: 'gray', fontSize: '12px' }}
-                            >
-                              累積消費金額
+                            </li>
+                            <li>
+                              <div
+                                className="py-1 pr-3 pl-1"
+                                style={{ color: 'gray', fontSize: '12px' }}
+                              >
+                                累積消費金額
                               <br />
-                              <span>1000</span>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className="d-flex justify-content-start">
-                        <Link
-                          to="/coupon"
-                          className=" font-weight-bold d-inline-block py-1"
-                        >
-                          優惠券
+                                <span>1000</span>
+                              </div>
+                            </li>
+                          </ul>
+                        </li>
+                        <li className="d-flex justify-content-start">
+                          <Link
+                            to="/coupon"
+                            className=" font-weight-bold d-inline-block py-1"
+                          >
+                            優惠券
                         </Link>
-                      </li>
-                      <li className="d-flex justify-content-start">
-                        <Link
-                          to="/order"
-                          className="font-weight-bold d-inline-block py-1"
-                        >
-                          購買紀錄
+                        </li>
+                        <li className="d-flex justify-content-start">
+                          <Link
+                            to="/order"
+                            className="font-weight-bold d-inline-block py-1"
+                          >
+                            購買紀錄
                         </Link>
-                      </li>
-                      <li
-                        className="d-flex justify-content-start"
-                        style={{ borderBottom: '1px solid black' }}
-                      >
-                        <Link
-                          to="/setting"
-                          className="font-weight-bold d-inline-block py-1"
+                        </li>
+                        <li
+                          className="d-flex justify-content-start"
+                          style={{ borderBottom: '1px solid black' }}
                         >
-                          帳號設定
+                          <Link
+                            to="/setting"
+                            className="font-weight-bold d-inline-block py-1"
+                          >
+                            帳號設定
                         </Link>
-                      </li>
-                      <li className="d-flex justify-content-start">
-                        <a
-                          href="#!"
-                          className="font-weight-bold d-inline-block py-1"
-                        >
-                          登出
+                        </li>
+                        <li className="d-flex justify-content-start">
+                          <a
+                            href="#!"
+                            className="font-weight-bold d-inline-block py-1"
+                          >
+                            登出
                         </a>
-                      </li>
-                    </ul>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
+
 
                   {/* 註冊 */}
                   <div className="sign-up-modal position-fixed d-none justify-content-center align-items-center">
@@ -465,7 +475,7 @@ function Header1() {
                   <div
                     className={`log-in-modal position-fixed ${
                       show ? 'd-flex' : 'd-none'
-                    } justify-content-center align-items-center`}
+                      } justify-content-center align-items-center`}
                   >
                     <div className="log-in-content">
                       <div className="content-top mb-1 d-flex justify-content-center align-items-center">
@@ -771,14 +781,20 @@ function Header1() {
         </div>
 
         {/* mega menu */}
-        <div
-          className="product-hover-menu d-none p-5 position-absolute"
-          style={{
-            backgroundColor: 'rgba(255,255,255,0.85)',
+        <div id="product-hover-menu-wrap" className="product-hover-menu-wrap position-absolute" style={{
             left: '0',
             right: '0',
-          }}
-        >
+          }}  onMouseEnter={() => { 
+            document.getElementById("product-hover-menu-wrap").style['display']='block'; 
+            }} onMouseLeave={(e) => { 
+              if(e.target.id!="product-navbar-link"){
+                document.getElementById("product-hover-menu-wrap").style['display']='none'; 
+              }
+              }} >
+        <div id="product-hover-menu"
+          className="product-hover-menu p-5 " style={{
+            backgroundColor: 'rgba(255,255,255,0.85)'}}
+          >
           <div className="container">
             <div className="row w-100">
               <div className="col-6">
@@ -895,6 +911,8 @@ function Header1() {
             </div>
           </div>
         </div>
+        </div>
+        
       </header>
     </>
   )

@@ -166,15 +166,26 @@ body {
   outline: none;
 }
 /*  */
-.main-navbar .navbar-icon .profile-icon-ul-wrap {
-  top: 55px;
-  background-color: white;
-  border: 1px solid #353c1d;
-  text-align: center;
+
+.profile-icon-wrap{
+  display: none;
   width: 150px;
   transform: translateX(-60%);
   z-index: 888;
 }
+.profile-navbar-li:hover .profile-icon-wrap{
+  display: block !important;
+}
+.main-navbar .navbar-icon .profile-icon-wrap:hover{
+  display: block !important;
+}
+
+.main-navbar .navbar-icon .profile-icon-ul-wrap {
+  background-color: white;
+  border: 1px solid #353c1d;
+  text-align: center;
+}
+
 
 .main-navbar .navbar-icon .profile-icon-ul-wrap::before {
   content: "";
@@ -196,17 +207,26 @@ body {
 }
 
 /*  */
+.cart-icon-wrap{
+  display: none;
+  width: 270px;
+  left: 0%;
+  transform: translateX(-78%);
+  /* top: 55px; */
+  z-index: 888;
+}
+.cart-navbar-li:hover .cart-icon-wrap{
+  display: block !important;
+}
+.main-navbar .navbar-icon .cart-icon-wrap:hover{
+  display: block !important;
+}
+
 .main-navbar .navbar-icon .cart-icon-ul-wrap {
   background-color: white;
   border: 1px solid #353c1d;
   text-align: center;
-  width: 270px;
-  left: 0%;
-  transform: translateX(-80%);
-  top: 55px;
-  z-index: 888;
 }
-
 .main-navbar .navbar-icon .cart-icon-ul-wrap::before {
   content: "";
   width: 15px;
@@ -245,16 +265,22 @@ body {
 .checkout-btn-wrap a {
   border: 1px solid black;
 }
-
-/*  */
-
-.product-hover-menu {
-  top: 145.406px;
+.checkout-btn-wrap .see-cart-btn {
+  transition: 0.15s;
+  color: black;
+} 
+.checkout-btn-wrap .see-cart-btn:hover{
+  transform: scale(0.97);
+} 
+.checkout-btn-wrap .go-check-btn{
+  transition: 0.15s;
+ color: white; 
+ background-color: black; 
 }
 
-.product-hover-menu ul li a {
-  color: black;
-  font-size: 12px;
+.checkout-btn-wrap .go-check-btn:hover{
+  transform: scale(0.97);
+
 }
 
 /*  */
@@ -337,6 +363,18 @@ body {
 .certificate-send-content .content-bottom label,
 .certificate-send-content .content-bottom input {
   cursor: pointer;
+}
+
+.product-hover-menu-wrap{
+  top: 145px;
+  padding-top: 8.41px;
+  display: none;
+  z-index: 9999;
+}
+
+.product-hover-menu ul li a {
+  color: black;
+  font-size: 12px;
 }
 /*  */
 .home-main .shop-now-top {
