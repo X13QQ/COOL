@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function HeaderAbout() {
   const [show, setShow] = useState(false)
   const [modal, setModal] = useState(1)
-  
+
   const login = () => {
     return (
       <>
@@ -504,8 +504,8 @@ function HeaderAbout() {
   return (
     <>
       <header className="about-header position-relative">
-      <div className="photo-mask">
-            <div className="photo-mask-mask"></div>
+        <div className="photo-mask">
+          <div className="photo-mask-mask"></div>
         </div>
         <div className="container position-relative" style={{ height: '100%' }}>
           <nav className="main-navbar navbar navbar-expand-lg px-0 pt-5">
@@ -516,16 +516,23 @@ function HeaderAbout() {
               <ul className="navbar-menu navbar-nav d-flex">
                 <li className="nav-item mx-4">
                   <Link
-                    to="/product" id="product-navbar-link"
+                    to="/product"
+                    id="product-navbar-link"
                     className="product-navbar-link nav-link active"
-                    aria-current="page" onMouseEnter={() => { 
-                      document.getElementById("product-hover-menu-wrap").style['display']='block'; 
-                      }} onMouseLeave={(e) => { 
-                        console.log(e.target.id)
-                        if(e.target.id!='product-hover-menu'){
-                          document.getElementById("product-hover-menu-wrap").style['display']='none'; 
-                        }
-                        }} 
+                    aria-current="page"
+                    onMouseEnter={() => {
+                      document.getElementById('product-hover-menu-wrap').style[
+                        'display'
+                      ] = 'block'
+                    }}
+                    onMouseLeave={(e) => {
+                      console.log(e.target.id)
+                      if (e.target.id != 'product-hover-menu') {
+                        document.getElementById(
+                          'product-hover-menu-wrap'
+                        ).style['display'] = 'none'
+                      }
+                    }}
                   >
                     商品
                   </Link>
@@ -551,7 +558,11 @@ function HeaderAbout() {
                 {/* 搜尋欄 */}
                 <li className="d-flex nav-item mx-2 mx-sm-3 mx-lg-2">
                   <div className="d-flex align-items-end search-icon-input-wrap mx-2">
-                    <input type="text" className="px-2" style={{color:'white',borderColor:'white'}}></input>
+                    <input
+                      type="text"
+                      className="px-2"
+                      style={{ color: 'white', borderColor: 'white' }}
+                    ></input>
                   </div>
                   <a className="nav-link active" aria-current="page" href="#!">
                     <img src={'images/素材/icon/Search_W.svg'} alt={''}></img>
@@ -592,10 +603,10 @@ function HeaderAbout() {
                               <div>
                                 <p className="m-0 text-left font-weight-bold">
                                   GOFE兩雙一組 / 右手超人襪
-                              </p>
+                                </p>
                                 <p className="m-0 text-left font-weight-bold">
                                   數量
-                                <span
+                                  <span
                                     className="mx-2"
                                     style={{
                                       width: '20px',
@@ -605,11 +616,11 @@ function HeaderAbout() {
                                     }}
                                   >
                                     1
-                                </span>
+                                  </span>
                                 </p>
                                 <p className="m-0 text-left font-weight-bold">
                                   NT$3,000
-                              </p>
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -635,10 +646,10 @@ function HeaderAbout() {
                               <div>
                                 <p className="m-0 text-left font-weight-bold">
                                   GOFE兩雙一組 / 右手超人襪
-                              </p>
+                                </p>
                                 <p className="m-0 text-left font-weight-bold">
                                   數量
-                                <span
+                                  <span
                                     className="mx-2"
                                     style={{
                                       width: '20px',
@@ -648,11 +659,11 @@ function HeaderAbout() {
                                     }}
                                   >
                                     1
-                                </span>
+                                  </span>
                                 </p>
                                 <p className="m-0 text-left font-weight-bold">
                                   NT$3,000
-                              </p>
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -670,17 +681,16 @@ function HeaderAbout() {
                           className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
                         >
                           查看購物車
-                      </a>
+                        </a>
                         <a
                           href="#!"
                           className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
                         >
                           前往結帳
-                      </a>
+                        </a>
                       </div>
                     </div>
                   </div>
-
                 </li>
 
                 {/* 會員 */}
@@ -704,7 +714,7 @@ function HeaderAbout() {
                             className="font-weight-bold d-flex justify-content-center align-items-center py-1"
                           >
                             江小明
-                          <img
+                            <img
                               src="images/素材/會員等級icon/winner.svg"
                               alt={''}
                               className="ml-2"
@@ -717,7 +727,7 @@ function HeaderAbout() {
                             className="font-weight-bold d-inline-block py-1"
                           >
                             我的信箱
-                        </Link>
+                          </Link>
                         </li>
                         <li className="d-flex align-items-start flex-column">
                           <Link
@@ -725,7 +735,7 @@ function HeaderAbout() {
                             className="font-weight-bold d-inline-block py-1"
                           >
                             會員專區
-                        </Link>
+                          </Link>
                           <ul className="list-unstyled text-left">
                             <li>
                               <div
@@ -733,7 +743,7 @@ function HeaderAbout() {
                                 style={{ color: 'gray', fontSize: '12px' }}
                               >
                                 黃金會員
-                            </div>
+                              </div>
                             </li>
                             <li>
                               <div
@@ -741,7 +751,7 @@ function HeaderAbout() {
                                 style={{ color: 'gray', fontSize: '12px' }}
                               >
                                 累積消費金額
-                              <br />
+                                <br />
                                 <span>1000</span>
                               </div>
                             </li>
@@ -753,7 +763,7 @@ function HeaderAbout() {
                             className=" font-weight-bold d-inline-block py-1"
                           >
                             優惠券
-                        </Link>
+                          </Link>
                         </li>
                         <li className="d-flex justify-content-start">
                           <Link
@@ -761,7 +771,7 @@ function HeaderAbout() {
                             className="font-weight-bold d-inline-block py-1"
                           >
                             購買紀錄
-                        </Link>
+                          </Link>
                         </li>
                         <li
                           className="d-flex justify-content-start"
@@ -772,7 +782,7 @@ function HeaderAbout() {
                             className="font-weight-bold d-inline-block py-1"
                           >
                             帳號設定
-                        </Link>
+                          </Link>
                         </li>
                         <li className="d-flex justify-content-start">
                           <a
@@ -780,12 +790,11 @@ function HeaderAbout() {
                             className="font-weight-bold d-inline-block py-1"
                           >
                             登出
-                        </a>
+                          </a>
                         </li>
                       </ul>
                     </div>
                   </div>
-
 
                   {/* 註冊 */}
                   <div className="sign-up-modal position-fixed d-none justify-content-center align-items-center">
@@ -970,7 +979,7 @@ function HeaderAbout() {
                   <div
                     className={`log-in-modal position-fixed ${
                       show ? 'd-flex' : 'd-none'
-                      } justify-content-center align-items-center`}
+                    } justify-content-center align-items-center`}
                   >
                     <div className="log-in-content">
                       <div className="content-top mb-1 d-flex justify-content-center align-items-center">
@@ -1274,8 +1283,8 @@ function HeaderAbout() {
             </div>
           </nav>
           <div class="page-title">
-                <h2 class="text-center text-sm-right">ABOUT US</h2>
-            </div>
+            <h2 class="text-center text-sm-right">ABOUT US</h2>
+          </div>
         </div>
 
         {show && modal === 1
@@ -1289,138 +1298,150 @@ function HeaderAbout() {
           : ''}
 
         {/* mega menu */}
-        <div id="product-hover-menu-wrap" className="product-hover-menu-wrap position-absolute" style={{
+        <div
+          id="product-hover-menu-wrap"
+          className="product-hover-menu-wrap position-absolute"
+          style={{
             left: '0',
             right: '0',
-          }}  onMouseEnter={() => { 
-            document.getElementById("product-hover-menu-wrap").style['display']='block'; 
-            }} onMouseLeave={(e) => { 
-              if(e.target.id!="product-navbar-link"){
-                document.getElementById("product-hover-menu-wrap").style['display']='none'; 
-              }
-              }} >
-        <div id="product-hover-menu"
-          className="product-hover-menu p-5 " style={{
-            backgroundColor: 'rgba(255,255,255,0.85)'}}
+          }}
+          onMouseEnter={() => {
+            document.getElementById('product-hover-menu-wrap').style[
+              'display'
+            ] = 'block'
+          }}
+          onMouseLeave={(e) => {
+            if (e.target.id != 'product-navbar-link') {
+              document.getElementById('product-hover-menu-wrap').style[
+                'display'
+              ] = 'none'
+            }
+          }}
+        >
+          <div
+            id="product-hover-menu"
+            className="product-hover-menu p-5 "
+            style={{
+              backgroundColor: 'rgba(255,255,255,0.85)',
+            }}
           >
-          <div className="container">
-            <div className="row w-100">
-              <div className="col-6">
-                <div className="row">
-                  <div className="col-4">
-                    <h6 className="font-weight-bold mb-3">商品分類</h6>
-                    <ul className="list-unstyled">
-                      <li>
-                        <a href="#!">新品</a>
-                      </li>
-                      <li>
-                        <a href="#!">外套</a>
-                      </li>
-                      <li>
-                        <a href="#!">長褲</a>
-                      </li>
-                      <li>
-                        <a href="#!">短褲</a>
-                      </li>
-                      <li>
-                        <a href="#!">牛仔褲</a>
-                      </li>
-                      <li>
-                        <a href="#!">西裝褲</a>
-                      </li>
-                      <li>
-                        <a href="#!">衣服</a>
-                      </li>
-                      <li>
-                        <a href="#!">褲子</a>
-                      </li>
-                      <li>
-                        <a href="#!">鞋子</a>
-                      </li>
-                      <li>
-                        <a href="#!">配件</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="col-4">
-                    <h6 className="font-weight-bold mb-3">品牌</h6>
-                    <ul className="list-unstyled">
-                      <li>
-                        <a href="#!">undefeated</a>
-                      </li>
-                      <li>
-                        <a href="#!">OnlyNY</a>
-                      </li>
-                      <li>
-                        <a href="#!">NOAH</a>
-                      </li>
-                      <li>
-                        <a href="#!">BBCICECREAM</a>
-                      </li>
-                      <li>
-                        <a href="#!">Tribal</a>
-                      </li>
-                      <li>
-                        <a href="#!">Palace</a>
-                      </li>
-                      <li>
-                        <a href="#!">Wckdthghts</a>
-                      </li>
-                      <li>
-                        <a href="#!">studio-seven</a>
-                      </li>
-                      <li>
-                        <a href="#!">Products</a>
-                      </li>
-                      <li>
-                        <a href="#!">424</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="col-4">
-                    <h6 className="font-weight-bold mb-3">活動</h6>
-                    <ul className="list-unstyled">
-                      <li>
-                        <a href="#!">十二月新品上市</a>
-                      </li>
-                      <li>
-                        <a href="#!">免運活動</a>
-                      </li>
-                      <li>
-                        <a href="#!">換季出清</a>
-                      </li>
-                      <li>
-                        <a href="#!">VIP商品區</a>
-                      </li>
-                    </ul>
+            <div className="container">
+              <div className="row w-100">
+                <div className="col-6">
+                  <div className="row">
+                    <div className="col-4">
+                      <h6 className="font-weight-bold mb-3">商品分類</h6>
+                      <ul className="list-unstyled">
+                        <li>
+                          <a href="#!">新品</a>
+                        </li>
+                        <li>
+                          <a href="#!">外套</a>
+                        </li>
+                        <li>
+                          <a href="#!">長褲</a>
+                        </li>
+                        <li>
+                          <a href="#!">短褲</a>
+                        </li>
+                        <li>
+                          <a href="#!">牛仔褲</a>
+                        </li>
+                        <li>
+                          <a href="#!">西裝褲</a>
+                        </li>
+                        <li>
+                          <a href="#!">衣服</a>
+                        </li>
+                        <li>
+                          <a href="#!">褲子</a>
+                        </li>
+                        <li>
+                          <a href="#!">鞋子</a>
+                        </li>
+                        <li>
+                          <a href="#!">配件</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="col-4">
+                      <h6 className="font-weight-bold mb-3">品牌</h6>
+                      <ul className="list-unstyled">
+                        <li>
+                          <a href="#!">undefeated</a>
+                        </li>
+                        <li>
+                          <a href="#!">OnlyNY</a>
+                        </li>
+                        <li>
+                          <a href="#!">NOAH</a>
+                        </li>
+                        <li>
+                          <a href="#!">BBCICECREAM</a>
+                        </li>
+                        <li>
+                          <a href="#!">Tribal</a>
+                        </li>
+                        <li>
+                          <a href="#!">Palace</a>
+                        </li>
+                        <li>
+                          <a href="#!">Wckdthghts</a>
+                        </li>
+                        <li>
+                          <a href="#!">studio-seven</a>
+                        </li>
+                        <li>
+                          <a href="#!">Products</a>
+                        </li>
+                        <li>
+                          <a href="#!">424</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="col-4">
+                      <h6 className="font-weight-bold mb-3">活動</h6>
+                      <ul className="list-unstyled">
+                        <li>
+                          <a href="#!">十二月新品上市</a>
+                        </li>
+                        <li>
+                          <a href="#!">免運活動</a>
+                        </li>
+                        <li>
+                          <a href="#!">換季出清</a>
+                        </li>
+                        <li>
+                          <a href="#!">VIP商品區</a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-6">
-                <div className="row">
-                  <div className="col-6">
-                    <img
-                      className="img-fluid"
-                      src="images/navbar/https___hk.hypebeast.com_files_2020_10_fairfax-usa-2020-fall-winter-collection-lookbook-8-scaled.jpg"
-                      alt={''}
-                      style={{ objectFit: 'cover', height: '300px' }}
-                    ></img>
-                  </div>
-                  <div className="col-6">
-                    <img
-                      className="img-fluid"
-                      src="images/navbar/黑人單人照.JPG"
-                      alt={''}
-                      style={{ objectFit: 'cover', height: '300px' }}
-                    ></img>
+                <div className="col-6">
+                  <div className="row">
+                    <div className="col-6">
+                      <img
+                        className="img-fluid"
+                        src="images/navbar/https___hk.hypebeast.com_files_2020_10_fairfax-usa-2020-fall-winter-collection-lookbook-8-scaled.jpg"
+                        alt={''}
+                        style={{ objectFit: 'cover', height: '300px' }}
+                      ></img>
+                    </div>
+                    <div className="col-6">
+                      <img
+                        className="img-fluid"
+                        src="images/navbar/黑人單人照.JPG"
+                        alt={''}
+                        style={{ objectFit: 'cover', height: '300px' }}
+                      ></img>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
-        
       </header>
     </>
   )

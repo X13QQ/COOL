@@ -8,10 +8,10 @@ import HeaderProduct from '../components/HeaderProduct'
 function Product() {
   return (
     <>
-    <HeaderProduct></HeaderProduct>
+      <HeaderProduct></HeaderProduct>
       <ProductContent></ProductContent>
       <Topbtn />
-      <Footer/>
+      <Footer />
     </>
   )
 }

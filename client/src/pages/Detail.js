@@ -11,7 +11,7 @@ function Detail() {
       <HeaderOther></HeaderOther>
       <DetailContent></DetailContent>
       <Topbtn />
-      <Footer/>
+      <Footer />
     </>
   )
 }

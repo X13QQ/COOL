@@ -4,7 +4,6 @@ import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
 import HeaderHome from '../components/HeaderHome'
 
-// 尚未導入header
 function Home() {
   return (
     <>
