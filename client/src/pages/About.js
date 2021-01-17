@@ -10,7 +10,7 @@ function About() {
       <HeaderAbout></HeaderAbout>
       <AboutContent />
       <Topbtn />
-      <Footer/>
+      <Footer />
     </>
   )
 }
