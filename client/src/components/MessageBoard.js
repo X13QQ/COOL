@@ -6,7 +6,7 @@ class MessageBoard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: 'MessageBoard',
+      title: '評論',
       act: 0,
       index: '',
       datas: [],
@@ -81,13 +81,13 @@ class MessageBoard extends Component {
           <input
             type="text"
             ref="name"
-            placeholder="your name"
+            placeholder="你的名字"
             className="formField"
           />
           <input
             type="text"
             ref="address"
-            placeholder="your address"
+            placeholder="來點評論吧"
             className="formField"
           />
           <button onClick={(e) => this.fSubmit(e)} className="myButton">
@@ -98,10 +98,16 @@ class MessageBoard extends Component {
           {datas.map((data, i) => (
             <li key={i} className="myList">
               {i + 1}. {data.name}, {data.address}
-              <button onClick={() => this.fRemove(i)} className="myListButton">
+              <button
+                onClick={() => this.fRemove(i)}
+                className="myListButton d-none"
+              >
                 remove{' '}
               </button>
-              <button onClick={() => this.fEdit(i)} className="myListButton">
+              <button
+                onClick={() => this.fEdit(i)}
+                className="myListButton d-none"
+              >
                 edit{' '}
               </button>
             </li>
