@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 function HeaderOther() {
+  const [name, setName] = useState(
+    !!localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))[0].name
+      : ''
+  )
   const [show, setShow] = useState(false)
   const [modal, setModal] = useState(1)
   const [user, setUser] = useState({ account: '', password: '', email: '' })
@@ -13,8 +18,14 @@ function HeaderOther() {
     email: '',
     letter: 'N',
   })
+  const [loginMessage, setLoginMessage] = useState('')
+  const [certificateMessage, setCertificateMessage] = useState('')
 
-  const defaultData = () => {
+  useEffect(() => {
+    if (!!name) setLoginStatus(1)
+  }, [name])
+
+  const cleanData = () => {
     setUser({ account: '', password: '' })
     setCertificateEmail('')
     setSignupData({
@@ -23,6 +34,8 @@ function HeaderOther() {
       email: '',
       letter: 'N',
     })
+    setLoginMessage('')
+    setCertificateMessage('')
   }
 
   const close = (id) => {
@@ -30,7 +43,7 @@ function HeaderOther() {
       if (e.target.id === id) {
         setShow(false)
         setModal(1)
-        defaultData()
+        cleanData()
       }
     })
   }
@@ -50,12 +63,13 @@ function HeaderOther() {
     fetch('http://localhost:3001/profile/login', loginMethod)
       .then((res) => res.json())
       .then((res) => {
-        // console.log(res)
         if (res.length > 0) {
           setLoginStatus(1)
           setShow(false)
+          setName(res[0].name)
+          localStorage.setItem('user', JSON.stringify(res))
         } else {
-          console.log(res.message)
+          setLoginMessage(res.message)
         }
       })
       .catch((err) => console.log('錯誤:', err))
@@ -90,7 +104,6 @@ function HeaderOther() {
   }
 
   const certificate = (email) => {
-    console.log(email)
     const data = {
       email: email,
     }
@@ -104,7 +117,12 @@ function HeaderOther() {
     fetch('http://localhost:3001/profile/certificate', certificateMethod)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.message)
+        console.log(res)
+        if (res.length > 0) {
+          setModal(4)
+        } else {
+          setCertificateMessage(res.message)
+        }
       })
       .catch((err) => console.log('錯誤:', err))
   }
@@ -200,14 +218,17 @@ function HeaderOther() {
                     href="#!"
                     className="font-weight-bold"
                     style={{ fontSize: '14px' }}
-                    onClick={() => setModal(2)}
+                    onClick={() => {
+                      setModal(2)
+                      cleanData()
+                    }}
                   >
                     立即註冊新帳號
                   </a>
                 </div>
-                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4">
-                  <a
-                    href="#!"
+                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
+                  <button
+                    type="button"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
@@ -217,10 +238,10 @@ function HeaderOther() {
                     onClick={() => setShow(false)}
                   >
                     取消
-                  </a>
-                  <a
-                    href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                  </button>
+                  <button
+                    type="button"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -233,8 +254,12 @@ function HeaderOther() {
                     }}
                   >
                     登入
-                  </a>
+                  </button>
+                  <div className="invalid-feedback text-center mt-3">
+                    {loginMessage}
+                  </div>
                 </div>
+
                 <hr
                   className="mt-0 mb-4"
                   style={{ backgroundColor: 'lightgray' }}
@@ -549,9 +574,9 @@ function HeaderOther() {
                     alt={''}
                   ></img>
                 </div>
-                <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4">
-                  <a
-                    href="#!"
+                <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
+                  <button
+                    type="button"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
@@ -561,10 +586,10 @@ function HeaderOther() {
                     onClick={() => setModal(1)}
                   >
                     返回
-                  </a>
-                  <a
-                    href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                  </button>
+                  <button
+                    type="button"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -577,7 +602,10 @@ function HeaderOther() {
                     }}
                   >
                     送出
-                  </a>
+                  </button>
+                  <div className="invalid-feedback text-center mt-3">
+                    {certificateMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -684,7 +712,7 @@ function HeaderOther() {
                   to="/setting"
                   className="font-weight-bold d-flex justify-content-center align-items-center py-1"
                 >
-                  江小明
+                  {name}
                   <img
                     src="images/素材/會員等級icon/winner.svg"
                     alt={''}
@@ -762,7 +790,8 @@ function HeaderOther() {
                   onClick={(e) => {
                     e.preventDefault()
                     setLoginStatus(0)
-                    defaultData()
+                    cleanData()
+                    localStorage.removeItem('user')
                   }}
                 >
                   登出
@@ -777,7 +806,6 @@ function HeaderOther() {
 
   return (
     <>
-      {}
       <header className="product-detail-header position-relative">
         <div className="container position-relative" style={{ height: '100%' }}>
           <nav className="main-navbar navbar navbar-expand-lg px-0 pt-5">
