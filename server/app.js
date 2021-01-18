@@ -30,7 +30,11 @@ app.post("/profile/:logintype", function (req, res) {
         if (result.length > 0) {
           res.send(result);
         } else {
-          res.send({ message: "帳號 / 密碼錯誤" });
+          if (req.body.account.length === 0)
+            res.send({ message: "請輸入帳號" });
+          else if (req.body.password.length === 0)
+            res.send({ message: "請輸入密碼" });
+          else res.send({ message: "帳號 / 密碼錯誤" });
         }
       }
     );
@@ -64,6 +68,7 @@ app.post("/profile/:logintype", function (req, res) {
     });
   } else if ("certificate" === req.params.logintype) {
     console.log(req.body.email);
+    if (req.body.email.length === 0) res.send({ message: "請輸入信箱" });
   }
 });
 

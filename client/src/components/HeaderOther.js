@@ -13,8 +13,9 @@ function HeaderOther() {
     email: '',
     letter: 'N',
   })
+  const [message, setMessage] = useState('')
 
-  const defaultData = () => {
+  const cleanData = () => {
     setUser({ account: '', password: '' })
     setCertificateEmail('')
     setSignupData({
@@ -23,6 +24,7 @@ function HeaderOther() {
       email: '',
       letter: 'N',
     })
+    setMessage('')
   }
 
   const close = (id) => {
@@ -30,7 +32,7 @@ function HeaderOther() {
       if (e.target.id === id) {
         setShow(false)
         setModal(1)
-        defaultData()
+        cleanData()
       }
     })
   }
@@ -56,6 +58,7 @@ function HeaderOther() {
           setShow(false)
         } else {
           console.log(res.message)
+          setMessage(res.message)
         }
       })
       .catch((err) => console.log('錯誤:', err))
@@ -90,7 +93,6 @@ function HeaderOther() {
   }
 
   const certificate = (email) => {
-    console.log(email)
     const data = {
       email: email,
     }
@@ -200,14 +202,17 @@ function HeaderOther() {
                     href="#!"
                     className="font-weight-bold"
                     style={{ fontSize: '14px' }}
-                    onClick={() => setModal(2)}
+                    onClick={() => {
+                      setModal(2)
+                      cleanData()
+                    }}
                   >
                     立即註冊新帳號
                   </a>
                 </div>
-                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4">
-                  <a
-                    href="#!"
+                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
+                  <button
+                    type="button"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
@@ -217,10 +222,10 @@ function HeaderOther() {
                     onClick={() => setShow(false)}
                   >
                     取消
-                  </a>
-                  <a
-                    href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                  </button>
+                  <button
+                    type="button"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -233,8 +238,12 @@ function HeaderOther() {
                     }}
                   >
                     登入
-                  </a>
+                  </button>
+                  <div className="invalid-feedback text-center mt-3">
+                    {message}
+                  </div>
                 </div>
+
                 <hr
                   className="mt-0 mb-4"
                   style={{ backgroundColor: 'lightgray' }}
@@ -762,7 +771,7 @@ function HeaderOther() {
                   onClick={(e) => {
                     e.preventDefault()
                     setLoginStatus(0)
-                    defaultData()
+                    cleanData()
                   }}
                 >
                   登出
