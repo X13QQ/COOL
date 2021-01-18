@@ -5,8 +5,6 @@ import ScrollToTop from './components/ScrollToTop'
 import routes from './routes/routes'
 
 function App() {
-  localStorage.memberNo = '1'
-  // console.log(localStorage)
   return (
     <BrowserRouter>
       <>
