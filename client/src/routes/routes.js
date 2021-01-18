@@ -4,12 +4,8 @@ import About from '../pages/About'
 import Product from '../pages/Product'
 import Detail from '../pages/Detail'
 import News from '../pages/News'
-<<<<<<< HEAD
-import MessageBoard from '../pages/MessageBoard'
-import ShoppingCart from '../pages/ShoppingCart'
-=======
+// import ShoppingCart from '../pages/ShoppingCart'
 import MessageBoard from '../components/MessageBoard'
->>>>>>> f555cf7c16bf61fa3e093e81c62b3088d7cdceb4
 
 import {
   Mail,
@@ -87,11 +83,11 @@ const routes = [
     component: MessageBoard,
     breadcrumbName: '留言板',
   },
-  {
-    // 購物車
-    path: '/shoppingcart',
-    component: ShoppingCart,
-  },
+  // {
+  //   // 購物車
+  //   path: '/shoppingcart',
+  //   component: ShoppingCart,
+  // },
 ]
 
 export default routes
