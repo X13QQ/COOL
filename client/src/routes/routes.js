@@ -5,6 +5,7 @@ import Product from '../pages/Product'
 import Detail from '../pages/Detail'
 import News from '../pages/News'
 import MessageBoard from '../pages/MessageBoard'
+import ShoppingCart from '../pages/ShoppingCart'
 
 import {
   Mail,
@@ -81,6 +82,11 @@ const routes = [
     path: '/messageBoard',
     component: MessageBoard,
     breadcrumbName: '留言板',
+  },
+  {
+    // 購物車
+    path: '/shoppingcart',
+    component: ShoppingCart,
   },
 ]
 
