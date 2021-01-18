@@ -1,10 +1,10 @@
 import React from 'react'
-import Header1 from '../components/Header1'
+import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
 function News() {
   return (
     <>
-      <Header1 />
+      <HeaderOther />
       <div
         className="horizon-line-sm position-relative mb-5 mx-auto text-center h2"
         style={{ marginTop: '96px' }}
