@@ -82,11 +82,11 @@ const routes = [
     component: MessageBoard,
     breadcrumbName: '留言板',
   },
-  // {
-  //   // 購物車
-  //   path: '/shoppingcart',
-  //   component: ShoppingCart,
-  // },
+  {
+    // 購物車
+    path: '/shoppingcart',
+    component: ShoppingCart,
+  },
 ]
 
 export default routes

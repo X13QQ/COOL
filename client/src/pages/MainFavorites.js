@@ -9,7 +9,7 @@ function MainFavorites(props) {
     <>
       <div className="main col-9">
         <div className="title ml-3 mb-2  font-weight-bold">蒐藏清單</div>
-        <div className="mx-2 favorites-wrap border-right-0 border-bottom-0">
+        <div className="mx-2 favorites-wrap ">
           {/* <Row> */}
           <InputGroup className="favorites-wrap-container mx-auto row justify-content-between">
             <div className="col-6 d-flex align-items-center pl-0">
