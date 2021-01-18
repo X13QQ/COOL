@@ -16,7 +16,7 @@ function App() {
         <ScrollToTop>
           <Switch>{renderRoutes(routes)}</Switch>
         </ScrollToTop>
-        <Footer />
+        {/* <Footer /> */}
       </>
     </BrowserRouter>
   )
