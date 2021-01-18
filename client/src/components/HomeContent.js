@@ -427,7 +427,10 @@ function HomeContent() {
               </Link>
             </div>
           </section>
-          <section className="latest-article mt-5" style={{marginBottom:'100px'}}>
+          <section
+            className="latest-article mt-5"
+            style={{ marginBottom: '100px' }}
+          >
             <h2 className="h2 font-weight-bold">最新文章</h2>
             <h3 className="d-inline-block h1 mb-5 font-weight-bolder font-italic position-relative">
               LATEST ARTICLES
@@ -452,7 +455,7 @@ function HomeContent() {
                     }}
                   >
                     {' '}
-                    繼續閱讀 > >
+                    繼續閱讀 {'>'} {'>'}
                   </Link>
                 </div>
               </div>
@@ -472,7 +475,7 @@ function HomeContent() {
                     className=""
                     style={{ color: '#353c1d', fontSize: '12px' }}
                   >
-                    繼續閱讀 > >
+                    繼續閱讀 {'>'} {'>'}
                   </Link>
                 </div>
               </div>
@@ -492,7 +495,7 @@ function HomeContent() {
                     className=""
                     style={{ color: '#353c1d', fontSize: '12px' }}
                   >
-                    繼續閱讀 > >
+                    繼續閱讀 {'>'} {'>'}
                   </Link>
                 </div>
               </div>

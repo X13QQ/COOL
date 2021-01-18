@@ -32,7 +32,7 @@ function AboutContent() {
         </div>
         <section className="main-content-bottom">
           <div className="main-content-bottom-mask">
-            <div className="container" style={{marginBottom:'100px'}}>
+            <div className="container" style={{ marginBottom: '100px' }}>
               <div className="row time-line-lg">
                 <div className="time-line-content-wrap col-6 d-flex justify-content-center align-items-end">
                   <div className="time-line-content w-50">

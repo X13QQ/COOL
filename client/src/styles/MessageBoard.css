@@ -1,11 +1,14 @@
-.MessageBoard.css {
+.board {
   margin: auto;
   width: 50%;
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
+  letter-spacing: 0.2rem;
 }
 
 .myForm {
   width: 100%;
-  background-color: #dfe6e9;
+  background-color: #f3eee9;
   border-radius: 5px;
   padding: 20px;
 }
@@ -33,6 +36,23 @@
 
 .myList {
   list-style: none;
+  overflow: hidden;
+  overflow: hidden;
+  padding: 0 0 1em;
+  border-bottom: 1px solid #ddd;
+  margin: 0 0 1em;
+  *zoom: 1;
+}
+.myName {
+  font-size: 25px;
+  font-weight: bold;
+}
+.myMessage {
+  font-size: 23px;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  background: #fff;
 }
 
 .myListButton {

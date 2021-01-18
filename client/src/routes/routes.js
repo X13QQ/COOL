@@ -4,7 +4,7 @@ import About from '../pages/About'
 import Product from '../pages/Product'
 import Detail from '../pages/Detail'
 import News from '../pages/News'
-import MessageBoard from '../pages/MessageBoard'
+import MessageBoard from '../components/MessageBoard'
 
 import {
   Mail,

@@ -205,30 +205,53 @@ function DetailContent() {
                           </h3>
                           <div>
                             <div className="table-choose d-flex mb-4 justify-content-center justify-content-sm-start">
-                              <a id="table-choose-size"
+                              <a
+                                id="table-choose-size"
                                 href="#!"
                                 className="table-choose-size text-center d-block py-2 text-decoration-none active-table-choose"
-                                onClick={()=>{document.getElementById('table-choose-size').classList.add('active-table-choose');
-                                document.getElementById('table-choose-tryon').classList.remove('active-table-choose');
-                                document.getElementById('size-table').classList.add('active-table');
-                                document.getElementById('tryon-table').classList.remove('active-table');
-                              }}
+                                onClick={() => {
+                                  document
+                                    .getElementById('table-choose-size')
+                                    .classList.add('active-table-choose')
+                                  document
+                                    .getElementById('table-choose-tryon')
+                                    .classList.remove('active-table-choose')
+                                  document
+                                    .getElementById('size-table')
+                                    .classList.add('active-table')
+                                  document
+                                    .getElementById('tryon-table')
+                                    .classList.remove('active-table')
+                                }}
                               >
                                 尺寸表
                               </a>
-                              <a id="table-choose-tryon"
+                              <a
+                                id="table-choose-tryon"
                                 href="#!"
                                 className="table-choose-tryon text-center tryon-table-choose d-block py-2 text-decoration-none"
-                                onClick={()=>{document.getElementById('table-choose-tryon').classList.add('active-table-choose');
-                                document.getElementById('table-choose-size').classList.remove('active-table-choose');
-                                document.getElementById('tryon-table').classList.add('active-table');
-                                document.getElementById('size-table').classList.remove('active-table');
-                              }}
+                                onClick={() => {
+                                  document
+                                    .getElementById('table-choose-tryon')
+                                    .classList.add('active-table-choose')
+                                  document
+                                    .getElementById('table-choose-size')
+                                    .classList.remove('active-table-choose')
+                                  document
+                                    .getElementById('tryon-table')
+                                    .classList.add('active-table')
+                                  document
+                                    .getElementById('size-table')
+                                    .classList.remove('active-table')
+                                }}
                               >
                                 試穿表
                               </a>
                             </div>
-                            <div id="size-table" className="size-table active-table">
+                            <div
+                              id="size-table"
+                              className="size-table active-table"
+                            >
                               <table className="table">
                                 <tr>
                                   <th className="py-2 px-5 text-center">
@@ -392,13 +415,10 @@ function DetailContent() {
                                   style={{ resize: 'none', height: '100px' }}
                                   className="px-3 py-2 w-100"
                                 ></textarea>
-                                <div
-                                  className=" d-flex w-100  justify-content-end mt-1"
-                                >
+                                <div className=" d-flex w-100  justify-content-end mt-1">
                                   <a
                                     href="#!"
                                     className="review-btn d-inline-block text-decoration-none py-2 px-4 mx-2 rounded"
-                                    
                                   >
                                     清除
                                   </a>
@@ -813,10 +833,7 @@ function DetailContent() {
               <div className="col-12 col-lg-6 pl-lg-5">
                 <div className="recommend-modal d-none justify-content-center align-items-center">
                   <div className="recommend-content p-5 position-relative">
-                    <a
-                      href="#!"
-                      className="close-button position-absolute"
-                    >
+                    <a href="#!" className="close-button position-absolute">
                       CLOSE
                       <span>X</span>
                     </a>
@@ -1151,7 +1168,10 @@ function DetailContent() {
         </div>
         <div className="container">
           <section className="main-content-bottom">
-            <div className="browse-history mt-5 d-flex justify-content-between" style={{marginBottom:'100px'}}>
+            <div
+              className="browse-history mt-5 d-flex justify-content-between"
+              style={{ marginBottom: '100px' }}
+            >
               <a
                 href="#!"
                 className="d-inline-block p-3 mr-2"
