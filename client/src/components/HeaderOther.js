@@ -14,19 +14,23 @@ function HeaderOther() {
     letter: 'N',
   })
 
+  const defaultData = () => {
+    setUser({ account: '', password: '' })
+    setCertificateEmail('')
+    setSignupData({
+      account: '',
+      password: '',
+      email: '',
+      letter: 'N',
+    })
+  }
+
   const close = (id) => {
     document.addEventListener('click', function (e) {
       if (e.target.id === id) {
         setShow(false)
         setModal(1)
-        setUser({ account: '', password: '' })
-        setCertificateEmail('')
-        setSignupData({
-          account: '',
-          password: '',
-          email: '',
-          letter: 'N',
-        })
+        defaultData()
       }
     })
   }
@@ -79,6 +83,7 @@ function HeaderOther() {
         } else {
           setLoginStatus(1)
           setModal(4)
+          setUser({ account: data.account, password: data.password })
         }
       })
       .catch((err) => console.log('錯誤:', err))
@@ -222,7 +227,8 @@ function HeaderOther() {
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       Login({ user })
                     }}
                   >
@@ -750,7 +756,15 @@ function HeaderOther() {
                 </Link>
               </li>
               <li className="d-flex justify-content-start">
-                <a href="#!" className="font-weight-bold d-inline-block py-1">
+                <a
+                  href="#!"
+                  className="font-weight-bold d-inline-block py-1"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setLoginStatus(0)
+                    defaultData()
+                  }}
+                >
                   登出
                 </a>
               </li>
@@ -954,7 +968,7 @@ function HeaderOther() {
                     href="#!"
                     onClick={(e) => {
                       e.preventDefault()
-                      setShow(true)
+                      if (loginStatus === 0) setShow(true)
                     }}
                   >
                     <img src="images/素材/icon/Profile_G.svg" alt={''}></img>

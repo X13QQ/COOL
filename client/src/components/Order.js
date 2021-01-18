@@ -56,7 +56,7 @@ const Order = (props) => {
         id=""
       >
         <Tab
-          className="orders overflow-auto"
+          className="orders overflow-auto font-weight-bold"
           eventKey="processing"
           title="處理中"
         >
@@ -84,7 +84,11 @@ const Order = (props) => {
           })}
         </Tab>
 
-        <Tab className="orders overflow-auto" eventKey="solved" title="已完成">
+        <Tab
+          className="orders overflow-auto font-weight-bold"
+          eventKey="solved"
+          title="已完成"
+        >
           {OrderDataSolved.map((val, key) => {
             return (
               <div className="orderlist m-3" key={key} id={key}>
@@ -110,7 +114,7 @@ const Order = (props) => {
         </Tab>
 
         <Tab
-          className="orders overflow-auto"
+          className="orders overflow-auto font-weight-bold"
           eventKey="orderlist"
           title="退款紀錄"
         >

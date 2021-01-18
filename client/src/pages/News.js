@@ -1,6 +1,7 @@
 import React from 'react'
 import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
+import Footer from '../components/Footer'
 function News() {
   return (
     <>
@@ -81,7 +82,6 @@ function News() {
           </div>
         </div>
       </div>
-
       <div
         className="horizon-line-sm position-relative mb-5 mx-auto text-center h2"
         style={{ marginTop: '96px' }}
@@ -93,7 +93,6 @@ function News() {
           推薦新聞
         </span>
       </div>
-
       <div className="news">
         <div className="container">
           <div className="d-flex justify-content-between ">
@@ -812,6 +811,7 @@ function News() {
         </div>
       </div>
       <Topbtn />
+      <Footer />
     </>
   )
 }
