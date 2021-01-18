@@ -6,7 +6,6 @@ import Detail from '../pages/Detail'
 import News from '../pages/News'
 import ShoppingCart from '../pages/ShoppingCart'
 import MessageBoard from '../components/MessageBoard'
-
 import {
   Mail,
   Order,
