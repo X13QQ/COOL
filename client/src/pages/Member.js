@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Header1 from '../components/Header1'
+import HeaderOther from '../components/HeaderOther'
 import Banner from '../components/Banner'
 import MemberSidebar from '../components/MemberSidebar'
 import { Row, Container } from 'react-bootstrap'
@@ -29,7 +29,7 @@ const onMatchedRoutes = (matchedRoutes) => {
 const Setting = ({ route, location }) => {
   return (
     <>
-      <Header1 />
+      <HeaderOther />
       <Container>
         <Row>
           <Breadcrumb
@@ -47,7 +47,7 @@ const Setting = ({ route, location }) => {
 const Mail = ({ route, location }) => {
   return (
     <>
-      <Header1 />
+      <HeaderOther />
       <Container>
         <Row>
           <Breadcrumb
@@ -65,7 +65,7 @@ const Mail = ({ route, location }) => {
 const Order = ({ route, location }) => {
   return (
     <>
-      <Header1 />
+      <HeaderOther />
       <Container>
         <Row>
           <Breadcrumb
@@ -83,7 +83,7 @@ const Order = ({ route, location }) => {
 const Member = ({ route, location }) => {
   return (
     <>
-      <Header1 />
+      <HeaderOther />
       <Container>
         <Row>
           <Breadcrumb
@@ -101,7 +101,7 @@ const Member = ({ route, location }) => {
 const Favorites = ({ route, location }) => {
   return (
     <>
-      <Header1 />
+      <HeaderOther />
       <Container>
         <Row>
           <Breadcrumb
@@ -119,7 +119,7 @@ const Favorites = ({ route, location }) => {
 const Coupon = ({ route, location }) => {
   return (
     <>
-      <Header1 />
+      <HeaderOther />
       <Container>
         <Row>
           <Breadcrumb
@@ -137,7 +137,7 @@ const Coupon = ({ route, location }) => {
 const Contact = ({ route, location }) => {
   return (
     <>
-      <Header1 />
+      <HeaderOther />
       <Container>
         <Row>
           <Breadcrumb

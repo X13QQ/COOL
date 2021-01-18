@@ -1,11 +1,12 @@
 import React from 'react'
-import Header1 from '../components/Header1'
+import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
+import Footer from '../components/Footer'
 
 function Clothing() {
   return (
     <>
-      <Header1 />
+      <HeaderOther />
       <main style={{ marginTop: '24px' }}>
         <div>
           <div className="row headerwrapper">
@@ -238,7 +239,7 @@ function Clothing() {
           className="horizon-line-sm position-relative my-5 mx-auto text-center h6"
           style={{ letterSpacing: '10px' }}
         >
-          <span className="font-weight-bold position-relative">2020 春/夏</span>
+          <span className="font-weight-bold position-relative" style={{ top: '-9.5px' }}>2020 春/夏</span>
         </div>
         <div>
           <div className="row wrapper px-5 mx-0">
@@ -300,6 +301,7 @@ function Clothing() {
         </div>
       </main>
       <Topbtn />
+      <Footer></Footer>
     </>
   )
 }
