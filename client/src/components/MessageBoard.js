@@ -9,6 +9,7 @@ class MessageBoard extends Component {
       title: '評論',
       act: 0,
       index: '',
+      list: [10],
       datas: [],
     }
   }
@@ -23,20 +24,20 @@ class MessageBoard extends Component {
 
     let datas = this.state.datas
     let name = this.refs.name.value
-    let address = this.refs.address.value
+    let Message = this.refs.Message.value
 
     if (this.state.act === 0) {
       //new
       let data = {
         name,
-        address,
+        Message,
       }
       datas.push(data)
     } else {
       //update
       let index = this.state.index
       datas[index].name = name
-      datas[index].address = address
+      datas[index].Message = Message
     }
 
     this.setState({
@@ -62,7 +63,7 @@ class MessageBoard extends Component {
   fEdit = (i) => {
     let data = this.state.datas[i]
     this.refs.name.value = data.name
-    this.refs.address.value = data.address
+    this.refs.Message.value = data.Message
 
     this.setState({
       act: 1,
@@ -75,7 +76,7 @@ class MessageBoard extends Component {
   render() {
     let datas = this.state.datas
     return (
-      <div className="MessageBoard">
+      <div className="board">
         <h2>{this.state.title}</h2>
         <form ref="myForm" className="myForm">
           <input
@@ -86,29 +87,35 @@ class MessageBoard extends Component {
           />
           <input
             type="text"
-            ref="address"
+            ref="Message"
             placeholder="來點評論吧"
             className="formField"
           />
           <button onClick={(e) => this.fSubmit(e)} className="myButton">
-            submit{' '}
+            留言{' '}
           </button>
         </form>
         <pre>
           {datas.map((data, i) => (
             <li key={i} className="myList">
-              {i + 1}. {data.name}, {data.address}
+              {i + 1}F.{' '}
+              <span className="myName">
+                {data.name}
+                {new Date().toLocaleString('chinese', { hour12: false })}
+              </span>
+              <br></br>
+              <div className="myMessage">{data.Message}</div>
               <button
                 onClick={() => this.fRemove(i)}
                 className="myListButton d-none"
               >
-                remove{' '}
+                刪除{' '}
               </button>
               <button
                 onClick={() => this.fEdit(i)}
                 className="myListButton d-none"
               >
-                edit{' '}
+                修改{' '}
               </button>
             </li>
           ))}
