@@ -556,7 +556,7 @@ function HeaderProduct() {
                     }}
                     onMouseLeave={(e) => {
                       console.log(e.target.id)
-                      if (e.target.id != 'product-hover-menu') {
+                      if (e.target.id !== 'product-hover-menu') {
                         document.getElementById(
                           'product-hover-menu-wrap'
                         ).style['display'] = 'none'
@@ -889,7 +889,7 @@ function HeaderProduct() {
             ] = 'block'
           }}
           onMouseLeave={(e) => {
-            if (e.target.id != 'product-navbar-link') {
+            if (e.target.id !== 'product-navbar-link') {
               document.getElementById('product-hover-menu-wrap').style[
                 'display'
               ] = 'none'

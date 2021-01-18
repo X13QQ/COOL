@@ -49,8 +49,6 @@ body {
   }
 }
 
-
-
 .product-detail-header .main-navbar .navbar-icon a {
   transition: 0.15s;
 }
@@ -99,16 +97,16 @@ body {
 }
 /*  */
 
-.profile-icon-wrap{
+.profile-icon-wrap {
   display: none;
   width: 150px;
   transform: translateX(-60%);
   z-index: 888;
 }
-.profile-navbar-li:hover .profile-icon-wrap{
+.profile-navbar-li:hover .profile-icon-wrap {
   display: block !important;
 }
-.main-navbar .navbar-icon .profile-icon-wrap:hover{
+.main-navbar .navbar-icon .profile-icon-wrap:hover {
   display: block !important;
 }
 
@@ -137,17 +135,17 @@ body {
   font-size: 14px;
 }
 /*  */
-.cart-icon-wrap{
+.cart-icon-wrap {
   display: none;
   width: 270px;
   left: 0%;
   transform: translateX(-78%);
   z-index: 888;
 }
-.cart-navbar-li:hover .cart-icon-wrap{
+.cart-navbar-li:hover .cart-icon-wrap {
   display: block !important;
 }
-.main-navbar .navbar-icon .cart-icon-wrap:hover{
+.main-navbar .navbar-icon .cart-icon-wrap:hover {
   display: block !important;
 }
 
@@ -200,19 +198,18 @@ body {
 .checkout-btn-wrap .see-cart-btn {
   transition: 0.15s;
   color: black;
-} 
-.checkout-btn-wrap .see-cart-btn:hover{
+}
+.checkout-btn-wrap .see-cart-btn:hover {
   transform: scale(0.97);
-} 
-.checkout-btn-wrap .go-check-btn{
+}
+.checkout-btn-wrap .go-check-btn {
   transition: 0.15s;
- color: white; 
- background-color: black; 
+  color: white;
+  background-color: black;
 }
 
-.checkout-btn-wrap .go-check-btn:hover{
+.checkout-btn-wrap .go-check-btn:hover {
   transform: scale(0.97);
-
 }
 /*  */
 /* .product-home-header .category-choose {
@@ -296,16 +293,20 @@ body {
   cursor: pointer;
 }
 /*  */
-.log-in-cancel-btn-wrap a ,.sign-up-cancel-btn-wrap a ,.certificate-cancel-btn-wrap a{
+.log-in-cancel-btn-wrap a,
+.sign-up-cancel-btn-wrap a,
+.certificate-cancel-btn-wrap a {
   transition: 0.15s;
 }
 
-.log-in-cancel-btn-wrap a:hover, .sign-up-cancel-btn-wrap a:hover ,.certificate-cancel-btn-wrap a:hover{
+.log-in-cancel-btn-wrap a:hover,
+.sign-up-cancel-btn-wrap a:hover,
+.certificate-cancel-btn-wrap a:hover {
   transform: scale(0.97);
 }
 /*  */
 /*  */
-.product-hover-menu-wrap{
+.product-hover-menu-wrap {
   top: 145px;
   padding-top: 8.41px;
   display: none;
@@ -644,11 +645,9 @@ h3 {
   bottom: 30px;
   right: 30px;
   transition: 0.15s;
-
 }
 
-
-.go-top:hover{
+.go-top:hover {
   transform: scale(0.97);
 }
 

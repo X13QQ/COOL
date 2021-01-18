@@ -4,14 +4,104 @@ import { Link } from 'react-router-dom'
 function HeaderOther() {
   const [show, setShow] = useState(false)
   const [modal, setModal] = useState(1)
+  const [user, setUser] = useState({ account: '', password: '', email: '' })
+  const [loginStatus, setLoginStatus] = useState(0)
+  const [certificateEmail, setCertificateEmail] = useState('')
+  const [signupData, setSignupData] = useState({
+    account: '',
+    password: '',
+    email: '',
+    letter: 'N',
+  })
 
   const close = (id) => {
     document.addEventListener('click', function (e) {
       if (e.target.id === id) {
         setShow(false)
         setModal(1)
+        setUser({ account: '', password: '' })
+        setCertificateEmail('')
+        setSignupData({
+          account: '',
+          password: '',
+          email: '',
+          letter: 'N',
+        })
       }
     })
+  }
+
+  const Login = (user) => {
+    const data = {
+      account: user.user.account,
+      password: user.user.password,
+    }
+    const loginMethod = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }
+    fetch('http://localhost:3001/profile/login', loginMethod)
+      .then((res) => res.json())
+      .then((res) => {
+        // console.log(res)
+        if (res.length > 0) {
+          setLoginStatus(1)
+          setShow(false)
+        } else {
+          console.log(res.message)
+        }
+      })
+      .catch((err) => console.log('錯誤:', err))
+  }
+
+  const SignUp = (signupData) => {
+    const data = {
+      account: signupData.signupData.account,
+      password: signupData.signupData.password,
+      email: signupData.signupData.email,
+      letter: signupData.signupData.letter,
+    }
+    const signupMethod = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }
+    fetch('http://localhost:3001/profile/signup', signupMethod)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.message) {
+          console.log(res.message)
+        } else {
+          setLoginStatus(1)
+          setModal(4)
+        }
+      })
+      .catch((err) => console.log('錯誤:', err))
+  }
+
+  const certificate = (email) => {
+    console.log(email)
+    const data = {
+      email: email,
+    }
+    const certificateMethod = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }
+    fetch('http://localhost:3001/profile/certificate', certificateMethod)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res.message)
+      })
+      .catch((err) => console.log('錯誤:', err))
   }
 
   const login = () => {
@@ -45,6 +135,10 @@ function HeaderOther() {
                     type="text"
                     placeholder="請輸入帳號"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={user.account}
+                    onChange={(e) => {
+                      setUser({ ...user, account: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -67,9 +161,13 @@ function HeaderOther() {
                   <input
                     id="log-in-password"
                     className="d-block py-1 font-weight-bold"
-                    type="text"
+                    type="password"
                     placeholder="請輸入密碼"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={user.password}
+                    onChange={(e) => {
+                      setUser({ ...user, password: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -123,6 +221,9 @@ function HeaderOther() {
                       border: '1px solid #353c1d',
                       color: 'white',
                       backgroundColor: '#353c1d',
+                    }}
+                    onClick={() => {
+                      Login({ user })
                     }}
                   >
                     登入
@@ -211,6 +312,10 @@ function HeaderOther() {
                     type="text"
                     placeholder="請輸入帳號"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={signupData.account}
+                    onChange={(e) => {
+                      setSignupData({ ...signupData, account: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -233,9 +338,13 @@ function HeaderOther() {
                   <input
                     id="sign-up-password"
                     className="d-block py-1 font-weight-bold"
-                    type="text"
+                    type="password"
                     placeholder="請輸入密碼"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={signupData.password}
+                    onChange={(e) => {
+                      setSignupData({ ...signupData, password: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -261,6 +370,10 @@ function HeaderOther() {
                     type="text"
                     placeholder="請輸入信箱"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={signupData.email}
+                    onChange={(e) => {
+                      setSignupData({ ...signupData, email: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -274,7 +387,15 @@ function HeaderOther() {
                   ></img>
                 </div>
                 <div className="subscribe-wrap mb-2 d-flex align-items-center">
-                  <input type="checkbox"></input>
+                  <input
+                    type="checkbox"
+                    onChange={(e) => {
+                      setSignupData({
+                        ...signupData,
+                        letter: e.target.checked ? 'Y' : 'N',
+                      })
+                    }}
+                  ></input>
                   <span
                     className="font-weight-bold ml-1"
                     style={{ fontSize: '14px' }}
@@ -314,7 +435,10 @@ function HeaderOther() {
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => setModal(4)}
+                    onClick={() => {
+                      // setModal(4)
+                      SignUp({ signupData })
+                    }}
                   >
                     註冊
                   </a>
@@ -403,6 +527,10 @@ function HeaderOther() {
                     type="text"
                     placeholder="請輸入信箱"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={certificateEmail}
+                    onChange={(e) => {
+                      setCertificateEmail(e.target.value)
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -437,7 +565,10 @@ function HeaderOther() {
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => setModal(4)}
+                    onClick={() => {
+                      certificate(certificateEmail)
+                      // setModal(4)
+                    }}
                   >
                     送出
                   </a>
@@ -527,6 +658,103 @@ function HeaderOther() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+
+  const profileNavbar = () => {
+    return (
+      <>
+        <div className="profile-icon-wrap position-absolute pt-3">
+          <div
+            className="profile-icon-ul-wrap position-relative rounded"
+            style={{ padding: '8px 15px' }}
+          >
+            <ul className="profile-icon-ul  list-unstyled w-100">
+              <li className="d-flex justify-content-start">
+                <Link
+                  to="/setting"
+                  className="font-weight-bold d-flex justify-content-center align-items-center py-1"
+                >
+                  江小明
+                  <img
+                    src="images/素材/會員等級icon/winner.svg"
+                    alt={''}
+                    className="ml-2"
+                  ></img>
+                </Link>
+              </li>
+              <li className="d-flex justify-content-start">
+                <Link
+                  to="/mail"
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  我的信箱
+                </Link>
+              </li>
+              <li className="d-flex align-items-start flex-column">
+                <Link
+                  to="/member"
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  會員專區
+                </Link>
+                <ul className="list-unstyled text-left">
+                  <li>
+                    <div
+                      className="py-1 pr-3 pl-1"
+                      style={{ color: 'gray', fontSize: '12px' }}
+                    >
+                      黃金會員
+                    </div>
+                  </li>
+                  <li>
+                    <div
+                      className="py-1 pr-3 pl-1"
+                      style={{ color: 'gray', fontSize: '12px' }}
+                    >
+                      累積消費金額
+                      <br />
+                      <span>1000</span>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li className="d-flex justify-content-start">
+                <Link
+                  to="/coupon"
+                  className=" font-weight-bold d-inline-block py-1"
+                >
+                  優惠券
+                </Link>
+              </li>
+              <li className="d-flex justify-content-start">
+                <Link
+                  to="/order"
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  購買紀錄
+                </Link>
+              </li>
+              <li
+                className="d-flex justify-content-start"
+                style={{ borderBottom: '1px solid black' }}
+              >
+                <Link
+                  to="/setting"
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  帳號設定
+                </Link>
+              </li>
+              <li className="d-flex justify-content-start">
+                <a href="#!" className="font-weight-bold d-inline-block py-1">
+                  登出
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </>
@@ -724,106 +952,16 @@ function HeaderOther() {
                   <a
                     className="nav-link"
                     href="#!"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       setShow(true)
                     }}
                   >
                     <img src="images/素材/icon/Profile_G.svg" alt={''}></img>
                   </a>
-                  <div className="profile-icon-wrap position-absolute pt-3">
-                    <div
-                      className="profile-icon-ul-wrap position-relative rounded"
-                      style={{ padding: '8px 15px' }}
-                    >
-                      <ul className="profile-icon-ul  list-unstyled w-100">
-                        <li className="d-flex justify-content-start">
-                          <Link
-                            to="/setting"
-                            className="font-weight-bold d-flex justify-content-center align-items-center py-1"
-                          >
-                            江小明
-                            <img
-                              src="images/素材/會員等級icon/winner.svg"
-                              alt={''}
-                              className="ml-2"
-                            ></img>
-                          </Link>
-                        </li>
-                        <li className="d-flex justify-content-start">
-                          <Link
-                            to="/mail"
-                            className="font-weight-bold d-inline-block py-1"
-                          >
-                            我的信箱
-                          </Link>
-                        </li>
-                        <li className="d-flex align-items-start flex-column">
-                          <Link
-                            to="/member"
-                            className="font-weight-bold d-inline-block py-1"
-                          >
-                            會員專區
-                          </Link>
-                          <ul className="list-unstyled text-left">
-                            <li>
-                              <div
-                                className="py-1 pr-3 pl-1"
-                                style={{ color: 'gray', fontSize: '12px' }}
-                              >
-                                黃金會員
-                              </div>
-                            </li>
-                            <li>
-                              <div
-                                className="py-1 pr-3 pl-1"
-                                style={{ color: 'gray', fontSize: '12px' }}
-                              >
-                                累積消費金額
-                                <br />
-                                <span>1000</span>
-                              </div>
-                            </li>
-                          </ul>
-                        </li>
-                        <li className="d-flex justify-content-start">
-                          <Link
-                            to="/coupon"
-                            className=" font-weight-bold d-inline-block py-1"
-                          >
-                            優惠券
-                          </Link>
-                        </li>
-                        <li className="d-flex justify-content-start">
-                          <Link
-                            to="/order"
-                            className="font-weight-bold d-inline-block py-1"
-                          >
-                            購買紀錄
-                          </Link>
-                        </li>
-                        <li
-                          className="d-flex justify-content-start"
-                          style={{ borderBottom: '1px solid black' }}
-                        >
-                          <Link
-                            to="/setting"
-                            className="font-weight-bold d-inline-block py-1"
-                          >
-                            帳號設定
-                          </Link>
-                        </li>
-                        <li className="d-flex justify-content-start">
-                          <a
-                            href="#!"
-                            className="font-weight-bold d-inline-block py-1"
-                          >
-                            登出
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  {loginStatus === 1 ? profileNavbar() : ''}
                 </li>
+
                 <li className="nav-item mx-2 mx-sm-3 mx-lg-2 d-block d-lg-none">
                   <a className="nav-link" href="#!">
                     <img src="images/素材/icon/Menu_W.svg" alt={''}></img>
