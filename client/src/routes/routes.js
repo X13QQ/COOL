@@ -4,6 +4,7 @@ import About from '../pages/About'
 import Product from '../pages/Product'
 import Detail from '../pages/Detail'
 import News from '../pages/News'
+import ShoppingCart from '../pages/ShoppingCart'
 import MessageBoard from '../components/MessageBoard'
 
 import {
@@ -81,6 +82,11 @@ const routes = [
     path: '/messageBoard',
     component: MessageBoard,
     breadcrumbName: '留言板',
+  },
+  {
+    // 購物車
+    path: '/shoppingcart',
+    component: ShoppingCart,
   },
 ]
 

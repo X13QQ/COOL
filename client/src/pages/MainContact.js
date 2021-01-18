@@ -67,7 +67,7 @@ function MainContact() {
     <>
       <div className="main col-9">
         <div className="title ml-3 mb-2 font-weight-bold">聯絡我們</div>
-        <div className="mx-2 contact border-right-0 border-bottom-0">
+        <div className="mx-2 contact">
           <div className="row mx-5 text-center  d-flex align-items-center">
             <div className="titleIcon"></div>
             <div className="titleContent ">
