@@ -8,21 +8,23 @@ function MainFavorites(props) {
   return (
     <>
       <div className="main col-9">
-        <div className="title ml-3 mb-2">蒐藏清單</div>
-        <Row>
-          <InputGroup className="m-2 row justify-content-between">
-            <div className="col-6 d-flex align-items-center">
+        <div className="title ml-3 mb-2  font-weight-bold">蒐藏清單</div>
+        <div className="mx-2 favorites-wrap border-right-0 border-bottom-0">
+          {/* <Row> */}
+          <InputGroup className="favorites-wrap-container mx-auto row justify-content-between">
+            <div className="col-6 d-flex align-items-center pl-0">
               <FormControl placeholder="搜尋商品" />
-              <Search style={{ transform: 'translate(-25px, 0px)' }} />
+              <Search style={{ transform: 'translate(-35px, 0px)' }} />
             </div>
-            <div className="col-3">
+            <div className="col-3 pr-0">
               <Form.Control className="" as="select" custom>
                 <option>依加入順序</option>
               </Form.Control>
             </div>
           </InputGroup>
-        </Row>
-        <Favorites memberNo={memberNo} />
+          {/* </Row> */}
+          <Favorites memberNo={memberNo} />
+        </div>
       </div>
     </>
   )

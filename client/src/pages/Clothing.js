@@ -1,11 +1,12 @@
 import React from 'react'
-import Header1 from '../components/Header1'
+import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
+import Footer from '../components/Footer'
 
 function Clothing() {
   return (
     <>
-      <Header1 />
+      <HeaderOther />
       <main style={{ marginTop: '24px' }}>
         <div>
           <div className="row headerwrapper">
@@ -305,6 +306,7 @@ function Clothing() {
         </div>
       </main>
       <Topbtn />
+      <Footer></Footer>
     </>
   )
 }

@@ -76,15 +76,15 @@ function MainSetting() {
   return (
     <>
       <div className="main col-9">
-        <div className="title ml-3 mb-2">帳號設定</div>
-        <div className="mx-2 setting">
-          <div className="row mx-5 text-center">
+        <div className="title ml-3 mb-2 font-weight-bold">帳號設定</div>
+        <div className="mx-2 setting border-right-0 border-bottom-0">
+          <div className="row mx-5 text-center d-flex align-items-center">
             <div className="titleIcon"></div>
             <div className="titleContent">聯絡資訊</div>
           </div>
           <div className="linkTop"></div>
 
-          <form>
+          <form className="setting-form ">
             <div className="form-group mx-5 my-2 p-0 col-5">
               <label htmlFor="name" className="form-label">
                 *使用者姓名
@@ -115,7 +115,6 @@ function MainSetting() {
                 maxLength="20"
                 placeholder="使用者帳號"
                 value={account}
-                readOnly
               />
             </div>
 
@@ -202,25 +201,26 @@ function MainSetting() {
                 }}
               />
             </div>
+            <div className="d-flex justify-content-center align-items-center">
+              <div className="my-2 mx-2 p-0 text-center">
+                <button
+                  className="btn px-5 py-2"
+                  type="button"
+                  onClick={() => updateSettingData()}
+                >
+                  更新
+                </button>
+              </div>
 
-            <div className="my-2 p-0 text-center">
-              <button
-                className="btn px-5 py-2"
-                type="button"
-                onClick={() => updateSettingData()}
-              >
-                更新
-              </button>
-            </div>
-
-            <div className="my-2 p-0 text-center">
-              <button
-                className="btn px-5 py-2"
-                type="button"
-                onClick={() => checkValue()}
-              >
-                測試
-              </button>
+              <div className="my-2 mx-2 p-0 text-center">
+                <button
+                  className="btn px-5 py-2"
+                  type="button"
+                  onClick={() => checkValue()}
+                >
+                  測試
+                </button>
+              </div>
             </div>
           </form>
         </div>

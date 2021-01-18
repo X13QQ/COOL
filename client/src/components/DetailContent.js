@@ -15,10 +15,10 @@ function DetailContent() {
                 <Link to="/">首頁</Link>
               </li>
               <li className="breadcrumb-item">
-                <Link to="/product">商品首頁</Link>
+                <Link to="/product">商品</Link>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
-                商品詳細頁
+                商品詳細
               </li>
             </ol>
           </nav>
@@ -195,7 +195,7 @@ function DetailContent() {
                         <div className="size-tryon-content  p-5 position-relative">
                           <a
                             href="#!"
-                            className="close-button position-absolute text-decoration-none"
+                            className="close-button position-absolute"
                           >
                             CLOSE
                             <span>X</span>
@@ -206,19 +206,52 @@ function DetailContent() {
                           <div>
                             <div className="table-choose d-flex mb-4 justify-content-center justify-content-sm-start">
                               <a
+                                id="table-choose-size"
                                 href="#!"
-                                className="text-center d-block py-2 text-decoration-none"
+                                className="table-choose-size text-center d-block py-2 text-decoration-none active-table-choose"
+                                onClick={() => {
+                                  document
+                                    .getElementById('table-choose-size')
+                                    .classList.add('active-table-choose')
+                                  document
+                                    .getElementById('table-choose-tryon')
+                                    .classList.remove('active-table-choose')
+                                  document
+                                    .getElementById('size-table')
+                                    .classList.add('active-table')
+                                  document
+                                    .getElementById('tryon-table')
+                                    .classList.remove('active-table')
+                                }}
                               >
                                 尺寸表
                               </a>
                               <a
+                                id="table-choose-tryon"
                                 href="#!"
-                                className="text-center tryon-table-choose d-block py-2 text-decoration-none"
+                                className="table-choose-tryon text-center tryon-table-choose d-block py-2 text-decoration-none"
+                                onClick={() => {
+                                  document
+                                    .getElementById('table-choose-tryon')
+                                    .classList.add('active-table-choose')
+                                  document
+                                    .getElementById('table-choose-size')
+                                    .classList.remove('active-table-choose')
+                                  document
+                                    .getElementById('tryon-table')
+                                    .classList.add('active-table')
+                                  document
+                                    .getElementById('size-table')
+                                    .classList.remove('active-table')
+                                }}
                               >
                                 試穿表
                               </a>
                             </div>
-                            <div className="size-table d-none">
+                            <div
+                              id="size-table"
+                              className="size-table active-table"
+                            >
                               <table className="table">
                                 <tr>
                                   <th className="py-2 px-5 text-center">
@@ -286,7 +319,7 @@ function DetailContent() {
                                 ></img>
                               </div>
                             </div>
-                            <div className="tryon-table ">
+                            <div id="tryon-table" className="tryon-table">
                               <table className="table">
                                 <tr>
                                   <th className="py-2 px-5 text-center">
@@ -365,7 +398,7 @@ function DetailContent() {
                         <div className="review-content py-5 px-3 px-md-5 position-relative">
                           <a
                             href="#!"
-                            className="close-button position-absolute text-decoration-none"
+                            className="close-button position-absolute"
                           >
                             CLOSE
                             <span>X</span>
@@ -374,7 +407,7 @@ function DetailContent() {
                             評論
                           </h3>
                           <div>
-                            <div className="mb-3">
+                            <div className="mb-4">
                               <form action="" className="position-relative">
                                 <textarea
                                   name=""
@@ -382,27 +415,16 @@ function DetailContent() {
                                   style={{ resize: 'none', height: '100px' }}
                                   className="px-3 py-2 w-100"
                                 ></textarea>
-                                <div
-                                  className=" d-flex w-100  justify-content-end"
-                                  style={{ bottom: '10px' }}
-                                >
+                                <div className=" d-flex w-100  justify-content-end mt-1">
                                   <a
                                     href="#!"
-                                    className="d-inline-block text-decoration-none py-2 px-4 mx-2"
-                                    style={{
-                                      backgroundColor: '#353c1d',
-                                      color: 'white',
-                                    }}
+                                    className="review-btn d-inline-block text-decoration-none py-2 px-4 mx-2 rounded"
                                   >
                                     清除
                                   </a>
                                   <a
                                     href="#!"
-                                    className="d-inline-block text-decoration-none py-2 px-4 ml-2"
-                                    style={{
-                                      backgroundColor: '#353c1d',
-                                      color: 'white',
-                                    }}
+                                    className="review-btn d-inline-block text-decoration-none py-2 px-4 ml-2 rounded"
                                   >
                                     送出
                                   </a>
@@ -811,10 +833,7 @@ function DetailContent() {
               <div className="col-12 col-lg-6 pl-lg-5">
                 <div className="recommend-modal d-none justify-content-center align-items-center">
                   <div className="recommend-content p-5 position-relative">
-                    <a
-                      href="#!"
-                      className="close-button position-absolute text-decoration-none "
-                    >
+                    <a href="#!" className="close-button position-absolute">
                       CLOSE
                       <span>X</span>
                     </a>
@@ -988,12 +1007,7 @@ function DetailContent() {
                     >
                       <a
                         href="#!"
-                        className="d-inline-block font-weight-bold text-decoration-none py-2 px-5"
-                        style={{
-                          border: '3px solid #353c1d',
-                          color: '#353c1d',
-                          backgroundColor: 'white',
-                        }}
+                        className="see-all-btn d-inline-block font-weight-bold text-decoration-none py-2 px-5"
                       >
                         查看全部商品
                       </a>
@@ -1154,10 +1168,13 @@ function DetailContent() {
         </div>
         <div className="container">
           <section className="main-content-bottom">
-            <div className="browse-history my-5 d-flex justify-content-between">
+            <div
+              className="browse-history mt-5 d-flex justify-content-between"
+              style={{ marginBottom: '100px' }}
+            >
               <a
                 href="#!"
-                className="d-inline-block text-decoration-none p-3 mr-2"
+                className="d-inline-block p-3 mr-2"
                 style={{ width: '180px' }}
               >
                 <img
@@ -1181,7 +1198,7 @@ function DetailContent() {
               </a>
               <a
                 href="#!"
-                className="d-inline-block text-decoration-none p-3 mx-2"
+                className="d-inline-block p-3 mx-2"
                 style={{ width: '180px' }}
               >
                 <img
@@ -1205,7 +1222,7 @@ function DetailContent() {
               </a>
               <a
                 href="#!"
-                className="d-inline-block text-decoration-none p-3 mx-2"
+                className="d-inline-block p-3 mx-2"
                 style={{ width: '180px' }}
               >
                 <img
@@ -1229,7 +1246,7 @@ function DetailContent() {
               </a>
               <a
                 href="#!"
-                className="d-inline-block text-decoration-none p-3 mx-2"
+                className="d-inline-block p-3 mx-2"
                 style={{ width: '180px' }}
               >
                 <img
@@ -1253,7 +1270,7 @@ function DetailContent() {
               </a>
               <a
                 href="#!"
-                className="d-inline-block text-decoration-none p-3 ml-2"
+                className="d-inline-block p-3 ml-2"
                 style={{ width: '180px' }}
               >
                 <img

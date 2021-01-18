@@ -1,14 +1,122 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function Header1() {
+function HeaderOther() {
   const [show, setShow] = useState(false)
   const [modal, setModal] = useState(1)
+  const [user, setUser] = useState({ account: '', password: '', email: '' })
+  const [loginStatus, setLoginStatus] = useState(0)
+  const [certificateEmail, setCertificateEmail] = useState('')
+  const [signupData, setSignupData] = useState({
+    account: '',
+    password: '',
+    email: '',
+    letter: 'N',
+  })
+
+  const defaultData = () => {
+    setUser({ account: '', password: '' })
+    setCertificateEmail('')
+    setSignupData({
+      account: '',
+      password: '',
+      email: '',
+      letter: 'N',
+    })
+  }
+
+  const close = (id) => {
+    document.addEventListener('click', function (e) {
+      if (e.target.id === id) {
+        setShow(false)
+        setModal(1)
+        defaultData()
+      }
+    })
+  }
+
+  const Login = (user) => {
+    const data = {
+      account: user.user.account,
+      password: user.user.password,
+    }
+    const loginMethod = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }
+    fetch('http://localhost:3001/profile/login', loginMethod)
+      .then((res) => res.json())
+      .then((res) => {
+        // console.log(res)
+        if (res.length > 0) {
+          setLoginStatus(1)
+          setShow(false)
+        } else {
+          console.log(res.message)
+        }
+      })
+      .catch((err) => console.log('錯誤:', err))
+  }
+
+  const SignUp = (signupData) => {
+    const data = {
+      account: signupData.signupData.account,
+      password: signupData.signupData.password,
+      email: signupData.signupData.email,
+      letter: signupData.signupData.letter,
+    }
+    const signupMethod = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }
+    fetch('http://localhost:3001/profile/signup', signupMethod)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.message) {
+          console.log(res.message)
+        } else {
+          setLoginStatus(1)
+          setModal(4)
+          setUser({ account: data.account, password: data.password })
+        }
+      })
+      .catch((err) => console.log('錯誤:', err))
+  }
+
+  const certificate = (email) => {
+    console.log(email)
+    const data = {
+      email: email,
+    }
+    const certificateMethod = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }
+    fetch('http://localhost:3001/profile/certificate', certificateMethod)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res.message)
+      })
+      .catch((err) => console.log('錯誤:', err))
+  }
 
   const login = () => {
+    close('log-in-modal')
     return (
       <>
-        <div className="log-in-modal position-fixed d-flex justify-content-center align-items-center">
+        <div
+          id="log-in-modal"
+          className="log-in-modal position-fixed d-flex justify-content-center align-items-center"
+        >
           <div className="log-in-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
@@ -32,6 +140,10 @@ function Header1() {
                     type="text"
                     placeholder="請輸入帳號"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={user.account}
+                    onChange={(e) => {
+                      setUser({ ...user, account: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -54,9 +166,13 @@ function Header1() {
                   <input
                     id="log-in-password"
                     className="d-block py-1 font-weight-bold"
-                    type="text"
+                    type="password"
                     placeholder="請輸入密碼"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={user.password}
+                    onChange={(e) => {
+                      setUser({ ...user, password: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -98,6 +214,7 @@ function Header1() {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
+                    onClick={() => setShow(false)}
                   >
                     取消
                   </a>
@@ -109,6 +226,10 @@ function Header1() {
                       border: '1px solid #353c1d',
                       color: 'white',
                       backgroundColor: '#353c1d',
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      Login({ user })
                     }}
                   >
                     登入
@@ -136,7 +257,7 @@ function Header1() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -165,10 +286,15 @@ function Header1() {
       </>
     )
   }
+
   const signUp = () => {
+    close('sign-up-modal')
     return (
       <>
-        <div className="sign-up-modal position-fixed d-flex justify-content-center align-items-center">
+        <div
+          id="sign-up-modal"
+          className="sign-up-modal position-fixed d-flex justify-content-center align-items-center"
+        >
           <div className="sign-up-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
@@ -192,6 +318,10 @@ function Header1() {
                     type="text"
                     placeholder="請輸入帳號"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={signupData.account}
+                    onChange={(e) => {
+                      setSignupData({ ...signupData, account: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -214,9 +344,13 @@ function Header1() {
                   <input
                     id="sign-up-password"
                     className="d-block py-1 font-weight-bold"
-                    type="text"
+                    type="password"
                     placeholder="請輸入密碼"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={signupData.password}
+                    onChange={(e) => {
+                      setSignupData({ ...signupData, password: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -242,6 +376,10 @@ function Header1() {
                     type="text"
                     placeholder="請輸入信箱"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={signupData.email}
+                    onChange={(e) => {
+                      setSignupData({ ...signupData, email: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -255,7 +393,15 @@ function Header1() {
                   ></img>
                 </div>
                 <div className="subscribe-wrap mb-2 d-flex align-items-center">
-                  <input type="checkbox"></input>
+                  <input
+                    type="checkbox"
+                    onChange={(e) => {
+                      setSignupData({
+                        ...signupData,
+                        letter: e.target.checked ? 'Y' : 'N',
+                      })
+                    }}
+                  ></input>
                   <span
                     className="font-weight-bold ml-1"
                     style={{ fontSize: '14px' }}
@@ -268,6 +414,7 @@ function Header1() {
                     href="#!"
                     className="font-weight-bold"
                     style={{ fontSize: '14px' }}
+                    onClick={() => setModal(1)}
                   >
                     已經有帳號了嗎？
                   </a>
@@ -281,6 +428,7 @@ function Header1() {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
+                    onClick={() => setModal(1)}
                   >
                     取消
                   </a>
@@ -293,7 +441,10 @@ function Header1() {
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => setModal(4)}
+                    onClick={() => {
+                      // setModal(4)
+                      SignUp({ signupData })
+                    }}
                   >
                     註冊
                   </a>
@@ -320,7 +471,7 @@ function Header1() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -349,11 +500,16 @@ function Header1() {
       </>
     )
   }
+
   const getPassword = () => {
+    close('certificate-modal')
     return (
       <>
         {/* 忘記密碼 */}
-        <div className="certificate-modal position-fixed d-flex justify-content-center align-items-center">
+        <div
+          id="certificate-modal"
+          className="certificate-modal position-fixed d-flex justify-content-center align-items-center"
+        >
           <div className="certificate-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
@@ -377,6 +533,10 @@ function Header1() {
                     type="text"
                     placeholder="請輸入信箱"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={certificateEmail}
+                    onChange={(e) => {
+                      setCertificateEmail(e.target.value)
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -398,6 +558,7 @@ function Header1() {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
+                    onClick={() => setModal(1)}
                   >
                     返回
                   </a>
@@ -409,6 +570,10 @@ function Header1() {
                       border: '1px solid #353c1d',
                       color: 'white',
                       backgroundColor: '#353c1d',
+                    }}
+                    onClick={() => {
+                      certificate(certificateEmail)
+                      // setModal(4)
                     }}
                   >
                     送出
@@ -437,7 +602,7 @@ function Header1() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -468,9 +633,13 @@ function Header1() {
   }
 
   const success = () => {
+    close('certificate-send-modal')
     return (
       <>
-        <div className="certificate-send-modal position-fixed d-flex justify-content-center align-items-center">
+        <div
+          id="certificate-send-modal"
+          className="certificate-send-modal position-fixed d-flex justify-content-center align-items-center"
+        >
           <div className="certificate-send-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
@@ -501,8 +670,114 @@ function Header1() {
     )
   }
 
+  const profileNavbar = () => {
+    return (
+      <>
+        <div className="profile-icon-wrap position-absolute pt-3">
+          <div
+            className="profile-icon-ul-wrap position-relative rounded"
+            style={{ padding: '8px 15px' }}
+          >
+            <ul className="profile-icon-ul  list-unstyled w-100">
+              <li className="d-flex justify-content-start">
+                <Link
+                  to="/setting"
+                  className="font-weight-bold d-flex justify-content-center align-items-center py-1"
+                >
+                  江小明
+                  <img
+                    src="images/素材/會員等級icon/winner.svg"
+                    alt={''}
+                    className="ml-2"
+                  ></img>
+                </Link>
+              </li>
+              <li className="d-flex justify-content-start">
+                <Link
+                  to="/mail"
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  我的信箱
+                </Link>
+              </li>
+              <li className="d-flex align-items-start flex-column">
+                <Link
+                  to="/member"
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  會員專區
+                </Link>
+                <ul className="list-unstyled text-left">
+                  <li>
+                    <div
+                      className="py-1 pr-3 pl-1"
+                      style={{ color: 'gray', fontSize: '12px' }}
+                    >
+                      黃金會員
+                    </div>
+                  </li>
+                  <li>
+                    <div
+                      className="py-1 pr-3 pl-1"
+                      style={{ color: 'gray', fontSize: '12px' }}
+                    >
+                      累積消費金額
+                      <br />
+                      <span>1000</span>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li className="d-flex justify-content-start">
+                <Link
+                  to="/coupon"
+                  className=" font-weight-bold d-inline-block py-1"
+                >
+                  優惠券
+                </Link>
+              </li>
+              <li className="d-flex justify-content-start">
+                <Link
+                  to="/order"
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  購買紀錄
+                </Link>
+              </li>
+              <li
+                className="d-flex justify-content-start"
+                style={{ borderBottom: '1px solid black' }}
+              >
+                <Link
+                  to="/setting"
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  帳號設定
+                </Link>
+              </li>
+              <li className="d-flex justify-content-start">
+                <a
+                  href="#!"
+                  className="font-weight-bold d-inline-block py-1"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setLoginStatus(0)
+                    defaultData()
+                  }}
+                >
+                  登出
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
+      {}
       <header className="product-detail-header position-relative">
         <div className="container position-relative" style={{ height: '100%' }}>
           <nav className="main-navbar navbar navbar-expand-lg px-0 pt-5">
@@ -514,8 +789,22 @@ function Header1() {
                 <li className="nav-item mx-4">
                   <Link
                     to="/product"
-                    className="nav-link active"
+                    id="product-navbar-link"
+                    className="product-navbar-link nav-link active"
                     aria-current="page"
+                    onMouseEnter={() => {
+                      document.getElementById('product-hover-menu-wrap').style[
+                        'display'
+                      ] = 'block'
+                    }}
+                    onMouseLeave={(e) => {
+                      console.log(e.target.id)
+                      if (e.target.id !== 'product-hover-menu') {
+                        document.getElementById(
+                          'product-hover-menu-wrap'
+                        ).style['display'] = 'none'
+                      }
+                    }}
                   >
                     商品
                   </Link>
@@ -549,231 +838,144 @@ function Header1() {
                 </li>
 
                 {/* 購物車 */}
-                <li className="nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-                  <a className="nav-link" href="#!">
+                <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
+                  <a className="cart-navbar-a nav-link" href="#!">
                     <img
                       src={'images/素材/icon/shopping_cart_G.svg'}
                       alt={''}
                     ></img>
                   </a>
-                  <div
-                    className="cart-icon-ul-wrap position-absolute rounded"
-                    style={{ padding: '8px 15px' }}
-                  >
-                    <ul className="cart-icon-ul list-unstyled">
-                      <li
-                        style={{ borderBottom: '1px solid gray' }}
-                        className="my-2"
-                      >
-                        <div className="row m-0 pb-2">
-                          <div className="col-3 pl-0 content-img">
-                            <div>
-                              <a className="d-block" href="#!">
-                                <img
-                                  className="img-fluid"
-                                  src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                                  alt={''}
-                                ></img>
-                              </a>
+                  <div className="cart-icon-wrap position-absolute pt-3">
+                    <div
+                      className="cart-icon-ul-wrap position-relative rounded"
+                      style={{ padding: '8px 15px' }}
+                    >
+                      <ul className="cart-icon-ul list-unstyled">
+                        <li
+                          style={{ borderBottom: '1px solid gray' }}
+                          className="my-2"
+                        >
+                          <div className="row m-0 pb-2">
+                            <div className="col-3 pl-0 content-img">
+                              <div>
+                                <a className="d-block" href="#!">
+                                  <img
+                                    className="img-fluid"
+                                    src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                                    alt={''}
+                                  ></img>
+                                </a>
+                              </div>
+                            </div>
+                            <div className="col-9 pr-0 content-word">
+                              <div>
+                                <p className="m-0 text-left font-weight-bold">
+                                  GOFE兩雙一組 / 右手超人襪
+                                </p>
+                                <p className="m-0 text-left font-weight-bold">
+                                  數量
+                                  <span
+                                    className="mx-2"
+                                    style={{
+                                      width: '20px',
+                                      display: 'inline-block',
+                                      textAlign: 'center',
+                                      borderBottom: '1px solid black',
+                                    }}
+                                  >
+                                    1
+                                  </span>
+                                </p>
+                                <p className="m-0 text-left font-weight-bold">
+                                  NT$3,000
+                                </p>
+                              </div>
                             </div>
                           </div>
-                          <div className="col-9 pr-0 content-word">
-                            <div>
-                              <p className="m-0 text-left font-weight-bold">
-                                GOFE兩雙一組 / 右手超人襪
-                              </p>
-                              <p className="m-0 text-left font-weight-bold">
-                                數量
-                                <span
-                                  className="mx-2"
-                                  style={{
-                                    width: '20px',
-                                    display: 'inline-block',
-                                    textAlign: 'center',
-                                    borderBottom: '1px solid black',
-                                  }}
-                                >
-                                  1
-                                </span>
-                              </p>
-                              <p className="m-0 text-left font-weight-bold">
-                                NT$3,000
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
+                        </li>
 
-                      <li
-                        style={{ borderBottom: '1px solid gray' }}
-                        className="my-2"
-                      >
-                        <div className="row m-0 pb-2">
-                          <div className="col-3 pl-0 content-img">
-                            <div>
-                              <a className="d-block" href="#!">
-                                <img
-                                  className="img-fluid"
-                                  src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                                  alt={''}
-                                ></img>
-                              </a>
+                        <li
+                          style={{ borderBottom: '1px solid gray' }}
+                          className="my-2"
+                        >
+                          <div className="row m-0 pb-2">
+                            <div className="col-3 pl-0 content-img">
+                              <div>
+                                <a className="d-block" href="#!">
+                                  <img
+                                    className="img-fluid"
+                                    src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                                    alt={''}
+                                  ></img>
+                                </a>
+                              </div>
+                            </div>
+                            <div className="col-9 pr-0 content-word">
+                              <div>
+                                <p className="m-0 text-left font-weight-bold">
+                                  GOFE兩雙一組 / 右手超人襪
+                                </p>
+                                <p className="m-0 text-left font-weight-bold">
+                                  數量
+                                  <span
+                                    className="mx-2"
+                                    style={{
+                                      width: '20px',
+                                      display: 'inline-block',
+                                      textAlign: 'center',
+                                      borderBottom: '1px solid black',
+                                    }}
+                                  >
+                                    1
+                                  </span>
+                                </p>
+                                <p className="m-0 text-left font-weight-bold">
+                                  NT$3,000
+                                </p>
+                              </div>
                             </div>
                           </div>
-                          <div className="col-9 pr-0 content-word">
-                            <div>
-                              <p className="m-0 text-left font-weight-bold">
-                                GOFE兩雙一組 / 右手超人襪
-                              </p>
-                              <p className="m-0 text-left font-weight-bold">
-                                數量
-                                <span
-                                  className="mx-2"
-                                  style={{
-                                    width: '20px',
-                                    display: 'inline-block',
-                                    textAlign: 'center',
-                                    borderBottom: '1px solid black',
-                                  }}
-                                >
-                                  1
-                                </span>
-                              </p>
-                              <p className="m-0 text-left font-weight-bold">
-                                NT$3,000
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                    <div className="total-price-wrap">
-                      <p className="d-flex justify-content-between font-weight-bold">
-                        <span>結帳金額：</span>
-                        <span>NT$3,000</span>
-                      </p>
-                    </div>
-                    <div className="checkout-btn-wrap d-flex flex-column">
-                      <a
-                        href="#!"
-                        style={{ color: 'black' }}
-                        className="my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                      >
-                        查看購物車
-                      </a>
-                      <a
-                        href="#!"
-                        style={{ color: 'white', backgroundColor: 'black' }}
-                        className="my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                      >
-                        前往結帳
-                      </a>
+                        </li>
+                      </ul>
+                      <div className="total-price-wrap">
+                        <p className="d-flex justify-content-between font-weight-bold">
+                          <span>結帳金額：</span>
+                          <span>NT$3,000</span>
+                        </p>
+                      </div>
+                      <div className="checkout-btn-wrap d-flex flex-column">
+                        <a
+                          href="#!"
+                          className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+                        >
+                          查看購物車
+                        </a>
+                        <a
+                          href="#!"
+                          className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+                        >
+                          前往結帳
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </li>
 
                 {/* 會員 */}
-                <li className="nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
+                <li className="profile-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
                   <a
                     className="nav-link"
                     href="#!"
-                    onClick={() => setShow(true)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      if (loginStatus === 0) setShow(true)
+                    }}
                   >
                     <img src="images/素材/icon/Profile_G.svg" alt={''}></img>
                   </a>
-                  <div
-                    className="profile-icon-ul-wrap d-flex position-absolute rounded"
-                    style={{ padding: '8px 15px' }}
-                  >
-                    <ul className="profile-icon-ul  list-unstyled w-100">
-                      <li className="d-flex justify-content-start">
-                        <Link
-                          to="/setting"
-                          className="font-weight-bold d-flex justify-content-center align-items-center py-1"
-                        >
-                          江小明
-                          <img
-                            src="images/素材/會員等級icon/winner.svg"
-                            alt={''}
-                            className="ml-2"
-                          ></img>
-                        </Link>
-                      </li>
-                      <li className="d-flex justify-content-start">
-                        <Link
-                          to="/mail"
-                          className="font-weight-bold d-inline-block py-1"
-                        >
-                          我的信箱
-                        </Link>
-                      </li>
-                      <li className="d-flex align-items-start flex-column">
-                        <Link
-                          to="/member"
-                          className="font-weight-bold d-inline-block py-1"
-                        >
-                          會員專區
-                        </Link>
-                        <ul className="list-unstyled text-left">
-                          <li>
-                            <div
-                              to="/member"
-                              className="py-1 pr-3 pl-1"
-                              style={{ color: 'gray', fontSize: '12px' }}
-                            >
-                              黃金會員
-                            </div>
-                          </li>
-                          <li>
-                            <div
-                              className="py-1 pr-3 pl-1"
-                              style={{ color: 'gray', fontSize: '12px' }}
-                            >
-                              累積消費金額
-                              <br />
-                              <span>1000</span>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className="d-flex justify-content-start">
-                        <Link
-                          to="/coupon"
-                          className=" font-weight-bold d-inline-block py-1"
-                        >
-                          優惠券
-                        </Link>
-                      </li>
-                      <li className="d-flex justify-content-start">
-                        <Link
-                          to="/order"
-                          className="font-weight-bold d-inline-block py-1"
-                        >
-                          購買紀錄
-                        </Link>
-                      </li>
-                      <li
-                        className="d-flex justify-content-start"
-                        style={{ borderBottom: '1px solid black' }}
-                      >
-                        <Link
-                          to="/setting"
-                          className="font-weight-bold d-inline-block py-1"
-                        >
-                          帳號設定
-                        </Link>
-                      </li>
-                      <li className="d-flex justify-content-start">
-                        <a
-                          href="#!"
-                          className="font-weight-bold d-inline-block py-1"
-                        >
-                          登出
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
+                  {loginStatus === 1 ? profileNavbar() : ''}
                 </li>
+
                 <li className="nav-item mx-2 mx-sm-3 mx-lg-2 d-block d-lg-none">
                   <a className="nav-link" href="#!">
                     <img src="images/素材/icon/Menu_W.svg" alt={''}></img>
@@ -786,133 +988,153 @@ function Header1() {
 
         {show && modal === 1
           ? login()
-          : modal === 2
+          : show && modal === 2
           ? signUp()
-          : modal === 3
+          : show && modal === 3
           ? getPassword()
-          : modal === 4
+          : show && modal === 4
           ? success()
           : ''}
 
         {/* mega menu */}
         <div
-          className="product-hover-menu d-none p-5 position-absolute"
+          id="product-hover-menu-wrap"
+          className="product-hover-menu-wrap position-absolute"
           style={{
-            backgroundColor: 'rgba(255,255,255,0.85)',
             left: '0',
             right: '0',
           }}
+          onMouseEnter={() => {
+            document.getElementById('product-hover-menu-wrap').style[
+              'display'
+            ] = 'block'
+          }}
+          onMouseLeave={(e) => {
+            if (e.target.id !== 'product-navbar-link') {
+              document.getElementById('product-hover-menu-wrap').style[
+                'display'
+              ] = 'none'
+            }
+          }}
         >
-          <div className="container">
-            <div className="row w-100">
-              <div className="col-6">
-                <div className="row">
-                  <div className="col-4">
-                    <h6 className="font-weight-bold mb-3">商品分類</h6>
-                    <ul className="list-unstyled">
-                      <li>
-                        <a href="#!">新品</a>
-                      </li>
-                      <li>
-                        <a href="#!">外套</a>
-                      </li>
-                      <li>
-                        <a href="#!">長褲</a>
-                      </li>
-                      <li>
-                        <a href="#!">短褲</a>
-                      </li>
-                      <li>
-                        <a href="#!">牛仔褲</a>
-                      </li>
-                      <li>
-                        <a href="#!">西裝褲</a>
-                      </li>
-                      <li>
-                        <a href="#!">衣服</a>
-                      </li>
-                      <li>
-                        <a href="#!">褲子</a>
-                      </li>
-                      <li>
-                        <a href="#!">鞋子</a>
-                      </li>
-                      <li>
-                        <a href="#!">配件</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="col-4">
-                    <h6 className="font-weight-bold mb-3">品牌</h6>
-                    <ul className="list-unstyled">
-                      <li>
-                        <a href="#!">undefeated</a>
-                      </li>
-                      <li>
-                        <a href="#!">OnlyNY</a>
-                      </li>
-                      <li>
-                        <a href="#!">NOAH</a>
-                      </li>
-                      <li>
-                        <a href="#!">BBCICECREAM</a>
-                      </li>
-                      <li>
-                        <a href="#!">Tribal</a>
-                      </li>
-                      <li>
-                        <a href="#!">Palace</a>
-                      </li>
-                      <li>
-                        <a href="#!">Wckdthghts</a>
-                      </li>
-                      <li>
-                        <a href="#!">studio-seven</a>
-                      </li>
-                      <li>
-                        <a href="#!">Products</a>
-                      </li>
-                      <li>
-                        <a href="#!">424</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="col-4">
-                    <h6 className="font-weight-bold mb-3">活動</h6>
-                    <ul className="list-unstyled">
-                      <li>
-                        <a href="#!">十二月新品上市</a>
-                      </li>
-                      <li>
-                        <a href="#!">免運活動</a>
-                      </li>
-                      <li>
-                        <a href="#!">換季出清</a>
-                      </li>
-                      <li>
-                        <a href="#!">VIP商品區</a>
-                      </li>
-                    </ul>
+          <div
+            id="product-hover-menu"
+            className="product-hover-menu p-5 "
+            style={{
+              backgroundColor: 'rgba(255,255,255,0.85)',
+            }}
+          >
+            <div className="container">
+              <div className="row w-100">
+                <div className="col-6">
+                  <div className="row">
+                    <div className="col-4">
+                      <h6 className="font-weight-bold mb-3">商品分類</h6>
+                      <ul className="list-unstyled">
+                        <li>
+                          <a href="#!">新品</a>
+                        </li>
+                        <li>
+                          <a href="#!">外套</a>
+                        </li>
+                        <li>
+                          <a href="#!">長褲</a>
+                        </li>
+                        <li>
+                          <a href="#!">短褲</a>
+                        </li>
+                        <li>
+                          <a href="#!">牛仔褲</a>
+                        </li>
+                        <li>
+                          <a href="#!">西裝褲</a>
+                        </li>
+                        <li>
+                          <a href="#!">衣服</a>
+                        </li>
+                        <li>
+                          <a href="#!">褲子</a>
+                        </li>
+                        <li>
+                          <a href="#!">鞋子</a>
+                        </li>
+                        <li>
+                          <a href="#!">配件</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="col-4">
+                      <h6 className="font-weight-bold mb-3">品牌</h6>
+                      <ul className="list-unstyled">
+                        <li>
+                          <a href="#!">undefeated</a>
+                        </li>
+                        <li>
+                          <a href="#!">OnlyNY</a>
+                        </li>
+                        <li>
+                          <a href="#!">NOAH</a>
+                        </li>
+                        <li>
+                          <a href="#!">BBCICECREAM</a>
+                        </li>
+                        <li>
+                          <a href="#!">Tribal</a>
+                        </li>
+                        <li>
+                          <a href="#!">Palace</a>
+                        </li>
+                        <li>
+                          <a href="#!">Wckdthghts</a>
+                        </li>
+                        <li>
+                          <a href="#!">studio-seven</a>
+                        </li>
+                        <li>
+                          <a href="#!">Products</a>
+                        </li>
+                        <li>
+                          <a href="#!">424</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="col-4">
+                      <h6 className="font-weight-bold mb-3">活動</h6>
+                      <ul className="list-unstyled">
+                        <li>
+                          <a href="#!">十二月新品上市</a>
+                        </li>
+                        <li>
+                          <a href="#!">免運活動</a>
+                        </li>
+                        <li>
+                          <a href="#!">換季出清</a>
+                        </li>
+                        <li>
+                          <a href="#!">VIP商品區</a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-6">
-                <div className="row">
-                  <div className="col-6">
-                    <img
-                      className="img-fluid"
-                      src="images/navbar/https___hk.hypebeast.com_files_2020_10_fairfax-usa-2020-fall-winter-collection-lookbook-8-scaled.jpg"
-                      alt={''}
-                      style={{ objectFit: 'cover', height: '300px' }}
-                    ></img>
-                  </div>
-                  <div className="col-6">
-                    <img
-                      className="img-fluid"
-                      src="images/navbar/黑人單人照.JPG"
-                      alt={''}
-                      style={{ objectFit: 'cover', height: '300px' }}
-                    ></img>
+                <div className="col-6">
+                  <div className="row">
+                    <div className="col-6">
+                      <img
+                        className="img-fluid"
+                        src="images/navbar/https___hk.hypebeast.com_files_2020_10_fairfax-usa-2020-fall-winter-collection-lookbook-8-scaled.jpg"
+                        alt={''}
+                        style={{ objectFit: 'cover', height: '300px' }}
+                      ></img>
+                    </div>
+                    <div className="col-6">
+                      <img
+                        className="img-fluid"
+                        src="images/navbar/黑人單人照.JPG"
+                        alt={''}
+                        style={{ objectFit: 'cover', height: '300px' }}
+                      ></img>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -924,4 +1146,4 @@ function Header1() {
   )
 }
 
-export default Header1
+export default HeaderOther

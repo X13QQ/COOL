@@ -3,6 +3,8 @@ import Clothing from '../pages/Clothing'
 import About from '../pages/About'
 import Product from '../pages/Product'
 import Detail from '../pages/Detail'
+import News from '../pages/News'
+import MessageBoard from '../components/MessageBoard'
 
 import {
   Mail,
@@ -34,7 +36,7 @@ const routes = [
   },
   {
     path: '/news',
-    // component: ,
+    component: News,
   },
   {
     path: '/clothing',
@@ -43,7 +45,7 @@ const routes = [
   {
     path: '/setting',
     component: Setting,
-    breadcrumbName: '帳號設定',
+    breadcrumbName: '會員首頁',
   },
   {
     path: '/mail',
@@ -74,6 +76,11 @@ const routes = [
     path: '/contact',
     component: Contact,
     breadcrumbName: '聯絡我們',
+  },
+  {
+    path: '/messageBoard',
+    component: MessageBoard,
+    breadcrumbName: '留言板',
   },
 ]
 

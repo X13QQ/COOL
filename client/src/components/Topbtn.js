@@ -5,9 +5,9 @@ function Topbtn() {
     <>
       <a
         href="#!"
-        class="go-top position-fixed d-flex flex-column jusify-content-center align-items-center text-decoration-none"
+        className="go-top position-fixed d-flex flex-column jusify-content-center align-items-center text-decoration-none"
       >
-        <i class="text-center mb-2 fas fa-arrow-up"></i>
+        <i className="text-center mb-2 fas fa-arrow-up"></i>
         <span>TOP</span>
       </a>
     </>
