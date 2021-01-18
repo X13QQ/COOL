@@ -18,3 +18,4 @@ config/database.yml
 node_modules/
 package-lock.json
 .env
+*.sql
