@@ -66,9 +66,9 @@ function MainContact() {
   return (
     <>
       <div className="main col-9">
-        <div className="title ml-3 mb-2">聯絡我們</div>
-        <div className="mx-2 contact">
-          <div className="row mx-5 text-center">
+        <div className="title ml-3 mb-2 font-weight-bold">聯絡我們</div>
+        <div className="mx-2 contact border-right-0 border-bottom-0">
+          <div className="row mx-5 text-center  d-flex align-items-center">
             <div className="titleIcon"></div>
             <div className="titleContent ">
               請輸入您的Email及問題，我們將會以最快的速度回覆您
@@ -95,7 +95,11 @@ function MainContact() {
                 placeholder="電子郵件地址"
                 required
               />
-              <small id="emailHelp" className="form-text">
+              <small
+                id="emailHelp"
+                className="form-text my-2"
+                style={{ fontSize: '12px', color: 'gray' }}
+              >
                 為了讓您順利收到 cool 回信，請務必確認 EMAIL
                 填寫正確，並避免使用 Yahoo、Hotmail
                 等免費信箱，以免發生擋信、漏信的狀況。
@@ -159,9 +163,9 @@ function MainContact() {
               ></textarea>
               <div className="invalid-feedback">限制字數2000字</div>
             </div>
-            <div className="mx-5 p-0 text-center">
+            <div className="mx-5  p-0 text-center">
               <button
-                className="btn px-5 py-2"
+                className="btn px-5 py-2 my-2"
                 type="button"
                 onClick={() => {
                   if (checkValue()) {

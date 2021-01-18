@@ -45,7 +45,7 @@ const routes = [
   {
     path: '/setting',
     component: Setting,
-    breadcrumbName: '帳號設定',
+    breadcrumbName: '會員首頁',
   },
   {
     path: '/mail',

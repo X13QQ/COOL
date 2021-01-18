@@ -9,8 +9,13 @@ function MemberSidebar(props) {
     <>
       <div className="Sidebar col-3">
         <ul className="SidebarList">
-          <div className="my-3">我的COOL</div>
-          <p className="solid-bottom"></p>
+          <div
+            className="py-3 font-weight-bold"
+            style={{ borderBottom: '2px solid black' }}
+          >
+            我的COOL
+          </div>
+          {/* <p className="solid-bottom"></p> */}
           {MemberSidebarData.map((val, key) => {
             const isActive = val.link === locationPath
 
@@ -18,10 +23,10 @@ function MemberSidebar(props) {
               <Link
                 to={val.link}
                 key={key}
-                className="row w-100 m-0 d-flex justify-content-center align-items-center"
+                className="font-weight-bold row w-100 m-0 d-flex justify-content-center py-3 align-items-center"
                 id={isActive ? 'active' : ''}
               >
-                <div className="mr-2 icon">{val.icon}</div>
+                <div className="mr-3 icon">{val.icon}</div>
                 <div className="">{val.title}</div>
               </Link>
             )

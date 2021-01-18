@@ -14,10 +14,7 @@ function App() {
         <ScrollToTop>
           <Switch>{renderRoutes(routes)}</Switch>
         </ScrollToTop>
-<<<<<<< HEAD
         {/* <Footer /> */}
-=======
->>>>>>> 52761c74dd3861be1df78efecbf01412f43bf114
       </>
     </BrowserRouter>
   )
