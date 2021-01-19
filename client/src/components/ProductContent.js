@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 // FakeRes 測試
@@ -8,7 +8,7 @@ import FakeRes from '../data/FakeRes'
 // Link 路由還沒寫的精準
 
 function ProductContent() {
-  // 
+  //
   // fetch('http://localhost:3001/product',
   //   {
   //     method: 'GET',
@@ -20,12 +20,12 @@ function ProductContent() {
   //   .then((res) => { console.log(res) })
   //   .catch((err) => console.log('錯誤:', err))
 
-  // 
-  const [itemsPerPage, setItemsPerPage] = useState(8);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [listTimeOrder, setListTimeOrder] = useState(true);
-  const [listPriceOrder, setListPriceOrder] = useState(true);
-  let pages = Math.ceil(FakeRes.length / itemsPerPage);
+  //
+  const [itemsPerPage, setItemsPerPage] = useState(8)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [listTimeOrder, setListTimeOrder] = useState(true)
+  const [listPriceOrder, setListPriceOrder] = useState(true)
+  let pages = Math.ceil(FakeRes.length / itemsPerPage)
   console.log(pages)
   // console.log(FakeRes)
   // function ResStructure() {
@@ -51,7 +51,7 @@ function ProductContent() {
   //     </>
   //   )
   // }
-  // 
+  //
   return (
     <>
       <section className="hot-sale container">
@@ -457,17 +457,41 @@ function ProductContent() {
                       <div className="product-sort-ul-wrap position-relative py-2 rounded">
                         <ul className="product-sort-ul  list-unstyled mb-0">
                           <li>
-                            <a href="#!" className="d-inline-block py-2 px-3" onClick={(e) => { e.preventDefault(); setListTimeOrder(!listTimeOrder); setCurrentPage(1) }}>
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                              onClick={(e) => {
+                                e.preventDefault()
+                                setListTimeOrder(!listTimeOrder)
+                                setCurrentPage(1)
+                              }}
+                            >
                               依上架順序
                             </a>
                           </li>
                           <li>
-                            <a href="#!" className="d-inline-block py-2 px-3" onClick={(e) => { e.preventDefault(); setListPriceOrder(true); setCurrentPage(1) }}>
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                              onClick={(e) => {
+                                e.preventDefault()
+                                setListPriceOrder(true)
+                                setCurrentPage(1)
+                              }}
+                            >
                               從價格最低
                             </a>
                           </li>
                           <li>
-                            <a href="#!" className="d-inline-block py-2 px-3" onClick={(e) => { e.preventDefault(); setListPriceOrder(false); setCurrentPage(1) }}>
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                              onClick={(e) => {
+                                e.preventDefault()
+                                setListPriceOrder(false)
+                                setCurrentPage(1)
+                              }}
+                            >
                               從價格最高
                             </a>
                           </li>
@@ -519,21 +543,42 @@ function ProductContent() {
                       <div className="items-per-page-ul-wrap position-relative py-2 rounded">
                         <ul className="items-per-page-ul  list-unstyled mb-0">
                           <li>
-                            <a href="#!" className="d-inline-block py-2 px-3" onClick={(e) => {
-                              e.preventDefault();
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                              onClick={(e) => {
+                                e.preventDefault()
 
-                              setItemsPerPage(8); setCurrentPage(1)
-                            }}>
+                                setItemsPerPage(8)
+                                setCurrentPage(1)
+                              }}
+                            >
                               8筆
                             </a>
                           </li>
                           <li>
-                            <a href="#!" className="d-inline-block py-2 px-3" onClick={(e) => { e.preventDefault(); setItemsPerPage(16); setCurrentPage(1) }}>
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                              onClick={(e) => {
+                                e.preventDefault()
+                                setItemsPerPage(16)
+                                setCurrentPage(1)
+                              }}
+                            >
                               16筆
                             </a>
                           </li>
                           <li>
-                            <a href="#!" className="d-inline-block py-2 px-3" onClick={(e) => { e.preventDefault(); setItemsPerPage(32); setCurrentPage(1) }}>
+                            <a
+                              href="#!"
+                              className="d-inline-block py-2 px-3"
+                              onClick={(e) => {
+                                e.preventDefault()
+                                setItemsPerPage(32)
+                                setCurrentPage(1)
+                              }}
+                            >
                               32筆
                             </a>
                           </li>
@@ -542,7 +587,10 @@ function ProductContent() {
                     </div>
                   </div>
                 </div>
-                <div className="product-list row" style={{ minHeight: '610px' }}>
+                <div
+                  className="product-list row"
+                  style={{ minHeight: '610px' }}
+                >
                   {/*  */}
                   {/*  */}
                   {/*  */}
@@ -606,12 +654,14 @@ function ProductContent() {
 
                   {/* 價錢測試 */}
 
-                  {
-                    listPriceOrder ?
-                      FakeRes.sort(function (a, b) {
-                        return a.price > b.price ? 1 : -1;
+                  {listPriceOrder
+                    ? FakeRes.sort(function (a, b) {
+                        return a.price > b.price ? 1 : -1
                       }).map((v, i) => {
-                        if (i >= (itemsPerPage * (currentPage - 1)) && i <= (itemsPerPage * currentPage -1)) {
+                        if (
+                          i >= itemsPerPage * (currentPage - 1) &&
+                          i <= itemsPerPage * currentPage - 1
+                        ) {
                           return (
                             <>
                               <Link to="/detail" className="col-6 col-md-3">
@@ -620,34 +670,10 @@ function ProductContent() {
                                     className="mb-3"
                                     src={v.image}
                                     width="100%"
-                                    style={{ height: '140px', objectFit: 'contain' }}
-                                    alt={''}
-                                  ></img>
-                                  <p className="m-0 text-center d-none d-sm-block">
-                                    {v.name}
-                                  </p>
-                                  <p className="m-0 text-center">{v.brand}</p>
-                                  <p className="m-0 text-center font-weight-bold">
-                                    NT$ {v.price}
-                                  </p>
-                                </div>
-                              </Link>
-                            </>
-                          )
-                        }
-                      }) : FakeRes.sort(function (a, b) {
-                        return a.price < b.price ? 1 : -1;
-                      }).map((v, i) => {
-                        if (i > (itemsPerPage * (currentPage - 1)) && i <= (itemsPerPage * currentPage)) {
-                          return (
-                            <>
-                              <Link to="/detail" className="col-6 col-md-3">
-                                <div className="m-3">
-                                  <img
-                                    className="mb-3"
-                                    src={v.image}
-                                    width="100%"
-                                    style={{ height: '140px', objectFit: 'contain' }}
+                                    style={{
+                                      height: '140px',
+                                      objectFit: 'contain',
+                                    }}
                                     alt={''}
                                   ></img>
                                   <p className="m-0 text-center d-none d-sm-block">
@@ -663,7 +689,40 @@ function ProductContent() {
                           )
                         }
                       })
-                  }
+                    : FakeRes.sort(function (a, b) {
+                        return a.price < b.price ? 1 : -1
+                      }).map((v, i) => {
+                        if (
+                          i > itemsPerPage * (currentPage - 1) &&
+                          i <= itemsPerPage * currentPage
+                        ) {
+                          return (
+                            <>
+                              <Link to="/detail" className="col-6 col-md-3">
+                                <div className="m-3">
+                                  <img
+                                    className="mb-3"
+                                    src={v.image}
+                                    width="100%"
+                                    style={{
+                                      height: '140px',
+                                      objectFit: 'contain',
+                                    }}
+                                    alt={''}
+                                  ></img>
+                                  <p className="m-0 text-center d-none d-sm-block">
+                                    {v.name}
+                                  </p>
+                                  <p className="m-0 text-center">{v.brand}</p>
+                                  <p className="m-0 text-center font-weight-bold">
+                                    NT$ {v.price}
+                                  </p>
+                                </div>
+                              </Link>
+                            </>
+                          )
+                        }
+                      })}
 
                   {/*  */}
                   {/*  */}
@@ -955,8 +1014,16 @@ function ProductContent() {
                 >
                   <a
                     href="#!"
-                    className={" font-weight-bold page-previous d-flex justify-content-between align-items-center px-2 mx-2 text-center text-decoration-none " + (currentPage === 1 ? '' : '')}
-                    onClick={(e) => { e.preventDefault(); if (currentPage > 1) { setCurrentPage(currentPage - 1) } }}
+                    className={
+                      ' font-weight-bold page-previous d-flex justify-content-between align-items-center px-2 mx-2 text-center text-decoration-none ' +
+                      (currentPage === 1 ? '' : '')
+                    }
+                    onClick={(e) => {
+                      e.preventDefault()
+                      if (currentPage > 1) {
+                        setCurrentPage(currentPage - 1)
+                      }
+                    }}
                   >
                     <img src="images/素材/icon/arrow_W.svg" alt={''}></img>
                     上一頁
@@ -964,7 +1031,7 @@ function ProductContent() {
                   {/*  */}
                   {/*  */}
                   {/*  */}
-                  {function pageSelect() {
+                  {(function pageSelect() {
                     let pageSelectContent = []
                     for (let i = 1; i <= pages; i++) {
                       pageSelectContent[i - 1] = i
@@ -973,17 +1040,24 @@ function ProductContent() {
                     // console.log(pageSelectContent)
                     return (
                       <>
-                        {pageSelectContent.map((v, i) =>
+                        {pageSelectContent.map((v, i) => (
                           <a
                             href="#!"
-                            className={" font-weight-bold page-number d-inline-block mx-2 text-center text-decoration-none " + (v === currentPage ? 'page-select-disabled' : '')} onClick={(e) => { e.preventDefault(); setCurrentPage(v) }}
+                            className={
+                              ' font-weight-bold page-number d-inline-block mx-2 text-center text-decoration-none ' +
+                              (v === currentPage ? 'page-select-disabled' : '')
+                            }
+                            onClick={(e) => {
+                              e.preventDefault()
+                              setCurrentPage(v)
+                            }}
                           >
                             {v}
                           </a>
-                        )}
+                        ))}
                       </>
                     )
-                  }()}
+                  })()}
 
                   {/*  */}
                   {/*  */}
@@ -1008,8 +1082,16 @@ function ProductContent() {
                   </a> */}
                   <a
                     href="#!"
-                    className={" font-weight-bold page-next d-flex justify-content-between align-items-center px-3 mx-2 text-center text-decoration-none "+ (currentPage === pages ? '' : '')}
-                    onClick={(e) => { e.preventDefault(); if (currentPage < pages) { setCurrentPage(currentPage + 1) } }}
+                    className={
+                      ' font-weight-bold page-next d-flex justify-content-between align-items-center px-3 mx-2 text-center text-decoration-none ' +
+                      (currentPage === pages ? '' : '')
+                    }
+                    onClick={(e) => {
+                      e.preventDefault()
+                      if (currentPage < pages) {
+                        setCurrentPage(currentPage + 1)
+                      }
+                    }}
                   >
                     下一頁
                     <img src="images/素材/icon/arrow_W.svg" alt={''}></img>
