@@ -288,14 +288,14 @@
     display: flex;
     padding: 0px 15px 0px 15px;
     justify-content: space-between;
-    background-color: rgb(255, 136, 17);
+    background-color: rgb(255, 136, 17) !important;
     border-radius: 5px;
     transition: 0.1s;
     z-index: 1;
   }
 
   .main-nav-ul .setting-li .setting-li-a:hover {
-    background-color: #f37022;
+    background-color: #f37022 !important;
   }
 
   .main-nav-ul .setting-li .setting-li-a i {
@@ -421,7 +421,7 @@
   }
 
   .open .menu-a {
-    background-color: #f37022 !important;
+    background-color: #f37022;
     color: white !important;
   }
 
@@ -431,7 +431,7 @@
   }
 
   .setting-open .setting-li-a {
-    background-color: #f37022 !important;
+    background-color: #f37022;
   }
 
   .setting-open .setting-inner-ul {
@@ -442,7 +442,7 @@
   }
 
   .setting-open .nav-a .fa-caret-down {
-    transform: rotate(180deg);
+    transform: rotate(180deg) !important;
   }
 
   /* toggle classlist end */
