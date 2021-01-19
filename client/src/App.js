@@ -5,14 +5,16 @@ import ScrollToTop from './components/ScrollToTop'
 import routes from './routes/routes'
 
 function App() {
-  localStorage.memberNo = '1'
-  // console.log(localStorage)
   return (
     <BrowserRouter>
       <>
         <ScrollToTop>
           <Switch>{renderRoutes(routes)}</Switch>
         </ScrollToTop>
+<<<<<<< HEAD
+        {/* <Footer /> */}
+=======
+>>>>>>> 77942f6a09fa4b4dc9f657324f6c1758d67b6b7a
       </>
     </BrowserRouter>
   )

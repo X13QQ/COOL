@@ -6,7 +6,7 @@ function MainMail() {
     <>
       <div className="main col-9">
         <div className="title ml-3 mb-2  font-weight-bold">我的信箱</div>
-        <div className="mx-2 mail-wrap border-right-0 border-bottom-0">
+        <div className="mx-2 mail-wrap">
           {/* <div className="mailamount ml-3 my-2 font-weight-bold">
             共有1/1信件
           </div> */}
