@@ -1,6 +1,21 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import {
+  faChartBar,
+  faHome,
+  faListAlt,
+  faBarcode,
+  faSuitcase,
+  faEnvelope,
+  faBell,
+  faUserCircle,
+  faCaretDown,
+  faCog,
+  faUser,
+  faFileAlt,
+  faPowerOff,
+  faAngleDown,
+} from '@fortawesome/free-solid-svg-icons'
 
 function Dashboard() {
   return (
@@ -16,19 +31,37 @@ function Dashboard() {
             <ul className="menu-ul google-font">
               <li className="menu-li">
                 <a className="menu-a">
-                  <i className="fas fa-home"></i>總覽
+                  <i>
+                    <FontAwesomeIcon icon={faHome} />
+                  </i>
+                  總覽
                 </a>
               </li>
               <li className="menu-li" id="menuLi">
-                <a className="menu-a" data-num="1" id="menuu">
-                  <i className="far fa-list-alt"></i>
+                <a
+                  className="menu-a"
+                  data-num="1"
+                  id="menuu"
+                  onClick={() => {
+                    document
+                      .getElementById('menu-inner-ul1')
+                      .classList.toggle('active-inner-ul')
+                  }}
+                >
+                  <i>
+                    <FontAwesomeIcon icon={faListAlt} />
+                  </i>
+                  {/* <i className="far faListAlt"></i> */}
                   訂單列表
-                  <i
-                    className="fas fa-angle-down"
+                  {/* <i>
+                   
+                  </i>  */}
+                  <FontAwesomeIcon
+                    icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
-                  ></i>
+                  ></FontAwesomeIcon>
                 </a>
-                <ul className="menu-inner-ul" data-num="1">
+                <ul className="menu-inner-ul" data-num="1" id="menu-inner-ul1">
                   <li>
                     <a href="#!">無未結案訂單</a>
                   </li>
@@ -43,18 +76,20 @@ function Dashboard() {
                   data-num="2"
                   onClick={() => {
                     document
-                      .getElementById('menu-inner-ul1')
+                      .getElementById('menu-inner-ul2')
                       .classList.toggle('active-inner-ul')
                   }}
                 >
-                  <FontAwesomeIcon icon={['fas', 'faChartBar']} />
+                  <i>
+                    <FontAwesomeIcon icon={faChartBar} />
+                  </i>
                   營運分析
-                  <i
-                    className="fas fa-angle-down"
+                  <FontAwesomeIcon
+                    icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
-                  ></i>
+                  ></FontAwesomeIcon>
                 </a>
-                <ul id="menu-inner-ul1" className="menu-inner-ul" data-num="2">
+                <ul id="menu-inner-ul2" className="menu-inner-ul" data-num="2">
                   <li>
                     <a href="#!">基本報表</a>
                   </li>
@@ -79,15 +114,26 @@ function Dashboard() {
                 </ul>
               </li>
               <li className="menu-li">
-                <a className="menu-a" data-num="3">
-                  <i className="fas fa-users"></i>
+                <a
+                  className="menu-a"
+                  data-num="3"
+                  onClick={() => {
+                    document
+                      .getElementById('menu-inner-ul3')
+                      .classList.toggle('active-inner-ul')
+                  }}
+                >
+                  <i>
+                    <FontAwesomeIcon icon={faUser} />
+                  </i>
+                  {/* <i className="fas fa-users"></i> */}
                   會員管理
-                  <i
-                    className="fas fa-angle-down"
+                  <FontAwesomeIcon
+                    icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
-                  ></i>
+                  ></FontAwesomeIcon>
                 </a>
-                <ul className="menu-inner-ul" data-num="3">
+                <ul id="menu-inner-ul3" className="menu-inner-ul" data-num="3">
                   <li>
                     <a href="#!">顧客列表</a>
                   </li>
@@ -103,15 +149,26 @@ function Dashboard() {
                 </ul>
               </li>
               <li className="menu-li">
-                <a className="menu-a" data-num="4">
-                  <i className="fas fa-barcode"></i>
+                <a
+                  className="menu-a"
+                  data-num="4"
+                  onClick={() => {
+                    document
+                      .getElementById('menu-inner-ul4')
+                      .classList.toggle('active-inner-ul')
+                  }}
+                >
+                  {/* <i className="fas faBarcode"></i> */}
+                  <i>
+                    <FontAwesomeIcon icon={faBarcode} />
+                  </i>
                   商品管理
-                  <i
-                    className="fas fa-angle-down"
+                  <FontAwesomeIcon
+                    icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
-                  ></i>
+                  ></FontAwesomeIcon>
                 </a>
-                <ul className="menu-inner-ul" data-num="4">
+                <ul className="menu-inner-ul" data-num="4" id="menu-inner-ul4">
                   <li>
                     <a href="#!">新增商品</a>
                   </li>
@@ -127,15 +184,26 @@ function Dashboard() {
                 </ul>
               </li>
               <li className="menu-li">
-                <a className="menu-a" data-num="4">
-                  <i className="fas fa-suitcase"></i>
+                <a
+                  className="menu-a"
+                  data-num="4"
+                  onClick={() => {
+                    document
+                      .getElementById('menu-inner-ul5')
+                      .classList.toggle('active-inner-ul')
+                  }}
+                >
+                  {/* <i className="fas faSuitcase"></i> */}
+                  <i>
+                    <FontAwesomeIcon icon={faSuitcase} />
+                  </i>
                   商品群組
-                  <i
-                    className="fas fa-angle-down"
+                  <FontAwesomeIcon
+                    icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
-                  ></i>
+                  ></FontAwesomeIcon>
                 </a>
-                <ul className="menu-inner-ul" data-num="4">
+                <ul className="menu-inner-ul" data-num="4" id="menu-inner-ul5">
                   <li>
                     <a href="#!">商品分類</a>
                   </li>
@@ -157,15 +225,26 @@ function Dashboard() {
                 </ul>
               </li>
               <li className="menu-li">
-                <a className="menu-a" data-num="4">
-                  <i className="fas fa-envelope"></i>
+                <a
+                  className="menu-a"
+                  data-num="4"
+                  onClick={() => {
+                    document
+                      .getElementById('menu-inner-ul6')
+                      .classList.toggle('active-inner-ul')
+                  }}
+                >
+                  {/* <i className="fas faEnvelope"></i> */}
+                  <i>
+                    <FontAwesomeIcon icon={faEnvelope} />
+                  </i>
                   客服問答
-                  <i
-                    className="fas fa-angle-down"
+                  <FontAwesomeIcon
+                    icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
-                  ></i>
+                  ></FontAwesomeIcon>
                 </a>
-                <ul className="menu-inner-ul" data-num="4">
+                <ul className="menu-inner-ul" data-num="4" id="menu-inner-ul6">
                   <li>
                     <a href="#!">問題分類</a>
                   </li>
@@ -190,18 +269,30 @@ function Dashboard() {
                   style={{ marginLeft: 'auto', marginRight: '40px' }}
                 >
                   <a className="nav-a" href="#!">
-                    <i className="fas fa-bell"></i>
+                    {/* <i className="fas faBell"></i> */}
+                    <i>
+                      <FontAwesomeIcon icon={faBell} />
+                    </i>
+
                     <span className="bell-badge google-font">1</span>
                   </a>
                 </li>
                 <li className="main-nav-ul-li" style={{ marginRight: '40px' }}>
                   <a className="nav-a" href="#!">
-                    <i className="fas fa-home"></i>
+                    {/* <i className="fas fa-home"></i> */}
+                    <i>
+                      <FontAwesomeIcon icon={faHome} />
+                    </i>
                   </a>
                 </li>
                 <li className="main-nav-ul-li" style={{ marginRight: '40px' }}>
                   <a className="nav-a" style={{ cursor: 'default' }}>
-                    <i className="far fa-user-circle"></i>
+                    <i className="far faUserCircle"></i>
+                    {/* <i className="fas fa-home"></i> */}
+                    <i>
+                      <FontAwesomeIcon icon={faUserCircle} />
+                    </i>
+
                     <span
                       className="google-font"
                       style={{
@@ -219,26 +310,52 @@ function Dashboard() {
                   className="setting-li main-nav-ul-li"
                   style={{ marginRight: '40px' }}
                 >
-                  <a className="nav-a setting-li-a">
-                    <i className="fas fa-cog"></i>
-                    <i className="fas fa-caret-down"></i>
+                  <a
+                    className="nav-a setting-li-a"
+                    onClick={() => {
+                      document
+                        .getElementById('nav-ul1')
+                        .classList.toggle('active-inner-ul')
+                    }}
+                  >
+                    {/* <i className="fas faCog"></i> */}
+                    <i>
+                      <FontAwesomeIcon icon={faCog} />
+                    </i>
+
+                    {/* <i className="fas faCaretDown"></i> */}
+                    <i>
+                      <FontAwesomeIcon icon={faCaretDown} />
+                    </i>
                   </a>
-                  <ul className="setting-inner-ul google-font">
+                  <ul className="setting-inner-ul google-font" id="nav-ul1">
                     <li>
                       <a href="#!">
-                        <i className="far fa-user"></i>
+                        {/* <i className="far faUser"></i> */}
+                        <i>
+                          <FontAwesomeIcon icon={faUser} />
+                        </i>
+
                         <span className="setting-word">帳號</span>
                       </a>
                     </li>
                     <li>
                       <a href="#!">
-                        <i className="fas fa-file-alt"></i>
+                        {/* <i className="fas faFileAlt"></i> */}
+                        <i>
+                          <FontAwesomeIcon icon={faFileAlt} />
+                        </i>
+
                         <span className="setting-word">文件</span>
                       </a>
                     </li>
                     <li>
                       <a href="#!">
-                        <i className="fas fa-power-off"></i>
+                        {/* <i className="fas faPowerOff"></i> */}
+                        <i>
+                          <FontAwesomeIcon icon={faPowerOff} />
+                        </i>
+
                         <span className="setting-word">登出</span>
                       </a>
                     </li>
