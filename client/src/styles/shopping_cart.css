@@ -329,8 +329,7 @@ body {
 
 /* 綠色勾勾 */
 .tick {
-  height: 50px;
-  width: 50px;
+
 }
 
 /* 目前所在頁 */
@@ -340,6 +339,7 @@ body {
   height: 50px;
   line-height: 50px;
   color: white;
+  text-align: center;
 }
 
 .nowpage {
@@ -348,6 +348,7 @@ body {
   height: 50px;
   line-height: 50px;
   color: white;
+  text-align: center;
 }
 
 .set-line-height {
@@ -360,31 +361,31 @@ body {
 
 /* 信用卡專區 */
 .credit-card-info {
-  width: 75%;
-  height: 50px;
-  margin: 0 auto;
+
 }
 
 .credit-card-info-num {
-  margin: 10px;
+  margin: 8px 16px;
   width: 20%;
+  font-weight: 700;
 }
 
 .credit-card-info-date {
-  margin-left: 10px;
-  width: 25%;
-  height: 40px;
+  margin: 8px 16px; width: 25%;
+  font-weight: 700;
+
 }
 
 .credit-card-info-savecode {
   width: 20%;
-  height: 40px;
+  margin: 8px 16px;
+  font-weight: 700;
 }
 
 .credit-card-info-owner {
-  margin-right: 10px;
-  width: 30%;
-  height: 40px;
+  margin: 8px 16px; width: 30%;
+  font-weight: 700;
+
 }
 
 /* 標題格式 */
@@ -396,37 +397,25 @@ body {
 
 .title-fontsize {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 /* 選擇城市/地區 */
 .choose-city-dropdown {
-  display: block;
-  width: 75%;
-  height: 50px;
-  margin: 0 auto;
+
 }
 
 /* 選擇門市 */
 .store-info-textbox {
-  display: block;
-  width: 75%;
-  height: 50px;
-  margin: 0 auto;
 }
 
 /* 發票資訊 */
-.invoice-info {
-  display: block;
-  width: 75%;
-  height: 50px;
-  margin: 0 auto;
-}
+/* .invoice-info {
+} */
 
 /* 圖片尺寸 */
 .img-box {
-  height: 150px;
-  width: 150px;
+  height: 100px; width: 100px;
 }
 
 /* 右邊的結帳小區塊 */
@@ -448,10 +437,19 @@ body {
 
 /* 結帳最後一頁的紅通通價格(最底下) */
 .final-price {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   color: red;
 }
+
+.payment-tab-wrap .nav-tabs .nav-link{
+  border: none;
+  margin: 0px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/*  */
 
 /*  */
 .go-top {
