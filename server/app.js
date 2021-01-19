@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql");
 require("dotenv").config();
-const nodemailer = require("nodemailer");
 
 console.log(process.env.DB_HOST);
 const db = mysql.createPool({
