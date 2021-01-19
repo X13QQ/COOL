@@ -208,7 +208,10 @@ function HeaderOther() {
                     href="#!"
                     className="font-weight-bold"
                     style={{ fontSize: '14px' }}
-                    onClick={() => setModal(3)}
+                    onClick={() => {
+                      setModal(3)
+                      cleanData()
+                    }}
                   >
                     忘記密碼
                   </a>
@@ -273,12 +276,16 @@ function HeaderOther() {
                   </p>
                   <div className="d-flex justify-content-center align-items-center">
                     <a
+                      id="gmail"
                       href="#!"
                       className="mx-2 rounded d-flex justify-content-center align-items-center"
                       style={{
                         width: '25px',
                         height: '25px',
                         border: '1px solid #353c1d',
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault()
                       }}
                     >
                       <img
@@ -583,7 +590,9 @@ function HeaderOther() {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setModal(1)}
+                    onClick={() => {
+                      setModal(1)
+                    }}
                   >
                     返回
                   </button>
@@ -826,7 +835,6 @@ function HeaderOther() {
                       ] = 'block'
                     }}
                     onMouseLeave={(e) => {
-                      console.log(e.target.id)
                       if (e.target.id !== 'product-hover-menu') {
                         document.getElementById(
                           'product-hover-menu-wrap'
@@ -1170,8 +1178,40 @@ function HeaderOther() {
           </div>
         </div>
       </header>
+      <button type="button" id="btnSignIn">
+        Google登入
+      </button>
+      <button type="button" id="btnDisconnect">
+        斷連Google App
+      </button>
+
+      {show ? apiLogin('gmail') : ''}
     </>
   )
+  function apiLogin(type) {
+    console.log(`'${type}'`)
+    console.log(document.getElementById(`'${type}'`))
+    const s = document.createElement('script')
+    s.type = 'text/javascript'
+    s.innerHTML = `
+      window.onload = () => {
+        var btnSignIn = document.getElementById('${type}')
+        if (btnSignIn) {
+          btnSignIn.addEventListener('click', function () {
+            GoogleLogin()
+          })
+        }
+      }
+    `
+    document.body.appendChild(s)
+    // console.log(s)
+  }
 }
 
+// var btnDisconnect = document.getElementById('btnDisconnect')
+// if (btnDisconnect) {
+//   btnDisconnect.addEventListener('click', function () {
+//     Google_disconnect()
+//   })
+// }
 export default HeaderOther
