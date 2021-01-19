@@ -115,6 +115,7 @@ function MainSetting() {
                 maxLength="20"
                 placeholder="使用者帳號"
                 value={account}
+                readOnly
               />
             </div>
 
