@@ -9,8 +9,8 @@
 @import './styles/shopping_cart.css';
 @import './styles/MessageBoard.css';
 @import './styles/checkout_system_style.css';
-
-// 全站都會使用的共同樣式
+@import './styles/dashboard.scss';
+@import '~font-awesome/css/font-awesome.min.css'; // 全站都會使用的共同樣式
 // html {
 // font-size: 12px;
 // }
