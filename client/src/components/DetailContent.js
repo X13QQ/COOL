@@ -1,10 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-
+import FakeRes from '../data/FakeRes'
 // 目前會顯示很多prettier warnings，暫時無視
 // Link 路由還沒寫的精準
 function DetailContent(props) {
-  console.log(props.match.params.id)
+  let ProductBrand = props.match.params.brand
+  let ProductId = props.match.params.id
+
+  // 老師的fetch寫法
+  // 步驟一：設一個空detailRes，setDetailRes為之後fetch response
+  const [DetailRes, setDetailRes] = useState('')
+  // async await
+  async function getDetail() {
+
+    // 要使用try-catch來作錯誤處理
+    try {
+      // 從伺服器得到資料
+      const response = await fetch(
+        'http://localhost:3001/detail/' + ProductBrand + '/' + ProductId,
+        {
+          method: 'get',
+        }
+      )
+      if (response.ok) {
+        // 剖析資料為JS的數值
+        const data = await response.json()
+
+        // 設定資料到DetailRes狀態
+        setDetailRes(data)
+      }
+    } catch (error) {
+      // 發生錯誤的處理情況
+      alert('無法得到伺服器資料，請稍後再重試')
+      console.log(error)
+    }
+  }
+
+  // dom生成後，執行fetch函式，再影響setProductRes
+  useEffect(() => {
+    getDetail()
+
+  }, [])
+
+  console.log(DetailRes) // ok
+  // console.log(DetailRes[0]["id"]) // ok
+  // 
   const [status, setStatus] = useState(0)
   const [commentTable, setCommentTable] = useState(false)
   const sizemodal = () => {
@@ -756,17 +796,17 @@ function DetailContent(props) {
               >
                 <img
                   className="img-fluid my-2"
-                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-1.jpg"
+                  src={DetailRes ? DetailRes[0].image : ''}
                   alt={''}
                 ></img>
                 <img
                   className="img-fluid my-2"
-                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-2.jpg"
+                  src={DetailRes ? DetailRes[0].image : ''}
                   alt={''}
                 ></img>
                 <img
                   className="img-fluid my-2"
-                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-3.jpg"
+                  src={DetailRes ? DetailRes[0].image : ''}
                   alt={''}
                 ></img>
               </div>
@@ -775,10 +815,10 @@ function DetailContent(props) {
                 style={{ height: '1000px', overflowY: 'hidden' }}
               >
                 <div>
-                  <h2 className="font-weight-bold">HONEST DELIVERY</h2>
-                  <h3>Better Fast Hoodie</h3>
+                  <h2 className="font-weight-bold">{DetailRes ? DetailRes[0].name : ''}</h2>
+                  <h3>{DetailRes ? DetailRes[0].brand : ''}</h3>
                   <h3 className="font-weight-bold" style={{ color: '#f37022' }}>
-                    $999
+                    ${DetailRes ? DetailRes[0].price : ''}
                   </h3>
                   <p className="font-weight-bold mb-2">產地及材質</p>
                   <p className="m-0" style={{ fontSize: '14px' }}>
@@ -982,12 +1022,12 @@ function DetailContent(props) {
               <div className="col-12 col-md-6">
                 <img
                   className="img-fluid my-2"
-                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-8.jpg"
+                  src={DetailRes ? DetailRes[0].image : ''}
                   alt={''}
                 ></img>
                 <img
                   className="img-fluid my-2"
-                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-6.jpg"
+                  src={DetailRes ? DetailRes[0].image : ''}
                   alt={''}
                 ></img>
               </div>
@@ -1020,7 +1060,7 @@ function DetailContent(props) {
                 </div>
                 <img
                   className="img-fluid my-2"
-                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-7.jpg"
+                  src={DetailRes ? DetailRes[0].image : ''}
                   alt={''}
                 ></img>
               </div>
@@ -1037,7 +1077,7 @@ function DetailContent(props) {
               <div className="col-12 col-lg-6 pr-lg-5 mb-3 mb-lg-0">
                 <img
                   className="img-fluid"
-                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-1.jpg"
+                  src={DetailRes ? DetailRes[0].image : ''}
                   alt={''}
                 ></img>
               </div>
@@ -1056,7 +1096,7 @@ function DetailContent(props) {
                     >
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                         style={{ transform: 'rotate(180deg)' }}
                       ></img>

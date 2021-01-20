@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // FakeRes 測試
@@ -6,119 +6,82 @@ import FakeRes from '../data/FakeRes'
 
 // 目前會顯示很多prettier warnings，暫時無視
 // Link 路由還沒寫的精準
-
 function ProductContent() {
-  // fetch('http://localhost:3001/product',
-  //   {
-  //     method: 'GET',
-  //     headers: new Headers({
-  //       'Content-Type': 'application/json'
-  //     })
-  //   })
-  //   .then((res) => res.json())
-  //   .then((res) => { console.log(res) })
-  //   .catch((err) => console.log('錯誤:', err))
+  
+  
+  // 老師的fetch寫法
+  // 步驟一：設一個空productRes，setProductRes為之後fetch response
+  const [ProductRes, setProductRes] = useState([])
+  // async await
+  async function getProducts() {
 
+    // 要使用try-catch來作錯誤處理
+    try {
+      // 從伺服器得到資料
+      const response = await fetch(
+        'http://localhost:3001/product',
+        {
+          method: 'get',
+        }
+      )
+      if (response.ok) {
+        // 剖析資料為JS的數值
+        const data = await response.json()
+
+        // 設定資料到ProductRes狀態
+        setProductRes(data)
+      }
+    } catch (error) {
+      // 發生錯誤的處理情況
+      alert('無法得到伺服器資料，請稍後再重試')
+      console.log(error)
+    }
+  }
+
+  // dom生成後，執行fetch函式，再影響setProductRes
+  useEffect(() => {
+    getProducts()
+  }, [])
+
+  // 
+  // 
   //
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
   const [listOrder, setListOrder] = useState(1)
   let pages = Math.ceil(FakeRes.length / itemsPerPage)
-  console.log(pages)
-  // console.log(FakeRes)
-  // function ResStructure() {
-  //   return (
-  //     <>
-  //       <Link to="/detail" className="col-6 col-md-3">
-  //         <div className="m-3">
-  //           <img
-  //             className="mb-3"
-  //             src={FakeRes[0].image}
-  //             width="100%"
-  //             alt={''}
-  //           ></img>
-  //           <p className="m-0 text-center d-none d-sm-block">
-  //             {FakeRes[0].name}
-  //           </p>
-  //           <p className="m-0 text-center">{FakeRes[0].brand}</p>
-  //           <p className="m-0 text-center font-weight-bold">
-  //             {FakeRes[0].price}
-  //           </p>
-  //         </div>
-  //       </Link>
-  //     </>
-  //   )
-  // }
-  //
+
   return (
     <>
       <section className="hot-sale container">
         <div>
           <h2 className="text-center my-5">熱賣商品</h2>
           <div className="list-unstyled row my-5">
-            <Link
-              to="/detail"
-              className="col-6 col-md-3 mb-3  mb-lg-0 d-block "
-            >
-              <div className="m-3">
-                <img
-                  className="mb-3"
-                  src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                  width="100%"
-                  alt={''}
-                ></img>
-                <p className="m-0 text-center d-none d-sm-block">
-                  Honest Delivery
-                </p>
-                <p className="m-0 text-center">Better Fast Hoodie</p>
-                <p className="m-0 text-center font-weight-bold">NT$9999</p>
-              </div>
-            </Link>
-            <Link to="/detail" className="col-6 col-md-3 mb-3  mb-lg-0 d-block">
-              <div className="m-3">
-                <img
-                  className="mb-3"
-                  src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                  width="100%"
-                  alt={''}
-                ></img>
-                <p className="m-0 text-center d-none d-sm-block">
-                  Honest Delivery
-                </p>
-                <p className="m-0 text-center">Better Fast Hoodie</p>
-                <p className="m-0 text-center font-weight-bold">NT$9999</p>
-              </div>
-            </Link>
-            <Link to="/detail" className="col-6 col-md-3 mb-3  mb-lg-0 d-block">
-              <div className="m-3">
-                <img
-                  className="mb-3"
-                  src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                  width="100%"
-                  alt={''}
-                ></img>
-                <p className="m-0 text-center d-none d-sm-block">
-                  Honest Delivery
-                </p>
-                <p className="m-0 text-center">Better Fast Hoodie</p>
-                <p className="m-0 text-center font-weight-bold">NT$9999</p>
-              </div>
-            </Link>
-            <Link to="/detail" className="col-6 col-md-3 mb-3 mb-lg-0  d-block">
-              <div className="m-3">
-                <img
-                  className="mb-3"
-                  src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                  width="100%"
-                  alt={''}
-                ></img>
-                <p className="m-0 text-center d-none d-sm-block">
-                  Honest Delivery
-                </p>
-                <p className="m-0 text-center">Better Fast Hoodie</p>
-                <p className="m-0 text-center font-weight-bold">NT$9999</p>
-              </div>
-            </Link>
+            {ProductRes.sort(function (a, b) {
+              return a.id > b.id ? 1 : -1
+            }).map((v, i) => {
+              if (i < 4) {
+                return (
+                  <>
+                    <Link to={'/detail/' + v.brand + '/' + v.id} className="col-6 col-md-3 mb-3 mb-lg-0  d-block">
+                      <div className="m-3">
+                        <img
+                          className="mb-3"
+                          src={v.image}
+                          style={{ height: '280px', width: '100%', objectFit: 'cover' }}
+                          alt={''}
+                        ></img>
+                        <p className="m-0 text-center d-none d-sm-block">
+                          {v.name}
+                        </p>
+                        <p className="m-0 text-center">{v.brand}</p>
+                        <p className="m-0 text-center font-weight-bold">NT$ {v.price}</p>
+                      </div>
+                    </Link>
+                  </>
+                )
+              }
+            })}
           </div>
         </div>
       </section>
@@ -428,6 +391,7 @@ function ProductContent() {
                           ] = 'none'
                         }
                       }}
+                      onClick={(e) => { e.preventDefault() }}
                     >
                       排序
                       <img
@@ -527,6 +491,7 @@ function ProductContent() {
                           ] = 'none'
                         }
                       }}
+                      onClick={(e) => { e.preventDefault() }}
                     >
                       顯示筆數
                       <img
@@ -600,19 +565,22 @@ function ProductContent() {
                 </div>
                 <div
                   className="product-list row"
-                  style={{ minHeight: '900px' }}
+                  style={{ minHeight: '921px' }}
                 >
                   {/*  */}
                   {/*  */}
                   {/*  */}
                   {/*  */}
                   {/*  */}
+
                   {/* 依時間最新排列 */}
                   {listOrder === 1 &&
-                    FakeRes.map((v, i) => {
+                    ProductRes.sort(function (a, b) {
+                      return a.id < b.id ? 1 : -1
+                    }).map((v, i) => {
                       if (
-                        i > itemsPerPage * (currentPage - 1) &&
-                        i <= itemsPerPage * currentPage
+                        i >= itemsPerPage * (currentPage - 1) &&
+                        i <= itemsPerPage * currentPage - 1
                       ) {
                         return (
                           <>
@@ -646,10 +614,12 @@ function ProductContent() {
                     })}
                   {/* 依時間最舊排列 */}
                   {listOrder === 2 &&
-                    FakeRes.reverse().map((v, i) => {
+                    ProductRes.sort(function (a, b) {
+                      return a.id > b.id ? 1 : -1
+                    }).map((v, i) => {
                       if (
-                        i > itemsPerPage * (currentPage - 1) &&
-                        i <= itemsPerPage * currentPage
+                        i >= itemsPerPage * (currentPage - 1) &&
+                        i <= itemsPerPage * currentPage - 1
                       ) {
                         return (
                           <>
@@ -683,7 +653,7 @@ function ProductContent() {
                     })}
                   {/* 依價格最低排列 */}
                   {listOrder === 3 &&
-                    FakeRes.sort(function (a, b) {
+                    ProductRes.sort(function (a, b) {
                       return a.price > b.price ? 1 : -1
                     }).map((v, i) => {
                       console.log(v)
@@ -723,14 +693,14 @@ function ProductContent() {
                     })}
                   {/* 依價格最高 */}
                   {listOrder === 4 &&
-                    FakeRes.sort(function (a, b) {
+                    ProductRes.sort(function (a, b) {
                       return a.price < b.price ? 1 : -1
                     }).map((v, i) => {
                       console.log(v)
 
                       if (
                         i >= itemsPerPage * (currentPage - 1) &&
-                        i <= itemsPerPage * currentPage
+                        i <= itemsPerPage * currentPage - 1
                       ) {
                         return (
                           <>
@@ -767,278 +737,7 @@ function ProductContent() {
                   {/*  */}
                   {/*  */}
                   {/*  */}
-                  {/* <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link>
-                  <Link to="/detail" className="col-6 col-md-3">
-                    <div className="m-3">
-                      <img
-                        className="mb-3"
-                        src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370_19-1.jpg"
-                        width="100%"
-                        alt={''}
-                      ></img>
-                      <p className="m-0 text-center d-none d-sm-block">
-                        Honest Delivery
-                      </p>
-                      <p className="m-0 text-center">Better Fast Hoodie</p>
-                      <p className="m-0 text-center font-weight-bold">
-                        NY$9999
-                      </p>
-                    </div>
-                  </Link> */}
+
                   {/*  */}
                   {/*  */}
                   {/*  */}
