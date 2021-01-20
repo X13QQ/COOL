@@ -1268,7 +1268,7 @@ function HeaderOther() {
               email: email,
               letter: 'Y',
               birth: yyyy + '-' + mm + '-' + dd,
-              birth2: mm+dd,
+              birth2: mm + dd,
               phone: phone,
               address: address,
               type: 'G',
@@ -1287,8 +1287,9 @@ function HeaderOther() {
                 if (res.length > 0) {
                   setLoginStatus(1)
                   setName(res[0].name)
-                  localStorage.setItem('user', JSON.stringify(res))
                 }
+                localStorage.setItem('user', JSON.stringify(res))
+                // console.log(res)
               })
               .catch((err) => console.log('錯誤:', err))
             //↑通常metadata標記primary:true的個資就是你該抓的資料

@@ -12,7 +12,10 @@ import MainFavorites from './MainFavorites'
 import MainSetting from './MainSetting'
 import MainContact from './MainContact'
 
-const id = JSON.parse(localStorage.getItem('user'))[0].id
+const id = !!localStorage.getItem('user')
+  ? JSON.parse(localStorage.getItem('user'))[0].id
+  : ''
+
 const onMatchedRoutes = (matchedRoutes) => {
   // console.log(matchedRoutes)
 
