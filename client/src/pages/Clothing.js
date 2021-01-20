@@ -7,7 +7,16 @@ function Clothing() {
   const [status, setStatus] = useState(0)
   const modal = () => {
     return (
-      <div className="clothing-modal d-flex justify-content-center align-items-center">
+      <div
+        id="what"
+        className="clothing-modal d-flex justify-content-center align-items-center"
+        onClick={(e) => {
+          console.log(e.target.id)
+          if (e.target.id) {
+            setStatus(0)
+          }
+        }}
+      >
         <div className="clothing-content p-5 position-relative">
           <a
             href="/#"
