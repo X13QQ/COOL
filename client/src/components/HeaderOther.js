@@ -1267,7 +1267,8 @@ function HeaderOther() {
               password: '',
               email: email,
               letter: 'Y',
-              birth: yyyy + mm + dd,
+              birth: yyyy + '-' + mm + '-' + dd,
+              birth2: mm+dd,
               phone: phone,
               address: address,
               type: 'G',
@@ -1283,7 +1284,11 @@ function HeaderOther() {
               .then((res) => res.json())
               .then((res) => {
                 // gmail註冊過
-                if (res.length > 0) console.log(res)
+                if (res.length > 0) {
+                  setLoginStatus(1)
+                  setName(res[0].name)
+                  localStorage.setItem('user', JSON.stringify(res))
+                }
               })
               .catch((err) => console.log('錯誤:', err))
             //↑通常metadata標記primary:true的個資就是你該抓的資料

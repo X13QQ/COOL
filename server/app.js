@@ -28,27 +28,30 @@ var emailService = require("./lib/email.js")(credentials);
 // 會員登錄 註冊 忘記密碼
 app.post("/profile/:logintype", function (req, res) {
   if ("login" === req.params.logintype) {
-    const sqlSelect =
-      "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
-      "FROM member WHERE account = ? and password = ? ";
-    // console.log(req.body.account + "/" + req.body.password);
-    db.query(
-      sqlSelect,
-      [req.body.account, req.body.password],
-      (err, result, fields) => {
-        if (err) res.send({ err: err });
+    if (req.body.account.length === 0) {
+      res.send({ message: "請輸入帳號" });
+      return;
+    } else if (req.body.password.length === 0) {
+      res.send({ message: "請輸入密碼" });
+      return;
+    } else {
+      const sqlSelect =
+        "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
+        "FROM member WHERE account = ? and password = ? and type = 'N' ";
+      db.query(
+        sqlSelect,
+        [req.body.account, req.body.password],
+        (err, result, fields) => {
+          if (err) res.send({ err: err });
 
-        if (result.length > 0) {
-          res.send(result);
-        } else {
-          if (req.body.account.length === 0)
-            res.send({ message: "請輸入帳號" });
-          else if (req.body.password.length === 0)
-            res.send({ message: "請輸入密碼" });
-          else res.send({ message: "帳號 / 密碼錯誤" });
+          if (result.length > 0) {
+            res.send(result);
+          } else {
+            res.send({ message: "帳號 / 密碼錯誤" });
+          }
         }
-      }
-    );
+      );
+    }
   } else if ("signup" === req.params.logintype) {
     if (req.body.account.length === 0) {
       res.send({ message: "請輸入帳號" });
@@ -65,8 +68,8 @@ app.post("/profile/:logintype", function (req, res) {
           res.send({ message: "帳號已存在" });
         } else {
           const sqlInsert =
-            "INSERT INTO member (account, password, email, letter) " +
-            "VALUES (?, ?, ?, ?) ";
+            "INSERT INTO member (account, password, email, letter, type) " +
+            "VALUES (?, ?, ?, ?, 'N') ";
           db.query(
             sqlInsert,
             [
@@ -88,7 +91,7 @@ app.post("/profile/:logintype", function (req, res) {
   } else if ("certificate" === req.params.logintype) {
     if (req.body.email.length === 0) res.send({ message: "請輸入信箱" });
     else {
-      const sqlSelect = "SELECT * FROM member WHERE email = ? ";
+      const sqlSelect = "SELECT * FROM member WHERE email = ? and type = 'N' ";
       db.query(sqlSelect, [req.body.email], (err, result, fields) => {
         if (err) res.send({ err: err });
 
@@ -101,7 +104,17 @@ app.post("/profile/:logintype", function (req, res) {
           );
           res.send(result);
         } else {
-          res.send({ message: "EMAIL不存在" });
+          const sqlSelect = "SELECT * FROM member WHERE email = ? and type = 'G' ";
+          db.query(sqlSelect, [req.body.email], (err, result, fields) => {
+            if (err) res.send({ err: err });
+
+            if (result.length > 0) {
+              res.send({ message: "請使用Google登入" });
+            }
+            else{
+              res.send({ message: "EMAIL不存在" });
+            }
+          })
         }
       });
     }
@@ -116,7 +129,41 @@ app.post("/profile/:logintype", function (req, res) {
       if (result.length > 0) {
         res.send(result);
       } else {
-        res.send({ message: "EMAIL不存在" });
+        const sqlInsert =
+          "INSERT INTO member (name, account, password, email, letter, birth, phone, address, type) " +
+          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+        db.query(
+          sqlInsert,
+          [
+            req.body.name,
+            req.body.account+req.body.birth2,
+            req.body.password,
+            req.body.email,
+            req.body.letter,
+            req.body.birth,
+            req.body.phone,
+            req.body.address,
+            req.body.type,
+          ],
+          (err, result, fields) => {
+            if (err) {
+              res.send({ err: err });
+            }
+            res.send([
+              {
+                name: req.body.name,
+                account: req.body.account+req.body.birth2,
+                password: req.body.password,
+                email: req.body.email,
+                letter: req.body.letter,
+                birth: req.body.birth,
+                phone: req.body.phone,
+                address: req.body.address,
+                type: req.body.type,
+              },
+            ]);
+          }
+        );
       }
     });
   }
