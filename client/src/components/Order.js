@@ -29,7 +29,7 @@ const Order = (props) => {
       return fetch(
         url +
           new URLSearchParams({
-            memberNo: props.memberNo,
+            memberNo: props.id,
           })
       )
         .then((res) => res.json())

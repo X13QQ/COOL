@@ -12,6 +12,10 @@ import MainFavorites from './MainFavorites'
 import MainSetting from './MainSetting'
 import MainContact from './MainContact'
 
+const id = !!localStorage.getItem('user')
+  ? JSON.parse(localStorage.getItem('user'))[0].id
+  : ''
+
 const onMatchedRoutes = (matchedRoutes) => {
   // console.log(matchedRoutes)
 
@@ -37,7 +41,7 @@ const Setting = ({ route, location }) => {
             // onMatchedRoutes={onMatchedRoutes}
           />
           <MemberSidebar />
-          <MainSetting />
+          <MainSetting id={id} />
         </Row>
       </Container>
     </>
@@ -73,7 +77,7 @@ const Order = ({ route, location }) => {
             onMatchedRoutes={onMatchedRoutes}
           />
           <MemberSidebar />
-          <MainOrder />
+          <MainOrder id={id} />
         </Row>
       </Container>
     </>
@@ -91,7 +95,7 @@ const Member = ({ route, location }) => {
             onMatchedRoutes={onMatchedRoutes}
           />
           <MemberSidebar />
-          <MainMember />
+          <MainMember id={id} />
         </Row>
       </Container>
     </>
@@ -109,7 +113,7 @@ const Favorites = ({ route, location }) => {
             onMatchedRoutes={onMatchedRoutes}
           />
           <MemberSidebar />
-          <MainFavorites />
+          <MainFavorites id={id} />
         </Row>
       </Container>
     </>

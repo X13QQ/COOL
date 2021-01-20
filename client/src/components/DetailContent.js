@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+
 // 目前會顯示很多prettier warnings，暫時無視
 // Link 路由還沒寫的精準
-function DetailContent() {
+function DetailContent(props) {
+  console.log(props.match.params.id)
   const [status, setStatus] = useState(0)
+  const [commentTable, setCommentTable] = useState(false)
   const sizemodal = () => {
     return (
       <div
@@ -197,47 +200,54 @@ function DetailContent() {
           </a>
           <h3 className="text-center font-weight-bold mb-4">評論</h3>
           <div>
-            <div className="mb-4">
-              <form action="" className="position-relative">
-                <textarea
-                  name=""
-                  id=""
-                  style={{ resize: 'none', height: '100px' }}
-                  className="px-3 py-2 w-100"
-                ></textarea>
-                <div className=" d-flex w-100  justify-content-end mt-1">
-                  <a
-                    href="#!"
-                    className="review-btn d-inline-block text-decoration-none py-2 px-4 mx-2 rounded"
-                  >
-                    清除
-                  </a>
-                  <a
-                    href="#!"
-                    className="review-btn d-inline-block text-decoration-none py-2 px-4 ml-2 rounded"
-                  >
-                    送出
-                  </a>
-                </div>
-              </form>
+            <div className="mb-3">
+              <a
+                href="#!"
+                id="show-comment-table"
+                className="d-block text-right mb-2"
+                style={{ fontSize: '14px', color: '#353c1d' }}
+                onClick={(e) => {
+                  e.preventDefault()
+                  setCommentTable(!commentTable)
+                }}
+              >
+                {commentTable ? '取消留言' : '我要留言'}
+              </a>
+              {commentTable && (
+                <form action="" className="position-relative">
+                  <textarea
+                    name=""
+                    id=""
+                    style={{ resize: 'none', height: '100px' }}
+                    className="px-3 py-2 w-100"
+                  ></textarea>
+                  <div className=" d-flex w-100  justify-content-end mt-1">
+                    <a
+                      href="#!"
+                      className="review-btn d-inline-block text-decoration-none py-1 px-3 mx-2 rounded"
+                      style={{ fontSize: '14px' }}
+                    >
+                      清除
+                    </a>
+                    <a
+                      href="#!"
+                      className="review-btn d-inline-block text-decoration-none py-1 px-3 ml-2 rounded"
+                      style={{ fontSize: '14px' }}
+                    >
+                      送出
+                    </a>
+                  </div>
+                </form>
+              )}
             </div>
             <div>
               <ul
                 className="list-unstyled w-100"
-                style={{ height: '300px', overflowY: 'scroll' }}
+                style={{ height: '300px', width: '864px', overflowY: 'scroll' }}
               >
                 <li style={{ width: '98%' }}>
                   <div className="row py-3">
-                    <div className="col-2 d-none d-lg-flex justify-content-center align-items-start">
-                      <div className="px-3">
-                        <img
-                          src="images/素材/會員等級icon/award.svg"
-                          className="img-fluid"
-                          alt={''}
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-10">
+                    <div className="col-12">
                       <div
                         style={{
                           borderBottom: '1px solid #353c1d',
@@ -245,14 +255,20 @@ function DetailContent() {
                       >
                         <div>
                           <p
+                            className="d-flex align-items-center"
                             style={{
                               fontSize: '14px',
                               fontWeight: '900',
                             }}
                           >
+                            <img
+                              src="/images/素材/會員等級icon/award.svg"
+                              style={{ width: '30px' }}
+                              className="mr-2"
+                              alt={''}
+                            ></img>
                             會員編號
                             <span>0020******</span>
-                            <span>(尊貴會員)</span>
                           </p>
                         </div>
                         <div>
@@ -266,7 +282,7 @@ function DetailContent() {
                         <div className="mb-3 d-flex justify-content-between">
                           <div>
                             <img
-                              src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                              src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                               alt={''}
                               width="50px"
                               style={{
@@ -276,7 +292,7 @@ function DetailContent() {
                               className="mr-3"
                             ></img>
                             <img
-                              src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                              src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                               alt={''}
                               width="50px"
                               style={{
@@ -301,16 +317,7 @@ function DetailContent() {
                 </li>
                 <li style={{ width: '98%' }}>
                   <div className="row py-3">
-                    <div className="col-2 d-none d-lg-flex justify-content-center align-items-start">
-                      <div className="px-3">
-                        <img
-                          src="images/素材/會員等級icon/award.svg"
-                          className="img-fluid"
-                          alt={''}
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-10">
+                    <div className="col-12">
                       <div
                         style={{
                           borderBottom: '1px solid #353c1d',
@@ -318,14 +325,20 @@ function DetailContent() {
                       >
                         <div>
                           <p
+                            className="d-flex align-items-center"
                             style={{
                               fontSize: '14px',
                               fontWeight: '900',
                             }}
                           >
+                            <img
+                              src="/images/素材/會員等級icon/award.svg"
+                              style={{ width: '30px' }}
+                              className="mr-2"
+                              alt={''}
+                            ></img>
                             會員編號
                             <span>0020******</span>
-                            <span>(尊貴會員)</span>
                           </p>
                         </div>
                         <div>
@@ -339,7 +352,7 @@ function DetailContent() {
                         <div className="mb-3 d-flex justify-content-between">
                           <div>
                             <img
-                              src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                              src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                               alt={''}
                               width="50px"
                               style={{
@@ -349,7 +362,7 @@ function DetailContent() {
                               className="mr-3"
                             ></img>
                             <img
-                              src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                              src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                               alt={''}
                               width="50px"
                               style={{
@@ -374,16 +387,7 @@ function DetailContent() {
                 </li>
                 <li style={{ width: '98%' }}>
                   <div className="row py-3">
-                    <div className="col-2 d-none d-lg-flex justify-content-center align-items-start">
-                      <div className="px-3">
-                        <img
-                          src="images/素材/會員等級icon/award.svg"
-                          className="img-fluid"
-                          alt={''}
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-10">
+                    <div className="col-12">
                       <div
                         style={{
                           borderBottom: '1px solid #353c1d',
@@ -391,14 +395,20 @@ function DetailContent() {
                       >
                         <div>
                           <p
+                            className="d-flex align-items-center"
                             style={{
                               fontSize: '14px',
                               fontWeight: '900',
                             }}
                           >
+                            <img
+                              src="/images/素材/會員等級icon/award.svg"
+                              style={{ width: '30px' }}
+                              className="mr-2"
+                              alt={''}
+                            ></img>
                             會員編號
-                            <span> 0020 ******</span>
-                            <span>(尊貴會員)</span>
+                            <span>0020******</span>
                           </p>
                         </div>
                         <div>
@@ -412,7 +422,7 @@ function DetailContent() {
                         <div className="mb-3 d-flex justify-content-between">
                           <div>
                             <img
-                              src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                              src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                               alt={''}
                               width="50px"
                               style={{
@@ -422,7 +432,7 @@ function DetailContent() {
                               className="mr-3"
                             ></img>
                             <img
-                              src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                              src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                               alt={''}
                               width="50px"
                               style={{
@@ -447,16 +457,7 @@ function DetailContent() {
                 </li>
                 <li style={{ width: '98%' }}>
                   <div className="row py-3">
-                    <div className="col-2 d-none d-lg-flex justify-content-center align-items-start">
-                      <div className="px-3">
-                        <img
-                          src="images/素材/會員等級icon/award.svg"
-                          className="img-fluid"
-                          alt={''}
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-10">
+                    <div className="col-12">
                       <div
                         style={{
                           borderBottom: '1px solid #353c1d',
@@ -464,14 +465,20 @@ function DetailContent() {
                       >
                         <div>
                           <p
+                            className="d-flex align-items-center"
                             style={{
                               fontSize: '14px',
                               fontWeight: '900',
                             }}
                           >
+                            <img
+                              src="/images/素材/會員等級icon/award.svg"
+                              style={{ width: '30px' }}
+                              className="mr-2"
+                              alt={''}
+                            ></img>
                             會員編號
                             <span>0020******</span>
-                            <span>(尊貴會員)</span>
                           </p>
                         </div>
                         <div>
@@ -485,7 +492,7 @@ function DetailContent() {
                         <div className="mb-3 d-flex justify-content-between">
                           <div>
                             <img
-                              src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                              src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                               alt={''}
                               width="50px"
                               style={{
@@ -495,7 +502,7 @@ function DetailContent() {
                               className="mr-3"
                             ></img>
                             <img
-                              src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                              src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                               alt={''}
                               width="50px"
                               style={{
@@ -556,7 +563,7 @@ function DetailContent() {
                     <img
                       className="img-fluid"
                       style={{ height: '150px', objectFit: 'cover' }}
-                      src="images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
+                      src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
                       alt={''}
                     ></img>
                   </div>
@@ -564,7 +571,7 @@ function DetailContent() {
                     <img
                       className="img-fluid"
                       style={{ height: '150px', objectFit: 'cover' }}
-                      src="images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
+                      src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
                       alt={''}
                     ></img>
                   </div>
@@ -572,7 +579,7 @@ function DetailContent() {
                     <img
                       className="img-fluid"
                       style={{ height: '150px', objectFit: 'cover' }}
-                      src="images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
+                      src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
                       alt={''}
                     ></img>
                   </div>
@@ -580,7 +587,7 @@ function DetailContent() {
                     <img
                       className="img-fluid"
                       style={{ height: '150px', objectFit: 'cover' }}
-                      src="images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
+                      src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
                       alt={''}
                     ></img>
                   </div>
@@ -590,7 +597,7 @@ function DetailContent() {
                     <img
                       className="h-100 w-100"
                       style={{ objectFit: 'cover' }}
-                      src="images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-10.jpg"
+                      src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-10.jpg"
                       alt={''}
                     ></img>
                   </div>
@@ -621,31 +628,31 @@ function DetailContent() {
                 <div className="color-choose mb-2">
                   <a href="#!">
                     <img
-                      src="images/素材/icon/Clothes color_B.svg"
+                      src="/images/素材/icon/Clothes color_B.svg"
                       alt={''}
                     ></img>
                   </a>
                   <a href="#!">
                     <img
-                      src="images/素材/icon/Clothes color_Blue.svg"
+                      src="/images/素材/icon/Clothes color_Blue.svg"
                       alt={''}
                     ></img>
                   </a>
                   <a href="#!">
                     <img
-                      src="images/素材/icon/Clothes color_R.svg"
+                      src="/images/素材/icon/Clothes color_R.svg"
                       alt={''}
                     ></img>
                   </a>
                   <a href="#!">
                     <img
-                      src="images/素材/icon/Clothes color_W.svg"
+                      src="/images/素材/icon/Clothes color_W.svg"
                       alt={''}
                     ></img>
                   </a>
                   <a href="#!">
                     <img
-                      src="images/素材/icon/Clothes color_Y.svg"
+                      src="/images/素材/icon/Clothes color_Y.svg"
                       alt={''}
                     ></img>
                   </a>
@@ -749,17 +756,17 @@ function DetailContent() {
               >
                 <img
                   className="img-fluid my-2"
-                  src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-1.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-1.jpg"
                   alt={''}
                 ></img>
                 <img
                   className="img-fluid my-2"
-                  src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-2.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-2.jpg"
                   alt={''}
                 ></img>
                 <img
                   className="img-fluid my-2"
-                  src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-3.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-3.jpg"
                   alt={''}
                 ></img>
               </div>
@@ -790,31 +797,31 @@ function DetailContent() {
                   <div className="color-choose mb-2">
                     <a href="#!">
                       <img
-                        src="images/素材/icon/Clothes color_B.svg"
+                        src="/images/素材/icon/Clothes color_B.svg"
                         alt={''}
                       ></img>
                     </a>
                     <a href="#!">
                       <img
-                        src="images/素材/icon/Clothes color_Blue.svg"
+                        src="/images/素材/icon/Clothes color_Blue.svg"
                         alt={''}
                       ></img>
                     </a>
                     <a href="#!">
                       <img
-                        src="images/素材/icon/Clothes color_R.svg"
+                        src="/images/素材/icon/Clothes color_R.svg"
                         alt={''}
                       ></img>
                     </a>
                     <a href="#!">
                       <img
-                        src="images/素材/icon/Clothes color_W.svg"
+                        src="/images/素材/icon/Clothes color_W.svg"
                         alt={''}
                       ></img>
                     </a>
                     <a href="#!">
                       <img
-                        src="images/素材/icon/Clothes color_Y.svg"
+                        src="/images/素材/icon/Clothes color_Y.svg"
                         alt={''}
                       ></img>
                     </a>
@@ -880,14 +887,14 @@ function DetailContent() {
                       >
                         <img
                           className="mr-2"
-                          src="images/素材/icon/star_orange.svg"
+                          src="/images/素材/icon/star_orange.svg"
                           alt={''}
                           width="25px"
                         ></img>
                         <span>收藏</span>
                         <img
                           className="ml-2"
-                          src="images/素材/icon/Right arrow_G.svg"
+                          src="/images/素材/icon/Right arrow_G.svg"
                           alt={''}
                         ></img>
                       </a>
@@ -903,14 +910,14 @@ function DetailContent() {
                       >
                         <img
                           className="mr-2"
-                          src="images/素材/icon/Feed_G.svg"
+                          src="/images/素材/icon/Feed_G.svg"
                           width="25px"
                           alt={''}
                         ></img>
                         <span>尺寸表</span>
                         <img
                           className="ml-2"
-                          src="images/素材/icon/Right arrow_G.svg"
+                          src="/images/素材/icon/Right arrow_G.svg"
                           alt={''}
                         ></img>
                       </a>
@@ -928,14 +935,14 @@ function DetailContent() {
                       >
                         <img
                           className="mr-2"
-                          src="images/素材/icon/Comment_G.svg"
+                          src="/images/素材/icon/Comment_G.svg"
                           width="25px"
                           alt={''}
                         ></img>
                         <span>評論</span>
                         <img
                           className="ml-2"
-                          src="images/素材/icon/Right arrow_G.svg"
+                          src="/images/素材/icon/Right arrow_G.svg"
                           alt={''}
                         ></img>
                       </a>
@@ -975,12 +982,12 @@ function DetailContent() {
               <div className="col-12 col-md-6">
                 <img
                   className="img-fluid my-2"
-                  src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-8.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-8.jpg"
                   alt={''}
                 ></img>
                 <img
                   className="img-fluid my-2"
-                  src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-6.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-6.jpg"
                   alt={''}
                 ></img>
               </div>
@@ -1013,7 +1020,7 @@ function DetailContent() {
                 </div>
                 <img
                   className="img-fluid my-2"
-                  src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-7.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-7.jpg"
                   alt={''}
                 ></img>
               </div>
@@ -1030,7 +1037,7 @@ function DetailContent() {
               <div className="col-12 col-lg-6 pr-lg-5 mb-3 mb-lg-0">
                 <img
                   className="img-fluid"
-                  src="images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-1.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/2/z-70864370-1.jpg"
                   alt={''}
                 ></img>
               </div>
@@ -1055,7 +1062,7 @@ function DetailContent() {
                       ></img>
                       <img
                         className="img-fluid"
-                        src="images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                        src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
                         onClick={(e) => {
                           e.preventDefault()
@@ -1064,7 +1071,7 @@ function DetailContent() {
                       ></img>
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                       ></img>
                     </a>
@@ -1076,13 +1083,13 @@ function DetailContent() {
                     >
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                         style={{ transform: 'rotate(180deg)' }}
                       ></img>
                       <img
                         className="img-fluid"
-                        src="images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                        src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
                         onClick={(e) => {
                           e.preventDefault()
@@ -1091,7 +1098,7 @@ function DetailContent() {
                       ></img>
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                       ></img>
                     </a>
@@ -1103,13 +1110,13 @@ function DetailContent() {
                     >
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                         style={{ transform: 'rotate(180deg)' }}
                       ></img>
                       <img
                         className="img-fluid"
-                        src="images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                        src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
                         onClick={(e) => {
                           e.preventDefault()
@@ -1118,7 +1125,7 @@ function DetailContent() {
                       ></img>
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                       ></img>
                     </a>
@@ -1130,13 +1137,13 @@ function DetailContent() {
                     >
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                         style={{ transform: 'rotate(180deg)' }}
                       ></img>
                       <img
                         className="img-fluid"
-                        src="images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                        src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
                         onClick={(e) => {
                           e.preventDefault()
@@ -1145,7 +1152,7 @@ function DetailContent() {
                       ></img>
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                       ></img>
                     </a>
@@ -1157,13 +1164,13 @@ function DetailContent() {
                     >
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                         style={{ transform: 'rotate(180deg)' }}
                       ></img>
                       <img
                         className="img-fluid"
-                        src="images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                        src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
                         onClick={(e) => {
                           e.preventDefault()
@@ -1172,7 +1179,7 @@ function DetailContent() {
                       ></img>
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                       ></img>
                     </a>
@@ -1184,13 +1191,13 @@ function DetailContent() {
                     >
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                         style={{ transform: 'rotate(180deg)' }}
                       ></img>
                       <img
                         className="img-fluid"
-                        src="images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                        src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
                         onClick={(e) => {
                           e.preventDefault()
@@ -1199,7 +1206,7 @@ function DetailContent() {
                       ></img>
                       <img
                         className="d-none d-lg-inline-block"
-                        src="images/素材/icon/Right arrow_G.svg"
+                        src="/images/素材/icon/Right arrow_G.svg"
                         alt={''}
                       ></img>
                     </a>
@@ -1230,7 +1237,7 @@ function DetailContent() {
                 style={{ width: '180px' }}
               >
                 <img
-                  src="images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                   className="img-fluid mb-3"
                   alt={''}
                 ></img>
@@ -1254,7 +1261,7 @@ function DetailContent() {
                 style={{ width: '180px' }}
               >
                 <img
-                  src="images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                   className="img-fluid mb-3"
                   alt={''}
                 ></img>
@@ -1278,7 +1285,7 @@ function DetailContent() {
                 style={{ width: '180px' }}
               >
                 <img
-                  src="images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                   className="img-fluid mb-3"
                   alt={''}
                 ></img>
@@ -1302,7 +1309,7 @@ function DetailContent() {
                 style={{ width: '180px' }}
               >
                 <img
-                  src="images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                   className="img-fluid mb-3"
                   alt={''}
                 ></img>
@@ -1326,7 +1333,7 @@ function DetailContent() {
                 style={{ width: '180px' }}
               >
                 <img
-                  src="images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                  src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                   className="img-fluid mb-3"
                   alt={''}
                 ></img>
@@ -1352,4 +1359,4 @@ function DetailContent() {
   )
 }
 
-export default DetailContent
+export default withRouter(DetailContent)

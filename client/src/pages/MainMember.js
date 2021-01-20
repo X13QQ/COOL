@@ -2,7 +2,8 @@ import React from 'react'
 import { Row } from 'react-bootstrap'
 import { Lv1, LV1, LV2 } from '../components/icons'
 
-function MainMember() {
+function MainMember(props) {
+  const id = props.id
   return (
     <>
       <div className="main col-9">

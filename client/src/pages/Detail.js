@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import DetailContent from '../components/DetailContent'
 import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
@@ -9,7 +10,9 @@ function Detail() {
   return (
     <>
       <HeaderOther></HeaderOther>
-      <DetailContent></DetailContent>
+      <Route path="/detail/:brand?/:id?">
+        <DetailContent></DetailContent>
+      </Route>
       <Topbtn />
       <Footer />
     </>
