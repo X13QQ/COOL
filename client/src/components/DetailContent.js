@@ -6,7 +6,14 @@ function DetailContent() {
   const [status, setStatus] = useState(0)
   const sizemodal = () => {
     return (
-      <div className="size-tryon-modal">
+      <div
+        id="size-modal"
+        className="size-tryon-modal"
+        onClick={(e) => {
+          // console.log(e.target.id)
+          if (e.target.id === 'size-modal') setStatus(0)
+        }}
+      >
         <div className="size-tryon-content  p-5 position-relative">
           <a
             href="#!"
@@ -168,7 +175,14 @@ function DetailContent() {
   }
   const reviewmodal = () => {
     return (
-      <div className="review-modal">
+      <div
+        id="review-modal"
+        className="review-modal"
+        onClick={(e) => {
+          // console.log(e.target.id)
+          if (e.target.id === 'review-modal') setStatus(0)
+        }}
+      >
         <div className="review-content py-5 px-3 px-md-5 position-relative">
           <a
             href="#!"
@@ -513,7 +527,14 @@ function DetailContent() {
   }
   const recommendmodal = () => {
     return (
-      <div className="recommend-modal d-flex justify-content-center align-items-center">
+      <div
+        id="recommend-modal"
+        className="recommend-modal d-flex justify-content-center align-items-center"
+        onClick={(e) => {
+          // console.log(e.target.id)
+          if (e.target.id === 'recommend-modal') setStatus(0)
+        }}
+      >
         <div className="recommend-content p-5 position-relative">
           <a
             href="#!"
