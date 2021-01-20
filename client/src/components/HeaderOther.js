@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+/* global gapi */
+
 function HeaderOther() {
   const [name, setName] = useState(
     !!localStorage.getItem('user')
@@ -17,15 +19,35 @@ function HeaderOther() {
     password: '',
     email: '',
     letter: 'N',
+    type: 'N',
   })
   const [loginMessage, setLoginMessage] = useState('')
   const [certificateMessage, setCertificateMessage] = useState('')
 
   useEffect(() => {
+    const apiLogin = (login) => {
+      var btnSignIn = document.getElementById(login)
+      if (btnSignIn) {
+        btnSignIn.addEventListener('click', function () {
+          GoogleLogin()
+        })
+      }
+    }
+    const apiLogout = (logout) => {
+      var btnDisconnect = document.getElementById(logout)
+      if (btnDisconnect) {
+        btnDisconnect.addEventListener('click', function () {
+          Google_disconnect()
+        })
+      }
+    }
     if (!!name) setLoginStatus(1)
-  }, [name])
+    if (show) apiLogin('gmail')
+    if (loginStatus === 1) apiLogout('logout')
+  }, [name, show, loginStatus])
 
   const cleanData = () => {
+    setName('')
     setUser({ account: '', password: '' })
     setCertificateEmail('')
     setSignupData({
@@ -33,6 +55,7 @@ function HeaderOther() {
       password: '',
       email: '',
       letter: 'N',
+      type: 'N',
     })
     setLoginMessage('')
     setCertificateMessage('')
@@ -81,6 +104,7 @@ function HeaderOther() {
       password: signupData.signupData.password,
       email: signupData.signupData.email,
       letter: signupData.signupData.letter,
+      type: signupData.signupData.type,
     }
     const signupMethod = {
       method: 'POST',
@@ -238,7 +262,10 @@ function HeaderOther() {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setShow(false)}
+                    onClick={() => {
+                      setShow(false)
+                      cleanData()
+                    }}
                   >
                     取消
                   </button>
@@ -286,6 +313,7 @@ function HeaderOther() {
                       }}
                       onClick={(e) => {
                         e.preventDefault()
+                        // apiLogin('gmail')
                       }}
                     >
                       <img
@@ -794,12 +822,13 @@ function HeaderOther() {
               </li>
               <li className="d-flex justify-content-start">
                 <a
+                  id="logout"
                   href="#!"
                   className="font-weight-bold d-inline-block py-1"
                   onClick={(e) => {
                     e.preventDefault()
-                    setLoginStatus(0)
                     cleanData()
+                    setLoginStatus(0)
                     localStorage.removeItem('user')
                   }}
                 >
@@ -1178,40 +1207,107 @@ function HeaderOther() {
           </div>
         </div>
       </header>
-      <button type="button" id="btnSignIn">
-        Google登入
-      </button>
-      <button type="button" id="btnDisconnect">
-        斷連Google App
-      </button>
-
-      {show ? apiLogin('gmail') : ''}
     </>
   )
-  function apiLogin(type) {
-    console.log(`'${type}'`)
-    console.log(document.getElementById(`'${type}'`))
-    const s = document.createElement('script')
-    s.type = 'text/javascript'
-    s.innerHTML = `
-      window.onload = () => {
-        var btnSignIn = document.getElementById('${type}')
-        if (btnSignIn) {
-          btnSignIn.addEventListener('click', function () {
-            GoogleLogin()
+
+  function GoogleLogin() {
+    let auth2 = gapi.auth2.getAuthInstance() //取得GoogleAuth物件
+    auth2.signIn().then(
+      function (GoogleUser) {
+        console.log('Google登入成功')
+        setLoginStatus(1)
+        setShow(false)
+        let user_id = GoogleUser.getId() //取得user id，不過要發送至Server端的話，為了資安請使用id_token，本人另一篇文章有範例：https://dotblogs.com.tw/shadow/2019/01/31/113026
+        console.log(`user_id:${user_id}`)
+        let AuthResponse = GoogleUser.getAuthResponse(true) //true會回傳包含access token ，false則不會
+        let id_token = AuthResponse.id_token //取得id_token
+        //people.get方法參考：https://developers.google.com/people/api/rest/v1/people/get
+        gapi.client.people.people
+          .get({
+            resourceName: 'people/me',
+            //通常你會想要知道的用戶個資↓
+            personFields:
+              'names,phoneNumbers,emailAddresses,addresses,residences,genders,birthdays,occupations',
           })
-        }
+          .then(function (res) {
+            //success
+            let str = JSON.stringify(res.result) //將物件列化成string，方便顯示結果在畫面上
+            console.log(str)
+            //顯示授權你網站存取的用戶個資
+            let name = '',
+              email = '',
+              yyyy = '',
+              mm = '',
+              dd = '',
+              phone = '',
+              address = ''
+            if (res.result.hasOwnProperty('names'))
+              name =
+                res.result.names[0].familyName + res.result.names[0].givenName
+            if (res.result.hasOwnProperty('emailAddresses'))
+              email = res.result.emailAddresses[0].value
+            if (res.result.hasOwnProperty('birthdays')) {
+              yyyy = res.result.birthdays[0].date.year
+              mm =
+                res.result.birthdays[0].date.month.length === 2
+                  ? res.result.birthdays[0].date.month
+                  : '0' + res.result.birthdays[0].date.month
+              dd =
+                res.result.birthdays[0].date.day.length === 2
+                  ? res.result.birthdays[0].date.day
+                  : '0' + res.result.birthdays[0].date.day
+            }
+            if (res.result.hasOwnProperty('phoneNumbers'))
+              phone = res.result.phoneNumbers[0].value
+            if (res.result.hasOwnProperty('addresses'))
+              address = res.result.addresses[0].formattedValue
+            let data = {
+              name: name,
+              account: email.substr(0, email.indexOf('@')),
+              password: '',
+              email: email,
+              letter: 'Y',
+              birth: yyyy + mm + dd,
+              phone: phone,
+              address: address,
+              type: 'G',
+            }
+            // console.log(data)
+            fetch('http://localhost:3001/profile/googlelogin', {
+              method: 'POST',
+              body: JSON.stringify(data),
+              headers: new Headers({
+                'Content-Type': 'application/json',
+              }),
+            })
+              .then((res) => res.json())
+              .then((res) => {
+                // gmail註冊過
+                if (res.length > 0) console.log(res)
+              })
+              .catch((err) => console.log('錯誤:', err))
+            //↑通常metadata標記primary:true的個資就是你該抓的資料
+
+            //請再自行Parse JSON，可以將JSON字串丟到線上parse工具查看：http://json.parser.online.fr/
+
+            //最終，取得用戶個資後看要填在畫面表單上或是透過Ajax儲存到資料庫(記得是傳id_token給你的Web Server而不是明碼的user_id喔)，本範例就不贅述，請自行努力XD
+            console.log(id_token)
+          })
+      },
+      function (error) {
+        console.log('Google登入失敗')
+        console.log(error)
       }
-    `
-    document.body.appendChild(s)
-    // console.log(s)
+    )
+  } //end function GoogleLogin
+
+  function Google_disconnect() {
+    let auth2 = gapi.auth2.getAuthInstance() //取得GoogleAuth物件
+
+    auth2.disconnect().then(function () {
+      console.log('User disconnect.')
+    })
   }
 }
 
-// var btnDisconnect = document.getElementById('btnDisconnect')
-// if (btnDisconnect) {
-//   btnDisconnect.addEventListener('click', function () {
-//     Google_disconnect()
-//   })
-// }
 export default HeaderOther

@@ -605,6 +605,7 @@ section.hot-sale {
   color: #353c1d;
 }
 
+
 .main-content .page-select .page-previous {
   border: 1px solid #353c1d;
   color: white;
@@ -652,6 +653,15 @@ section.hot-sale {
   transform: rotate(180deg);
 }
 
+/*  */
+.main-content .page-select .page-select-disabled{
+  background-color: #f37022!important;
+  color: white;
+  border-color: #f37022 !important;
+  pointer-events: none;
+}
+
+/*  */
 .page-all {
   border: 1px solid #353c1d;
   color: #353c1d;
