@@ -3,6 +3,19 @@ import { Link } from 'react-router-dom'
 // 目前會顯示很多prettier warnings，暫時無視
 // Link 路由還沒寫的精準
 function ProductContent() {
+  const loginMethod = {
+    method: 'GET',
+    // body: JSON.stringify(data),
+    // headers: new Headers({
+    //   'Content-Type': 'application/json',
+    // }),
+  }
+
+  fetch('http://localhost:3001/product', loginMethod)
+    .then((res) => res.json())
+    .then((res) => console.log(res[1].name))
+    .catch((err) => console.log('錯誤:', err))
+  //
   return (
     <>
       <section className="hot-sale container">
