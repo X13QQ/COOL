@@ -183,6 +183,7 @@
     background-color: #ecd5a3;
     cursor: pointer;
     transition: 0.1s;
+    user-select: none;
   }
 
   .menu-ul .menu-li .menu-a:hover {
@@ -194,17 +195,19 @@
     font-size: 20px;
     text-align: center;
     padding-right: 10px;
+    user-select: none;
   }
 
   .menu-ul .menu-li .menu-a .fa-angle-down {
     padding-right: 0px !important;
-    transition: 0.1s;
+    transition: .2s;
   }
 
   .menu-ul .menu-li .menu-inner-ul {
     max-height: 0;
     overflow: hidden;
     transition: 0.1s;
+    user-select: none;
   }
   .active-inner-ul {
     max-height: 800px !important;
@@ -218,6 +221,7 @@
     text-decoration: none;
     color: #353c1d;
     transition: 0.2s;
+    user-select: none;
   }
 
   .menu-li .menu-inner-ul li a:hover {
@@ -421,7 +425,7 @@
   }
 
   .open .menu-a {
-    background-color: #f37022;
+    background-color: #f37022 !important;
     color: white !important;
   }
 
