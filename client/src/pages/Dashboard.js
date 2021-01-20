@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faChartBar, faAngleDown } from '@fortawesome/free-solid-svg-icons'
 
 function Dashboard() {
   return (
@@ -47,12 +47,12 @@ function Dashboard() {
                       .classList.toggle('active-inner-ul')
                   }}
                 >
-                  <FontAwesomeIcon icon={['fas', 'faChartBar']} />
+                  <FontAwesomeIcon icon={faChartBar} />
                   營運分析
-                  <i
-                    className="fas fa-angle-down"
+                  <FontAwesomeIcon
+                    icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
-                  ></i>
+                  ></FontAwesomeIcon>
                 </a>
                 <ul id="menu-inner-ul1" className="menu-inner-ul" data-num="2">
                   <li>
