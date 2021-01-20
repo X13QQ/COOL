@@ -29,7 +29,8 @@ var emailService = require("./lib/email.js")(credentials);
 app.post("/profile/:logintype", function (req, res) {
   if ("login" === req.params.logintype) {
     const sqlSelect =
-      "SELECT * FROM member WHERE account = ? and password = ? ";
+      "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
+      "FROM member WHERE account = ? and password = ? ";
     // console.log(req.body.account + "/" + req.body.password);
     db.query(
       sqlSelect,
@@ -51,7 +52,7 @@ app.post("/profile/:logintype", function (req, res) {
   } else if ("signup" === req.params.logintype) {
     if (req.body.account.length === 0) {
       res.send({ message: "請輸入帳號" });
-    } else if (req.body.password.length === 0) {
+    } else if (req.body.password.length === 0 && req.body.type === "N") {
       res.send({ message: "請輸入密碼" });
     } else if (req.body.email.length === 0) {
       res.send({ message: "請輸入信箱" });
@@ -104,6 +105,20 @@ app.post("/profile/:logintype", function (req, res) {
         }
       });
     }
+  } else if ("googlelogin" === req.params.logintype) {
+    console.log(req.body.name);
+    const sqlSelect =
+      "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
+      "FROM member WHERE email = ? AND type = 'G' ";
+    db.query(sqlSelect, [req.body.email], (err, result, fields) => {
+      if (err) res.send({ err: err });
+
+      if (result.length > 0) {
+        res.send(result);
+      } else {
+        res.send({ message: "EMAIL不存在" });
+      }
+    });
   }
 });
 
