@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-function MainSetting() {
-  const id = localStorage.getItem('memberNo')
+function MainSetting(props) {
+  const id = props.id
   const [name, setName] = useState('')
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
@@ -20,6 +20,7 @@ function MainSetting() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         setName(data[0].name)
         setAccount(data[0].account)
         setPassword(data[0].password)

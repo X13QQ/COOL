@@ -26,12 +26,11 @@ const credentials = {
 var emailService = require("./lib/email.js")(credentials);
 
 // product test
-app.get("/product",function(req,res){
-  db.query("SELECT * FROM Product",(err,result)=>{
-    res.send(result)
-  })
-})
-
+app.get("/product", function (req, res) {
+  db.query("SELECT * FROM Product", (err, result) => {
+    res.send(result);
+  });
+});
 
 // 會員登錄 註冊 忘記密碼
 app.post("/profile/:logintype", function (req, res) {
@@ -112,17 +111,17 @@ app.post("/profile/:logintype", function (req, res) {
           );
           res.send(result);
         } else {
-          const sqlSelect = "SELECT * FROM member WHERE email = ? and type = 'G' ";
+          const sqlSelect =
+            "SELECT * FROM member WHERE email = ? and type = 'G' ";
           db.query(sqlSelect, [req.body.email], (err, result, fields) => {
             if (err) res.send({ err: err });
 
             if (result.length > 0) {
               res.send({ message: "請使用Google登入" });
-            }
-            else{
+            } else {
               res.send({ message: "EMAIL不存在" });
             }
-          })
+          });
         }
       });
     }
@@ -144,7 +143,7 @@ app.post("/profile/:logintype", function (req, res) {
           sqlInsert,
           [
             req.body.name,
-            req.body.account+req.body.birth2,
+            req.body.account + req.body.birth2,
             req.body.password,
             req.body.email,
             req.body.letter,
@@ -157,19 +156,15 @@ app.post("/profile/:logintype", function (req, res) {
             if (err) {
               res.send({ err: err });
             }
-            res.send([
-              {
-                name: req.body.name,
-                account: req.body.account+req.body.birth2,
-                password: req.body.password,
-                email: req.body.email,
-                letter: req.body.letter,
-                birth: req.body.birth,
-                phone: req.body.phone,
-                address: req.body.address,
-                type: req.body.type,
-              },
-            ]);
+            const sqlSelect =
+              "SELECT * FROM member WHERE email = ? AND type = 'G' ";
+            db.query(sqlSelect, [req.body.email], (err, result, fields) => {
+              if (err) res.send({ err: err });
+
+              if (result.length > 0) {
+                res.send(result);
+              }
+            });
           }
         );
       }
