@@ -834,8 +834,8 @@ function HeaderAbout() {
               </ul>
             </div>
           </nav>
-          <div class="page-title">
-            <h2 class="text-center text-sm-right">ABOUT US</h2>
+          <div className="page-title">
+            <h2 className="text-center text-sm-right">ABOUT US</h2>
           </div>
         </div>
 

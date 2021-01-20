@@ -53,7 +53,8 @@ function Favorites(props) {
                 <img src={val.image} alt=""></img>
                 <a
                   href="#!"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault()
                     deleteFavoritesData(val.id)
                   }}
                 >

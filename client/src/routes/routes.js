@@ -6,6 +6,7 @@ import Detail from '../pages/Detail'
 import News from '../pages/News'
 import ShoppingCart from '../pages/ShoppingCart'
 import MessageBoard from '../components/MessageBoard'
+import Dashboard from '../pages/Dashboard'
 
 import {
   Mail,
@@ -87,6 +88,11 @@ const routes = [
     // 購物車
     path: '/shoppingcart',
     component: ShoppingCart,
+  },
+  {
+    // 後台
+    path: '/dashboard',
+    component: Dashboard,
   },
 ]
 

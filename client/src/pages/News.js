@@ -1,8 +1,114 @@
-import React from 'react'
+import React, { useState } from 'react'
 import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
 function News() {
+  const [status, setStatus] = useState(0)
+  const [Content, setContent] = useState('')
+  const modal = () => {
+    return (
+      <div className="news-modal d-flex justify-content-center align-items-center">
+        <div className="news-content pt-5 position-relative">
+          <a
+            href="#!"
+            className="close-button position-absolute "
+            onClick={(e) => {
+              e.preventDefault()
+              setStatus(0)
+            }}
+          >
+            CLOSE
+            <span>X</span>
+          </a>
+          <div className="row mt-4  position-relative">
+            <img
+              src="images/新聞頁/文章頁-主視覺/news1.jpg"
+              className="position-absolute"
+              style={{
+                width: '40%',
+                height: '80%',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                right: '50px',
+                zIndex: '1',
+                objectFit: 'cover',
+              }}
+              alt=""
+            ></img>
+            <div className="row mx-0">
+              <div className="col-6 pr-0">
+                <div
+                  className="p-5"
+                  style={{ backgroundColor: '#353c1d', color: 'white' }}
+                >
+                  <h3 className="font-weight-bold">
+                    Constant dropping wears the stone
+                  </h3>
+                  <p className="font-weight-bold" style={{ fontSize: '16px' }}>
+                    {Content}
+                  </p>
+                </div>
+              </div>
+              <div className="col-6 pl-0">
+                <div
+                  style={{
+                    backgroundColor: '#353c1d',
+                    color: 'white',
+                    width: '100%',
+                    height: '100%',
+                  }}
+                ></div>
+              </div>
+            </div>
+            <div className="row mx-0">
+              <div className="col-6 pr-0">
+                <div className="p-5" style={{ backgroundColor: 'white' }}>
+                  <a
+                    className="font-weight-bold"
+                    style={{ fontSize: '14px' }}
+                    href="#!"
+                  >
+                    巴爾瑪肯大衣 NT$2,990 (預計10月下旬販售)
+                  </a>
+                  <a
+                    className="font-weight-bold"
+                    style={{ fontSize: '14px' }}
+                    href="#!"
+                  >
+                    喀什米爾圓領毛衣(長袖) NT$2,990
+                  </a>
+                  <a
+                    className="font-weight-bold"
+                    style={{ fontSize: '14px' }}
+                    href="#!"
+                  >
+                    HEATTECH SMART SlimFit長褲 NT$1,290
+                  </a>
+                  <a
+                    className="font-weight-bold"
+                    style={{ fontSize: '14px' }}
+                    href="#!"
+                  >
+                    麂皮風中筒靴 NT$1,990
+                  </a>
+                </div>
+              </div>
+              <div className="col-6 pl-0">
+                <div
+                  style={{
+                    backgroundColor: 'white',
+                    width: ' 100%',
+                    height: '100%',
+                  }}
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  //---------------------------------------------------------
   return (
     <>
       <HeaderOther />
@@ -146,104 +252,7 @@ function News() {
             </div>
           </div>
           {/*  */}
-          <div className="news-modal d-none justify-content-center align-items-center">
-            <div className="news-content pt-5 position-relative">
-              <a
-                href="#!"
-                className="close-button position-absolute text-decoration-none "
-              >
-                CLOSE
-                <span>X</span>
-              </a>
-              <div className="row mt-4  position-relative">
-                <img
-                  src="images/新聞頁/文章頁-主視覺/news1.jpg"
-                  className="position-absolute"
-                  style={{
-                    width: '40%',
-                    height: '80%',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    right: '50px',
-                    zIndex: '1',
-                    objectFit: 'cover',
-                  }}
-                  alt=""
-                ></img>
-                <div className="row mx-0">
-                  <div className="col-6 pr-0">
-                    <div
-                      className="p-5"
-                      style={{ backgroundColor: '#353c1d', color: 'white' }}
-                    >
-                      <h3 className="font-weight-bold">
-                        Constant dropping wears the stone
-                      </h3>
-                      <p
-                        className="font-weight-bold"
-                        style={{ fontSize: '16px' }}
-                      >
-                        有一種衣服，每當穿上它就會心情舒暢，不管去哪裡都想穿。這樣的衣服，你會希望它在你的衣櫥裡能有一席之地。怎麼樣的衣服，能夠貼近生活，並適合任何人穿著？
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-6 pl-0">
-                    <div
-                      style={{
-                        backgroundColor: '#353c1d',
-                        color: 'white',
-                        width: '100%',
-                        height: '100%',
-                      }}
-                    ></div>
-                  </div>
-                </div>
-                <div className="row mx-0">
-                  <div className="col-6 pr-0">
-                    <div className="p-5" style={{ backgroundColor: 'white' }}>
-                      <a
-                        className="font-weight-bold"
-                        style={{ fontSize: '14px' }}
-                        href="#!"
-                      >
-                        巴爾瑪肯大衣 NT$2,990 (預計10月下旬販售)
-                      </a>
-                      <a
-                        className="font-weight-bold"
-                        style={{ fontSize: '14px' }}
-                        href="#!"
-                      >
-                        喀什米爾圓領毛衣(長袖) NT$2,990
-                      </a>
-                      <a
-                        className="font-weight-bold"
-                        style={{ fontSize: '14px' }}
-                        href="#!"
-                      >
-                        HEATTECH SMART SlimFit長褲 NT$1,290
-                      </a>
-                      <a
-                        className="font-weight-bold"
-                        style={{ fontSize: '14px' }}
-                        href="#!"
-                      >
-                        麂皮風中筒靴 NT$1,990
-                      </a>
-                    </div>
-                  </div>
-                  <div className="col-6 pl-0">
-                    <div
-                      style={{
-                        backgroundColor: 'white',
-                        width: ' 100%',
-                        height: '100%',
-                      }}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {status === 1 ? modal() : ''}
           <div className=" d-flex justify-content-between ">
             {/* <!-- 左邊card 小圖 --> */}
             <div className=" card mb-3" style={{ maxWidth: '540px' }}>
@@ -259,6 +268,7 @@ function News() {
                   <div className="card-body news-card-body-text">
                     {/* <h5 className="card-title"></h5> */}
                     <p
+                      id="target-p"
                       className="news-article card-text font-weight-bold"
                       style={{ color: '#353c1d' }}
                     >
@@ -266,7 +276,7 @@ function News() {
                       決一連串關係密切的問題,必須有系統地
                       予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
                       決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
+                      予以解決,否則將會造成損失。{' '}
                     </p>
                   </div>
                   <div className="card-body news-card-body-link">
@@ -274,6 +284,13 @@ function News() {
                       <a
                         href="#!"
                         style={{ color: '#353c1d', fontSize: '12px' }}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          setStatus(1)
+                          setContent(
+                            document.getElementById('target-p').textContent
+                          )
+                        }}
                       >
                         繼續閱讀 ...
                       </a>
@@ -311,6 +328,10 @@ function News() {
                       <a
                         href="#!"
                         style={{ color: '#353c1d', fontSize: '12px' }}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          setStatus(1)
+                        }}
                       >
                         繼續閱讀 ...
                       </a>
