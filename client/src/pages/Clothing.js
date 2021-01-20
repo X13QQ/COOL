@@ -47,13 +47,16 @@ function Clothing() {
               />
             </div>
             <div className="col-6">
+              {/* 整個帽子區塊 */}
               <div className="pb-3">
+                {/* 帽子標籤 ↓ */}
                 <a
                   href="/#"
                   className="d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
                   style={{ color: '#353c1d' }}
                 >
                   帽子
+                  {/* 帽子右邊的箭頭 ↓ */}
                   <img
                     src="images/素材/icon/arrow_G.svg"
                     style={{

@@ -162,7 +162,7 @@ function HeaderOther() {
           <div className="log-in-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
-                src="images/cool_logo/LOGO-G.png"
+                src="/images/cool_logo/LOGO-G.png"
                 width="150px"
                 alt={''}
               ></img>
@@ -189,7 +189,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Profile_G.svg"
+                    src="/images/素材/icon/Profile_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -218,7 +218,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Attachment_G.svg"
+                    src="/images/素材/icon/Attachment_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -317,7 +317,7 @@ function HeaderOther() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
+                        src="/images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -332,7 +332,7 @@ function HeaderOther() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="/images/素材/icon/Facebook_G.svg"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -358,7 +358,7 @@ function HeaderOther() {
           <div className="sign-up-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
-                src="images/cool_logo/LOGO-G.png"
+                src="/images/cool_logo/LOGO-G.png"
                 width="150px"
                 alt={''}
               ></img>
@@ -385,7 +385,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Profile_G.svg"
+                    src="/images/素材/icon/Profile_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -414,7 +414,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Attachment_G.svg"
+                    src="/images/素材/icon/Attachment_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -443,7 +443,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Messages_G.svg"
+                    src="/images/素材/icon/Messages_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -531,7 +531,7 @@ function HeaderOther() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
+                        src="/images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -546,7 +546,7 @@ function HeaderOther() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="/images/素材/icon/Facebook_G.svg"
                         style={{ width: '15px' }}
                         alt={''}
                       ></img>
@@ -573,7 +573,7 @@ function HeaderOther() {
           <div className="certificate-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
-                src="images/cool_logo/LOGO-G.png"
+                src="/images/cool_logo/LOGO-G.png"
                 width="150px"
                 alt={''}
               ></img>
@@ -600,7 +600,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Messages_G.svg"
+                    src="/images/素材/icon/Messages_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -667,7 +667,7 @@ function HeaderOther() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
+                        src="/images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -682,7 +682,7 @@ function HeaderOther() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="/images/素材/icon/Facebook_G.svg"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -708,7 +708,7 @@ function HeaderOther() {
           <div className="certificate-send-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
-                src="images/cool_logo/LOGO-G.png"
+                src="/images/cool_logo/LOGO-G.png"
                 width="150px"
                 alt={''}
               ></img>
@@ -718,7 +718,7 @@ function HeaderOther() {
                 <img
                   className="mb-4"
                   style={{ width: '25%' }}
-                  src="images/素材/icon/check_big.svg"
+                  src="/images/素材/icon/check_big.svg"
                   alt={''}
                 ></img>
                 <p
@@ -751,7 +751,7 @@ function HeaderOther() {
                 >
                   {name}
                   <img
-                    src="images/素材/會員等級icon/winner.svg"
+                    src="/images/素材/會員等級icon/winner.svg"
                     alt={''}
                     className="ml-2"
                   ></img>
@@ -849,7 +849,7 @@ function HeaderOther() {
           <nav className="main-navbar navbar navbar-expand-lg px-0 pt-5">
             <div className="container-fluid p-0 justify-content-start align-items-end">
               <a className="navbar-brand d-inline-block mr-4" href="/">
-                <img src={'images/cool_logo/LOGO-G.png'} alt={''}></img>
+                <img src={'/images/cool_logo/LOGO-G.png'} alt={''}></img>
               </a>
               <ul className="navbar-menu navbar-nav d-flex">
                 <li className="nav-item mx-4">
@@ -898,7 +898,7 @@ function HeaderOther() {
                     <input type="text" className="px-2"></input>
                   </div>
                   <a className="nav-link active" aria-current="page" href="#!">
-                    <img src={'images/素材/icon/Search_G.svg'} alt={''}></img>
+                    <img src={'/images/素材/icon/Search_G.svg'} alt={''}></img>
                   </a>
                 </li>
 
@@ -906,7 +906,7 @@ function HeaderOther() {
                 <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
                   <a className="cart-navbar-a nav-link" href="#!">
                     <img
-                      src={'images/素材/icon/shopping_cart_G.svg'}
+                      src={'/images/素材/icon/shopping_cart_G.svg'}
                       alt={''}
                     ></img>
                   </a>
@@ -926,7 +926,7 @@ function HeaderOther() {
                                 <a className="d-block" href="#!">
                                   <img
                                     className="img-fluid"
-                                    src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                                    src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                                     alt={''}
                                   ></img>
                                 </a>
@@ -969,7 +969,7 @@ function HeaderOther() {
                                 <a className="d-block" href="#!">
                                   <img
                                     className="img-fluid"
-                                    src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                                    src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                                     alt={''}
                                   ></img>
                                 </a>
@@ -1036,14 +1036,14 @@ function HeaderOther() {
                       if (loginStatus === 0) setShow(true)
                     }}
                   >
-                    <img src="images/素材/icon/Profile_G.svg" alt={''}></img>
+                    <img src="/images/素材/icon/Profile_G.svg" alt={''}></img>
                   </a>
                   {loginStatus === 1 ? profileNavbar() : ''}
                 </li>
 
                 <li className="nav-item mx-2 mx-sm-3 mx-lg-2 d-block d-lg-none">
                   <a className="nav-link" href="#!">
-                    <img src="images/素材/icon/Menu_W.svg" alt={''}></img>
+                    <img src="/images/素材/icon/Menu_W.svg" alt={''}></img>
                   </a>
                 </li>
               </ul>
@@ -1187,7 +1187,7 @@ function HeaderOther() {
                     <div className="col-6">
                       <img
                         className="img-fluid"
-                        src="images/navbar/https___hk.hypebeast.com_files_2020_10_fairfax-usa-2020-fall-winter-collection-lookbook-8-scaled.jpg"
+                        src="/images/navbar/https___hk.hypebeast.com_files_2020_10_fairfax-usa-2020-fall-winter-collection-lookbook-8-scaled.jpg"
                         alt={''}
                         style={{ objectFit: 'cover', height: '300px' }}
                       ></img>
@@ -1195,7 +1195,7 @@ function HeaderOther() {
                     <div className="col-6">
                       <img
                         className="img-fluid"
-                        src="images/navbar/黑人單人照.JPG"
+                        src="/images/navbar/黑人單人照.JPG"
                         alt={''}
                         style={{ objectFit: 'cover', height: '300px' }}
                       ></img>
@@ -1267,7 +1267,8 @@ function HeaderOther() {
               password: '',
               email: email,
               letter: 'Y',
-              birth: yyyy + mm + dd,
+              birth: yyyy + '-' + mm + '-' + dd,
+              birth2: mm+dd,
               phone: phone,
               address: address,
               type: 'G',
@@ -1283,7 +1284,11 @@ function HeaderOther() {
               .then((res) => res.json())
               .then((res) => {
                 // gmail註冊過
-                if (res.length > 0) console.log(res)
+                if (res.length > 0) {
+                  setLoginStatus(1)
+                  setName(res[0].name)
+                  localStorage.setItem('user', JSON.stringify(res))
+                }
               })
               .catch((err) => console.log('錯誤:', err))
             //↑通常metadata標記primary:true的個資就是你該抓的資料

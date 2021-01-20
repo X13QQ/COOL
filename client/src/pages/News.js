@@ -7,7 +7,14 @@ function News() {
   const [Content, setContent] = useState('')
   const modal = () => {
     return (
-      <div className="news-modal d-flex justify-content-center align-items-center">
+      <div
+        id="news-modal"
+        className="news-modal d-flex justify-content-center align-items-center"
+        onClick={(e) => {
+          // console.log(e.target.id)
+          if (e.target.id === 'news-modal') setStatus(0)
+        }}
+      >
         <div className="news-content pt-5 position-relative">
           <a
             href="#!"
