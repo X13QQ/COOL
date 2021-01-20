@@ -29,7 +29,7 @@ const routes = [
     component: Product,
   },
   {
-    path: '/detail',
+    path: '/detail/',
     component: Detail,
   },
   {

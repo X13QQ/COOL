@@ -25,6 +25,14 @@ const credentials = {
 };
 var emailService = require("./lib/email.js")(credentials);
 
+// product test
+app.get("/product",function(req,res){
+  db.query("SELECT * FROM Product",(err,result)=>{
+    res.send(result)
+  })
+})
+
+
 // 會員登錄 註冊 忘記密碼
 app.post("/profile/:logintype", function (req, res) {
   if ("login" === req.params.logintype) {

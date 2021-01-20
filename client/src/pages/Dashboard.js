@@ -43,9 +43,10 @@ function Dashboard() {
                   data-num="1"
                   id="menuu"
                   onClick={() => {
+                    document.getElementById('menuLi').classList.toggle('open')
                     document
-                      .getElementById('menu-inner-ul1')
-                      .classList.toggle('active-inner-ul')
+                      .getElementById('faAngle1')
+                      .classList.toggle('icon-rotate')
                   }}
                 >
                   <i>
@@ -53,10 +54,8 @@ function Dashboard() {
                   </i>
                   {/* <i className="far faListAlt"></i> */}
                   訂單列表
-                  {/* <i>
-                   
-                  </i>  */}
                   <FontAwesomeIcon
+                    id="faAngle1"
                     icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
                   ></FontAwesomeIcon>
@@ -70,14 +69,15 @@ function Dashboard() {
                   </li>
                 </ul>
               </li>
-              <li className="menu-li">
+              <li className="menu-li" id="menuLi2">
                 <a
                   className="menu-a"
                   data-num="2"
                   onClick={() => {
+                    document.getElementById('menuLi2').classList.toggle('open')
                     document
-                      .getElementById('menu-inner-ul2')
-                      .classList.toggle('active-inner-ul')
+                      .getElementById('faAngle2')
+                      .classList.toggle('icon-rotate')
                   }}
                 >
                   <i>
@@ -85,6 +85,7 @@ function Dashboard() {
                   </i>
                   營運分析
                   <FontAwesomeIcon
+                    id="faAngle2"
                     icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
                   ></FontAwesomeIcon>
@@ -113,14 +114,15 @@ function Dashboard() {
                   </li>
                 </ul>
               </li>
-              <li className="menu-li">
+              <li className="menu-li" id="menuLi3">
                 <a
                   className="menu-a"
                   data-num="3"
                   onClick={() => {
+                    document.getElementById('menuLi3').classList.toggle('open')
                     document
-                      .getElementById('menu-inner-ul3')
-                      .classList.toggle('active-inner-ul')
+                      .getElementById('faAngle3')
+                      .classList.toggle('icon-rotate')
                   }}
                 >
                   <i>
@@ -129,6 +131,7 @@ function Dashboard() {
                   {/* <i className="fas fa-users"></i> */}
                   會員管理
                   <FontAwesomeIcon
+                    id="faAngle3"
                     icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
                   ></FontAwesomeIcon>
@@ -148,14 +151,15 @@ function Dashboard() {
                   </li>
                 </ul>
               </li>
-              <li className="menu-li">
+              <li className="menu-li" id="menuLi4">
                 <a
                   className="menu-a"
                   data-num="4"
                   onClick={() => {
+                    document.getElementById('menuLi4').classList.toggle('open')
                     document
-                      .getElementById('menu-inner-ul4')
-                      .classList.toggle('active-inner-ul')
+                      .getElementById('faAngle4')
+                      .classList.toggle('icon-rotate')
                   }}
                 >
                   {/* <i className="fas faBarcode"></i> */}
@@ -164,6 +168,7 @@ function Dashboard() {
                   </i>
                   商品管理
                   <FontAwesomeIcon
+                    id="faAngle4"
                     icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
                   ></FontAwesomeIcon>
@@ -183,14 +188,15 @@ function Dashboard() {
                   </li>
                 </ul>
               </li>
-              <li className="menu-li">
+              <li className="menu-li" id="menuLi5">
                 <a
                   className="menu-a"
                   data-num="4"
                   onClick={() => {
+                    document.getElementById('menuLi5').classList.toggle('open')
                     document
-                      .getElementById('menu-inner-ul5')
-                      .classList.toggle('active-inner-ul')
+                      .getElementById('faAngle5')
+                      .classList.toggle('icon-rotate')
                   }}
                 >
                   {/* <i className="fas faSuitcase"></i> */}
@@ -199,6 +205,7 @@ function Dashboard() {
                   </i>
                   商品群組
                   <FontAwesomeIcon
+                    id="faAngle5"
                     icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
                   ></FontAwesomeIcon>
@@ -224,14 +231,15 @@ function Dashboard() {
                   </li>
                 </ul>
               </li>
-              <li className="menu-li">
+              <li className="menu-li" id="menuLi6">
                 <a
                   className="menu-a"
                   data-num="4"
                   onClick={() => {
+                    document.getElementById('menuLi6').classList.toggle('open')
                     document
-                      .getElementById('menu-inner-ul6')
-                      .classList.toggle('active-inner-ul')
+                      .getElementById('faAngle6')
+                      .classList.toggle('icon-rotate')
                   }}
                 >
                   {/* <i className="fas faEnvelope"></i> */}
@@ -240,6 +248,7 @@ function Dashboard() {
                   </i>
                   客服問答
                   <FontAwesomeIcon
+                    id="faAngle6"
                     icon={faAngleDown}
                     style={{ marginLeft: 'auto' }}
                   ></FontAwesomeIcon>
@@ -309,13 +318,14 @@ function Dashboard() {
                 <li
                   className="setting-li main-nav-ul-li"
                   style={{ marginRight: '40px' }}
+                  id="nav-ul1"
                 >
                   <a
                     className="nav-a setting-li-a"
                     onClick={() => {
                       document
                         .getElementById('nav-ul1')
-                        .classList.toggle('active-inner-ul')
+                        .classList.toggle('setting-open')
                     }}
                   >
                     {/* <i className="fas faCog"></i> */}
@@ -328,7 +338,7 @@ function Dashboard() {
                       <FontAwesomeIcon icon={faCaretDown} />
                     </i>
                   </a>
-                  <ul className="setting-inner-ul google-font" id="nav-ul1">
+                  <ul className="setting-inner-ul google-font">
                     <li>
                       <a href="#!">
                         {/* <i className="far faUser"></i> */}
