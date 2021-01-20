@@ -6,6 +6,7 @@ import { Link, withRouter } from 'react-router-dom'
 function DetailContent(props) {
   console.log(props.match.params.id)
   const [status, setStatus] = useState(0)
+  const [commentTable, setCommentTable] = useState(false)
   const sizemodal = () => {
     return (
       <div
@@ -199,47 +200,54 @@ function DetailContent(props) {
           </a>
           <h3 className="text-center font-weight-bold mb-4">評論</h3>
           <div>
-            <div className="mb-4">
-              <form action="" className="position-relative">
-                <textarea
-                  name=""
-                  id=""
-                  style={{ resize: 'none', height: '100px' }}
-                  className="px-3 py-2 w-100"
-                ></textarea>
-                <div className=" d-flex w-100  justify-content-end mt-1">
-                  <a
-                    href="#!"
-                    className="review-btn d-inline-block text-decoration-none py-2 px-4 mx-2 rounded"
-                  >
-                    清除
-                  </a>
-                  <a
-                    href="#!"
-                    className="review-btn d-inline-block text-decoration-none py-2 px-4 ml-2 rounded"
-                  >
-                    送出
-                  </a>
-                </div>
-              </form>
+            <div className="mb-3">
+              <a
+                href="#!"
+                id="show-comment-table"
+                className="d-block text-right mb-2"
+                style={{ fontSize: '14px', color: '#353c1d' }}
+                onClick={(e) => {
+                  e.preventDefault()
+                  setCommentTable(!commentTable)
+                }}
+              >
+                {commentTable ? '取消留言' : '我要留言'}
+              </a>
+              {commentTable && (
+                <form action="" className="position-relative">
+                  <textarea
+                    name=""
+                    id=""
+                    style={{ resize: 'none', height: '100px' }}
+                    className="px-3 py-2 w-100"
+                  ></textarea>
+                  <div className=" d-flex w-100  justify-content-end mt-1">
+                    <a
+                      href="#!"
+                      className="review-btn d-inline-block text-decoration-none py-1 px-3 mx-2 rounded"
+                      style={{ fontSize: '14px' }}
+                    >
+                      清除
+                    </a>
+                    <a
+                      href="#!"
+                      className="review-btn d-inline-block text-decoration-none py-1 px-3 ml-2 rounded"
+                      style={{ fontSize: '14px' }}
+                    >
+                      送出
+                    </a>
+                  </div>
+                </form>
+              )}
             </div>
             <div>
               <ul
                 className="list-unstyled w-100"
-                style={{ height: '300px', overflowY: 'scroll' }}
+                style={{ height: '300px', width: '864px', overflowY: 'scroll' }}
               >
                 <li style={{ width: '98%' }}>
                   <div className="row py-3">
-                    <div className="col-2 d-none d-lg-flex justify-content-center align-items-start">
-                      <div className="px-3">
-                        <img
-                          src="images/素材/會員等級icon/award.svg"
-                          className="img-fluid"
-                          alt={''}
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-10">
+                    <div className="col-12">
                       <div
                         style={{
                           borderBottom: '1px solid #353c1d',
@@ -247,14 +255,20 @@ function DetailContent(props) {
                       >
                         <div>
                           <p
+                            className="d-flex align-items-center"
                             style={{
                               fontSize: '14px',
                               fontWeight: '900',
                             }}
                           >
+                            <img
+                              src="/images/素材/會員等級icon/award.svg"
+                              style={{ width: '30px' }}
+                              className="mr-2"
+                              alt={''}
+                            ></img>
                             會員編號
                             <span>0020******</span>
-                            <span>(尊貴會員)</span>
                           </p>
                         </div>
                         <div>
@@ -303,16 +317,7 @@ function DetailContent(props) {
                 </li>
                 <li style={{ width: '98%' }}>
                   <div className="row py-3">
-                    <div className="col-2 d-none d-lg-flex justify-content-center align-items-start">
-                      <div className="px-3">
-                        <img
-                          src="/images/素材/會員等級icon/award.svg"
-                          className="img-fluid"
-                          alt={''}
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-10">
+                    <div className="col-12">
                       <div
                         style={{
                           borderBottom: '1px solid #353c1d',
@@ -320,14 +325,20 @@ function DetailContent(props) {
                       >
                         <div>
                           <p
+                            className="d-flex align-items-center"
                             style={{
                               fontSize: '14px',
                               fontWeight: '900',
                             }}
                           >
+                            <img
+                              src="/images/素材/會員等級icon/award.svg"
+                              style={{ width: '30px' }}
+                              className="mr-2"
+                              alt={''}
+                            ></img>
                             會員編號
                             <span>0020******</span>
-                            <span>(尊貴會員)</span>
                           </p>
                         </div>
                         <div>
@@ -376,16 +387,7 @@ function DetailContent(props) {
                 </li>
                 <li style={{ width: '98%' }}>
                   <div className="row py-3">
-                    <div className="col-2 d-none d-lg-flex justify-content-center align-items-start">
-                      <div className="px-3">
-                        <img
-                          src="/images/素材/會員等級icon/award.svg"
-                          className="img-fluid"
-                          alt={''}
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-10">
+                    <div className="col-12">
                       <div
                         style={{
                           borderBottom: '1px solid #353c1d',
@@ -393,14 +395,20 @@ function DetailContent(props) {
                       >
                         <div>
                           <p
+                            className="d-flex align-items-center"
                             style={{
                               fontSize: '14px',
                               fontWeight: '900',
                             }}
                           >
+                            <img
+                              src="/images/素材/會員等級icon/award.svg"
+                              style={{ width: '30px' }}
+                              className="mr-2"
+                              alt={''}
+                            ></img>
                             會員編號
-                            <span> 0020 ******</span>
-                            <span>(尊貴會員)</span>
+                            <span>0020******</span>
                           </p>
                         </div>
                         <div>
@@ -449,16 +457,7 @@ function DetailContent(props) {
                 </li>
                 <li style={{ width: '98%' }}>
                   <div className="row py-3">
-                    <div className="col-2 d-none d-lg-flex justify-content-center align-items-start">
-                      <div className="px-3">
-                        <img
-                          src="/images/素材/會員等級icon/award.svg"
-                          className="img-fluid"
-                          alt={''}
-                        ></img>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-10">
+                    <div className="col-12">
                       <div
                         style={{
                           borderBottom: '1px solid #353c1d',
@@ -466,14 +465,20 @@ function DetailContent(props) {
                       >
                         <div>
                           <p
+                            className="d-flex align-items-center"
                             style={{
                               fontSize: '14px',
                               fontWeight: '900',
                             }}
                           >
+                            <img
+                              src="/images/素材/會員等級icon/award.svg"
+                              style={{ width: '30px' }}
+                              className="mr-2"
+                              alt={''}
+                            ></img>
                             會員編號
                             <span>0020******</span>
-                            <span>(尊貴會員)</span>
                           </p>
                         </div>
                         <div>
