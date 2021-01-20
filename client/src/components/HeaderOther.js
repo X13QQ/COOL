@@ -23,6 +23,7 @@ function HeaderOther() {
   })
   const [loginMessage, setLoginMessage] = useState('')
   const [certificateMessage, setCertificateMessage] = useState('')
+  const [signupMessage, setSignpMessage] = useState('')
 
   useEffect(() => {
     const apiLogin = (login) => {
@@ -42,9 +43,9 @@ function HeaderOther() {
       }
     }
     if (!!name) setLoginStatus(1)
-    if (show) apiLogin('gmail')
     if (loginStatus === 1) apiLogout('logout')
-  }, [name, show, loginStatus])
+    if (show || modal !== 0) apiLogin('gmail')
+  }, [name, show, loginStatus, modal])
 
   const cleanData = () => {
     setName('')
@@ -59,6 +60,7 @@ function HeaderOther() {
     })
     setLoginMessage('')
     setCertificateMessage('')
+    setSignpMessage()
   }
 
   const close = (id) => {
@@ -117,11 +119,9 @@ function HeaderOther() {
       .then((res) => res.json())
       .then((res) => {
         if (res.message) {
-          console.log(res.message)
+          setSignpMessage(res.message)
         } else {
-          setLoginStatus(1)
           setModal(4)
-          setUser({ account: data.account, password: data.password })
         }
       })
       .catch((err) => console.log('錯誤:', err))
@@ -232,7 +232,8 @@ function HeaderOther() {
                     href="#!"
                     className="font-weight-bold"
                     style={{ fontSize: '14px' }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       setModal(3)
                       cleanData()
                     }}
@@ -313,7 +314,6 @@ function HeaderOther() {
                       }}
                       onClick={(e) => {
                         e.preventDefault()
-                        // apiLogin('gmail')
                       }}
                     >
                       <img
@@ -479,9 +479,9 @@ function HeaderOther() {
                     已經有帳號了嗎？
                   </a>
                 </div>
-                <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4">
-                  <a
-                    href="#!"
+                <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
+                  <button
+                    type="button"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
@@ -491,10 +491,10 @@ function HeaderOther() {
                     onClick={() => setModal(1)}
                   >
                     取消
-                  </a>
-                  <a
-                    href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                  </button>
+                  <button
+                    type="button"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -502,12 +502,14 @@ function HeaderOther() {
                       backgroundColor: '#353c1d',
                     }}
                     onClick={() => {
-                      // setModal(4)
                       SignUp({ signupData })
                     }}
                   >
                     註冊
-                  </a>
+                  </button>
+                  <div className="invalid-feedback text-center mt-3">
+                    {signupMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -522,6 +524,7 @@ function HeaderOther() {
                   </p>
                   <div className="d-flex justify-content-center align-items-center">
                     <a
+                      id="gmail"
                       href="#!"
                       className="mx-2 rounded d-flex justify-content-center align-items-center"
                       style={{
@@ -529,6 +532,7 @@ function HeaderOther() {
                         height: '25px',
                         border: '1px solid #353c1d',
                       }}
+                      onClick={(e) => e.preventDefault()}
                     >
                       <img
                         src="/images/素材/icon/1004px-Google__G__Logo.svg.png"
@@ -635,7 +639,6 @@ function HeaderOther() {
                     }}
                     onClick={() => {
                       certificate(certificateEmail)
-                      // setModal(4)
                     }}
                   >
                     送出
@@ -658,6 +661,7 @@ function HeaderOther() {
                   </p>
                   <div className="d-flex justify-content-center align-items-center">
                     <a
+                      id="gmail"
                       href="#!"
                       className="mx-2 rounded d-flex justify-content-center align-items-center"
                       style={{
@@ -665,6 +669,7 @@ function HeaderOther() {
                         height: '25px',
                         border: '1px solid #353c1d',
                       }}
+                      onClick={(e) => e.preventDefault()}
                     >
                       <img
                         src="/images/素材/icon/1004px-Google__G__Logo.svg.png"

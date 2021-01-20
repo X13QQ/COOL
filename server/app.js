@@ -74,24 +74,32 @@ app.post("/profile/:logintype", function (req, res) {
         if (result.length > 0) {
           res.send({ message: "帳號已存在" });
         } else {
-          const sqlInsert =
-            "INSERT INTO member (account, password, email, letter, type) " +
-            "VALUES (?, ?, ?, ?, 'N') ";
-          db.query(
-            sqlInsert,
-            [
-              req.body.account,
-              req.body.password,
-              req.body.email,
-              req.body.letter,
-            ],
-            (err, result, fields) => {
-              if (err) {
-                res.send({ err: err });
-              }
-              res.send(result);
+          const sqlSelect = "SELECT * FROM member WHERE email = ? ";
+          db.query(sqlSelect, [req.body.email], (err, result, fields) => {
+            if (err) res.send({ err: err });
+            if (result.length > 0) {
+              res.send({ message: "此EMAIL已註冊" });
+            } else {
+              const sqlInsert =
+                "INSERT INTO member (account, password, email, letter, type) " +
+                "VALUES (?, ?, ?, ?, 'N') ";
+              db.query(
+                sqlInsert,
+                [
+                  req.body.account,
+                  req.body.password,
+                  req.body.email,
+                  req.body.letter,
+                ],
+                (err, result, fields) => {
+                  if (err) {
+                    res.send({ err: err });
+                  }
+                  res.send(result);
+                }
+              );
             }
-          );
+          });
         }
       });
     }
@@ -103,11 +111,23 @@ app.post("/profile/:logintype", function (req, res) {
         if (err) res.send({ err: err });
 
         if (result.length > 0) {
+          const sqlUpdate =
+            "UPDATE member SET password = ? WHERE id = ? and type = 'N' ";
+          db.query(
+            sqlUpdate,
+            ["00000000", result[0].id],
+            (err, result, fields) => {
+              if (err) {
+                res.send({ err: err });
+                return;
+              }
+            }
+          );
           emailService.send(
             `"COOL" <${process.env.EMAIL}>`,
             `"${result[0].name}" <${result[0].email}>`,
-            "COOL 測試",
-            "<h1>Hello</h1><p>'TEST'</p>"
+            "COOL 取回密碼",
+            "<h1>Hello</h1><p>你的密碼是00000000</p>"
           );
           res.send(result);
         } else {
@@ -208,7 +228,7 @@ app.delete("/member/favorites", function (req, res) {
 // 帳號設定
 app.get("/member/setting", function (req, res) {
   const sqlSelect =
-    "SELECT name, account, password, phone, email, address, DATE_FORMAT(birth, '%Y-%m-%d') as birth " +
+    "SELECT name, account, password, phone, email, address, DATE_FORMAT(birth, '%Y-%m-%d') as birth, type " +
     "FROM member " +
     "WHERE id = ? ";
   db.query(sqlSelect, [req.query.id], (req, result, fields) => {
