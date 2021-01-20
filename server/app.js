@@ -25,10 +25,24 @@ const credentials = {
 };
 var emailService = require("./lib/email.js")(credentials);
 
-// product test
+// 商品首頁 get
 app.get("/product", function (req, res) {
-  db.query("SELECT * FROM Product", (err, result) => {
-    res.send(result);
+  db.query("SELECT * FROM product", '', (err, result) => {
+    if (err) {
+      console.log(err)
+    }
+    res.send(JSON.stringify(result))
+  });
+});
+
+// 商品詳細頁 get
+app.get("/detail/:brand/:id", function (req, res) {
+  db.query("SELECT * FROM product WHERE id =" + req.params.id + "", '', (err, result) => {
+    if (err) {
+      console.log(err)
+    }
+    console.log(result);
+    res.send(JSON.stringify(result))
   });
 });
 
