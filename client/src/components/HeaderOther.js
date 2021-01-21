@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-
 /* global gapi */
 
 function HeaderOther() {
+  const id = !!localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user'))[0].id
+    : ''
   const [name, setName] = useState(
     !!localStorage.getItem('user')
       ? JSON.parse(localStorage.getItem('user'))[0].name
@@ -819,7 +821,12 @@ function HeaderOther() {
                 style={{ borderBottom: '1px solid black' }}
               >
                 <Link
-                  to="/setting"
+                  to={{
+                    pathname: '/setting',
+                    state: {
+                      id: id,
+                    },
+                  }}
                   className="font-weight-bold d-inline-block py-1"
                 >
                   帳號設定

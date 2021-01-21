@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-function MainSetting(props) {
+const MainSetting = (props) => {
+  // if (!props.id) window.location.reload()
   const id = props.id
   const [name, setName] = useState('')
   const [account, setAccount] = useState('')
