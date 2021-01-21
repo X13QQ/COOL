@@ -1,16 +1,15 @@
 import React from 'react'
-import { InputGroup, FormControl, Form, Row } from 'react-bootstrap'
+import { InputGroup, FormControl, Form } from 'react-bootstrap'
 import Favorites from '../components/Favorites'
 import { Search } from '../components/icons'
 
 function MainFavorites(props) {
-  const memberNo = localStorage.getItem('memberNo')
+  const id = props.id
   return (
     <>
       <div className="main col-9">
         <div className="title ml-3 mb-2  font-weight-bold">蒐藏清單</div>
-        <div className="mx-2 favorites-wrap border-right-0 border-bottom-0">
-          {/* <Row> */}
+        <div className="mx-2 favorites-wrap ">
           <InputGroup className="favorites-wrap-container mx-auto row justify-content-between">
             <div className="col-6 d-flex align-items-center pl-0">
               <FormControl placeholder="搜尋商品" />
@@ -22,8 +21,7 @@ function MainFavorites(props) {
               </Form.Control>
             </div>
           </InputGroup>
-          {/* </Row> */}
-          <Favorites memberNo={memberNo} />
+          <Favorites memberNo={id} />
         </div>
       </div>
     </>

@@ -2,7 +2,8 @@ import React from 'react'
 import { Row } from 'react-bootstrap'
 import { Lv1, LV1, LV2 } from '../components/icons'
 
-function MainMember() {
+function MainMember(props) {
+  const id = props.id
   return (
     <>
       <div className="main col-9">
@@ -10,8 +11,7 @@ function MainMember() {
         <Row
           className="member1 mx-2 mb-2 d-flex justify-content-center align-items-start"
           style={{
-            borderTop: '1px solid #d3d3d3',
-            borderLeft: '1px solid #d3d3d3',
+            border: '1px solid #d3d3d3',
             padding: '15px 0px',
           }}
         >
@@ -37,9 +37,8 @@ function MainMember() {
         <div
           className="mx-2"
           style={{
-            borderTop: '1px solid #d3d3d3',
-            borderLeft: '1px solid #d3d3d3',
-            padding: '15px 0px',
+            border: '1px solid #d3d3d3',
+            padding: '15px 0px 16px 0px',
           }}
         >
           <Row className="m-3">

@@ -6,6 +6,10 @@ import Detail from '../pages/Detail'
 import News from '../pages/News'
 import ShoppingCart from '../pages/ShoppingCart'
 import MessageBoard from '../components/MessageBoard'
+<<<<<<< HEAD
+=======
+import Dashboard from '../pages/Dashboard'
+>>>>>>> 79c6626af8f6fd3b440d9c31c28ffa73fdba2959
 
 import {
   Mail,
@@ -28,7 +32,7 @@ const routes = [
     component: Product,
   },
   {
-    path: '/detail',
+    path: '/detail/',
     component: Detail,
   },
   {
@@ -87,6 +91,11 @@ const routes = [
     // 購物車
     path: '/shoppingcart',
     component: ShoppingCart,
+  },
+  {
+    // 後台
+    path: '/dashboard',
+    component: Dashboard,
   },
 ]
 

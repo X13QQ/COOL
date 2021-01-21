@@ -1,7 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+/* global gapi */
+
 function HeaderOther() {
+  const [name, setName] = useState(
+    !!localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))[0].name
+      : ''
+  )
   const [show, setShow] = useState(false)
   const [modal, setModal] = useState(1)
   const [user, setUser] = useState({ account: '', password: '', email: '' })
@@ -12,9 +19,36 @@ function HeaderOther() {
     password: '',
     email: '',
     letter: 'N',
+    type: 'N',
   })
+  const [loginMessage, setLoginMessage] = useState('')
+  const [certificateMessage, setCertificateMessage] = useState('')
+  const [signupMessage, setSignpMessage] = useState('')
 
-  const defaultData = () => {
+  useEffect(() => {
+    const apiLogin = (login) => {
+      var btnSignIn = document.getElementById(login)
+      if (btnSignIn) {
+        btnSignIn.addEventListener('click', function () {
+          GoogleLogin()
+        })
+      }
+    }
+    const apiLogout = (logout) => {
+      var btnDisconnect = document.getElementById(logout)
+      if (btnDisconnect) {
+        btnDisconnect.addEventListener('click', function () {
+          Google_disconnect()
+        })
+      }
+    }
+    if (!!name) setLoginStatus(1)
+    if (loginStatus === 1) apiLogout('logout')
+    if (show || modal !== 0) apiLogin('gmail')
+  }, [name, show, loginStatus, modal])
+
+  const cleanData = () => {
+    setName('')
     setUser({ account: '', password: '' })
     setCertificateEmail('')
     setSignupData({
@@ -22,7 +56,11 @@ function HeaderOther() {
       password: '',
       email: '',
       letter: 'N',
+      type: 'N',
     })
+    setLoginMessage('')
+    setCertificateMessage('')
+    setSignpMessage()
   }
 
   const close = (id) => {
@@ -30,7 +68,7 @@ function HeaderOther() {
       if (e.target.id === id) {
         setShow(false)
         setModal(1)
-        defaultData()
+        cleanData()
       }
     })
   }
@@ -50,12 +88,13 @@ function HeaderOther() {
     fetch('http://localhost:3001/profile/login', loginMethod)
       .then((res) => res.json())
       .then((res) => {
-        // console.log(res)
         if (res.length > 0) {
           setLoginStatus(1)
           setShow(false)
+          setName(res[0].name)
+          localStorage.setItem('user', JSON.stringify(res))
         } else {
-          console.log(res.message)
+          setLoginMessage(res.message)
         }
       })
       .catch((err) => console.log('錯誤:', err))
@@ -67,6 +106,7 @@ function HeaderOther() {
       password: signupData.signupData.password,
       email: signupData.signupData.email,
       letter: signupData.signupData.letter,
+      type: signupData.signupData.type,
     }
     const signupMethod = {
       method: 'POST',
@@ -79,18 +119,15 @@ function HeaderOther() {
       .then((res) => res.json())
       .then((res) => {
         if (res.message) {
-          console.log(res.message)
+          setSignpMessage(res.message)
         } else {
-          setLoginStatus(1)
           setModal(4)
-          setUser({ account: data.account, password: data.password })
         }
       })
       .catch((err) => console.log('錯誤:', err))
   }
 
   const certificate = (email) => {
-    console.log(email)
     const data = {
       email: email,
     }
@@ -104,7 +141,12 @@ function HeaderOther() {
     fetch('http://localhost:3001/profile/certificate', certificateMethod)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.message)
+        console.log(res)
+        if (res.length > 0) {
+          setModal(4)
+        } else {
+          setCertificateMessage(res.message)
+        }
       })
       .catch((err) => console.log('錯誤:', err))
   }
@@ -120,7 +162,7 @@ function HeaderOther() {
           <div className="log-in-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
-                src="images/cool_logo/LOGO-G.png"
+                src="/images/cool_logo/LOGO-G.png"
                 width="150px"
                 alt={''}
               ></img>
@@ -147,7 +189,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Profile_G.svg"
+                    src="/images/素材/icon/Profile_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -176,7 +218,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Attachment_G.svg"
+                    src="/images/素材/icon/Attachment_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -190,7 +232,11 @@ function HeaderOther() {
                     href="#!"
                     className="font-weight-bold"
                     style={{ fontSize: '14px' }}
-                    onClick={() => setModal(3)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setModal(3)
+                      cleanData()
+                    }}
                   >
                     忘記密碼
                   </a>
@@ -200,27 +246,33 @@ function HeaderOther() {
                     href="#!"
                     className="font-weight-bold"
                     style={{ fontSize: '14px' }}
-                    onClick={() => setModal(2)}
+                    onClick={() => {
+                      setModal(2)
+                      cleanData()
+                    }}
                   >
                     立即註冊新帳號
                   </a>
                 </div>
-                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4">
-                  <a
-                    href="#!"
+                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
+                  <button
+                    type="button"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setShow(false)}
+                    onClick={() => {
+                      setShow(false)
+                      cleanData()
+                    }}
                   >
                     取消
-                  </a>
-                  <a
-                    href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                  </button>
+                  <button
+                    type="button"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -233,8 +285,12 @@ function HeaderOther() {
                     }}
                   >
                     登入
-                  </a>
+                  </button>
+                  <div className="invalid-feedback text-center mt-3">
+                    {loginMessage}
+                  </div>
                 </div>
+
                 <hr
                   className="mt-0 mb-4"
                   style={{ backgroundColor: 'lightgray' }}
@@ -248,6 +304,7 @@ function HeaderOther() {
                   </p>
                   <div className="d-flex justify-content-center align-items-center">
                     <a
+                      id="gmail"
                       href="#!"
                       className="mx-2 rounded d-flex justify-content-center align-items-center"
                       style={{
@@ -255,9 +312,12 @@ function HeaderOther() {
                         height: '25px',
                         border: '1px solid #353c1d',
                       }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                      }}
                     >
                       <img
-                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
+                        src="/images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -272,7 +332,7 @@ function HeaderOther() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="/images/素材/icon/Facebook_G.svg"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -298,7 +358,7 @@ function HeaderOther() {
           <div className="sign-up-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
-                src="images/cool_logo/LOGO-G.png"
+                src="/images/cool_logo/LOGO-G.png"
                 width="150px"
                 alt={''}
               ></img>
@@ -325,7 +385,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Profile_G.svg"
+                    src="/images/素材/icon/Profile_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -354,7 +414,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Attachment_G.svg"
+                    src="/images/素材/icon/Attachment_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -383,7 +443,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Messages_G.svg"
+                    src="/images/素材/icon/Messages_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -419,9 +479,9 @@ function HeaderOther() {
                     已經有帳號了嗎？
                   </a>
                 </div>
-                <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4">
-                  <a
-                    href="#!"
+                <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
+                  <button
+                    type="button"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
@@ -431,10 +491,10 @@ function HeaderOther() {
                     onClick={() => setModal(1)}
                   >
                     取消
-                  </a>
-                  <a
-                    href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                  </button>
+                  <button
+                    type="button"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -442,12 +502,14 @@ function HeaderOther() {
                       backgroundColor: '#353c1d',
                     }}
                     onClick={() => {
-                      // setModal(4)
                       SignUp({ signupData })
                     }}
                   >
                     註冊
-                  </a>
+                  </button>
+                  <div className="invalid-feedback text-center mt-3">
+                    {signupMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -462,6 +524,7 @@ function HeaderOther() {
                   </p>
                   <div className="d-flex justify-content-center align-items-center">
                     <a
+                      id="gmail"
                       href="#!"
                       className="mx-2 rounded d-flex justify-content-center align-items-center"
                       style={{
@@ -469,9 +532,10 @@ function HeaderOther() {
                         height: '25px',
                         border: '1px solid #353c1d',
                       }}
+                      onClick={(e) => e.preventDefault()}
                     >
                       <img
-                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
+                        src="/images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -486,7 +550,7 @@ function HeaderOther() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="/images/素材/icon/Facebook_G.svg"
                         style={{ width: '15px' }}
                         alt={''}
                       ></img>
@@ -513,7 +577,7 @@ function HeaderOther() {
           <div className="certificate-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
-                src="images/cool_logo/LOGO-G.png"
+                src="/images/cool_logo/LOGO-G.png"
                 width="150px"
                 alt={''}
               ></img>
@@ -540,7 +604,7 @@ function HeaderOther() {
                   ></input>
                   <img
                     className="position-absolute"
-                    src="images/素材/icon/Messages_G.svg"
+                    src="/images/素材/icon/Messages_G.svg"
                     style={{
                       width: '20px',
                       bottom: '8px',
@@ -549,22 +613,24 @@ function HeaderOther() {
                     alt={''}
                   ></img>
                 </div>
-                <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4">
-                  <a
-                    href="#!"
+                <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
+                  <button
+                    type="button"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setModal(1)}
+                    onClick={() => {
+                      setModal(1)
+                    }}
                   >
                     返回
-                  </a>
-                  <a
-                    href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                  </button>
+                  <button
+                    type="button"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -573,11 +639,13 @@ function HeaderOther() {
                     }}
                     onClick={() => {
                       certificate(certificateEmail)
-                      // setModal(4)
                     }}
                   >
                     送出
-                  </a>
+                  </button>
+                  <div className="invalid-feedback text-center mt-3">
+                    {certificateMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -593,6 +661,7 @@ function HeaderOther() {
                   </p>
                   <div className="d-flex justify-content-center align-items-center">
                     <a
+                      id="gmail"
                       href="#!"
                       className="mx-2 rounded d-flex justify-content-center align-items-center"
                       style={{
@@ -600,9 +669,10 @@ function HeaderOther() {
                         height: '25px',
                         border: '1px solid #353c1d',
                       }}
+                      onClick={(e) => e.preventDefault()}
                     >
                       <img
-                        src="images/素材/icon/1004px-Google__G__Logo.svg.png"
+                        src="/images/素材/icon/1004px-Google__G__Logo.svg.png"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -617,7 +687,7 @@ function HeaderOther() {
                       }}
                     >
                       <img
-                        src="images/素材/icon/Facebook_G.svg"
+                        src="/images/素材/icon/Facebook_G.svg"
                         alt={''}
                         style={{ width: '15px' }}
                       ></img>
@@ -643,7 +713,7 @@ function HeaderOther() {
           <div className="certificate-send-content">
             <div className="content-top mb-1 d-flex justify-content-center align-items-center">
               <img
-                src="images/cool_logo/LOGO-G.png"
+                src="/images/cool_logo/LOGO-G.png"
                 width="150px"
                 alt={''}
               ></img>
@@ -653,7 +723,7 @@ function HeaderOther() {
                 <img
                   className="mb-4"
                   style={{ width: '25%' }}
-                  src="images/素材/icon/check_big.svg"
+                  src="/images/素材/icon/check_big.svg"
                   alt={''}
                 ></img>
                 <p
@@ -684,9 +754,9 @@ function HeaderOther() {
                   to="/setting"
                   className="font-weight-bold d-flex justify-content-center align-items-center py-1"
                 >
-                  江小明
+                  {name}
                   <img
-                    src="images/素材/會員等級icon/winner.svg"
+                    src="/images/素材/會員等級icon/winner.svg"
                     alt={''}
                     className="ml-2"
                   ></img>
@@ -757,12 +827,14 @@ function HeaderOther() {
               </li>
               <li className="d-flex justify-content-start">
                 <a
-                  href="#!"
+                  id="logout"
+                  href="/"
                   className="font-weight-bold d-inline-block py-1"
                   onClick={(e) => {
                     e.preventDefault()
+                    cleanData()
                     setLoginStatus(0)
-                    defaultData()
+                    localStorage.removeItem('user')
                   }}
                 >
                   登出
@@ -777,13 +849,12 @@ function HeaderOther() {
 
   return (
     <>
-      {}
       <header className="product-detail-header position-relative">
         <div className="container position-relative" style={{ height: '100%' }}>
           <nav className="main-navbar navbar navbar-expand-lg px-0 pt-5">
             <div className="container-fluid p-0 justify-content-start align-items-end">
               <a className="navbar-brand d-inline-block mr-4" href="/">
-                <img src={'images/cool_logo/LOGO-G.png'} alt={''}></img>
+                <img src={'/images/cool_logo/LOGO-G.png'} alt={''}></img>
               </a>
               <ul className="navbar-menu navbar-nav d-flex">
                 <li className="nav-item mx-4">
@@ -798,7 +869,6 @@ function HeaderOther() {
                       ] = 'block'
                     }}
                     onMouseLeave={(e) => {
-                      console.log(e.target.id)
                       if (e.target.id !== 'product-hover-menu') {
                         document.getElementById(
                           'product-hover-menu-wrap'
@@ -833,7 +903,7 @@ function HeaderOther() {
                     <input type="text" className="px-2"></input>
                   </div>
                   <a className="nav-link active" aria-current="page" href="#!">
-                    <img src={'images/素材/icon/Search_G.svg'} alt={''}></img>
+                    <img src={'/images/素材/icon/Search_G.svg'} alt={''}></img>
                   </a>
                 </li>
 
@@ -841,7 +911,7 @@ function HeaderOther() {
                 <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
                   <a className="cart-navbar-a nav-link" href="#!">
                     <img
-                      src={'images/素材/icon/shopping_cart_G.svg'}
+                      src={'/images/素材/icon/shopping_cart_G.svg'}
                       alt={''}
                     ></img>
                   </a>
@@ -861,7 +931,7 @@ function HeaderOther() {
                                 <a className="d-block" href="#!">
                                   <img
                                     className="img-fluid"
-                                    src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                                    src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                                     alt={''}
                                   ></img>
                                 </a>
@@ -904,7 +974,7 @@ function HeaderOther() {
                                 <a className="d-block" href="#!">
                                   <img
                                     className="img-fluid"
-                                    src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
+                                    src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
                                     alt={''}
                                   ></img>
                                 </a>
@@ -971,14 +1041,14 @@ function HeaderOther() {
                       if (loginStatus === 0) setShow(true)
                     }}
                   >
-                    <img src="images/素材/icon/Profile_G.svg" alt={''}></img>
+                    <img src="/images/素材/icon/Profile_G.svg" alt={''}></img>
                   </a>
                   {loginStatus === 1 ? profileNavbar() : ''}
                 </li>
 
                 <li className="nav-item mx-2 mx-sm-3 mx-lg-2 d-block d-lg-none">
                   <a className="nav-link" href="#!">
-                    <img src="images/素材/icon/Menu_W.svg" alt={''}></img>
+                    <img src="/images/素材/icon/Menu_W.svg" alt={''}></img>
                   </a>
                 </li>
               </ul>
@@ -1122,7 +1192,7 @@ function HeaderOther() {
                     <div className="col-6">
                       <img
                         className="img-fluid"
-                        src="images/navbar/https___hk.hypebeast.com_files_2020_10_fairfax-usa-2020-fall-winter-collection-lookbook-8-scaled.jpg"
+                        src="/images/navbar/https___hk.hypebeast.com_files_2020_10_fairfax-usa-2020-fall-winter-collection-lookbook-8-scaled.jpg"
                         alt={''}
                         style={{ objectFit: 'cover', height: '300px' }}
                       ></img>
@@ -1130,7 +1200,7 @@ function HeaderOther() {
                     <div className="col-6">
                       <img
                         className="img-fluid"
-                        src="images/navbar/黑人單人照.JPG"
+                        src="/images/navbar/黑人單人照.JPG"
                         alt={''}
                         style={{ objectFit: 'cover', height: '300px' }}
                       ></img>
@@ -1144,6 +1214,111 @@ function HeaderOther() {
       </header>
     </>
   )
+
+  function GoogleLogin() {
+    let auth2 = gapi.auth2.getAuthInstance() //取得GoogleAuth物件
+    auth2.signIn().then(
+      function (GoogleUser) {
+        console.log('Google登入成功')
+        setLoginStatus(1)
+        setShow(false)
+        let user_id = GoogleUser.getId() //取得user id，不過要發送至Server端的話，為了資安請使用id_token，本人另一篇文章有範例：https://dotblogs.com.tw/shadow/2019/01/31/113026
+        console.log(`user_id:${user_id}`)
+        let AuthResponse = GoogleUser.getAuthResponse(true) //true會回傳包含access token ，false則不會
+        let id_token = AuthResponse.id_token //取得id_token
+        //people.get方法參考：https://developers.google.com/people/api/rest/v1/people/get
+        gapi.client.people.people
+          .get({
+            resourceName: 'people/me',
+            //通常你會想要知道的用戶個資↓
+            personFields:
+              'names,phoneNumbers,emailAddresses,addresses,residences,genders,birthdays,occupations',
+          })
+          .then(function (res) {
+            //success
+            let str = JSON.stringify(res.result) //將物件列化成string，方便顯示結果在畫面上
+            console.log(str)
+            //顯示授權你網站存取的用戶個資
+            let name = '',
+              email = '',
+              yyyy = '',
+              mm = '',
+              dd = '',
+              phone = '',
+              address = ''
+            if (res.result.hasOwnProperty('names'))
+              name =
+                res.result.names[0].familyName + res.result.names[0].givenName
+            if (res.result.hasOwnProperty('emailAddresses'))
+              email = res.result.emailAddresses[0].value
+            if (res.result.hasOwnProperty('birthdays')) {
+              yyyy = res.result.birthdays[0].date.year
+              mm =
+                res.result.birthdays[0].date.month.length === 2
+                  ? res.result.birthdays[0].date.month
+                  : '0' + res.result.birthdays[0].date.month
+              dd =
+                res.result.birthdays[0].date.day.length === 2
+                  ? res.result.birthdays[0].date.day
+                  : '0' + res.result.birthdays[0].date.day
+            }
+            if (res.result.hasOwnProperty('phoneNumbers'))
+              phone = res.result.phoneNumbers[0].value
+            if (res.result.hasOwnProperty('addresses'))
+              address = res.result.addresses[0].formattedValue
+            let data = {
+              name: name,
+              account: email.substr(0, email.indexOf('@')),
+              password: '',
+              email: email,
+              letter: 'Y',
+              birth: yyyy + '-' + mm + '-' + dd,
+              birth2: mm + dd,
+              phone: phone,
+              address: address,
+              type: 'G',
+            }
+            // console.log(data)
+            fetch('http://localhost:3001/profile/googlelogin', {
+              method: 'POST',
+              body: JSON.stringify(data),
+              headers: new Headers({
+                'Content-Type': 'application/json',
+              }),
+            })
+              .then((res) => res.json())
+              .then((res) => {
+                // gmail註冊過
+                if (res.length > 0) {
+                  setLoginStatus(1)
+                  setName(res[0].name)
+                }
+                localStorage.setItem('user', JSON.stringify(res))
+                // console.log(res)
+              })
+              .catch((err) => console.log('錯誤:', err))
+            //↑通常metadata標記primary:true的個資就是你該抓的資料
+
+            //請再自行Parse JSON，可以將JSON字串丟到線上parse工具查看：http://json.parser.online.fr/
+
+            //最終，取得用戶個資後看要填在畫面表單上或是透過Ajax儲存到資料庫(記得是傳id_token給你的Web Server而不是明碼的user_id喔)，本範例就不贅述，請自行努力XD
+            console.log(id_token)
+          })
+      },
+      function (error) {
+        console.log('Google登入失敗')
+        console.log(error)
+      }
+    )
+  } //end function GoogleLogin
+
+  function Google_disconnect() {
+    let auth2 = gapi.auth2.getAuthInstance() //取得GoogleAuth物件
+
+    auth2.disconnect().then(function () {
+      console.log('User disconnect.')
+    })
+  }
 }
 
 export default HeaderOther

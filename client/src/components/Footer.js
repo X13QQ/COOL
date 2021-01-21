@@ -11,7 +11,7 @@ function Footer() {
               <div className="d-flex d-md-block justify-content-between align-items-center">
                 <div className="mx-2 mx-sm-4 mx-md-0">
                   <img
-                    src="images/cool_logo/LOGO_W.png"
+                    src="/images/cool_logo/LOGO_W.png"
                     width="85px"
                     alt={''}
                   />
@@ -59,17 +59,17 @@ function Footer() {
                 <ul className="footer-icon d-flex list-unstyled justify-content-between">
                   <li className="mx-3">
                     <a href="#!">
-                      <img src="images/素材/icon/Instagram_W.svg" alt={''} />
+                      <img src="/images/素材/icon/Instagram_W.svg" alt={''} />
                     </a>
                   </li>
                   <li className="mx-3">
                     <a href="#!">
-                      <img src="images/素材/icon/facebook_W.svg" alt={''} />
+                      <img src="/images/素材/icon/facebook_W.svg" alt={''} />
                     </a>
                   </li>
                   <li className="mx-3">
                     <a href="#!">
-                      <img src="images/素材/icon/twitter_W.svg" alt={''} />
+                      <img src="/images/素材/icon/twitter_W.svg" alt={''} />
                     </a>
                   </li>
                 </ul>

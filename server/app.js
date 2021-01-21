@@ -3,67 +3,206 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql");
+require("dotenv").config();
 
+console.log(process.env.DB_HOST);
 const db = mysql.createPool({
-  host: "localhost",
-  user: "cool",
-  password: "12345",
-  database: "cool",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
 });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
+const credentials = {
+  gmail: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
+  },
+};
+var emailService = require("./lib/email.js")(credentials);
+
+// 商品首頁 get
+app.get("/product", function (req, res) {
+  db.query("SELECT * FROM product", '', (err, result) => {
+    if (err) {
+      console.log(err)
+    }
+    res.send(JSON.stringify(result))
+  });
+});
+
+// 商品詳細頁 get
+app.get("/detail/:brand/:id", function (req, res) {
+  db.query("SELECT * FROM product WHERE id =" + req.params.id + "", '', (err, result) => {
+    if (err) {
+      console.log(err)
+    }
+    console.log(result);
+    res.send(JSON.stringify(result))
+  });
+});
+
 // 會員登錄 註冊 忘記密碼
 app.post("/profile/:logintype", function (req, res) {
   if ("login" === req.params.logintype) {
-    const sqlSelect =
-      "SELECT * FROM member WHERE account = ? and password = ? ";
-    // console.log(req.body.account + "/" + req.body.password);
-    db.query(
-      sqlSelect,
-      [req.body.account, req.body.password],
-      (err, result, fields) => {
+    if (req.body.account.length === 0) {
+      res.send({ message: "請輸入帳號" });
+      return;
+    } else if (req.body.password.length === 0) {
+      res.send({ message: "請輸入密碼" });
+      return;
+    } else {
+      const sqlSelect =
+        "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
+        "FROM member WHERE account = ? and password = ? and type = 'N' ";
+      db.query(
+        sqlSelect,
+        [req.body.account, req.body.password],
+        (err, result, fields) => {
+          if (err) res.send({ err: err });
+
+          if (result.length > 0) {
+            res.send(result);
+          } else {
+            res.send({ message: "帳號 / 密碼錯誤" });
+          }
+        }
+      );
+    }
+  } else if ("signup" === req.params.logintype) {
+    if (req.body.account.length === 0) {
+      res.send({ message: "請輸入帳號" });
+    } else if (req.body.password.length === 0 && req.body.type === "N") {
+      res.send({ message: "請輸入密碼" });
+    } else if (req.body.email.length === 0) {
+      res.send({ message: "請輸入信箱" });
+    } else {
+      const sqlSelect = "SELECT * FROM member WHERE account = ? ";
+      db.query(sqlSelect, [req.body.account], (err, result, fields) => {
         if (err) res.send({ err: err });
 
         if (result.length > 0) {
+          res.send({ message: "帳號已存在" });
+        } else {
+          const sqlSelect = "SELECT * FROM member WHERE email = ? ";
+          db.query(sqlSelect, [req.body.email], (err, result, fields) => {
+            if (err) res.send({ err: err });
+            if (result.length > 0) {
+              res.send({ message: "此EMAIL已註冊" });
+            } else {
+              const sqlInsert =
+                "INSERT INTO member (account, password, email, letter, type) " +
+                "VALUES (?, ?, ?, ?, 'N') ";
+              db.query(
+                sqlInsert,
+                [
+                  req.body.account,
+                  req.body.password,
+                  req.body.email,
+                  req.body.letter,
+                ],
+                (err, result, fields) => {
+                  if (err) {
+                    res.send({ err: err });
+                  }
+                  res.send(result);
+                }
+              );
+            }
+          });
+        }
+      });
+    }
+  } else if ("certificate" === req.params.logintype) {
+    if (req.body.email.length === 0) res.send({ message: "請輸入信箱" });
+    else {
+      const sqlSelect = "SELECT * FROM member WHERE email = ? and type = 'N' ";
+      db.query(sqlSelect, [req.body.email], (err, result, fields) => {
+        if (err) res.send({ err: err });
+
+        if (result.length > 0) {
+          const sqlUpdate =
+            "UPDATE member SET password = ? WHERE id = ? and type = 'N' ";
+          db.query(
+            sqlUpdate,
+            ["00000000", result[0].id],
+            (err, result, fields) => {
+              if (err) {
+                res.send({ err: err });
+                return;
+              }
+            }
+          );
+          emailService.send(
+            `"COOL" <${process.env.EMAIL}>`,
+            `"${result[0].name}" <${result[0].email}>`,
+            "COOL 取回密碼",
+            "<h1>Hello</h1><p>你的密碼是00000000</p>"
+          );
           res.send(result);
         } else {
-          res.send({ message: "帳號 / 密碼錯誤" });
+          const sqlSelect =
+            "SELECT * FROM member WHERE email = ? and type = 'G' ";
+          db.query(sqlSelect, [req.body.email], (err, result, fields) => {
+            if (err) res.send({ err: err });
+
+            if (result.length > 0) {
+              res.send({ message: "請使用Google登入" });
+            } else {
+              res.send({ message: "EMAIL不存在" });
+            }
+          });
         }
-      }
-    );
-  } else if ("signup" === req.params.logintype) {
-    const sqlSelect = "SELECT * FROM member WHERE account = (?) ";
-    db.query(sqlSelect, [req.body.account], (err, result, fields) => {
+      });
+    }
+  } else if ("googlelogin" === req.params.logintype) {
+    console.log(req.body.name);
+    const sqlSelect =
+      "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
+      "FROM member WHERE email = ? AND type = 'G' ";
+    db.query(sqlSelect, [req.body.email], (err, result, fields) => {
       if (err) res.send({ err: err });
 
       if (result.length > 0) {
-        res.send({ message: "帳號已存在" });
+        res.send(result);
       } else {
         const sqlInsert =
-          "INSERT INTO member (account, password, email, letter) " +
-          "VALUES (?, ?, ?, ?) ";
+          "INSERT INTO member (name, account, password, email, letter, birth, phone, address, type) " +
+          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
         db.query(
           sqlInsert,
           [
-            req.body.account,
+            req.body.name,
+            req.body.account + req.body.birth2,
             req.body.password,
             req.body.email,
             req.body.letter,
+            req.body.birth,
+            req.body.phone,
+            req.body.address,
+            req.body.type,
           ],
           (err, result, fields) => {
             if (err) {
               res.send({ err: err });
             }
-            res.send(result);
+            const sqlSelect =
+              "SELECT * FROM member WHERE email = ? AND type = 'G' ";
+            db.query(sqlSelect, [req.body.email], (err, result, fields) => {
+              if (err) res.send({ err: err });
+
+              if (result.length > 0) {
+                res.send(result);
+              }
+            });
           }
         );
       }
     });
-  } else if ("certificate" === req.params.logintype) {
-    console.log(req.body.email);
   }
 });
 
@@ -103,7 +242,7 @@ app.delete("/member/favorites", function (req, res) {
 // 帳號設定
 app.get("/member/setting", function (req, res) {
   const sqlSelect =
-    "SELECT name, account, password, phone, email, address, DATE_FORMAT(birth, '%Y-%m-%d') as birth " +
+    "SELECT name, account, password, phone, email, address, DATE_FORMAT(birth, '%Y-%m-%d') as birth, type " +
     "FROM member " +
     "WHERE id = ? ";
   db.query(sqlSelect, [req.query.id], (req, result, fields) => {

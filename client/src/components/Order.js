@@ -29,7 +29,7 @@ const Order = (props) => {
       return fetch(
         url +
           new URLSearchParams({
-            memberNo: props.memberNo,
+            memberNo: props.id,
           })
       )
         .then((res) => res.json())
@@ -45,7 +45,7 @@ const Order = (props) => {
       const newUrl = url + type + '?'
       getOrderData(newUrl, type)
     })
-  }, [props.memberNo])
+  }, [props])
 
   return (
     <>
