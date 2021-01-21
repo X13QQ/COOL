@@ -404,6 +404,20 @@ body {
   color: black;
 }
 
+/*  */
+
+.clothing-accordion-ul {
+  max-height: 0px;
+  overflow: hidden;
+  transition: 0.15s;
+}
+
+.clothing-accordion-ul.accordion-actived {
+  max-height: 800px !important;
+  /* margin-bottom: 16px; */
+}
+
+/*  */
 .clothing-content input {
   width: 60px;
 }
@@ -558,6 +572,7 @@ h3 {
   background-image: url('../images/穿搭集/內容視覺/JUNE_EDITED-8-v1590602563975.jpg');
   background-size: cover;
   margin: 10px auto;
+  cursor: pointer;
 }
 /* .box2{
     flex-grow: 1;
@@ -570,11 +585,13 @@ h3 {
   height: 400px;
   background-image: url('../images/穿搭集/內容視覺/3.jpg');
   background-size: cover;
+  cursor: pointer;
 }
 .box2 > .box2-2 {
   height: 300px;
   background-image: url('../images/穿搭集/內容視覺/Home_TrendFeature_MB_12-4.jpg');
   background-size: cover;
+  cursor: pointer;
 }
 .box3 > .box {
   width: 250px;
@@ -584,11 +601,13 @@ h3 {
   height: 360px;
   background-image: url('../images/穿搭集/內容視覺/JUNE_EDITED-4-v1590602528298.jpg');
   background-size: cover;
+  cursor: pointer;
 }
 .box3 > .box3-2 {
   height: 340px;
   background-image: url('../images/穿搭集/內容視覺/JUNE_EDITED-13-v1590602603366\ \(1\).jpg');
   background-size: cover;
+  cursor: pointer;
 }
 
 /* 秋冬-------------------------------- */
@@ -599,6 +618,7 @@ h3 {
   margin: 10px auto;
   background-image: url('../images/穿搭集/內容視覺/man.jpg');
   background-size: cover;
+  cursor: pointer;
 }
 
 .dwbox2 > .box {
@@ -609,11 +629,13 @@ h3 {
   height: 350px;
   background-image: url('../images/穿搭集/內容視覺/Home_Kids_DT_9-30-2.jpg');
   background-size: cover;
+  cursor: pointer;
 }
 .dwbox2 > .dwbox2-2 {
   height: 200px;
   background-image: url('../images/穿搭集/內容視覺/New_Women.jpg');
   background-size: cover;
+  cursor: pointer;
 }
 .dwbox3 > .dwbox {
   width: 250px;
@@ -623,11 +645,13 @@ h3 {
   height: 320px;
   background-image: url('../images/穿搭集/內容視覺/14_300x.jpg');
   background-size: cover;
+  cursor: pointer;
 }
 .dwbox3 > .dwbox3-2 {
   height: 230px;
   background-image: url('../images/穿搭集/內容視覺/f20_accessories22.jpg');
   background-size: cover;
+  cursor: pointer;
 }
 .dwbox4 {
   /* display: flex; */
@@ -638,6 +662,7 @@ h3 {
   background-image: url('../images/穿搭集/內容視覺/F20_women22.jpg');
   /* background: brown; */
   background-size: cover;
+  cursor: pointer;
 }
 
 /* Top-------------------------------- */

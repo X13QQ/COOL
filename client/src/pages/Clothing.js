@@ -5,6 +5,7 @@ import Footer from '../components/Footer'
 
 function Clothing() {
   const [status, setStatus] = useState(0)
+  const [accordionActived, setAccordionActived] = useState(false)
   const modal = () => {
     return (
       <div
@@ -51,9 +52,13 @@ function Clothing() {
               <div className="pb-3">
                 {/* 帽子標籤 ↓ */}
                 <a
-                  href="/#"
-                  className="d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
+                  href="#!"
+                  className="clothing-accordion-a d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
                   style={{ color: '#353c1d' }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setAccordionActived(!accordionActived)
+                  }}
                 >
                   帽子
                   {/* 帽子右邊的箭頭 ↓ */}
@@ -68,7 +73,12 @@ function Clothing() {
                     alt={' '}
                   />
                 </a>
-                <ul className="list-unstyled">
+                <ul
+                  className={
+                    'clothing-accordion-ul list-unstyled mb-0 ' +
+                    (accordionActived ? 'accordion-actived' : '')
+                  }
+                >
                   <li className="px-5">
                     <p
                       style={{
@@ -82,7 +92,7 @@ function Clothing() {
                       YEEZY BOOST 350 V2 - CBLACK/ RED
                     </p>
                     <p style={{ fontSize: '12px' }}>NT$6,800</p>
-                    <div className="d-flex justify-content-end">
+                    <div className="d-flex justify-content-end mb-3">
                       <a
                         className="d-block text-right"
                         style={{ fontSize: '12px' }}
