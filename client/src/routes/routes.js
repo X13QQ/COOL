@@ -6,10 +6,7 @@ import Detail from '../pages/Detail'
 import News from '../pages/News'
 import ShoppingCart from '../pages/ShoppingCart'
 import MessageBoard from '../components/MessageBoard'
-<<<<<<< HEAD
-=======
 import Dashboard from '../pages/Dashboard'
->>>>>>> 79c6626af8f6fd3b440d9c31c28ffa73fdba2959
 
 import {
   Mail,
