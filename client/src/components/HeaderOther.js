@@ -821,12 +821,7 @@ function HeaderOther() {
                 style={{ borderBottom: '1px solid black' }}
               >
                 <Link
-                  to={{
-                    pathname: '/setting',
-                    state: {
-                      id: id,
-                    },
-                  }}
+                  to="/setting"
                   className="font-weight-bold d-inline-block py-1"
                 >
                   帳號設定

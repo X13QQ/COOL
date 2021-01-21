@@ -3,6 +3,7 @@ import context from 'react-bootstrap/esm/AccordionContext'
 import { Link, withRouter } from 'react-router-dom'
 import FakeRes from '../data/FakeRes'
 import Product from '../pages/Product'
+import ProductContent from './ProductContent'
 // 目前會顯示很多prettier warnings，暫時無視
 // Link 路由還沒寫的精準
 function DetailContent(props) {
