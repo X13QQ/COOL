@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-/* global gapi */
+import { Link, useHistory } from 'react-router-dom'
 
+/* global gapi */
 function HeaderOther() {
-  const id = !!localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user'))[0].id
-    : ''
+  const history = useHistory()
+  const [id, setId] = useState(
+    !!localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))[0].id
+      : null
+  )
   const [name, setName] = useState(
     !!localStorage.getItem('user')
       ? JSON.parse(localStorage.getItem('user'))[0].name
@@ -94,6 +97,7 @@ function HeaderOther() {
           setLoginStatus(1)
           setShow(false)
           setName(res[0].name)
+          setId(res[0].id)
           localStorage.setItem('user', JSON.stringify(res))
         } else {
           setLoginMessage(res.message)
@@ -753,7 +757,10 @@ function HeaderOther() {
             <ul className="profile-icon-ul  list-unstyled w-100">
               <li className="d-flex justify-content-start">
                 <Link
-                  to="/setting"
+                  to={{
+                    pathname: '/setting',
+                    state: { id: id },
+                  }}
                   className="font-weight-bold d-flex justify-content-center align-items-center py-1"
                 >
                   {name}
@@ -766,7 +773,10 @@ function HeaderOther() {
               </li>
               <li className="d-flex justify-content-start">
                 <Link
-                  to="/mail"
+                  to={{
+                    pathname: '/mail',
+                    state: { id: id },
+                  }}
                   className="font-weight-bold d-inline-block py-1"
                 >
                   我的信箱
@@ -774,7 +784,10 @@ function HeaderOther() {
               </li>
               <li className="d-flex align-items-start flex-column">
                 <Link
-                  to="/member"
+                  to={{
+                    pathname: '/member',
+                    state: { id: id },
+                  }}
                   className="font-weight-bold d-inline-block py-1"
                 >
                   會員專區
@@ -802,7 +815,10 @@ function HeaderOther() {
               </li>
               <li className="d-flex justify-content-start">
                 <Link
-                  to="/coupon"
+                  to={{
+                    pathname: '/coupon',
+                    state: { id: id },
+                  }}
                   className=" font-weight-bold d-inline-block py-1"
                 >
                   優惠券
@@ -810,7 +826,10 @@ function HeaderOther() {
               </li>
               <li className="d-flex justify-content-start">
                 <Link
-                  to="/order"
+                  to={{
+                    pathname: '/order',
+                    state: { id: id },
+                  }}
                   className="font-weight-bold d-inline-block py-1"
                 >
                   購買紀錄
@@ -821,7 +840,10 @@ function HeaderOther() {
                 style={{ borderBottom: '1px solid black' }}
               >
                 <Link
-                  to="/setting"
+                  to={{
+                    pathname: '/setting',
+                    state: { id: id },
+                  }}
                   className="font-weight-bold d-inline-block py-1"
                 >
                   帳號設定
@@ -837,7 +859,7 @@ function HeaderOther() {
                     cleanData()
                     setLoginStatus(0)
                     localStorage.removeItem('user')
-                    window.location.href = '/clothing'
+                    history.push('/clothing')
                   }}
                 >
                   登出
