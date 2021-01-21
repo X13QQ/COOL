@@ -30,7 +30,7 @@ function DetailContent(props) {
         if (response.ok) {
           // 剖析資料為JS的數值
           const data = await response.json()
-          
+
           // 設定資料到DetailRes狀態
           setDetailRes(data)
         }
@@ -42,27 +42,28 @@ function DetailContent(props) {
     }
     getDetail()
     // setBrowseHistory(true)
-  }, [])
+  }, [ProductBrand, ProductId])
+
   function BrowseHistoryFunc() {
     // 設定變數，並判斷是否已有localstorage資料來做賦值
     let browseArr2 = !!JSON.parse(localStorage.getItem('browseHistory'))
       ? JSON.parse(localStorage.getItem('browseHistory'))
       : [
-        {
-          id: ProductId,
-          brand: DetailRes ? DetailRes[0].brand : '',
-          name: DetailRes ? DetailRes[0].name : '',
-          price: DetailRes ? DetailRes[0].price : '',
-        },
-      ]
+          {
+            id: ProductId,
+            brand: DetailRes ? DetailRes[0].brand : '',
+            name: DetailRes ? DetailRes[0].name : '',
+            price: DetailRes ? DetailRes[0].price : '',
+          },
+        ]
 
     // 在有localstorage的情況下，先判斷陣列長度，再判斷是否內容重複
     if (!!localStorage.getItem('browseHistory')) {
       if (browseArr2.length > 4) {
-        let whetherPush = true;
+        let whetherPush = true
         for (let i = 0; i < browseArr2.length; i++) {
           if (browseArr2[i].id === ProductId) {
-            whetherPush = false;
+            whetherPush = false
             break
           }
         }
@@ -76,10 +77,10 @@ function DetailContent(props) {
           })
         }
       } else {
-        let whetherPush = true;
+        let whetherPush = true
         for (let i = 0; i < browseArr2.length; i++) {
           if (browseArr2[i].id === ProductId) {
-            whetherPush = false;
+            whetherPush = false
             break
           }
         }
@@ -96,14 +97,11 @@ function DetailContent(props) {
     localStorage.setItem('browseHistory', JSON.stringify(browseArr2))
   }
 
-  
-  useEffect(() => {
-    BrowseHistoryFunc()
-  }, [DetailRes])
+  if (DetailRes.length > 0) BrowseHistoryFunc()
 
-  //
   const [status, setStatus] = useState(0)
   const [commentTable, setCommentTable] = useState(false)
+
   const sizemodal = () => {
     return (
       <div
