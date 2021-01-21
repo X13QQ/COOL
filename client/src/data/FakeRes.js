@@ -5,7 +5,11 @@ const FakeRes = [
     name: 'Reverse Weave Crew, Script Logo',
     brand: 'Champion',
     image:
+<<<<<<< HEAD
       '/images/product/Champion/Reverse_Weave_Crew_Script_Logo/Reverse_Weave_Crew_Script_Logo_B01.jpeg',
+=======
+      '/images/product/Champion/Reverse_Weave_Crew_Script_Logo/Reverse_Weave_Crew_Script_Logo_B01.jpg',
+>>>>>>> 79c6626af8f6fd3b440d9c31c28ffa73fdba2959
     price: 4590,
   },
   {

@@ -45,7 +45,7 @@ const Order = (props) => {
       const newUrl = url + type + '?'
       getOrderData(newUrl, type)
     })
-  }, [props.memberNo])
+  }, [props])
 
   return (
     <>
