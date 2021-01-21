@@ -37,13 +37,15 @@ app.get("/product", function (req, res) {
 
 // 商品詳細頁 get
 app.get("/detail/:brand/:id", function (req, res) {
-  db.query("SELECT * FROM product WHERE id =" + req.params.id + "", '', (err, result) => {
+  db.query("SELECT * FROM product " +
+    "INNER JOIN product_images ON product.id = product_images.product_id " +
+    "WHERE product.id = ? ORDER BY color", [req.params.id], (err, result) => {
     if (err) {
-      console.log(err)
-    }
-    console.log(result);
-    res.send(JSON.stringify(result))
-  });
+    console.log(err)
+  }
+  console.log(result);
+  res.send(JSON.stringify(result))
+});
 });
 
 // 會員登錄 註冊 忘記密碼

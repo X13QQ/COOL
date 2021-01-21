@@ -7,23 +7,17 @@ import FakeRes from '../data/FakeRes'
 // 目前會顯示很多prettier warnings，暫時無視
 // Link 路由還沒寫的精準
 function ProductContent() {
-  
-  
   // 老師的fetch寫法
   // 步驟一：設一個空productRes，setProductRes為之後fetch response
   const [ProductRes, setProductRes] = useState([])
   // async await
   async function getProducts() {
-
     // 要使用try-catch來作錯誤處理
     try {
       // 從伺服器得到資料
-      const response = await fetch(
-        'http://localhost:3001/product',
-        {
-          method: 'get',
-        }
-      )
+      const response = await fetch('http://localhost:3001/product', {
+        method: 'get',
+      })
       if (response.ok) {
         // 剖析資料為JS的數值
         const data = await response.json()
@@ -43,8 +37,8 @@ function ProductContent() {
     getProducts()
   }, [])
 
-  // 
-  // 
+  //
+  //
   //
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
@@ -63,19 +57,28 @@ function ProductContent() {
               if (i < 4) {
                 return (
                   <>
-                    <Link to={'/detail/' + v.brand + '/' + v.id} className="col-6 col-md-3 mb-3 mb-lg-0  d-block">
+                    <Link
+                      to={'/detail/' + v.brand + '/' + v.id}
+                      className="col-6 col-md-3 mb-3 mb-lg-0  d-block"
+                    >
                       <div className="m-3">
                         <img
                           className="mb-3"
                           src={v.image}
-                          style={{ height: '280px', width: '100%', objectFit: 'cover' }}
+                          style={{
+                            height: '280px',
+                            width: '100%',
+                            objectFit: 'cover',
+                          }}
                           alt={''}
                         ></img>
                         <p className="m-0 text-center d-none d-sm-block">
                           {v.name}
                         </p>
                         <p className="m-0 text-center">{v.brand}</p>
-                        <p className="m-0 text-center font-weight-bold">NT$ {v.price}</p>
+                        <p className="m-0 text-center font-weight-bold">
+                          NT$ {v.price}
+                        </p>
                       </div>
                     </Link>
                   </>
@@ -391,7 +394,9 @@ function ProductContent() {
                           ] = 'none'
                         }
                       }}
-                      onClick={(e) => { e.preventDefault() }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                      }}
                     >
                       排序
                       <img
@@ -491,7 +496,9 @@ function ProductContent() {
                           ] = 'none'
                         }
                       }}
-                      onClick={(e) => { e.preventDefault() }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                      }}
                     >
                       顯示筆數
                       <img

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import context from 'react-bootstrap/esm/AccordionContext'
 import { Link, withRouter } from 'react-router-dom'
 import FakeRes from '../data/FakeRes'
+import Product from '../pages/Product'
 // 目前會顯示很多prettier warnings，暫時無視
 // Link 路由還沒寫的精準
 function DetailContent(props) {
@@ -10,41 +12,80 @@ function DetailContent(props) {
   // 老師的fetch寫法
   // 步驟一：設一個空detailRes，setDetailRes為之後fetch response
   const [DetailRes, setDetailRes] = useState('')
-  // async await
-  async function getDetail() {
-
-    // 要使用try-catch來作錯誤處理
-    try {
-      // 從伺服器得到資料
-      const response = await fetch(
-        'http://localhost:3001/detail/' + ProductBrand + '/' + ProductId,
-        {
-          method: 'get',
-        }
-      )
-      if (response.ok) {
-        // 剖析資料為JS的數值
-        const data = await response.json()
-
-        // 設定資料到DetailRes狀態
-        setDetailRes(data)
-      }
-    } catch (error) {
-      // 發生錯誤的處理情況
-      alert('無法得到伺服器資料，請稍後再重試')
-      console.log(error)
-    }
-  }
+  const [browseHistory, setBrowseHistory] = useState(false)
 
   // dom生成後，執行fetch函式，再影響setProductRes
   useEffect(() => {
-    getDetail()
+    // async await
+    async function getDetail() {
+      // 要使用try-catch來作錯誤處理
+      try {
+        // 從伺服器得到資料
+        const response = await fetch(
+          'http://localhost:3001/detail/' + ProductBrand + '/' + ProductId,
+          {
+            method: 'get',
+          }
+        )
+        if (response.ok) {
+          // 剖析資料為JS的數值
+          const data = await response.json()
 
+          // 設定資料到DetailRes狀態
+          setDetailRes(data)
+        }
+      } catch (error) {
+        // 發生錯誤的處理情況
+        alert('無法得到伺服器資料，請稍後再重試')
+        console.log(error)
+      }
+    }
+    getDetail()
+    setBrowseHistory(true)
   }, [])
 
-  console.log(DetailRes) // ok
-  // console.log(DetailRes[0]["id"]) // ok
-  // 
+  function BrowseHistoryFunc() {
+    let browseArr2 = !!JSON.parse(localStorage.getItem('browseHistory'))
+      ? JSON.parse(localStorage.getItem('browseHistory'))
+      : [
+          {
+            id: ProductId,
+            brand: DetailRes ? DetailRes[0].brand : '',
+            name: DetailRes ? DetailRes[0].name : '',
+            price: DetailRes ? DetailRes[0].price : '',
+          },
+        ]
+    // let browseArr2 = JSON.parse(localStorage.getItem('browseHistory'))
+    if (!!localStorage.getItem('browseHistory')) {
+      // Object.values(
+      //   JSON.parse(localStorage.getItem('browseHistory'))
+      // ).forEach((e) => console.log(e.id))
+      if (browseArr2.length > 4) {
+        console.log('yes')
+        browseArr2.splice(0, 1)
+        browseArr2.push({
+          id: ProductId,
+          brand: DetailRes ? DetailRes[0].brand : '',
+          name: DetailRes ? DetailRes[0].name : '',
+          price: DetailRes ? DetailRes[0].price : '',
+        })
+      } else {
+        browseArr2.push({
+          id: ProductId,
+          brand: DetailRes ? DetailRes[0].brand : '',
+          name: DetailRes ? DetailRes[0].name : '',
+          price: DetailRes ? DetailRes[0].price : '',
+        })
+      }
+    }
+    localStorage.setItem('browseHistory', JSON.stringify(browseArr2))
+  }
+  useEffect(() => {
+    BrowseHistoryFunc()
+  }, [DetailRes])
+
+  // console.log(DetailRes) // ok
+  //
   const [status, setStatus] = useState(0)
   const [commentTable, setCommentTable] = useState(false)
   const sizemodal = () => {
@@ -815,7 +856,9 @@ function DetailContent(props) {
                 style={{ height: '1000px', overflowY: 'hidden' }}
               >
                 <div>
-                  <h2 className="font-weight-bold">{DetailRes ? DetailRes[0].name : ''}</h2>
+                  <h2 className="font-weight-bold">
+                    {DetailRes ? DetailRes[0].name : ''}
+                  </h2>
                   <h3>{DetailRes ? DetailRes[0].brand : ''}</h3>
                   <h3 className="font-weight-bold" style={{ color: '#f37022' }}>
                     ${DetailRes ? DetailRes[0].price : ''}
