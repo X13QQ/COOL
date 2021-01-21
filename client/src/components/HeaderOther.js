@@ -828,13 +828,14 @@ function HeaderOther() {
               <li className="d-flex justify-content-start">
                 <a
                   id="logout"
-                  href="/"
+                  href="#!"
                   className="font-weight-bold d-inline-block py-1"
                   onClick={(e) => {
                     e.preventDefault()
                     cleanData()
                     setLoginStatus(0)
                     localStorage.removeItem('user')
+                    window.location.href = '/clothing'
                   }}
                 >
                   登出
