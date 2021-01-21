@@ -12,7 +12,7 @@ function DetailContent(props) {
   // 老師的fetch寫法
   // 步驟一：設一個空detailRes，setDetailRes為之後fetch response
   const [DetailRes, setDetailRes] = useState('')
-  const [browseHistory, setBrowseHistory] = useState(false)
+  // const [browseHistory, setBrowseHistory] = useState(true)
 
   // dom生成後，執行fetch函式，再影響setProductRes
   useEffect(() => {
@@ -30,7 +30,7 @@ function DetailContent(props) {
         if (response.ok) {
           // 剖析資料為JS的數值
           const data = await response.json()
-
+          
           // 設定資料到DetailRes狀態
           setDetailRes(data)
         }
@@ -41,50 +41,66 @@ function DetailContent(props) {
       }
     }
     getDetail()
-    setBrowseHistory(true)
+    // setBrowseHistory(true)
   }, [])
-
   function BrowseHistoryFunc() {
+    // 設定變數，並判斷是否已有localstorage資料來做賦值
     let browseArr2 = !!JSON.parse(localStorage.getItem('browseHistory'))
       ? JSON.parse(localStorage.getItem('browseHistory'))
       : [
-          {
+        {
+          id: ProductId,
+          brand: DetailRes ? DetailRes[0].brand : '',
+          name: DetailRes ? DetailRes[0].name : '',
+          price: DetailRes ? DetailRes[0].price : '',
+        },
+      ]
+
+    // 在有localstorage的情況下，先判斷陣列長度，再判斷是否內容重複
+    if (!!localStorage.getItem('browseHistory')) {
+      if (browseArr2.length > 4) {
+        let whetherPush = true;
+        for (let i = 0; i < browseArr2.length; i++) {
+          if (browseArr2[i].id === ProductId) {
+            whetherPush = false;
+            break
+          }
+        }
+        if (whetherPush) {
+          browseArr2.splice(0, 1)
+          browseArr2.push({
             id: ProductId,
             brand: DetailRes ? DetailRes[0].brand : '',
             name: DetailRes ? DetailRes[0].name : '',
             price: DetailRes ? DetailRes[0].price : '',
-          },
-        ]
-    // let browseArr2 = JSON.parse(localStorage.getItem('browseHistory'))
-    if (!!localStorage.getItem('browseHistory')) {
-      // Object.values(
-      //   JSON.parse(localStorage.getItem('browseHistory'))
-      // ).forEach((e) => console.log(e.id))
-      if (browseArr2.length > 4) {
-        console.log('yes')
-        browseArr2.splice(0, 1)
-        browseArr2.push({
-          id: ProductId,
-          brand: DetailRes ? DetailRes[0].brand : '',
-          name: DetailRes ? DetailRes[0].name : '',
-          price: DetailRes ? DetailRes[0].price : '',
-        })
+          })
+        }
       } else {
-        browseArr2.push({
-          id: ProductId,
-          brand: DetailRes ? DetailRes[0].brand : '',
-          name: DetailRes ? DetailRes[0].name : '',
-          price: DetailRes ? DetailRes[0].price : '',
-        })
+        let whetherPush = true;
+        for (let i = 0; i < browseArr2.length; i++) {
+          if (browseArr2[i].id === ProductId) {
+            whetherPush = false;
+            break
+          }
+        }
+        if (whetherPush) {
+          browseArr2.push({
+            id: ProductId,
+            brand: DetailRes ? DetailRes[0].brand : '',
+            name: DetailRes ? DetailRes[0].name : '',
+            price: DetailRes ? DetailRes[0].price : '',
+          })
+        }
       }
     }
     localStorage.setItem('browseHistory', JSON.stringify(browseArr2))
   }
+
+  
   useEffect(() => {
     BrowseHistoryFunc()
   }, [DetailRes])
 
-  // console.log(DetailRes) // ok
   //
   const [status, setStatus] = useState(0)
   const [commentTable, setCommentTable] = useState(false)
