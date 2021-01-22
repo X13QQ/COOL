@@ -96,16 +96,16 @@ body {
 }
 /*  */
 
-.profile-icon-wrap{
+.profile-icon-wrap {
   display: none;
   width: 150px;
   transform: translateX(-60%);
   z-index: 888;
 }
-.profile-navbar-li:hover .profile-icon-wrap{
+.profile-navbar-li:hover .profile-icon-wrap {
   display: block !important;
 }
-.main-navbar .navbar-icon .profile-icon-wrap:hover{
+.main-navbar .navbar-icon .profile-icon-wrap:hover {
   display: block !important;
 }
 
@@ -114,7 +114,6 @@ body {
   border: 1px solid #353c1d;
   text-align: center;
 }
-
 
 .main-navbar .navbar-icon .profile-icon-ul-wrap::before {
   content: '';
@@ -136,7 +135,7 @@ body {
 }
 
 /*  */
-.cart-icon-wrap{
+.cart-icon-wrap {
   display: none;
   width: 270px;
   left: 0%;
@@ -144,10 +143,10 @@ body {
   /* top: 55px; */
   z-index: 888;
 }
-.cart-navbar-li:hover .cart-icon-wrap{
+.cart-navbar-li:hover .cart-icon-wrap {
   display: block !important;
 }
-.main-navbar .navbar-icon .cart-icon-wrap:hover{
+.main-navbar .navbar-icon .cart-icon-wrap:hover {
   display: block !important;
 }
 
@@ -197,19 +196,18 @@ body {
 .checkout-btn-wrap .see-cart-btn {
   transition: 0.15s;
   color: black;
-} 
-.checkout-btn-wrap .see-cart-btn:hover{
+}
+.checkout-btn-wrap .see-cart-btn:hover {
   transform: scale(0.97);
-} 
-.checkout-btn-wrap .go-check-btn{
+}
+.checkout-btn-wrap .go-check-btn {
   transition: 0.15s;
- color: white; 
- background-color: black; 
+  color: white;
+  background-color: black;
 }
 
-.checkout-btn-wrap .go-check-btn:hover{
+.checkout-btn-wrap .go-check-btn:hover {
   transform: scale(0.97);
-
 }
 /*  */
 
@@ -295,16 +293,20 @@ body {
   cursor: pointer;
 }
 /*  */
-.log-in-cancel-btn-wrap a ,.sign-up-cancel-btn-wrap a ,.certificate-cancel-btn-wrap a{
+.log-in-cancel-btn-wrap a,
+.sign-up-cancel-btn-wrap a,
+.certificate-cancel-btn-wrap a {
   transition: 0.15s;
 }
 
-.log-in-cancel-btn-wrap a:hover, .sign-up-cancel-btn-wrap a:hover ,.certificate-cancel-btn-wrap a:hover{
+.log-in-cancel-btn-wrap a:hover,
+.sign-up-cancel-btn-wrap a:hover,
+.certificate-cancel-btn-wrap a:hover {
   transform: scale(0.97);
 }
 /*  */
 /*  */
-.product-hover-menu-wrap{
+.product-hover-menu-wrap {
   top: 145px;
   padding-top: 8.41px;
   display: none;
@@ -460,7 +462,7 @@ body {
 }
 
 .newsImageMain7 {
-  background-image: url('../images/新聞頁/文章頁-主視覺/news7.jpeg');
+  background-image: url('../images/新聞頁/文章頁-主視覺/news7.jpg');
   box-sizing: border-box;
 }
 
@@ -489,12 +491,29 @@ body {
   font-size: 40px;
   font-weight: bold;
 }
+
+.newsBig-pic-text2 {
+  position: absolute;
+  left: 16px;
+  bottom: 50px;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+}
+.newsBig-pic-text3 {
+  position: absolute;
+  left: 16px;
+  bottom: 50px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
 .newsBig-pic-text-sm {
   position: absolute;
   left: 16px;
-  bottom: 25px;
+  bottom: 18px;
   color: white;
-  font-size: 28px;
+  font-size: 18px;
   font-weight: bold;
 }
 .justify-content-between .card .row .d-flex .img-fluid {
@@ -695,10 +714,9 @@ body {
   bottom: 30px;
   right: 30px;
   transition: 0.15s;
-
 }
 
-.go-top:hover{
+.go-top:hover {
   transform: scale(0.97);
 }
 .go-top i {
