@@ -3,7 +3,7 @@ import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
 import Magnifier from 'react-magnifier'
-
+// clothing
 function Clothing() {
   const [status, setStatus] = useState(0)
   // const [accordionActived, setAccordionActived] = useState(false)
