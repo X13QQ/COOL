@@ -38,9 +38,8 @@ app.get("/product", function (req, res) {
 // 商品詳細頁 get
 app.get("/detail/:brand/:id", function (req, res) {
   db.query(
-    "SELECT * FROM product WHERE id =" + req.params.id + "",
-    "",
-    (err, result) => {
+    "SELECT * FROM product INNER JOIN product_images ON product.id = product_images.product_id  WHERE product.id =" + req.params.id + " ORDER BY color",
+        (err, result) => {
       if (err) {
         console.log(err);
       }
