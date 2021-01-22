@@ -1317,6 +1317,7 @@ function HeaderOther() {
                 if (res.length > 0) {
                   setLoginStatus(1)
                   setName(res[0].name)
+                  setId(res[0].id)
                 }
                 localStorage.setItem('user', JSON.stringify(res))
                 // console.log(res)

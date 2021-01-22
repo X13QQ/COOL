@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Heart } from '../components/icons'
+import { useLocation, useHistory } from 'react-router-dom'
 
-function Favorites(props) {
-  const memberNo = props.memberNo
+function Favorites() {
+  const loc = useLocation()
+  const history = useHistory()
+  const id = !!loc.state ? loc.state.id : history.push('/clothing')
+
   const [FavoritesData, setFavoritesData] = useState([])
 
-  const getFavoritesData = (memberNo) => {
+  const getFavoritesData = (id) => {
     let url = new URL('http://localhost:3001/member/favorites')
     let params = {
-      memberNo: memberNo,
+      memberNo: id,
       valid: 1,
     }
     url.search = new URLSearchParams(params).toString()
@@ -40,8 +44,8 @@ function Favorites(props) {
   }
 
   useEffect(() => {
-    getFavoritesData(memberNo)
-  }, [memberNo])
+    getFavoritesData(id)
+  }, [id])
 
   return (
     <>
@@ -53,8 +57,7 @@ function Favorites(props) {
                 <img src={val.image} alt=""></img>
                 <a
                   href="#!"
-                  onClick={(e) => {
-                    e.preventDefault()
+                  onClick={() => {
                     deleteFavoritesData(val.id)
                   }}
                 >
