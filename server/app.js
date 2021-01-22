@@ -37,7 +37,6 @@ app.get("/product", function (req, res) {
 
 // 商品詳細頁 get
 app.get("/detail/:brand/:id", function (req, res) {
-<<<<<<< HEAD
   db.query(
     "SELECT * FROM product WHERE id =" + req.params.id + "",
     "",
@@ -45,7 +44,7 @@ app.get("/detail/:brand/:id", function (req, res) {
       if (err) {
         console.log(err);
       }
-      console.log(result);
+      // console.log(result);
       res.send(JSON.stringify(result));
     }
   );
@@ -79,17 +78,15 @@ app.get("/clothing/:id", function (req, res) {
       res.send(JSON.stringify(result));
     }
   );
-=======
   db.query("SELECT * FROM product " +
     "INNER JOIN product_images ON product.id = product_images.product_id " +
     "WHERE product.id = ? ORDER BY color", [req.params.id], (err, result) => {
-    if (err) {
-    console.log(err)
-  }
-  console.log(result);
-  res.send(JSON.stringify(result))
-});
->>>>>>> 7befd6b551f0cfb26b66c4edb712ad65dfcc841b
+      if (err) {
+        console.log(err)
+      }
+      console.log(result);
+      res.send(JSON.stringify(result))
+    });
 });
 
 // 會員登錄 註冊 忘記密碼
