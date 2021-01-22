@@ -3,7 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom'
 
 const MainSetting = () => {
   const loc = useLocation()
-  console.log(loc)
+  // console.log(loc)
   const history = useHistory()
   const id = !!loc.state ? loc.state.id : history.push('/clothing')
   const [name, setName] = useState('')
