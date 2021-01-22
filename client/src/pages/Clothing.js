@@ -6,7 +6,6 @@ import Footer from '../components/Footer'
 function Clothing() {
   const [status, setStatus] = useState(0)
   const [accordionActived, setAccordionActived] = useState(false)
-  const [dropdown, setdropdown] = useState(0)
 
   const [clothingImages, setClothingImages] = useState([])
   const [clothingData, setClothingData] = useState([])
@@ -141,16 +140,23 @@ function Clothing() {
                     <div className="row">
                       <div className="dropdown">
                         <button
-                          className=" btn btn-secondary dropdown-toggle mx-2 my-2"
+                          className="btn btn-secondary dropdown-toggle mx-2 my-2"
                           type="button"
-                          id="dropdownMenuButton"
+                          // id="dropdownMenuButton"
                           data-toggle="dropdown"
                           aria-haspopup="true"
                           aria-expanded="false"
+                          onClick={(e) => {
+                            e.preventDefault()
+                            document
+                              .getElementById('dropdownMenuButton')
+                              .classList.toggle('clothing-accordion-ul')
+                          }}
                         >
                           尺寸
                         </button>
                         <div
+                          id="dropdownMenuButton"
                           className="dropdown-menu"
                           aria-labelledby="dropdownMenuButton"
                         >
