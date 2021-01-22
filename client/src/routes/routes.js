@@ -82,7 +82,6 @@ const routes = [
   {
     path: '/messageBoard',
     component: MessageBoard,
-    breadcrumbName: '留言板',
   },
   {
     // 購物車

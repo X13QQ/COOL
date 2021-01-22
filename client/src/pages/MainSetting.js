@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
 
-function MainSetting(props) {
-  const id = props.id
+const MainSetting = () => {
+  const loc = useLocation()
+  // console.log(loc)
+  const history = useHistory()
+  const id = !!loc.state ? loc.state.id : history.push('/clothing')
   const [name, setName] = useState('')
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
