@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 function Clothing() {
   const [status, setStatus] = useState(0)
   const [accordionActived, setAccordionActived] = useState(false)
+  const [dropdown, setdropdown] = useState(0)
 
   const [clothingImages, setClothingImages] = useState([])
   const [clothingData, setClothingData] = useState([])
@@ -33,34 +34,20 @@ function Clothing() {
         console.log(error)
       }
     }
-
-    async function getClothingData(id) {
-      // 要使用try-catch來作錯誤處理
-      try {
-        // 從伺服器得到資料
-        let url = new URL('http://localhost:3001/clothing')
-        let params = {
-          id: id,
-        }
-        url.search = new URLSearchParams(params).toString()
-        const response = await fetch(url)
-        if (response.ok) {
-          // 剖析資料為JS的數值
-          const data = await response.json()
-
-          // 設定資料到ProductRes狀態
-          setClothingData(data)
-          console.log(data)
-        }
-      } catch (error) {
-        // 發生錯誤的處理情況
-        alert('無法得到伺服器資料，請稍後再重試')
-        console.log(error)
-      }
-    }
     getClothing()
-    getClothingData()
   }, [])
+
+  function getClothingData(id) {
+    // 從伺服器得到資料
+    let url = new URL('http://localhost:3001/clothing/' + id)
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        setClothingData(data)
+      })
+      .catch((err) => console.log(err))
+  }
 
   const modal = () => {
     return (
@@ -68,7 +55,7 @@ function Clothing() {
         id="what"
         className="clothing-modal d-flex justify-content-center align-items-center"
         onClick={(e) => {
-          console.log(e.target.id)
+          // console.log(e.target.id)
           if (e.target.id === 'what') {
             setStatus(0)
           }
@@ -151,9 +138,102 @@ function Clothing() {
                       YEEZY BOOST 350 V2 - CBLACK/ RED
                     </p>
                     <p style={{ fontSize: '12px' }}>NT$6,800</p>
+                    <div className="row">
+                      <div className="dropdown">
+                        <button
+                          className=" btn btn-secondary dropdown-toggle mx-2 my-2"
+                          type="button"
+                          id="dropdownMenuButton"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          尺寸
+                        </button>
+                        <div
+                          className="dropdown-menu"
+                          aria-labelledby="dropdownMenuButton"
+                        >
+                          <a className="dropdown-item" href="#!">
+                            S
+                          </a>
+                          <a className="dropdown-item" href="#!">
+                            M
+                          </a>
+                          <a className="dropdown-item" href="#!">
+                            L
+                          </a>
+                          <a className="dropdown-item" href="#!">
+                            XL
+                          </a>
+                        </div>
+                      </div>
+                      <div className="dropdown">
+                        <button
+                          className="btn btn-secondary dropdown-toggle mx-2 my-2"
+                          type="button"
+                          id="dropdownMenuButton"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          顏色
+                        </button>
+                        <div
+                          className="dropdown-menu "
+                          aria-labelledby="dropdownMenuButton"
+                        >
+                          <a className="dropdown-item" href="#!">
+                            黑
+                          </a>
+                          <a className="dropdown-item" href="#!">
+                            白
+                          </a>
+                          <a className="dropdown-item" href="#!">
+                            藍
+                          </a>
+                          <a className="dropdown-item" href="#!">
+                            紅
+                          </a>
+                        </div>
+                      </div>
+                      <div className="dropdown">
+                        <button
+                          className="btn btn-secondary dropdown-toggle mx-2 my-2"
+                          type="button"
+                          id="dropdownMenuButton"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                        >
+                          數量
+                        </button>
+                        <div
+                          className="dropdown-menu"
+                          aria-labelledby="dropdownMenuButton"
+                        >
+                          <a className="dropdown-item" href="#!">
+                            1
+                          </a>
+                          <a className="dropdown-item" href="#!">
+                            2
+                          </a>
+                          <a className="dropdown-item" href="#!">
+                            3
+                          </a>
+                          <a className="dropdown-item" href="#!">
+                            4
+                          </a>
+                          <a className="dropdown-item" href="#!">
+                            5
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="d-flex justify-content-end mb-3">
                       <a
-                        className="d-block text-right"
+                        className="d-block text-right my-2"
                         style={{ fontSize: '12px' }}
                         href="/#"
                       >
@@ -488,6 +568,7 @@ function Clothing() {
                 setStatus(1)
                 // 抓商品清單
                 console.log('5')
+                getClothingData('5')
               }}
             ></div>
             <div className="col-3 box2 pl-0">
@@ -559,7 +640,7 @@ function Clothing() {
         <div>
           <div className="row wrapper2 px-5 mx-0 ">
             <div
-              className="col-6 dwbox1 mx-0 pl-0"
+              className="col-6 dwbox1  mx-0 pl-0"
               style={{
                 width: '100%',
                 backgroundImage: `url('${
