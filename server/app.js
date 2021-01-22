@@ -65,11 +65,10 @@ app.get("/clothing", function (req, res) {
   );
 });
 
-//clothing
+//clothing modal使用
 app.get("/clothing/:id", function (req, res) {
   db.query("SELECT * FROM product " +
-    "INNER JOIN product_images ON product.id = product_images.product_id " +
-    "WHERE product.id = ? ORDER BY color", [req.params.id], (err, result) => {
+    "WHERE clothing_id = ? ORDER BY category", [req.params.id], (err, result) => {
     if (err) {
     console.log(err)
   }
