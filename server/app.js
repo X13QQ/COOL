@@ -305,6 +305,19 @@ app.put("/member/setting", function (req, res) {
   );
 });
 
+
+//優惠券
+app.get("/member/coupon", function (req, res) {
+  const sqlSelect =
+    "SELECT * FROM coupon " +
+    "WHERE coupon.code NOT IN (SELECT cool_order.coupon FROM cool_order WHERE cool_order.member_no = ?) "+
+    "ORDER BY coupon.amount DESC "
+  db.query(sqlSelect, [req.query.id], (req, result, fields) => {
+    res.send(result);
+  });
+});
+
+
 // 聯絡我們
 app.post("/member/contact", function (req, res) {
   const sqlInsert =

@@ -10,8 +10,16 @@ function CustomToggle({ children, eventKey }) {
     open()
   })
   return (
-    <button type="button" onClick={decoratedOnClick}>
-      {up ? <ArrowDown className="mx-2" /> : <ArrowUp className="mx-2" />}
+    <button
+      type="button"
+      onClick={decoratedOnClick}
+      className="border-0 py-2 font-weight-bold"
+      style={{ fontSize: '16px' }}
+    >
+      {/* {up ? <ArrowDown className="mx-2" /> : <ArrowUp className="mx-2" />} */}
+      <ArrowDown
+        className={`arrow-svg mx-3 ' + ${up ? 'arrow-actived' : ''}`}
+      />
       {children}
     </button>
   )
@@ -68,18 +76,28 @@ const Order = () => {
           {OrderDataProcessing.map((val, key) => {
             return (
               <div className="orderlist m-3" key={key} id={key}>
-                <ul className="m-2 d-flex flex-row list-unstyled d-flex justify-content-around">
-                  <li className="">訂單編號:　{val.order_no}</li>
-                  <li className="">購買日期:　{val.date}</li>
-                  <li className="">付款金額:　{val.price}</li>
+                <ul className="m-2 flex-row list-unstyled justify-content-around">
+                  <li className="font-weight-bold">
+                    訂單編號:　
+                    <span style={{ fontStyle: 'italic' }}>{val.order_no}</span>
+                  </li>
+                  <li className="font-weight-bold">
+                    購買日期:　
+                    <span style={{ fontStyle: 'italic' }}>{val.date}</span>
+                  </li>
+                  <li className="font-weight-bold">
+                    付款金額:　
+                    <span style={{ fontStyle: 'italic' }}>{val.price}</span>
+                  </li>
                 </ul>
-                <p className="solid-bottom"></p>
                 <div className="m-0">
                   <Accordion defaultActiveKey="">
                     <Card>
                       <CustomToggle eventKey="0">檢視完整訂單</CustomToggle>
                       <Accordion.Collapse eventKey="0">
-                        <Card.Body>{val.amount}</Card.Body>
+                        <Card.Body className="font-weight-bold">
+                          {val.amount}
+                        </Card.Body>
                       </Accordion.Collapse>
                     </Card>
                   </Accordion>
@@ -97,18 +115,28 @@ const Order = () => {
           {OrderDataSolved.map((val, key) => {
             return (
               <div className="orderlist m-3" key={key} id={key}>
-                <ul className="m-2 d-flex flex-row list-unstyled d-flex justify-content-around">
-                  <li className="">訂單編號:　{val.order_no}</li>
-                  <li className="">購買日期:　{val.date}</li>
-                  <li className="">付款金額:　{val.price}</li>
+                <ul className="m-2 flex-row list-unstyled justify-content-around">
+                  <li className="font-weight-bold">
+                    訂單編號:　
+                    <span style={{ fontStyle: 'italic' }}>{val.order_no}</span>
+                  </li>
+                  <li className="font-weight-bold">
+                    購買日期:　
+                    <span style={{ fontStyle: 'italic' }}> {val.date}</span>
+                  </li>
+                  <li className="font-weight-bold">
+                    付款金額:　
+                    <span style={{ fontStyle: 'italic' }}> {val.price}</span>
+                  </li>
                 </ul>
-                <p className="solid-bottom"></p>
                 <div className="m-0">
                   <Accordion defaultActiveKey="">
                     <Card>
                       <CustomToggle eventKey="0">檢視完整訂單</CustomToggle>
                       <Accordion.Collapse eventKey="0">
-                        <Card.Body>{val.amount}</Card.Body>
+                        <Card.Body className="font-weight-bold">
+                          {val.amount}
+                        </Card.Body>
                       </Accordion.Collapse>
                     </Card>
                   </Accordion>
@@ -126,18 +154,28 @@ const Order = () => {
           {OrderDataRefundlist.map((val, key) => {
             return (
               <div className="orderlist m-3" key={key} id={key}>
-                <ul className="m-2 d-flex flex-row list-unstyled d-flex justify-content-around">
-                  <li className="">訂單編號:　{val.order_no}</li>
-                  <li className="">購買日期:　{val.date}</li>
-                  <li className="">付款金額:　{val.price}</li>
+                <ul className="m-2 flex-row list-unstyled  justify-content-around">
+                  <li className="font-weight-bold">
+                    訂單編號:　
+                    <span style={{ fontStyle: 'italic' }}>{val.order_no}</span>
+                  </li>
+                  <li className="font-weight-bold">
+                    購買日期:　
+                    <span style={{ fontStyle: 'italic' }}>{val.date}</span>
+                  </li>
+                  <li className="font-weight-bold">
+                    付款金額:　
+                    <span style={{ fontStyle: 'italic' }}>{val.price}</span>
+                  </li>
                 </ul>
-                <p className="solid-bottom"></p>
                 <div className="m-0">
                   <Accordion defaultActiveKey="">
                     <Card>
                       <CustomToggle eventKey="0">檢視完整訂單</CustomToggle>
                       <Accordion.Collapse eventKey="0">
-                        <Card.Body>{val.amount}</Card.Body>
+                        <Card.Body className="font-weight-bold">
+                          {val.amount}
+                        </Card.Body>
                       </Accordion.Collapse>
                     </Card>
                   </Accordion>
