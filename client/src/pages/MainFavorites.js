@@ -2,9 +2,12 @@ import React from 'react'
 import { InputGroup, FormControl, Form } from 'react-bootstrap'
 import Favorites from '../components/Favorites'
 import { Search } from '../components/icons'
+import { useLocation, useHistory } from 'react-router-dom'
 
-function MainFavorites(props) {
-  const id = props.id
+function MainFavorites() {
+  const loc = useLocation()
+  const history = useHistory()
+  const id = !!loc.state ? loc.state.id : history.push('/clothing')
   return (
     <>
       <div className="main col-9">
