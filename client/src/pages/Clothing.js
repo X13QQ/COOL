@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
@@ -6,6 +6,62 @@ import Footer from '../components/Footer'
 function Clothing() {
   const [status, setStatus] = useState(0)
   const [accordionActived, setAccordionActived] = useState(false)
+
+  const [clothingImages, setClothingImages] = useState([])
+  const [clothingData, setClothingData] = useState([])
+
+  useEffect(() => {
+    // async await
+    async function getClothing() {
+      // 要使用try-catch來作錯誤處理
+      try {
+        // 從伺服器得到資料
+        const response = await fetch('http://localhost:3001/clothing', {
+          method: 'get',
+        })
+        if (response.ok) {
+          // 剖析資料為JS的數值
+          const data = await response.json()
+
+          // 設定資料到ProductRes狀態
+          setClothingImages(data)
+          console.log(data)
+        }
+      } catch (error) {
+        // 發生錯誤的處理情況
+        alert('無法得到伺服器資料，請稍後再重試')
+        console.log(error)
+      }
+    }
+
+    async function getClothingData(id) {
+      // 要使用try-catch來作錯誤處理
+      try {
+        // 從伺服器得到資料
+        let url = new URL('http://localhost:3001/clothing')
+        let params = {
+          id: id,
+        }
+        url.search = new URLSearchParams(params).toString()
+        const response = await fetch(url)
+        if (response.ok) {
+          // 剖析資料為JS的數值
+          const data = await response.json()
+
+          // 設定資料到ProductRes狀態
+          setClothingData(data)
+          console.log(data)
+        }
+      } catch (error) {
+        // 發生錯誤的處理情況
+        alert('無法得到伺服器資料，請稍後再重試')
+        console.log(error)
+      }
+    }
+    getClothing()
+    getClothingData()
+  }, [])
+
   const modal = () => {
     return (
       <div
@@ -13,7 +69,7 @@ function Clothing() {
         className="clothing-modal d-flex justify-content-center align-items-center"
         onClick={(e) => {
           console.log(e.target.id)
-          if (e.target.id) {
+          if (e.target.id === 'what') {
             setStatus(0)
           }
         }}
@@ -47,6 +103,7 @@ function Clothing() {
                 alt={' '}
               />
             </div>
+
             <div className="col-6">
               {/* 整個帽子區塊 */}
               <div className="pb-3">
@@ -57,6 +114,7 @@ function Clothing() {
                   style={{ color: '#353c1d' }}
                   onClick={(e) => {
                     e.preventDefault()
+                    // document.getElementById('top')
                     setAccordionActived(!accordionActived)
                   }}
                 >
@@ -74,6 +132,7 @@ function Clothing() {
                   />
                 </a>
                 <ul
+                  // id="top"
                   className={
                     'clothing-accordion-ul list-unstyled mb-0 ' +
                     (accordionActived ? 'accordion-actived' : '')
@@ -106,9 +165,16 @@ function Clothing() {
               </div>
               <div className="pb-3">
                 <a
-                  href="/#"
-                  className="d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
+                  href="#!"
+                  className="clothing-accordion-a  d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
                   style={{ color: '#353c1d' }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('coat')
+                      .classList.toggle('clothing-accordion-ul')
+                    // setAccordionActived(!accordionActived)
+                  }}
                 >
                   外套
                   <img
@@ -122,7 +188,14 @@ function Clothing() {
                     alt={' '}
                   />
                 </a>
-                <ul className="list-unstyled">
+                <ul
+                  id="coat"
+                  className={'clothing-accordion-ul list-unstyled mb-0 '}
+                  // className={
+                  //   'clothing-accordion-ul list-unstyled mb-0 ' +
+                  //   (accordionActived ? 'accordion-actived' : '')
+                  // }
+                >
                   <li className="px-5">
                     <p
                       style={{
@@ -150,9 +223,16 @@ function Clothing() {
               </div>
               <div className="pb-3">
                 <a
-                  href="/#"
-                  className="d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
+                  href="#!"
+                  className="clothing-accordion-a  d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
                   style={{ color: '#353c1d' }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('top')
+                      .classList.toggle('clothing-accordion-ul')
+                    // setAccordionActived(!accordionActived)
+                  }}
                 >
                   上衣
                   <img
@@ -166,12 +246,58 @@ function Clothing() {
                     alt={' '}
                   />
                 </a>
+                <ul
+                  id="top"
+                  className={'clothing-accordion-ul list-unstyled mb-0 '}
+                  // className={
+                  //   'clothing-accordion-ul list-unstyled mb-0 ' +
+                  //   (accordionActived ? 'accordion-actived' : '')
+                  // }
+                >
+                  <li className="px-5">
+                    <p
+                      style={{
+                        fontSize: '12px',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        display: 'block',
+                      }}
+                    >
+                      YEEZY BOOST 350 V2 - CBLACK/ RED
+                    </p>
+                    <p style={{ fontSize: '12px' }}>NT$6,800</p>
+                    <div className="d-flex justify-content-end">
+                      <a
+                        className="d-block text-right"
+                        style={{ fontSize: '12px' }}
+                        href="/#"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          document
+                            .getElementById('hattrousers')
+                            .classList.toggle('clothing-accordion-ul')
+                          // setAccordionActived(!accordionActived)
+                        }}
+                      >
+                        加入購物車
+                      </a>
+                    </div>
+                  </li>
+                </ul>
               </div>
               <div className="pb-3">
                 <a
-                  href="/#"
-                  className="d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
+                  href="#!"
+                  className="clothing-accordion-a  d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
                   style={{ color: '#353c1d' }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('trousers')
+                      .classList.toggle('clothing-accordion-ul')
+                    // setAccordionActived(!accordionActived)
+                  }}
                 >
                   長褲
                   <img
@@ -185,12 +311,51 @@ function Clothing() {
                     alt={' '}
                   />
                 </a>
+                <ul
+                  id="trousers"
+                  className={'clothing-accordion-ul list-unstyled mb-0 '}
+                  // className={
+                  //   'clothing-accordion-ul list-unstyled mb-0 ' +
+                  //   (accordionActived ? 'accordion-actived' : '')
+                  // }
+                >
+                  <li className="px-5">
+                    <p
+                      style={{
+                        fontSize: '12px',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        display: 'block',
+                      }}
+                    >
+                      YEEZY BOOST 350 V2 - CBLACK/ RED
+                    </p>
+                    <p style={{ fontSize: '12px' }}>NT$6,800</p>
+                    <div className="d-flex justify-content-end">
+                      <a
+                        className="d-block text-right"
+                        style={{ fontSize: '12px' }}
+                        href="/#"
+                      >
+                        加入購物車
+                      </a>
+                    </div>
+                  </li>
+                </ul>
               </div>
               <div className="pb-3">
                 <a
-                  href="/#"
-                  className="d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
+                  href="#!"
+                  className="clothing-accordion-a  d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
                   style={{ color: '#353c1d' }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('shoe')
+                      .classList.toggle('clothing-accordion-ul')
+                    // setAccordionActived(!accordionActived)
+                  }}
                 >
                   鞋款
                   <img
@@ -204,6 +369,38 @@ function Clothing() {
                     alt={' '}
                   />
                 </a>
+                <ul
+                  id="shoe"
+                  className={'clothing-accordion-ul list-unstyled mb-0 '}
+                  // className={
+                  //   'clothing-accordion-ul list-unstyled mb-0 ' +
+                  //   (accordionActived ? 'accordion-actived' : '')
+                  // }
+                >
+                  <li className="px-5">
+                    <p
+                      style={{
+                        fontSize: '12px',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        display: 'block',
+                      }}
+                    >
+                      YEEZY BOOST 350 V2 - CBLACK/ RED
+                    </p>
+                    <p style={{ fontSize: '12px' }}>NT$6,800</p>
+                    <div className="d-flex justify-content-end">
+                      <a
+                        className="d-block text-right"
+                        style={{ fontSize: '12px' }}
+                        href="/#"
+                      >
+                        加入購物車
+                      </a>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -282,21 +479,38 @@ function Clothing() {
           <div className="row wrapper px-5 mx-0">
             <div
               className="col-6 box1 mx-0"
+              style={{
+                backgroundImage: `url('${
+                  clothingImages.length > 0 ? clothingImages[4].src : ''
+                }')`,
+              }}
               onClick={() => {
                 setStatus(1)
+                // 抓商品清單
+                console.log('5')
               }}
             ></div>
             <div className="col-3 box2 pl-0">
               <div
                 className="box2-1 box mx-0"
-                style={{ width: '100%' }}
+                style={{
+                  width: '100%',
+                  backgroundImage: `url('${
+                    clothingImages.length > 0 ? clothingImages[1].src : ''
+                  }')`,
+                }}
                 onClick={() => {
                   setStatus(1)
                 }}
               ></div>
               <div
                 className="box2-2 box mx-0"
-                style={{ width: '100%' }}
+                style={{
+                  width: '100%',
+                  backgroundImage: `url('${
+                    clothingImages.length > 0 ? clothingImages[3].src : ''
+                  }')`,
+                }}
                 onClick={() => {
                   setStatus(1)
                 }}
@@ -305,14 +519,24 @@ function Clothing() {
             <div className="col-3 box3 pl-0">
               <div
                 className="box3-1 box ml-0"
-                style={{ width: '100%' }}
+                style={{
+                  width: '100%',
+                  backgroundImage: `url('${
+                    clothingImages.length > 0 ? clothingImages[0].src : ''
+                  }')`,
+                }}
                 onClick={() => {
                   setStatus(1)
                 }}
               ></div>
               <div
                 className="box3-2 box ml-0"
-                style={{ width: '100%' }}
+                style={{
+                  width: '100%',
+                  backgroundImage: `url('${
+                    clothingImages.length > 0 ? clothingImages[2].src : ''
+                  }')`,
+                }}
                 onClick={() => {
                   setStatus(1)
                 }}
@@ -335,7 +559,12 @@ function Clothing() {
         <div>
           <div className="row wrapper2 px-5 mx-0 ">
             <div
-              className="col-6 dwbox1  mx-0 pl-0"
+              style={{
+                width: '100%',
+                backgroundImage: `url('${
+                  clothingImages.length > 0 ? clothingImages[5].src : ''
+                }')`,
+              }}
               onClick={() => {
                 setStatus(1)
               }}
@@ -344,14 +573,24 @@ function Clothing() {
               <div className="col-6 dwbox2 px-0">
                 <div
                   className="dwbox2-1 box mx-0"
-                  style={{ width: '100%' }}
+                  style={{
+                    width: '100%',
+                    backgroundImage: `url('${
+                      clothingImages.length > 0 ? clothingImages[2].src : ''
+                    }')`,
+                  }}
                   onClick={() => {
                     setStatus(1)
                   }}
                 ></div>
                 <div
                   className="dwbox2-2 box mx-0 mb-0"
-                  style={{ width: '100%' }}
+                  style={{
+                    width: '100%',
+                    backgroundImage: `url('${
+                      clothingImages.length > 0 ? clothingImages[2].src : ''
+                    }')`,
+                  }}
                   onClick={() => {
                     setStatus(1)
                   }}
@@ -360,14 +599,24 @@ function Clothing() {
               <div className="col-6 dwbox3 pr-0">
                 <div
                   className="dwbox3-1 box mx-0 "
-                  style={{ width: '100%' }}
+                  style={{
+                    width: '100%',
+                    backgroundImage: `url('${
+                      clothingImages.length > 0 ? clothingImages[2].src : ''
+                    }')`,
+                  }}
                   onClick={() => {
                     setStatus(1)
                   }}
                 ></div>
                 <div
                   className="dwbox3-2 box mx-0 mb-0"
-                  style={{ width: '100%' }}
+                  style={{
+                    width: '100%',
+                    backgroundImage: `url('${
+                      clothingImages.length > 0 ? clothingImages[2].src : ''
+                    }')`,
+                  }}
                   onClick={() => {
                     setStatus(1)
                   }}
@@ -376,7 +625,13 @@ function Clothing() {
               <div className="col-12 px-0">
                 <div
                   className="dwbox4 box mx-0"
-                  style={{ width: '100%', margin: '10px auto' }}
+                  style={{
+                    width: '100%',
+                    margin: '10px auto',
+                    backgroundImage: `url('${
+                      clothingImages.length > 0 ? clothingImages[2].src : ''
+                    }')`,
+                  }}
                   onClick={() => {
                     setStatus(1)
                   }}

@@ -408,8 +408,9 @@ body {
 
 .clothing-accordion-ul {
   max-height: 0px;
+  /* margin-bottom: 0px; */
   overflow: hidden;
-  transition: 0.15s;
+  transition: 0.5s;
 }
 
 .clothing-accordion-ul.accordion-actived {
@@ -569,7 +570,7 @@ h3 {
 .box1 {
   /* flex-grow: 2; */
   /* height: 710px; */
-  background-image: url('../images/穿搭集/內容視覺/JUNE_EDITED-8-v1590602563975.jpg');
+  /* background-image: url('../images/穿搭集/內容視覺/JUNE_EDITED-8-v1590602563975.jpg'); no5 */
   background-size: cover;
   margin: 10px auto;
   cursor: pointer;
@@ -583,13 +584,13 @@ h3 {
 }
 .box2 > .box2-1 {
   height: 400px;
-  background-image: url('../images/穿搭集/內容視覺/3.jpg');
+  /* background-image: url('../images/穿搭集/內容視覺/3.jpg'); no3 */
   background-size: cover;
   cursor: pointer;
 }
 .box2 > .box2-2 {
   height: 300px;
-  background-image: url('../images/穿搭集/內容視覺/Home_TrendFeature_MB_12-4.jpg');
+  /* background-image: url('../images/穿搭集/內容視覺/Home_TrendFeature_MB_12-4.jpg'); */
   background-size: cover;
   cursor: pointer;
 }
@@ -599,13 +600,13 @@ h3 {
 }
 .box3 > .box3-1 {
   height: 360px;
-  background-image: url('../images/穿搭集/內容視覺/JUNE_EDITED-4-v1590602528298.jpg');
+  /* background-image: url('../images/穿搭集/內容視覺/JUNE_EDITED-4-v1590602528298.jpg'); */
   background-size: cover;
   cursor: pointer;
 }
 .box3 > .box3-2 {
   height: 340px;
-  background-image: url('../images/穿搭集/內容視覺/JUNE_EDITED-13-v1590602603366\ \(1\).jpg');
+  /* background-image: url('../images/穿搭集/內容視覺/JUNE_EDITED-13-v1590602603366\ \(1\).jpg'); */
   background-size: cover;
   cursor: pointer;
 }
@@ -616,7 +617,7 @@ h3 {
   /* flex-grow: 2; */
   /* height: 800px; */
   margin: 10px auto;
-  background-image: url('../images/穿搭集/內容視覺/man.jpg');
+  /* background-image: url('../images/穿搭集/內容視覺/man.jpg'); */
   background-size: cover;
   cursor: pointer;
 }
@@ -627,13 +628,13 @@ h3 {
 }
 .dwbox2 > .dwbox2-1 {
   height: 350px;
-  background-image: url('../images/穿搭集/內容視覺/Home_Kids_DT_9-30-2.jpg');
+  /* background-image: url('../images/穿搭集/內容視覺/Home_Kids_DT_9-30-2.jpg'); */
   background-size: cover;
   cursor: pointer;
 }
 .dwbox2 > .dwbox2-2 {
   height: 200px;
-  background-image: url('../images/穿搭集/內容視覺/New_Women.jpg');
+  /* background-image: url('../images/穿搭集/內容視覺/New_Women.jpg'); */
   background-size: cover;
   cursor: pointer;
 }
@@ -643,13 +644,13 @@ h3 {
 }
 .dwbox3 > .dwbox3-1 {
   height: 320px;
-  background-image: url('../images/穿搭集/內容視覺/14_300x.jpg');
+  /* background-image: url('../images/穿搭集/內容視覺/14_300x.jpg'); */
   background-size: cover;
   cursor: pointer;
 }
 .dwbox3 > .dwbox3-2 {
   height: 230px;
-  background-image: url('../images/穿搭集/內容視覺/f20_accessories22.jpg');
+  /* background-image: url('../images/穿搭集/內容視覺/f20_accessories22.jpg'); */
   background-size: cover;
   cursor: pointer;
 }
@@ -659,7 +660,7 @@ h3 {
   height: 220px;
   width: 580px;
   flex-direction: column-reverse;
-  background-image: url('../images/穿搭集/內容視覺/F20_women22.jpg');
+  /* background-image: url('../images/穿搭集/內容視覺/F20_women22.jpg'); */
   /* background: brown; */
   background-size: cover;
   cursor: pointer;
