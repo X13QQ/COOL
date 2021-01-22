@@ -12,7 +12,6 @@ function DetailContent(props) {
   const [DetailRes, setDetailRes] = useState('')
   // async await
   async function getDetail() {
-
     // 要使用try-catch來作錯誤處理
     try {
       // 從伺服器得到資料
@@ -39,12 +38,11 @@ function DetailContent(props) {
   // dom生成後，執行fetch函式，再影響setProductRes
   useEffect(() => {
     getDetail()
-
   }, [])
 
   console.log(DetailRes) // ok
   // console.log(DetailRes[0]["id"]) // ok
-  // 
+  //
   const [status, setStatus] = useState(0)
   const [commentTable, setCommentTable] = useState(false)
   const sizemodal = () => {
@@ -815,7 +813,9 @@ function DetailContent(props) {
                 style={{ height: '1000px', overflowY: 'hidden' }}
               >
                 <div>
-                  <h2 className="font-weight-bold">{DetailRes ? DetailRes[0].name : ''}</h2>
+                  <h2 className="font-weight-bold">
+                    {DetailRes ? DetailRes[0].name : ''}
+                  </h2>
                   <h3>{DetailRes ? DetailRes[0].brand : ''}</h3>
                   <h3 className="font-weight-bold" style={{ color: '#f37022' }}>
                     ${DetailRes ? DetailRes[0].price : ''}

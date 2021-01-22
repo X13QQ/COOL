@@ -25,12 +25,6 @@ const credentials = {
 };
 var emailService = require("./lib/email.js")(credentials);
 
-<<<<<<< HEAD
-// product test
-app.get("/product", function (req, res) {
-  db.query("SELECT * FROM Product", (err, result) => {
-    res.send(result);
-=======
 // 商品首頁 get
 app.get("/product", function (req, res) {
   db.query("SELECT * FROM product", '', (err, result) => {
@@ -49,7 +43,6 @@ app.get("/detail/:brand/:id", function (req, res) {
     }
     console.log(result);
     res.send(JSON.stringify(result))
->>>>>>> 79c6626af8f6fd3b440d9c31c28ffa73fdba2959
   });
 });
 
@@ -95,24 +88,6 @@ app.post("/profile/:logintype", function (req, res) {
         if (result.length > 0) {
           res.send({ message: "帳號已存在" });
         } else {
-<<<<<<< HEAD
-          const sqlInsert =
-            "INSERT INTO member (account, password, email, letter, type) " +
-            "VALUES (?, ?, ?, ?, 'N') ";
-          db.query(
-            sqlInsert,
-            [
-              req.body.account,
-              req.body.password,
-              req.body.email,
-              req.body.letter,
-            ],
-            (err, result, fields) => {
-              if (err) {
-                res.send({ err: err });
-              }
-              res.send(result);
-=======
           const sqlSelect = "SELECT * FROM member WHERE email = ? ";
           db.query(sqlSelect, [req.body.email], (err, result, fields) => {
             if (err) res.send({ err: err });
@@ -137,7 +112,6 @@ app.post("/profile/:logintype", function (req, res) {
                   res.send(result);
                 }
               );
->>>>>>> 79c6626af8f6fd3b440d9c31c28ffa73fdba2959
             }
           });
         }

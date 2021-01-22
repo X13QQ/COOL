@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
 import HeaderOther from '../components/HeaderOther'
 import Footer from '../components/Footer'
+// import Session from 'react-session-api'
+import FakeRes from '../data/FakeRes'
 
 function ShoppingCart(props) {
   const [status, setStatus] = useState(1)
+  const [total, setTotal] = useState(0)
+  var totalprice = 0
   const OrderSummary = () => {
     return (
       <div className="col-3 order-summary border px-0">
@@ -15,8 +19,8 @@ function ShoppingCart(props) {
           訂單摘要
         </h4>
         <div className="d-flex align-items-center justify-content-center mb-3">
-          <p className="font-weight-bold mb-0">商品總計 NT$ </p>
-          <span> {props.price} </span>
+          <p className="font-weight-bold mb-0">商品總計 NT$</p>
+          <span className="font-weight-bold"> {totalprice} </span>
         </div>
         <div className="d-flex align-items-center justify-content-center mb-3">
           <p className="font-weight-bold mb-0">運費總計 NT$ </p>
@@ -28,19 +32,82 @@ function ShoppingCart(props) {
         <hr style={{ width: '85%', margin: '16px auto' }} />
         <div className="d-flex align-items-center justify-content-center mb-3">
           <p className="font-weight-bold mb-0">結帳總金額 NT$ </p>
-          <span className="font-weight-bold"> 0 </span>
+          <span className="font-weight-bold">
+            {status === 1 ? totalprice : total}{' '}
+          </span>
         </div>
         <button
+          id="before-page"
           type="button"
-          className="btn btn-danger"
+          className={'btn btn-secondary mx-2 ' + (status === 1 ? 'd-none' : '')}
           onClick={() => {
-            setStatus(status + 1)
+            setStatus(status - 1)
           }}
         >
-          前往結帳
+          上一步
+        </button>
+        <button
+          type="button"
+          className="btn btn-danger mx-2"
+          onClick={() => {
+            setStatus(status + 1)
+            setTotal(totalprice)
+          }}
+        >
+          下一步
         </button>
       </div>
     )
+  }
+  const brand = () => {
+    return FakeRes.map((v, i) => {
+      // console.log(v)
+      totalprice += v.price
+      // setTotal(total + v.price)
+      // console.log(totalprice)
+      // setTotal(totalprice) ???????????????????????????????????????????????????????????????????????
+      return (
+        <div className=" brand border mx-0 mb-2">
+          <div className="px-3 py-2">
+            <label for="brand-name " className="font-weight-bold mb-0 ml-3">
+              品牌：{v.brand} / 顏色：B / 尺寸：S
+            </label>
+          </div>
+          <div className="product row py-2 mx-0">
+            <div className="col-3  d-flex justify-content-center align-items-center">
+              <div className="img-box">
+                <img
+                  style={{
+                    width: '100px',
+                    height: '92px',
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                  }}
+                  src={v.image}
+                  alt={''}
+                ></img>
+              </div>
+            </div>
+            <div
+              className="col-3   d-flex justify-content-center align-items-center font-weight-bold"
+              style={{ fontSize: '14px' }}
+            >
+              {v.name}
+            </div>
+            <div className="col-3  d-flex justify-content-center align-items-center">
+              <select style={{ width: '50px' }}>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </select>
+            </div>
+            <div className="col-3 d-flex justify-content-center align-items-center font-weight-bold">
+              NT$ <span>{v.price}</span>
+            </div>
+          </div>
+        </div>
+      )
+    })
   }
   const checkout = () => {
     return (
@@ -74,100 +141,17 @@ function ShoppingCart(props) {
             <div className="col-9 order-product pl-0">
               <div className="select-all border mb-3 py-2">
                 <div className="px-3">
-                  <input type="checkbox" />
-                  <label className="title-fontsize mb-0 ml-3">選擇全部</label>
+                  {/* <input type="checkbox" /> */}
+                  <label className="title-fontsize mb-0 ml-3">您的購物車</label>
                 </div>
               </div>
-              <div className=" brand border mx-0 mb-2">
-                <div className="px-3 py-2">
-                  <input type="checkbox" />
-                  <label
-                    for="brand-name "
-                    className="font-weight-bold mb-0 ml-3"
-                  >
-                    Adidas
-                  </label>
-                </div>
-                <div className="product row py-2 mx-0">
-                  <div className="col-3  d-flex justify-content-center align-items-center">
-                    <div className="img-box">
-                      <img
-                        className="img-fluid"
-                        src="../images/商品/商品組圖(尚未依品牌分類)/1/z-70864313_30-1.jpg"
-                        alt={''}
-                      ></img>
-                    </div>
-                  </div>
-                  <div className="col-3   d-flex justify-content-center align-items-center font-weight-bold">
-                    GOFE兩雙一組/右手超人襪
-                  </div>
-                  <div className="col-3  d-flex justify-content-center align-items-center">
-                    <select style={{ width: '50px' }}>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                    </select>
-                  </div>
-                  <div className="col-3 d-flex justify-content-center align-items-center font-weight-bold">
-                    NT$ <span>3,000</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="brand border mx-0 mb-2">
-                <div className="px-3 py-2">
-                  <input type="checkbox" />
-                  <label className="font-weight-bold mb-0 ml-3">Adidas2</label>
-                </div>
-                <div className="product row py-2 mx-0">
-                  <div className="col-3 d-flex justify-content-center align-items-center">
-                    <div className="img-box">
-                      <img
-                        className="img-fluid"
-                        src="../images/商品/商品組圖(尚未依品牌分類)/1/z-70864313_30-1.jpg"
-                        alt={''}
-                      ></img>
-                    </div>
-                  </div>
-                  <div className="col-3 d-flex justify-content-center align-items-center font-weight-bold">
-                    GOFE兩雙一組/右手超人襪
-                  </div>
-                  <div className="col-3 d-flex justify-content-center align-items-center">
-                    <select style={{ width: '50px' }}>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                    </select>
-                  </div>
-                  <div className="col-3 d-flex justify-content-center align-items-center font-weight-bold">
-                    NT$ 3,000
-                  </div>
-                </div>
-                <div className="product row py-2 mx-0">
-                  <div className="col-3 d-flex justify-content-center align-items-center">
-                    <div className="img-box">
-                      <img
-                        className="img-fluid"
-                        src="../images/商品/商品組圖(尚未依品牌分類)/1/z-70864313_30-1.jpg"
-                        alt={''}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-3 d-flex justify-content-center align-items-center font-weight-bold">
-                    GOFE兩雙一組/右手超人襪
-                  </div>
-                  <div className="col-3 d-flex justify-content-center align-items-center">
-                    <select style={{ width: '50px' }}>
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                    </select>
-                  </div>
-                  <div className="col-3 d-flex justify-content-center align-items-center  font-weight-bold">
-                    NT$ 3,000
-                  </div>
-                </div>
-              </div>
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {/*  */}
+              {brand()}
             </div>
             {OrderSummary()}
           </div>
