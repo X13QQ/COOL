@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Tabs, Tab, Accordion, Card, useAccordionToggle } from 'react-bootstrap'
-import { ArrowDown, ArrowUp } from './icons'
+// import { ArrowDown, ArrowUp } from './icons'
+import { ArrowDown } from './icons'
 import { useLocation, useHistory } from 'react-router-dom'
 
 function CustomToggle({ children, eventKey }) {
@@ -122,11 +123,11 @@ const Order = () => {
                   </li>
                   <li className="font-weight-bold">
                     購買日期:　
-                    <span style={{ fontStyle: 'italic' }}> {val.date}</span>
+                    <span style={{ fontStyle: 'italic' }}>{val.date}</span>
                   </li>
                   <li className="font-weight-bold">
                     付款金額:　
-                    <span style={{ fontStyle: 'italic' }}> {val.price}</span>
+                    <span style={{ fontStyle: 'italic' }}>{val.price}</span>
                   </li>
                 </ul>
                 <div className="m-0">
