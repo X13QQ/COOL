@@ -8,7 +8,9 @@ import FakeRes from '../data/FakeRes'
 function ShoppingCart(props) {
   const [status, setStatus] = useState(1)
   const [total, setTotal] = useState(0)
+  const [shippingstatus, setshipping] = useState(0)
   var totalprice = 0
+
   const OrderSummary = () => {
     return (
       <div className="col-3 order-summary border px-0">
@@ -20,11 +22,15 @@ function ShoppingCart(props) {
         </h4>
         <div className="d-flex align-items-center justify-content-center mb-3">
           <p className="font-weight-bold mb-0">商品總計 NT$</p>
-          <span className="font-weight-bold"> {totalprice} </span>
+          <span className="font-weight-bold">
+            {status === 1 ? totalprice : total}
+          </span>
         </div>
         <div className="d-flex align-items-center justify-content-center mb-3">
           <p className="font-weight-bold mb-0">運費總計 NT$ </p>
-          <span className="font-weight-bold"> 0 </span>
+          <span className="font-weight-bold">
+            {status === 1 ? 0 : shippingstatus === 0 ? 60 : 150}
+          </span>
         </div>
         <a href="#!" className="font-weight-bold">
           使用優惠券
@@ -33,7 +39,9 @@ function ShoppingCart(props) {
         <div className="d-flex align-items-center justify-content-center mb-3">
           <p className="font-weight-bold mb-0">結帳總金額 NT$ </p>
           <span className="font-weight-bold">
-            {status === 1 ? totalprice : total}{' '}
+            {status === 1
+              ? totalprice
+              : total + (shippingstatus === 0 ? 60 : 150)}
           </span>
         </div>
         <button
@@ -70,7 +78,7 @@ function ShoppingCart(props) {
         <div className=" brand border mx-0 mb-2">
           <div className="px-3 py-2">
             <label for="brand-name " className="font-weight-bold mb-0 ml-3">
-              品牌：{v.brand} / 顏色：B / 尺寸：S
+              品牌：{v.brand} / 顏色：{v.color} / 尺寸：{v.size}
             </label>
           </div>
           <div className="product row py-2 mx-0">
@@ -159,7 +167,13 @@ function ShoppingCart(props) {
       </>
     )
   }
-  const PaymentMethodByCash = () => {
+  const PaymentMethod = () => {
+    // document.getElementById('VISA').onClick = function () {
+    //   setshipping(0)
+    // }
+    // document.getElementById('Home-delivery').onClick = function () {
+    //   setshipping(1)
+    // }
     return (
       <>
         <div className="container" style={{ margin: '69px auto 100px auto' }}>
@@ -205,6 +219,7 @@ function ShoppingCart(props) {
                   >
                     <Tab
                       title="VISA(宅配)"
+                      id="VISA"
                       eventKey="processing"
                       className="tab-visa"
                     >
@@ -298,6 +313,7 @@ function ShoppingCart(props) {
                     </Tab>
                     <Tab
                       className="choosing"
+                      id="Home-delivery"
                       title="超商取付 OOO門市"
                       eventKey="solved"
                     >
@@ -659,7 +675,7 @@ function ShoppingCart(props) {
       {status === 1
         ? checkout()
         : status === 2
-        ? PaymentMethodByCash()
+        ? PaymentMethod()
         : status === 3
         ? CompleteOrder()
         : ''}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 // 購物車要求：品牌名稱、顏色、尺寸、商品圖片路徑、庫存、品名、單價
 const FakeRes = [
   {
@@ -8,6 +9,8 @@ const FakeRes = [
     image:
       '/images/product/Champion/Reverse_Weave_Crew_Script_Logo/Reverse_Weave_Crew_Script_Logo_B01.jpg',
     price: 4590,
+    color: '紅色',
+    size: 'L',
   },
   {
     id: 2,
@@ -16,6 +19,8 @@ const FakeRes = [
     image:
       '/images/product/Champion/Reverse_Weave_Tie_Dye_Hoodie/Reverse_Weave_Tie_Dye_Hoodie_P01.jpg',
     price: 3500,
+    color: '黑色',
+    size: 'S',
   },
   {
     id: 3,
@@ -24,6 +29,8 @@ const FakeRes = [
     image:
       '/images/product/Champion/Campus_Fleece_Mock_Neck_Crew_Embroidered_Logo/Campus_Fleece_Mock_Neck_Crew_Embroidered_Logo_O01.jpg',
     price: 21000,
+    color: '白色',
+    size: 'M',
   },
   // {
   //   id: 4,
