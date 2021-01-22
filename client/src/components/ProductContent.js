@@ -43,7 +43,7 @@ function ProductContent() {
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
   const [listOrder, setListOrder] = useState(1)
-  let pages = Math.ceil(FakeRes.length / itemsPerPage)
+  let pages = Math.ceil(ProductRes.length / itemsPerPage)
 
   return (
     <>

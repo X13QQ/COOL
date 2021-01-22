@@ -35,10 +35,26 @@ app.get("/product", function (req, res) {
   });
 });
 
-// 商品詳細頁 get
+// 商品詳細頁 get product_image
 app.get("/detail/:brand/:id", function (req, res) {
   db.query(
+    // 兩張表成功
     "SELECT * FROM product INNER JOIN product_images ON product.id = product_images.product_id  WHERE product.id =" + req.params.id + " ORDER BY color",
+
+        (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+
+// 商品詳細頁 post product_stock
+app.post("/detail/:brand/:id", function (req, res) {
+  db.query(
+    "SELECT * FROM product INNER JOIN product_stock ON product.id = product_stock.product_id  WHERE product.id =" + req.params.id + " ORDER BY color , size",
         (err, result) => {
       if (err) {
         console.log(err);
