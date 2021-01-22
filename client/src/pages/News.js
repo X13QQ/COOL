@@ -1,10 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
 function News() {
   const [status, setStatus] = useState(0)
   const [Content, setContent] = useState('')
+  const [newsImages, setNewsImages] = useState([])
+
+  useEffect(() => {
+    // async await
+    async function getNews() {
+      // 要使用try-catch來作錯誤處理
+      try {
+        // 從伺服器得到資料
+        const response = await fetch('http://localhost:3001/news', {
+          method: 'get',
+        })
+        if (response.ok) {
+          // 剖析資料為JS的數值
+          const data = await response.json()
+
+          // 設定資料到ProductRes狀態
+          setNewsImages(data)
+          console.log(data)
+        }
+      } catch (error) {
+        // 發生錯誤的處理情況
+        alert('無法得到伺服器資料，請稍後再重試')
+        console.log(error)
+      }
+    }
+    getNews()
+  }, [])
+
   const modal = () => {
     return (
       <div
@@ -140,7 +168,14 @@ function News() {
           <div className="col-8 px-0">
             <div className="row mx-0">
               <div className="col-8 px-0">
-                <div className="newsImageMain1 newsBg-cover newsRow newsBig-pic-mask ">
+                <div
+                  className="newsImageMain1 newsBg-cover newsRow newsBig-pic-mask "
+                  style={{
+                    backgroundImage: `url('${
+                      newsImages.length > 0 ? newsImages[0].src : ''
+                    }')`,
+                  }}
+                >
                   <h3 className="newsBig-pic-text ">
                     TOMMY HILFIGER 2021年推出TOMMY JEANS
                   </h3>
@@ -153,8 +188,22 @@ function News() {
                 </div>
               </div>
               <div className="col-4 px-0">
-                <div className="newsImageMain2 newsBg-cover newsBox "></div>
-                <div className="newsImageMain4 newsBg-cover newsBox newsBig-pic-mask ">
+                <div
+                  className="newsImageMain2 newsBg-cover newsBox "
+                  style={{
+                    backgroundImage: `url('${
+                      newsImages.length > 0 ? newsImages[1].src : ''
+                    }')`,
+                  }}
+                ></div>
+                <div
+                  className="newsImageMain4 newsBg-cover newsBox newsBig-pic-mask "
+                  style={{
+                    backgroundImage: `url('${
+                      newsImages.length > 0 ? newsImages[3].src : ''
+                    }')`,
+                  }}
+                >
                   <h3 className="newsBig-pic-text3">
                     大地色系工裝 X 機能！ THE NORTH FACE URBAN EXPLORATION
                     春夏膠囊 UTILITY GEAR 系列開始發售！
@@ -165,14 +214,28 @@ function News() {
             </div>
             <div className="row mx-0">
               <div className="col-4 px-0">
-                <div className="newsImageMain6 newsBg-cover newsBox newsBig-pic-mask ">
+                <div
+                  className="newsImageMain6 newsBg-cover newsBox newsBig-pic-mask "
+                  style={{
+                    backgroundImage: `url('${
+                      newsImages.length > 0 ? newsImages[5].src : ''
+                    }')`,
+                  }}
+                >
                   <h3 className="newsBig-pic-text3">
                     全球限量 300 件！村上隆「頂級收藏品」MELTING
                     DOB，誰搶到誰就從貧民變老闆
                   </h3>
                   <h5 className="newsBig-pic-text-sm">Miya.</h5>
                 </div>
-                <div className="newsImageMain8 newsBg-cover newsBox newsBig-pic-mask ">
+                <div
+                  className="newsImageMain8 newsBg-cover newsBox newsBig-pic-mask "
+                  style={{
+                    backgroundImage: `url('${
+                      newsImages.length > 0 ? newsImages[7].src : ''
+                    }')`,
+                  }}
+                >
                   <h3 className="newsBig-pic-text3">
                     STÜSSY X MATTEL CREATIONS 打造 MAGIC 8 BALL
                     占卜玩具，搖晃就告訴你 YES 或 NO ！
@@ -181,7 +244,14 @@ function News() {
                 </div>
               </div>
               <div className="col-8 px-0">
-                <div className="newsImageMain7 newsBg-cover newsRow newsBig-pic-mask ">
+                <div
+                  className="newsImageMain7 newsBg-cover newsRow newsBig-pic-mask "
+                  style={{
+                    backgroundImage: `url('${
+                      newsImages.length > 0 ? newsImages[6].src : ''
+                    }')`,
+                  }}
+                >
                   <h3 className="newsBig-pic-text">
                     愛神回來到－GIRLS DON’T CRY 全新 2021 膠囊系列發佈
                   </h3>
@@ -191,7 +261,14 @@ function News() {
             </div>
           </div>
           <div className="col-4 px-0 d-flex flex-column">
-            <div className=" newsImageMain3 newsBg-cover newsBox newsBig-pic-mask ">
+            <div
+              className=" newsImageMain3 newsBg-cover newsBox newsBig-pic-mask "
+              style={{
+                backgroundImage: `url('${
+                  newsImages.length > 0 ? newsImages[2].src : ''
+                }')`,
+              }}
+            >
               <h3 className="newsBig-pic-text2">
                 肯爺怒告 YEEZY 實習生私自曝光品牌最新設計，要求賠償千萬違約金！
               </h3>
@@ -199,7 +276,12 @@ function News() {
             </div>
             <div
               className="newsImageMain5 newsBg-cover newsBox newsBig-pic-mask "
-              style={{ flexGrow: '1' }}
+              style={{
+                backgroundImage: `url('${
+                  newsImages.length > 0 ? newsImages[4].src : ''
+                }')`,
+                flexGrow: '1',
+              }}
             >
               <h3 className="newsBig-pic-text2">
                 絲綢、唐裝通通回歸！ CLOT X POLO RALPH LAUREN
@@ -207,7 +289,14 @@ function News() {
               </h3>
               <h5 className="newsBig-pic-text-sm">Sheng.</h5>
             </div>
-            <div className="newsImageMain9 newsBg-cover newsBox newsBig-pic-mask ">
+            <div
+              className="newsImageMain9 newsBg-cover newsBox newsBig-pic-mask "
+              style={{
+                backgroundImage: `url('${
+                  newsImages.length > 0 ? newsImages[8].src : ''
+                }')`,
+              }}
+            >
               <h3 className="newsBig-pic-text2">
                 SUPREME 母公司將經營中心移到上海，「SUPREME
                 首間中國門店」要開了？
