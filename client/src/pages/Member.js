@@ -1,7 +1,7 @@
 import React from 'react'
 
 import HeaderOther from '../components/HeaderOther'
-import Banner from '../components/Banner'
+import MainCoupon from './MainCoupon'
 import MemberSidebar from '../components/MemberSidebar'
 import { Row, Container } from 'react-bootstrap'
 import Breadcrumb from '../components/Breadcrumb'
@@ -11,10 +11,6 @@ import MainMember from './MainMember'
 import MainFavorites from './MainFavorites'
 import MainSetting from './MainSetting'
 import MainContact from './MainContact'
-
-const id = !!localStorage.getItem('user')
-  ? JSON.parse(localStorage.getItem('user'))[0].id
-  : ''
 
 const onMatchedRoutes = (matchedRoutes) => {
   // console.log(matchedRoutes)
@@ -41,7 +37,7 @@ const Setting = ({ route, location }) => {
             // onMatchedRoutes={onMatchedRoutes}
           />
           <MemberSidebar />
-          <MainSetting id={id} />
+          <MainSetting />
         </Row>
       </Container>
     </>
@@ -77,7 +73,7 @@ const Order = ({ route, location }) => {
             onMatchedRoutes={onMatchedRoutes}
           />
           <MemberSidebar />
-          <MainOrder id={id} />
+          <MainOrder />
         </Row>
       </Container>
     </>
@@ -95,7 +91,7 @@ const Member = ({ route, location }) => {
             onMatchedRoutes={onMatchedRoutes}
           />
           <MemberSidebar />
-          <MainMember id={id} />
+          <MainMember />
         </Row>
       </Container>
     </>
@@ -113,7 +109,7 @@ const Favorites = ({ route, location }) => {
             onMatchedRoutes={onMatchedRoutes}
           />
           <MemberSidebar />
-          <MainFavorites id={id} />
+          <MainFavorites />
         </Row>
       </Container>
     </>
@@ -131,7 +127,7 @@ const Coupon = ({ route, location }) => {
             onMatchedRoutes={onMatchedRoutes}
           />
           <MemberSidebar />
-          <Banner pagename="優惠券" />
+          <MainCoupon />
         </Row>
       </Container>
     </>

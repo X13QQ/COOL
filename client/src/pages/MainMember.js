@@ -1,9 +1,13 @@
 import React from 'react'
 import { Row } from 'react-bootstrap'
 import { Lv1, LV1, LV2 } from '../components/icons'
+import { useLocation, useHistory } from 'react-router-dom'
 
-function MainMember(props) {
-  const id = props.id
+function MainMember() {
+  const loc = useLocation()
+  const history = useHistory()
+  const id = !!loc.state ? loc.state.id : history.push('/clothing')
+
   return (
     <>
       <div className="main col-9">

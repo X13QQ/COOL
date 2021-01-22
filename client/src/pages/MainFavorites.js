@@ -3,8 +3,7 @@ import { InputGroup, FormControl, Form } from 'react-bootstrap'
 import Favorites from '../components/Favorites'
 import { Search } from '../components/icons'
 
-function MainFavorites(props) {
-  const id = props.id
+function MainFavorites() {
   return (
     <>
       <div className="main col-9">
@@ -21,7 +20,7 @@ function MainFavorites(props) {
               </Form.Control>
             </div>
           </InputGroup>
-          <Favorites memberNo={id} />
+          <Favorites />
         </div>
       </div>
     </>

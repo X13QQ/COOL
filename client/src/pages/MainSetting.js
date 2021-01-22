@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
 
-function MainSetting(props) {
-  const id = props.id
+const MainSetting = () => {
+  const loc = useLocation()
+  // console.log(loc)
+  const history = useHistory()
+  const id = !!loc.state ? loc.state.id : history.push('/clothing')
   const [name, setName] = useState('')
   const [account, setAccount] = useState('')
   const [password, setPassword] = useState('')
@@ -9,6 +13,7 @@ function MainSetting(props) {
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
   const [birth, setBirth] = useState('')
+  const [type, setType] = useState('N')
 
   const getSettingData = (id) => {
     let url = new URL('http://localhost:3001/member/setting')
@@ -27,7 +32,8 @@ function MainSetting(props) {
         setPhone(data[0].phone)
         setEmail(data[0].email)
         setAddress(data[0].address)
-        setBirth(data[0].birth)
+        setBirth(data[0].birth || '')
+        setType(data[0].type)
       })
       .catch((err) => console.log('錯誤:', err))
   }
@@ -53,21 +59,6 @@ function MainSetting(props) {
     fetch(url, updateMethod)
       .then(() => alert('update success'))
       .catch((err) => console.log('錯誤:', err))
-  }
-
-  const checkValue = (change) => {
-    let bool = true
-    if (!!change) {
-      document.getElementById(change).classList.remove('is-invalid')
-      return false
-    }
-    const array = ['name', 'password', 'birth', 'phone', 'email', 'address']
-
-    array.forEach((element) => {
-      console.log(element)
-    })
-
-    return bool
   }
 
   useEffect(() => {
@@ -119,24 +110,36 @@ function MainSetting(props) {
                 readOnly
               />
             </div>
-
-            <div className="form-group mx-5 my-2 p-0 col-5">
-              <label htmlFor="password" className="form-label">
-                *使用者密碼
-              </label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                // aria-describedby="emailHelp"
-                maxLength="20"
-                placeholder="使用者密碼"
-                value={password}
-                onChange={(event) => {
-                  setPassword(event.target.value)
-                }}
-              />
-            </div>
+            {type === 'N' ? (
+              <div className="form-group mx-5 my-2 p-0 col-5">
+                <label htmlFor="password" className="form-label">
+                  *使用者密碼
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  // aria-describedby="emailHelp"
+                  maxLength="20"
+                  placeholder="使用者密碼"
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.target.value)
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="form-group mx-5 my-2 p-0 col-5">
+                <label htmlFor="password" className="form-label">
+                  *Google登入
+                </label>
+                <img
+                  src="/images/素材/icon/1004px-Google__G__Logo.svg.png"
+                  alt={''}
+                  style={{ width: '15px' }}
+                ></img>
+              </div>
+            )}
 
             <div className="form-row mx-5 my-0 justify-content-between">
               <div className="form-group my-2 px-0 pr-1 col-6">
@@ -211,16 +214,6 @@ function MainSetting(props) {
                   onClick={() => updateSettingData()}
                 >
                   更新
-                </button>
-              </div>
-
-              <div className="my-2 mx-2 p-0 text-center">
-                <button
-                  className="btn px-5 py-2"
-                  type="button"
-                  onClick={() => checkValue()}
-                >
-                  測試
                 </button>
               </div>
             </div>

@@ -1,6 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function Topbtn() {
+  useEffect(() => {
+    document.querySelector('.go-top').addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    })
+  })
   return (
     <>
       <a
