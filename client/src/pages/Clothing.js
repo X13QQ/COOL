@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
+import Magnifier from 'react-magnifier'
 
 function Clothing() {
   const [status, setStatus] = useState(0)
-  const [accordionActived, setAccordionActived] = useState(false)
+  // const [accordionActived, setAccordionActived] = useState(false)
 
   const [clothingImages, setClothingImages] = useState([])
   const [clothingData, setClothingData] = useState([])
+
+  const [choose, setchoose] = useState(0)
 
   useEffect(() => {
     // async await
@@ -75,12 +78,12 @@ function Clothing() {
           <h3 className="text-center font-weight-bold mb-4">產品詳情</h3>
           <div className="row mb-4">
             <div className="col-6">
-              <img
+              <Magnifier
                 className="btn"
                 type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                src="images/穿搭集/內容視覺/JUNE_EDITED-8-v1590602563975.jpg"
+                src={clothingImages[choose].src}
                 style={{
                   width: '100%',
                   height: '100%',
@@ -89,405 +92,168 @@ function Clothing() {
                 alt={' '}
               />
             </div>
-
             <div className="col-6">
-              {/* 整個帽子區塊 */}
-              <div className="pb-3">
-                {/* 帽子標籤 ↓ */}
-                <a
-                  href="#!"
-                  className="clothing-accordion-a d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
-                  style={{ color: '#353c1d' }}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    // document.getElementById('top')
-                    setAccordionActived(!accordionActived)
-                  }}
-                >
-                  帽子
-                  {/* 帽子右邊的箭頭 ↓ */}
-                  <img
-                    src="images/素材/icon/arrow_G.svg"
-                    style={{
-                      width: '20px',
-                      transform: 'rotate(-90deg)',
-                      position: 'relative',
-                      top: '-3.5px',
-                    }}
-                    alt={' '}
-                  />
-                </a>
-                <ul
-                  // id="top"
-                  className={
-                    'clothing-accordion-ul list-unstyled mb-0 ' +
-                    (accordionActived ? 'accordion-actived' : '')
-                  }
-                >
-                  <li className="px-5">
-                    <p
-                      style={{
-                        fontSize: '12px',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        display: 'block',
+              {clothingData.map((val, key) => {
+                return (
+                  <div className="pb-3">
+                    {/* 帽子標籤 ↓ */}
+                    <a
+                      href="#!"
+                      className="clothing-accordion-a d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
+                      style={{ color: '#353c1d' }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        // document.getElementById('top')
+                        // setAccordionActived(!accordionActived)
                       }}
                     >
-                      YEEZY BOOST 350 V2 - CBLACK/ RED
-                    </p>
-                    <p style={{ fontSize: '12px' }}>NT$6,800</p>
-                    <div className="row">
-                      <div className="dropdown">
-                        <button
-                          className="btn btn-secondary dropdown-toggle mx-2 my-2"
-                          type="button"
-                          // id="dropdownMenuButton"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                          onClick={(e) => {
-                            e.preventDefault()
-                            document
-                              .getElementById('dropdownMenuButton')
-                              .classList.toggle('clothing-accordion-ul')
+                      {val.category}
+                      {/* 帽子右邊的箭頭 ↓ */}
+                      <img
+                        src="images/素材/icon/arrow_G.svg"
+                        style={{
+                          width: '20px',
+                          transform: 'rotate(-90deg)',
+                          position: 'relative',
+                          top: '-3.5px',
+                        }}
+                        alt={' '}
+                      />
+                    </a>
+                    <ul
+                      id={`sort${val.id}`}
+                      // className={
+                      //   'clothing-accordion-ul list-unstyled mb-0 ' +
+                      //   (accordionActived ? 'accordion-actived' : '')
+                      // }
+                    >
+                      <li className="px-5">
+                        <p
+                          style={{
+                            fontSize: '12px',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            display: 'block',
                           }}
                         >
-                          尺寸
-                        </button>
-                        <div
-                          id="dropdownMenuButton"
-                          className="dropdown-menu"
-                          aria-labelledby="dropdownMenuButton"
-                        >
-                          <a className="dropdown-item" href="#!">
-                            S
-                          </a>
-                          <a className="dropdown-item" href="#!">
-                            M
-                          </a>
-                          <a className="dropdown-item" href="#!">
-                            L
-                          </a>
-                          <a className="dropdown-item" href="#!">
-                            XL
-                          </a>
+                          YEEZY BOOST 350 V2 - CBLACK/ RED
+                        </p>
+                        <p style={{ fontSize: '12px' }}>NT$6,800</p>
+                        <div className="row">
+                          <div className="dropdown">
+                            <button
+                              className="btn btn-secondary dropdown-toggle mx-2 my-2"
+                              type="button"
+                              // id="dropdownMenuButton"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                              onClick={(e) => {
+                                e.preventDefault()
+                                document
+                                  .getElementById(`dropdownMenuButton${val.id}`)
+                                  .classList.toggle('clothing-accordion-ul')
+                              }}
+                            >
+                              尺寸
+                            </button>
+                            <div
+                              id={`dropdownMenuButton${val.id}`}
+                              className="dropdown-menu"
+                              aria-labelledby="dropdownMenuButton"
+                            >
+                              <a className="dropdown-item" href="#!">
+                                S
+                              </a>
+                              <a className="dropdown-item" href="#!">
+                                M
+                              </a>
+                              <a className="dropdown-item" href="#!">
+                                L
+                              </a>
+                              <a className="dropdown-item" href="#!">
+                                XL
+                              </a>
+                            </div>
+                          </div>
+                          <div className="dropdown">
+                            <button
+                              className="btn btn-secondary dropdown-toggle mx-2 my-2"
+                              type="button"
+                              id="dropdownMenuButton"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              顏色
+                            </button>
+                            <div
+                              className="dropdown-menu "
+                              aria-labelledby="dropdownMenuButton"
+                            >
+                              <a className="dropdown-item" href="#!">
+                                黑
+                              </a>
+                              <a className="dropdown-item" href="#!">
+                                白
+                              </a>
+                              <a className="dropdown-item" href="#!">
+                                藍
+                              </a>
+                              <a className="dropdown-item" href="#!">
+                                紅
+                              </a>
+                            </div>
+                          </div>
+                          <div className="dropdown">
+                            <button
+                              className="btn btn-secondary dropdown-toggle mx-2 my-2"
+                              type="button"
+                              id="dropdownMenuButton"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              數量
+                            </button>
+                            <div
+                              className="dropdown-menu"
+                              aria-labelledby="dropdownMenuButton"
+                            >
+                              <a className="dropdown-item" href="#!">
+                                1
+                              </a>
+                              <a className="dropdown-item" href="#!">
+                                2
+                              </a>
+                              <a className="dropdown-item" href="#!">
+                                3
+                              </a>
+                              <a className="dropdown-item" href="#!">
+                                4
+                              </a>
+                              <a className="dropdown-item" href="#!">
+                                5
+                              </a>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="dropdown">
-                        <button
-                          className="btn btn-secondary dropdown-toggle mx-2 my-2"
-                          type="button"
-                          id="dropdownMenuButton"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          顏色
-                        </button>
-                        <div
-                          className="dropdown-menu "
-                          aria-labelledby="dropdownMenuButton"
-                        >
-                          <a className="dropdown-item" href="#!">
-                            黑
-                          </a>
-                          <a className="dropdown-item" href="#!">
-                            白
-                          </a>
-                          <a className="dropdown-item" href="#!">
-                            藍
-                          </a>
-                          <a className="dropdown-item" href="#!">
-                            紅
-                          </a>
-                        </div>
-                      </div>
-                      <div className="dropdown">
-                        <button
-                          className="btn btn-secondary dropdown-toggle mx-2 my-2"
-                          type="button"
-                          id="dropdownMenuButton"
-                          data-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          數量
-                        </button>
-                        <div
-                          className="dropdown-menu"
-                          aria-labelledby="dropdownMenuButton"
-                        >
-                          <a className="dropdown-item" href="#!">
-                            1
-                          </a>
-                          <a className="dropdown-item" href="#!">
-                            2
-                          </a>
-                          <a className="dropdown-item" href="#!">
-                            3
-                          </a>
-                          <a className="dropdown-item" href="#!">
-                            4
-                          </a>
-                          <a className="dropdown-item" href="#!">
-                            5
-                          </a>
-                        </div>
-                      </div>
-                    </div>
 
-                    <div className="d-flex justify-content-end mb-3">
-                      <a
-                        className="d-block text-right my-2"
-                        style={{ fontSize: '12px' }}
-                        href="/#"
-                      >
-                        加入購物車
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="pb-3">
-                <a
-                  href="#!"
-                  className="clothing-accordion-a  d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
-                  style={{ color: '#353c1d' }}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    document
-                      .getElementById('coat')
-                      .classList.toggle('clothing-accordion-ul')
-                    // setAccordionActived(!accordionActived)
-                  }}
-                >
-                  外套
-                  <img
-                    src="images/素材/icon/arrow_G.svg"
-                    style={{
-                      width: '20px',
-                      transform: 'rotate(-90deg)',
-                      position: 'relative',
-                      top: '-3.5px',
-                    }}
-                    alt={' '}
-                  />
-                </a>
-                <ul
-                  id="coat"
-                  className={'clothing-accordion-ul list-unstyled mb-0 '}
-                  // className={
-                  //   'clothing-accordion-ul list-unstyled mb-0 ' +
-                  //   (accordionActived ? 'accordion-actived' : '')
-                  // }
-                >
-                  <li className="px-5">
-                    <p
-                      style={{
-                        fontSize: '12px',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        display: 'block',
-                      }}
-                    >
-                      YEEZY BOOST 350 V2 - CBLACK/ RED
-                    </p>
-                    <p style={{ fontSize: '12px' }}>NT$6,800</p>
-                    <div className="d-flex justify-content-end">
-                      <a
-                        className="d-block text-right"
-                        style={{ fontSize: '12px' }}
-                        href="/#"
-                      >
-                        加入購物車
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="pb-3">
-                <a
-                  href="#!"
-                  className="clothing-accordion-a  d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
-                  style={{ color: '#353c1d' }}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    document
-                      .getElementById('top')
-                      .classList.toggle('clothing-accordion-ul')
-                    // setAccordionActived(!accordionActived)
-                  }}
-                >
-                  上衣
-                  <img
-                    src="images/素材/icon/arrow_G.svg"
-                    style={{
-                      width: '20px',
-                      transform: 'rotate(-90deg)',
-                      position: 'relative',
-                      top: '-3.5px',
-                    }}
-                    alt={' '}
-                  />
-                </a>
-                <ul
-                  id="top"
-                  className={'clothing-accordion-ul list-unstyled mb-0 '}
-                  // className={
-                  //   'clothing-accordion-ul list-unstyled mb-0 ' +
-                  //   (accordionActived ? 'accordion-actived' : '')
-                  // }
-                >
-                  <li className="px-5">
-                    <p
-                      style={{
-                        fontSize: '12px',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        display: 'block',
-                      }}
-                    >
-                      YEEZY BOOST 350 V2 - CBLACK/ RED
-                    </p>
-                    <p style={{ fontSize: '12px' }}>NT$6,800</p>
-                    <div className="d-flex justify-content-end">
-                      <a
-                        className="d-block text-right"
-                        style={{ fontSize: '12px' }}
-                        href="/#"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          document
-                            .getElementById('hattrousers')
-                            .classList.toggle('clothing-accordion-ul')
-                          // setAccordionActived(!accordionActived)
-                        }}
-                      >
-                        加入購物車
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="pb-3">
-                <a
-                  href="#!"
-                  className="clothing-accordion-a  d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
-                  style={{ color: '#353c1d' }}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    document
-                      .getElementById('trousers')
-                      .classList.toggle('clothing-accordion-ul')
-                    // setAccordionActived(!accordionActived)
-                  }}
-                >
-                  長褲
-                  <img
-                    src="images/素材/icon/arrow_G.svg"
-                    style={{
-                      width: '20px',
-                      transform: 'rotate(-90deg)',
-                      position: 'relative',
-                      top: '-3.5px',
-                    }}
-                    alt={' '}
-                  />
-                </a>
-                <ul
-                  id="trousers"
-                  className={'clothing-accordion-ul list-unstyled mb-0 '}
-                  // className={
-                  //   'clothing-accordion-ul list-unstyled mb-0 ' +
-                  //   (accordionActived ? 'accordion-actived' : '')
-                  // }
-                >
-                  <li className="px-5">
-                    <p
-                      style={{
-                        fontSize: '12px',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        display: 'block',
-                      }}
-                    >
-                      YEEZY BOOST 350 V2 - CBLACK/ RED
-                    </p>
-                    <p style={{ fontSize: '12px' }}>NT$6,800</p>
-                    <div className="d-flex justify-content-end">
-                      <a
-                        className="d-block text-right"
-                        style={{ fontSize: '12px' }}
-                        href="/#"
-                      >
-                        加入購物車
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="pb-3">
-                <a
-                  href="#!"
-                  className="clothing-accordion-a  d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
-                  style={{ color: '#353c1d' }}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    document
-                      .getElementById('shoe')
-                      .classList.toggle('clothing-accordion-ul')
-                    // setAccordionActived(!accordionActived)
-                  }}
-                >
-                  鞋款
-                  <img
-                    src="images/素材/icon/arrow_G.svg"
-                    style={{
-                      width: '20px',
-                      transform: 'rotate(-90deg)',
-                      position: 'relative',
-                      top: '-3.5px',
-                    }}
-                    alt={' '}
-                  />
-                </a>
-                <ul
-                  id="shoe"
-                  className={'clothing-accordion-ul list-unstyled mb-0 '}
-                  // className={
-                  //   'clothing-accordion-ul list-unstyled mb-0 ' +
-                  //   (accordionActived ? 'accordion-actived' : '')
-                  // }
-                >
-                  <li className="px-5">
-                    <p
-                      style={{
-                        fontSize: '12px',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        display: 'block',
-                      }}
-                    >
-                      YEEZY BOOST 350 V2 - CBLACK/ RED
-                    </p>
-                    <p style={{ fontSize: '12px' }}>NT$6,800</p>
-                    <div className="d-flex justify-content-end">
-                      <a
-                        className="d-block text-right"
-                        style={{ fontSize: '12px' }}
-                        href="/#"
-                      >
-                        加入購物車
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+                        <div className="d-flex justify-content-end mb-3">
+                          <a
+                            className="d-block text-right my-2"
+                            style={{ fontSize: '12px' }}
+                            href="/#"
+                          >
+                            加入購物車
+                          </a>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                )
+              })}
             </div>
           </div>
           <div
@@ -571,6 +337,7 @@ function Clothing() {
                 }')`,
               }}
               onClick={() => {
+                setchoose(4)
                 setStatus(1)
                 // 抓商品清單
                 console.log('5')
@@ -587,7 +354,10 @@ function Clothing() {
                   }')`,
                 }}
                 onClick={() => {
+                  setchoose(1)
                   setStatus(1)
+                  console.log('2')
+                  getClothingData('2')
                 }}
               ></div>
               <div
@@ -599,7 +369,10 @@ function Clothing() {
                   }')`,
                 }}
                 onClick={() => {
+                  setchoose(3)
                   setStatus(1)
+                  console.log('3')
+                  getClothingData('3')
                 }}
               ></div>
             </div>
@@ -613,7 +386,10 @@ function Clothing() {
                   }')`,
                 }}
                 onClick={() => {
+                  setchoose(0)
                   setStatus(1)
+                  console.log('1')
+                  getClothingData('1')
                 }}
               ></div>
               <div
@@ -625,7 +401,10 @@ function Clothing() {
                   }')`,
                 }}
                 onClick={() => {
+                  setchoose(2)
                   setStatus(1)
+                  console.log('3')
+                  getClothingData('3')
                 }}
               ></div>
             </div>
@@ -654,7 +433,10 @@ function Clothing() {
                 }')`,
               }}
               onClick={() => {
+                setchoose(5)
                 setStatus(1)
+                console.log('6')
+                getClothingData('6')
               }}
             ></div>
             <div className="row col-6 mx-0 pr-0">
@@ -668,7 +450,10 @@ function Clothing() {
                     }')`,
                   }}
                   onClick={() => {
+                    setchoose(6)
                     setStatus(1)
+                    console.log('7')
+                    getClothingData('7')
                   }}
                 ></div>
                 <div
@@ -680,7 +465,10 @@ function Clothing() {
                     }')`,
                   }}
                   onClick={() => {
+                    setchoose(8)
                     setStatus(1)
+                    console.log('9')
+                    getClothingData('9')
                   }}
                 ></div>
               </div>
@@ -694,7 +482,10 @@ function Clothing() {
                     }')`,
                   }}
                   onClick={() => {
+                    setchoose(7)
                     setStatus(1)
+                    console.log('8')
+                    getClothingData('8')
                   }}
                 ></div>
                 <div
@@ -706,7 +497,10 @@ function Clothing() {
                     }')`,
                   }}
                   onClick={() => {
+                    setchoose(9)
                     setStatus(1)
+                    console.log('10')
+                    getClothingData('10')
                   }}
                 ></div>
               </div>
@@ -721,7 +515,10 @@ function Clothing() {
                     }')`,
                   }}
                   onClick={() => {
+                    setchoose(10)
                     setStatus(1)
+                    console.log('11')
+                    getClothingData('11')
                   }}
                 ></div>
               </div>
