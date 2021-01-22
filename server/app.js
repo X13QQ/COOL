@@ -27,23 +27,57 @@ var emailService = require("./lib/email.js")(credentials);
 
 // 商品首頁 get
 app.get("/product", function (req, res) {
-  db.query("SELECT * FROM product", '', (err, result) => {
+  db.query("SELECT * FROM product", "", (err, result) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     }
-    res.send(JSON.stringify(result))
+    res.send(JSON.stringify(result));
   });
 });
 
 // 商品詳細頁 get
 app.get("/detail/:brand/:id", function (req, res) {
-  db.query("SELECT * FROM product WHERE id =" + req.params.id + "", '', (err, result) => {
-    if (err) {
-      console.log(err)
+  db.query(
+    "SELECT * FROM product WHERE id =" + req.params.id + "",
+    "",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(result);
+      res.send(JSON.stringify(result));
     }
-    console.log(result);
-    res.send(JSON.stringify(result))
-  });
+  );
+});
+
+//clothing
+app.get("/clothing", function (req, res) {
+  db.query(
+    "SELECT * FROM pages_data WHERE clothing_id != '' ORDER BY CONVERT(clothing_id,SIGNED ) ",
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      // console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+
+//clothing
+app.get("/clothing/:id", function (req, res) {
+  db.query(
+    "",
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      // console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
 });
 
 // 會員登錄 註冊 忘記密碼
