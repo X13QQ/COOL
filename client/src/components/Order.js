@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Tabs, Tab, Accordion, Card, useAccordionToggle } from 'react-bootstrap'
 import { ArrowDown, ArrowUp } from './icons'
+import { useLocation, useHistory } from 'react-router-dom'
 
 function CustomToggle({ children, eventKey }) {
   const [up, setUp] = useState(true)
@@ -16,7 +17,11 @@ function CustomToggle({ children, eventKey }) {
   )
 }
 
-const Order = (props) => {
+const Order = () => {
+  const loc = useLocation()
+  const history = useHistory()
+  const id = !!loc.state ? loc.state.id : history.push('/clothing')
+
   const [OrderDataProcessing, setOrderDataProcessing] = useState([])
   const [OrderDataSolved, setOrderDataSolved] = useState([])
   const [OrderDataRefundlist, setOrderDataRefundlist] = useState([])
@@ -29,7 +34,7 @@ const Order = (props) => {
       return fetch(
         url +
           new URLSearchParams({
-            memberNo: props.id,
+            memberNo: id,
           })
       )
         .then((res) => res.json())
@@ -45,7 +50,7 @@ const Order = (props) => {
       const newUrl = url + type + '?'
       getOrderData(newUrl, type)
     })
-  }, [props])
+  }, [id])
 
   return (
     <>

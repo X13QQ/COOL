@@ -1,14 +1,14 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
-// 購物車要求：品牌名稱、顏色、尺寸、商品圖片路徑、庫存、品名、單價
+// 購物車要求：品牌名稱、顏色、尺寸、商品圖片路徑、庫存、品名、單價、數量
 const FakeRes = [
   {
     id: 1,
-    name: 'Reverse Weave Crew, Script Logo',
-    brand: 'Champion',
+    name: 'Reverse Weave Crew, Script Logo', //品名
+    brand: 'Champion', //品牌名稱
     image:
-      '/images/product/Champion/Reverse_Weave_Crew_Script_Logo/Reverse_Weave_Crew_Script_Logo_B01.jpg',
-    price: 4590,
+      '/images/product/Champion/Reverse_Weave_Crew_Script_Logo/Reverse_Weave_Crew_Script_Logo_B01.jpg', //商品圖片路徑
+    price: 4590, //單價
     color: '紅色',
     size: 'L',
   },
