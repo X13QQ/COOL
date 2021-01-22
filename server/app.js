@@ -38,9 +38,8 @@ app.get("/product", function (req, res) {
 // 商品詳細頁 get
 app.get("/detail/:brand/:id", function (req, res) {
   db.query(
-    "SELECT * FROM product WHERE id =" + req.params.id + "",
-    "",
-    (err, result) => {
+    "SELECT * FROM product INNER JOIN product_images ON product.id = product_images.product_id  WHERE product.id =" + req.params.id + " ORDER BY color",
+        (err, result) => {
       if (err) {
         console.log(err);
       }
@@ -67,15 +66,17 @@ app.get("/clothing", function (req, res) {
 
 //clothing
 app.get("/clothing/:id", function (req, res) {
-  db.query("SELECT * FROM product " +
-    "INNER JOIN product_images ON product.id = product_images.product_id " +
-    "WHERE product.id = ? ORDER BY color", [req.params.id], (err, result) => {
-    if (err) {
-    console.log(err)
-  }
-  console.log(result);
-  res.send(JSON.stringify(result))
-});
+  db.query(
+    "SELECT * FROM product " + "WHERE clothing_id = ? ORDER BY category",
+    [req.params.id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
 });
 
 // 會員登錄 註冊 忘記密碼
@@ -301,6 +302,17 @@ app.put("/member/setting", function (req, res) {
       res.send(result);
     }
   );
+});
+
+//優惠券
+app.get("/member/coupon", function (req, res) {
+  const sqlSelect =
+    "SELECT * FROM coupon " +
+    "WHERE coupon.code NOT IN (SELECT cool_order.coupon FROM cool_order WHERE cool_order.member_no = ?) " +
+    "ORDER BY coupon.amount DESC ";
+  db.query(sqlSelect, [req.query.id], (req, result, fields) => {
+    res.send(result);
+  });
 });
 
 // 聯絡我們

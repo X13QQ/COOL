@@ -1,7 +1,7 @@
 import React from 'react'
 
 import HeaderOther from '../components/HeaderOther'
-import Banner from '../components/Banner'
+import MainCoupon from './MainCoupon'
 import MemberSidebar from '../components/MemberSidebar'
 import { Row, Container } from 'react-bootstrap'
 import Breadcrumb from '../components/Breadcrumb'
@@ -127,7 +127,7 @@ const Coupon = ({ route, location }) => {
             onMatchedRoutes={onMatchedRoutes}
           />
           <MemberSidebar />
-          <Banner pagename="優惠券" />
+          <MainCoupon />
         </Row>
       </Container>
     </>
