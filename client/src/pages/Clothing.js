@@ -559,7 +559,7 @@ function Clothing() {
         <div>
           <div className="row wrapper2 px-5 mx-0 ">
             <div
-              className="col-6 dwbox1  mx-0 pl-0"
+              className="col-6 dwbox1 mx-0 pl-0"
               style={{
                 width: '100%',
                 backgroundImage: `url('${
