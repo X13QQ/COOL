@@ -559,6 +559,7 @@ function Clothing() {
         <div>
           <div className="row wrapper2 px-5 mx-0 ">
             <div
+              className="col-6 dwbox1  mx-0 pl-0"
               style={{
                 width: '100%',
                 backgroundImage: `url('${
@@ -576,7 +577,7 @@ function Clothing() {
                   style={{
                     width: '100%',
                     backgroundImage: `url('${
-                      clothingImages.length > 0 ? clothingImages[2].src : ''
+                      clothingImages.length > 0 ? clothingImages[6].src : ''
                     }')`,
                   }}
                   onClick={() => {
@@ -588,7 +589,7 @@ function Clothing() {
                   style={{
                     width: '100%',
                     backgroundImage: `url('${
-                      clothingImages.length > 0 ? clothingImages[2].src : ''
+                      clothingImages.length > 0 ? clothingImages[8].src : ''
                     }')`,
                   }}
                   onClick={() => {
@@ -602,7 +603,7 @@ function Clothing() {
                   style={{
                     width: '100%',
                     backgroundImage: `url('${
-                      clothingImages.length > 0 ? clothingImages[2].src : ''
+                      clothingImages.length > 0 ? clothingImages[7].src : ''
                     }')`,
                   }}
                   onClick={() => {
@@ -614,7 +615,7 @@ function Clothing() {
                   style={{
                     width: '100%',
                     backgroundImage: `url('${
-                      clothingImages.length > 0 ? clothingImages[2].src : ''
+                      clothingImages.length > 0 ? clothingImages[9].src : ''
                     }')`,
                   }}
                   onClick={() => {
@@ -629,7 +630,7 @@ function Clothing() {
                     width: '100%',
                     margin: '10px auto',
                     backgroundImage: `url('${
-                      clothingImages.length > 0 ? clothingImages[2].src : ''
+                      clothingImages.length > 0 ? clothingImages[10].src : ''
                     }')`,
                   }}
                   onClick={() => {
