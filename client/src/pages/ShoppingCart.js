@@ -10,16 +10,14 @@ function ShoppingCart(props) {
   const [total, setTotal] = useState(0)
   const [shippingstatus, setshipping] = useState(1)
   const [buyerinfo, setbuyer] = useState([])
-  const [test, setTest] = useState(false)
+  // const [test, setTest] = useState(false)
   var totalprice = 0
-  FakeRes.map((v, i) => {
-    totalprice += v.price
-  })
+  FakeRes.map((v, i) => (totalprice += v.price))
 
-  useEffect(() => {
-    console.log(buyerinfo)
-    setTest(true)
-  }, [buyerinfo])
+  // useEffect(() => {
+  // console.log(buyerinfo)
+  // setTest(true)
+  // }, [buyerinfo])
 
   const OrderSummary = () => {
     return (
@@ -115,9 +113,9 @@ function ShoppingCart(props) {
       // console.log(v)
       // setTotal(total + v.price)
       return (
-        <div className=" brand border mx-0 mb-2">
+        <div key={i} className=" brand border mx-0 mb-2">
           <div className="px-3 py-2">
-            <label for="brand-name " className="font-weight-bold mb-0 ml-3">
+            <label htmlFor="brand-name " className="font-weight-bold mb-0 ml-3">
               品牌：{v.brand} / 顏色：{v.color} / 尺寸：{v.size}
             </label>
           </div>
@@ -279,28 +277,28 @@ function ShoppingCart(props) {
                                 id="credit-card-num1"
                                 className="credit-card-info-num px-2"
                                 type="text"
-                                maxlength="4"
+                                maxLength="4"
                                 placeholder="xxxx"
                               />
                               <input
                                 id="credit-card-num2"
                                 className="credit-card-info-num px-2"
                                 type="text"
-                                maxlength="4"
+                                maxLength="4"
                                 placeholder="xxxx"
                               />
                               <input
                                 id="credit-card-num3"
                                 className="credit-card-info-num px-2"
                                 type="text"
-                                maxlength="4"
+                                maxLength="4"
                                 placeholder="xxxx"
                               />
                               <input
                                 id="credit-card-num4"
                                 className="credit-card-info-num px-2"
                                 type="text"
-                                maxlength="4"
+                                maxLength="4"
                                 placeholder="xxxx"
                               />
                             </div>
@@ -407,13 +405,9 @@ function ShoppingCart(props) {
                             <select
                               required
                               className="choose-city-dropdown font-weight-bold my-2 mx-3 py-2 px-2"
+                              defaultValue="0"
                             >
-                              <option
-                                value=""
-                                disabled="disabled"
-                                selected
-                                hidden
-                              >
+                              <option value="0" disabled="disabled" hidden>
                                 請選擇城市
                               </option>
                               <option value="1">桃園市</option>
@@ -423,29 +417,21 @@ function ShoppingCart(props) {
                             <select
                               required
                               className="choose-city-dropdown font-weight-bold my-2 mx-3 py-2 px-2"
+                              defaultValue="0"
                             >
-                              <option
-                                value=""
-                                disabled="disabled"
-                                selected
-                                hidden
-                              >
+                              <option value="0" disabled="disabled" hidden>
                                 請選擇區域
                               </option>
                               <option value="1">中壢區</option>
-                              <option value="1">????區</option>
-                              <option value="1">鳳山區</option>
+                              <option value="2">????區</option>
+                              <option value="3">鳳山區</option>
                             </select>
                             <select
                               required
                               className="choose-city-dropdown font-weight-bold my-2 mx-3 py-2 px-2"
+                              defaultValue="0"
                             >
-                              <option
-                                value=""
-                                disabled="disabled"
-                                selected
-                                hidden
-                              >
+                              <option value="0" disabled="disabled" hidden>
                                 請選擇門市
                               </option>
                               <option value="1">學央門市</option>
@@ -501,7 +487,7 @@ function ShoppingCart(props) {
                                 // checked={!shippingstatus ? 'checked' : ''}
                               />
                               <label
-                                htnmlFor="donate-2"
+                                htmlFor="donate-2"
                                 className="ml-3 font-weight-bold"
                               >
                                 捐贈
@@ -594,14 +580,15 @@ function ShoppingCart(props) {
                   className="font-color-gray font-weight-bold"
                   style={{ fontSize: '14px' }}
                 >
-                  {/*  */}
-                  訂單日期：{test ? buyerinfo.orderdate : 'no'}
+                  訂單日期：
+                  {buyerinfo.length > 0 ? '' + buyerinfo[0].orderdate : ''}
                 </p>
                 <p
                   className="font-color-gray font-weight-bold"
                   style={{ fontSize: '14px' }}
                 >
                   訂單號碼：
+                  {buyerinfo.length > 0 ? '' + buyerinfo[0].ordernum : ''}
                 </p>
                 <p
                   className="font-color-gray font-weight-bold"
@@ -626,13 +613,19 @@ function ShoppingCart(props) {
                   className="font-color-gray font-weight-bold"
                   style={{ fontSize: '14px' }}
                 >
-                  收件人電話：{buyerinfo.addresseecellphone}
+                  收件人電話：
+                  {buyerinfo.length > 0
+                    ? '' + buyerinfo[0].addresseecellphone
+                    : ''}
                 </p>
                 <p
                   className="font-color-gray font-weight-bold"
                   style={{ fontSize: '14px' }}
                 >
-                  收件人地址：{buyerinfo.addresseeaddress}
+                  收件人地址：{' '}
+                  {buyerinfo.length > 0
+                    ? '' + buyerinfo[0].addresseeaddress
+                    : ''}
                 </p>
               </div>
             </div>

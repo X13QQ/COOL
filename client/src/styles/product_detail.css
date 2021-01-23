@@ -330,6 +330,14 @@ body {
   color: #353c1d;
 }
 
+.detail-display .color-choose-a{
+  transition: 0.15s;
+}
+
+.detail-display .color-choose-a.color-choose-actived{
+  transform: scale(1.2);
+}
+
 .detail-display .size-choose a {
   border: 1px solid #353c1d;
   color: white;
@@ -343,6 +351,12 @@ body {
 .detail-display .size-choose a:hover {
   background-color: white;
   color: #353c1d;
+}
+
+.detail-display .size-choose .size-choose-actived{
+  background-color: #f37022 !important;
+  border: 1px solid #f37022;
+  color: white !important;
 }
 
 .detail-display .amount-choose input {
