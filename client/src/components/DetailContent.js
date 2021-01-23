@@ -1006,6 +1006,8 @@ function DetailContent(props) {
                           onClick={(e) => {
                             e.preventDefault()
                             setColorState(i)
+                            setSizeState(0)
+                            document.getElementById('detail-amount-input').value = 1;
                           }}
                         >
                         </a>)
@@ -1013,23 +1015,24 @@ function DetailContent(props) {
                   </div>
                   <p className="mb-2 font-weight-bold">SIZE</p>
                   <div className="size-choose mb-2">
-                    {DetailRes ? (StockRes ? StockRes.map((v, i) => {
-                      if (StockRes[i].color === DetailRes[colorState].color) {
-                        return (
-                          <a
-                            href="#!"
-                            style={{ textTransform: 'uppercase' }}
-                            className={"size-choose-a d-inline-block text-center text-decoration-none mr-3 " + (sizeState === i ? 'size-choose-actived' : '')}
-                            onClick={(e) => {
-                              e.preventDefault()
-                              setSizeState(i)
-                            }}
-                          >
-                            {v.size}
-                          </a>
-                        )
-                      }
-                    }) : '') : ''}
+                    {DetailRes ? (StockRes ? StockRes.filter((item) => { return item.color === DetailRes[colorState].color }).map((v, i) => {
+                      return (
+                        <a
+                          href="#!"
+                          style={{ textTransform: 'uppercase' }}
+                          className={"size-choose-a d-inline-block text-center text-decoration-none mr-3 " + (sizeState === i ? 'size-choose-actived' : '')}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setSizeState(i)
+                            document.getElementById('detail-amount-input').value = 1;
+
+                          }}
+                        >
+                          {v.size}
+                        </a>
+                      )
+                    }
+                    ) : '') : ''}
 
                   </div>
                   <p className="mb-2 font-weight-bold">AMOUNT</p>
@@ -1051,7 +1054,7 @@ function DetailContent(props) {
                         +
                     </a>
                       <input id="detail-amount-input" disabled type="number" min='1' defaultValue="1" className="text-center"
-                      style={{fontWeight:'bold',border:'none',color:'red',backgroundColor:'white'}}
+                        style={{ fontWeight: 'bold', border: 'none', color: 'red', backgroundColor: 'white' }}
                         onChange={() => {
                           if (document.getElementById('detail-amount-input').value < 1) {
                             document.getElementById('detail-amount-input').value = 1;
@@ -1080,13 +1083,46 @@ function DetailContent(props) {
                         {DetailRes ? (StockRes ? StockRes.filter((e) => {
                           return e.color === DetailRes[colorState].color
                         })[sizeState].stock
-                          : '') : ''}</span> 個</p>
+                          : '') : ''}
+                      </span> 個</p>
                     </div>
                   </div>
                   <div className="add-to-cart-btn mb-4">
                     <a
                       href="#!"
                       className="d-inline-block py-2 px-5 text-decoration-none"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        let cartProductPrice = DetailRes ? DetailRes[0].price : ''
+                        let cartProductColor = document.querySelector('.color-choose-actived').style.backgroundColor;
+                        let cartProductSize = document.querySelector('.size-choose-actived').textContent;
+                        let cartProductAmount = document.getElementById('detail-amount-input').value
+                        let cartProductData = [{
+                          id: ProductId,
+                          name: DetailRes ? DetailRes[0].name : '',
+                          brand: ProductBrand,
+                          price: cartProductPrice,
+                          color: cartProductColor,
+                          size: cartProductSize,
+                          amount: cartProductAmount,
+                          image: DetailRes ? DetailRes[0].image : ''
+                        }]
+                        let cartOriginalData = !!JSON.parse(localStorage.getItem('cartList')) ? JSON.parse(localStorage.getItem('cartList')) : cartProductData
+                        let cartNextData = !!JSON.parse(localStorage.getItem('cartList')) ? cartOriginalData.concat({
+                          id: ProductId,
+                          name: DetailRes ? DetailRes[0].name : '',
+                          brand: ProductBrand,
+                          price: cartProductPrice,
+                          color: cartProductColor,
+                          size: cartProductSize,
+                          amount: cartProductAmount,
+                          image: DetailRes ? DetailRes[0].image : ''
+                        }) : cartProductData
+                        let cartList = JSON.stringify(cartNextData)
+                        localStorage.setItem('cartList', cartList)
+                        // 測試
+                        props.setDetailToHeaderCart(true)
+                      }}
                     >
                       加入購物車
                     </a>
@@ -1194,12 +1230,12 @@ function DetailContent(props) {
               <div className="col-12 col-md-6">
                 <img
                   className="img-fluid my-2"
-                  src={DetailRes ? DetailRes[0].image : ''}
+                  src={DetailRes ? DetailRes[0].content_image1 : ''}
                   alt={''}
                 ></img>
                 <img
                   className="img-fluid my-2"
-                  src={DetailRes ? DetailRes[0].image : ''}
+                  src={DetailRes ? DetailRes[0].content_image2 : ''}
                   alt={''}
                 ></img>
               </div>
@@ -1232,7 +1268,7 @@ function DetailContent(props) {
                 </div>
                 <img
                   className="img-fluid my-2"
-                  src={DetailRes ? DetailRes[0].image : ''}
+                  src={DetailRes ? DetailRes[0].content_image3 : ''}
                   alt={''}
                 ></img>
               </div>
