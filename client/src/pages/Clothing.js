@@ -107,7 +107,19 @@ function Clothing() {
                         // setAccordionActived(!accordionActived)
                       }}
                     >
-                      {val.category}
+                      {val.category === '1'
+                        ? '上衣'
+                        : val.category === '2'
+                        ? '帽子'
+                        : val.category === '3'
+                        ? '外套'
+                        : val.category === '4'
+                        ? '褲子'
+                        : val.category === '5'
+                        ? '鞋款'
+                        : val.category === '6'
+                        ? '配件'
+                        : ''}
                       {/* 帽子右邊的箭頭 ↓ */}
                       <img
                         src="images/素材/icon/arrow_G.svg"
