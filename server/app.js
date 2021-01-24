@@ -24,9 +24,22 @@ const credentials = {
   },
 };
 var emailService = require("./lib/email.js")(credentials);
-
+// 正在測試的訂單寫入
+app.post("/shoppingcart", function (req, res){
+  const sqlInsert ="INSERT INTO cool_order (order_no, member_no, receiver's_address, receiver's_cellphone, pickup_store, invoice, date, amount, price, status, coupon) " 
+  + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '?') ";
+  console.log(req.body)
+  //   db.query(sqlInsert,[............................]],
+  //   (err, result, fields) => {
+  //     if (err) {
+  //       res.send({ err: err });
+  //     }
+  //     res.send(result);
+  //   }
+  // );
+})
 // 商品首頁 get
-app.get("/product", function (req, res) {
+app.get("/shoppningcart", function (req, res) {
   db.query("SELECT * FROM product", "", (err, result) => {
     if (err) {
       console.log(err);
