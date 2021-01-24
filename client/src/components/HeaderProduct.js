@@ -835,35 +835,73 @@ function HeaderProduct(props) {
             <a
               href="#!"
               className="category-choose-btn d-inline-block py-3 px-5 mb-5 "
-              onClick={(e) => { e.preventDefault(); document.getElementById("product-horizon-lg").scrollIntoView({ behavior: "smooth" }); props.setChildCategoryState(0) }}
+              onClick={(e) => {
+                e.preventDefault()
+                document
+                  .getElementById('product-horizon-lg')
+                  .scrollIntoView({ behavior: 'smooth' })
+                props.setChildCategoryState(0)
+              }}
             >
               按類別購物
             </a>
             <ul className="d-flex list-unstyled w-100 justify-content-center">
               <li>
-                <a href="#!" className="mx-4 "
-                  onClick={(e) => { e.preventDefault(); document.getElementById("product-horizon-lg").scrollIntoView({ behavior: "smooth" }); props.setChildCategoryState(1) }}
+                <a
+                  href="#!"
+                  className="mx-4 "
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('product-horizon-lg')
+                      .scrollIntoView({ behavior: 'smooth' })
+                    props.setChildCategoryState(1)
+                  }}
                 >
                   上衣
                 </a>
               </li>
               <li>
-                <a href="#!" className="mx-4 "
-                  onClick={(e) => { e.preventDefault(); document.getElementById("product-horizon-lg").scrollIntoView({ behavior: "smooth" }); props.setChildCategoryState(4) }}
+                <a
+                  href="#!"
+                  className="mx-4 "
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('product-horizon-lg')
+                      .scrollIntoView({ behavior: 'smooth' })
+                    props.setChildCategoryState(4)
+                  }}
                 >
                   下著
                 </a>
               </li>
               <li>
-                <a href="#!" className="mx-4 "
-                  onClick={(e) => { e.preventDefault(); document.getElementById("product-horizon-lg").scrollIntoView({ behavior: "smooth" }); props.setChildCategoryState(3) }}
+                <a
+                  href="#!"
+                  className="mx-4 "
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('product-horizon-lg')
+                      .scrollIntoView({ behavior: 'smooth' })
+                    props.setChildCategoryState(3)
+                  }}
                 >
                   外套
                 </a>
               </li>
               <li>
-                <a href="#!" className="mx-4 "
-                  onClick={(e) => { e.preventDefault(); document.getElementById("product-horizon-lg").scrollIntoView({ behavior: "smooth" }); props.setChildCategoryState(6) }}
+                <a
+                  href="#!"
+                  className="mx-4 "
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('product-horizon-lg')
+                      .scrollIntoView({ behavior: 'smooth' })
+                    props.setChildCategoryState(6)
+                  }}
                 >
                   配件
                 </a>
@@ -875,12 +913,12 @@ function HeaderProduct(props) {
         {show && modal === 1
           ? login()
           : show && modal === 2
-            ? signUp()
-            : show && modal === 3
-              ? getPassword()
-              : show && modal === 4
-                ? success()
-                : ''}
+          ? signUp()
+          : show && modal === 3
+          ? getPassword()
+          : show && modal === 4
+          ? success()
+          : ''}
 
         {/* mega menu */}
         <div

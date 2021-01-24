@@ -34,6 +34,7 @@ const Order = () => {
   const [OrderDataProcessing, setOrderDataProcessing] = useState([])
   const [OrderDataSolved, setOrderDataSolved] = useState([])
   const [OrderDataRefundlist, setOrderDataRefundlist] = useState([])
+  const [datail, setDetail] = useState([])
 
   useEffect(() => {
     const url = 'http://localhost:3001/member/order/'
@@ -55,10 +56,26 @@ const Order = () => {
         .catch((err) => console.log('錯誤:', err))
     }
 
+    const getOrderDetail = () => {
+      return fetch(
+        'http://localhost:3001/member/orderdetail?' +
+          new URLSearchParams({
+            memberNo: id,
+          })
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data)
+          setDetail(data)
+        })
+        .catch((err) => console.log('錯誤:', err))
+    }
+
     type.forEach((type) => {
       const newUrl = url + type + '?'
       getOrderData(newUrl, type)
     })
+    getOrderDetail()
   }, [id])
 
   return (
@@ -97,7 +114,22 @@ const Order = () => {
                       <CustomToggle eventKey="0">檢視完整訂單</CustomToggle>
                       <Accordion.Collapse eventKey="0">
                         <Card.Body className="font-weight-bold">
-                          {val.amount}
+                          {datail.map((v, i) =>
+                            v.order_no === val.order_no ? (
+                              <div key={i}>
+                                <ul>
+                                  <li>商品名稱: {v.name}</li>
+                                  <li>數量: {v.amount}</li>
+                                  <li>尺寸: {v.size}</li>
+                                  <li>品牌: {v.brand}</li>
+                                  <li>顏色: {v.color}</li>
+                                  <li>價格: {v.price}</li>
+                                </ul>
+                              </div>
+                            ) : (
+                              ''
+                            )
+                          )}
                         </Card.Body>
                       </Accordion.Collapse>
                     </Card>
@@ -136,7 +168,22 @@ const Order = () => {
                       <CustomToggle eventKey="0">檢視完整訂單</CustomToggle>
                       <Accordion.Collapse eventKey="0">
                         <Card.Body className="font-weight-bold">
-                          {val.amount}
+                          {datail.map((v, i) =>
+                            v.order_no === val.order_no ? (
+                              <div key={i}>
+                                <ul>
+                                  <li>商品名稱: {v.name}</li>
+                                  <li>數量: {v.amount}</li>
+                                  <li>尺寸: {v.size}</li>
+                                  <li>品牌: {v.brand}</li>
+                                  <li>顏色: {v.color}</li>
+                                  <li>價格: {v.price}</li>
+                                </ul>
+                              </div>
+                            ) : (
+                              ''
+                            )
+                          )}
                         </Card.Body>
                       </Accordion.Collapse>
                     </Card>
@@ -175,7 +222,22 @@ const Order = () => {
                       <CustomToggle eventKey="0">檢視完整訂單</CustomToggle>
                       <Accordion.Collapse eventKey="0">
                         <Card.Body className="font-weight-bold">
-                          {val.amount}
+                          {datail.map((v, i) =>
+                            v.order_no === val.order_no ? (
+                              <div key={i}>
+                                <ul>
+                                  <li>商品名稱: {v.name}</li>
+                                  <li>數量: {v.amount}</li>
+                                  <li>尺寸: {v.size}</li>
+                                  <li>品牌: {v.brand}</li>
+                                  <li>顏色: {v.color}</li>
+                                  <li>價格: {v.price}</li>
+                                </ul>
+                              </div>
+                            ) : (
+                              ''
+                            )
+                          )}
                         </Card.Body>
                       </Accordion.Collapse>
                     </Card>

@@ -5,7 +5,9 @@ import { Link, useHistory } from 'react-router-dom'
 function HeaderOther(props) {
   // shopping cart local storage
   // 測試
-  const [shoppingCartStorage, setShoppingCartStorage] = useState(props.detailToHeaderCart)
+  const [shoppingCartStorage, setShoppingCartStorage] = useState(
+    props.detailToHeaderCart
+  )
   const cartMap = () => {
     let cartTotalValue = new Number;
     return shoppingCartStorage ?
@@ -967,6 +969,7 @@ function HeaderOther(props) {
                     cleanData()
                     setLoginStatus(0)
                     localStorage.removeItem('user')
+                    localStorage.removeItem('favorites')
                     history.push('/clothing')
                   }}
                 >
@@ -1086,12 +1089,12 @@ function HeaderOther(props) {
         {show && modal === 1
           ? login()
           : show && modal === 2
-            ? signUp()
-            : show && modal === 3
-              ? getPassword()
-              : show && modal === 4
-                ? success()
-                : ''}
+          ? signUp()
+          : show && modal === 3
+          ? getPassword()
+          : show && modal === 4
+          ? success()
+          : ''}
 
         {/* mega menu */}
         <div
