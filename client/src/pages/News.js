@@ -3,6 +3,8 @@ import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
 function News() {
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+
   const [status, setStatus] = useState(0)
   const [Content, setContent] = useState('')
   const [newsImages, setNewsImages] = useState([])
@@ -146,7 +148,7 @@ function News() {
   //---------------------------------------------------------
   return (
     <>
-      <HeaderOther />
+      <HeaderOther  detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
       <div
         className="horizon-line-sm position-relative mb-5 mx-auto text-center h2"
         style={{ marginTop: '96px' }}

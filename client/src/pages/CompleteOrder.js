@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Footer from '../components/Footer'
 import HeaderOther from '../components/HeaderOther'
 
 function CompleteOrder() {
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+
   return (
     <>
-      <HeaderOther />
+      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
       <div class="container mt-5">
         <div>
           <div class="row">

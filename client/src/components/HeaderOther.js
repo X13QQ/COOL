@@ -7,56 +7,107 @@ function HeaderOther(props) {
   // 測試
   const [shoppingCartStorage, setShoppingCartStorage] = useState(props.detailToHeaderCart)
   const cartMap = () => {
+    let cartTotalValue = new Number;
     return shoppingCartStorage ?
-      JSON.parse(localStorage.getItem('cartList')).map((v, i) => {
-        return (<>
-          <li
-            style={{ borderBottom: '1px solid gray' }}
-            className="my-2"
-          >
-            <div className="row m-0 pb-2">
-              <div className="col-3 pl-0 content-img">
-                <div>
-                  <a className="d-block" href="#!">
-                    <img
-                      className="img-fluid"
-                      src={v.image}
-                      alt={''}
-                    ></img>
-                  </a>
-                </div>
-              </div>
-              <div className="col-9 pr-0 content-word">
-                <div>
-                  <p className="m-0 text-left font-weight-bold">
-                    {v.name}
-                  </p>
-                  <p className="m-0 text-left font-weight-bold">
-                    數量
-      <span
-                      className="mx-2"
-                      style={{
-                        width: '20px',
-                        display: 'inline-block',
-                        textAlign: 'center',
-                        borderBottom: '1px solid black',
-                      }}
+      (
+        <>
+          <div className="cart-icon-wrap position-absolute pt-3">
+            <div
+              className="cart-icon-ul-wrap position-relative rounded"
+              style={{ padding: '8px 15px' }}
+            >
+              <ul className="cart-icon-ul list-unstyled">
+                {JSON.parse(localStorage.getItem('cartList')).map((v, i) => {
+                  cartTotalValue += Number(v.price) * Number(v.amount)
+                  return (<>
+                    <li
+                      style={{ borderBottom: '1px solid gray' }}
+                      className="my-2"
                     >
-                      {v.amount}
-                    </span>
-                  </p>
-                  <p className="m-0 text-left font-weight-bold">
-                    NT$ {v.price}
-                  </p>
-                </div>
+                      <div className="row m-0 pb-2">
+                        <div className="col-3 pl-0 content-img">
+                          <div>
+                            <a className="d-block" href="#!">
+                              <img
+                                className="img-fluid"
+                                src={v.image}
+                                alt={''}
+                              ></img>
+                            </a>
+                          </div>
+                        </div>
+                        <div className="col-7 pr-0 content-word">
+                          <div>
+                            <p className="m-0 text-left font-weight-bold">
+                              {v.name}
+                            </p>
+                            <p className="m-0 text-left font-weight-bold">
+                              數量
+                              <span
+                                className="mx-2"
+                                style={{
+                                  width: '20px',
+                                  display: 'inline-block',
+                                  textAlign: 'center',
+                                  borderBottom: '1px solid black',
+                                }}
+                              >
+                                {v.amount}
+                              </span>
+                            </p>
+                            <p className="m-0 text-left font-weight-bold">
+                              NT$ {Number(v.price) * Number(v.amount)}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="col-2 d-flex align-items-center">
+                          <a href="#!" style={{ color: 'red' }} className="text-decoration-none font-weight-bold" onClick={(e) => {
+                            e.preventDefault()
+                            let removeData = JSON.parse(localStorage.getItem('cartList'))
+                            let removeList = [].concat(removeData.slice(0, i)).concat(removeData.slice(i + 1))
+                            console.log(removeList)
+                            localStorage.setItem('cartList', JSON.stringify(removeList))
+                            props.setDetailToHeaderCart(props.detailToHeaderCart - 1)
+                          }}>
+                            x
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                  </>
+                  )
+                })}
+              </ul>
+              <div className="total-price-wrap">
+                <p className="d-flex justify-content-between font-weight-bold">
+                  <span>結帳金額：</span>
+                  <span>NT${Number(cartTotalValue)}</span>
+                </p>
+              </div>
+              <div className="checkout-btn-wrap d-flex flex-column">
+                <Link
+                  to="/shoppingcart"
+                  className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+                >
+                  查看購物車
+                </Link>
+                <Link
+                  to="/shoppingcart"
+                  className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+                >
+                  前往結帳
+        </Link>
               </div>
             </div>
-          </li>
+          </div>
         </>
-        )
-      })
+
+      )
       : ''
   }
+  useEffect(() => {
+    setShoppingCartStorage(props.detailToHeaderCart)
+  }, [props.detailToHeaderCart])
   // 
   // 
   // 
@@ -991,53 +1042,20 @@ function HeaderOther(props) {
 
                 {/* 購物車 */}
                 <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-                  <a className="cart-navbar-a nav-link" href="#!">
+                  <a className="cart-navbar-a nav-link position-relative" href="#!">
                     <img
                       src={'/images/素材/icon/shopping_cart_G.svg'}
                       alt={''}
                     ></img>
+                    {shoppingCartStorage ? <span class="badge position-absolute rounded-pill bg-danger d-flex align-items-center justify-content-center" style={{ color: 'white', textAlign: 'center', top: '-3px', left: '15px', minHeight: '20px', minWidth: '20px' }}>{!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : ''}</span>
+                      : ''}
                   </a>
                   {/*  */}
                   {/*  */}
                   {/*  */}
                   {shoppingCartStorage ?
-                    (
-                      <>
-                        <div className="cart-icon-wrap position-absolute pt-3">
-                          <div
-                            className="cart-icon-ul-wrap position-relative rounded"
-                            style={{ padding: '8px 15px' }}
-                          >
-                            <ul className="cart-icon-ul list-unstyled">
-                              {cartMap()}
-                            </ul>
-                            <div className="total-price-wrap">
-                              <p className="d-flex justify-content-between font-weight-bold">
-                                <span>結帳金額：</span>
-                                <span>NT$3,000</span>
-                              </p>
-                            </div>
-                            <div className="checkout-btn-wrap d-flex flex-column">
-                              <a
-                                href="#!"
-                                className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                              >
-                                查看購物車
-                        </a>
-                              <a
-                                href="#!"
-                                className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                              >
-                                前往結帳
-                        </a>
-                            </div>
-                          </div>
-                        </div>
-                      </>
-
-                    )
+                    cartMap()
                     : ''}
-
                 </li>
 
                 {/* 會員 */}
