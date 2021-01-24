@@ -16,6 +16,8 @@ import {
   faPowerOff,
   faAngleDown,
 } from '@fortawesome/free-solid-svg-icons'
+import { Switch, Route } from 'react-router-dom'
+import OrderListDashboardContent from '../components/OrderListDahboardContent'
 
 function Dashboard() {
   return (
@@ -296,7 +298,7 @@ function Dashboard() {
           </aside>
           <main className="main-main">
             <nav className="main-nav">
-              <ul className="main-nav-ul mb-0">
+              <ul className="main-nav-ul mb-0 list-unstyled">
                 <li
                   className="main-nav-ul-li"
                   style={{ marginLeft: 'auto', marginRight: '40px' }}
@@ -414,7 +416,11 @@ function Dashboard() {
                 </ol>
               </nav>
               {/* <!-- 內容打在下面 --> */}
-
+              <Switch>
+                <Route path="/dashboard/orderlist">
+                  <OrderListDashboardContent />
+                </Route>
+              </Switch>
               {/* <!-- 內容打在上面 --> */}
             </div>
             <footer className="main-footer google-font">
