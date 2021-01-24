@@ -2,7 +2,64 @@ import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 /* global gapi */
-function HeaderOther() {
+function HeaderOther(props) {
+  // shopping cart local storage
+  // 測試
+  const [shoppingCartStorage, setShoppingCartStorage] = useState(props.detailToHeaderCart)
+  const cartMap = () => {
+    return shoppingCartStorage ?
+      JSON.parse(localStorage.getItem('cartList')).map((v, i) => {
+        return (<>
+          <li
+            style={{ borderBottom: '1px solid gray' }}
+            className="my-2"
+          >
+            <div className="row m-0 pb-2">
+              <div className="col-3 pl-0 content-img">
+                <div>
+                  <a className="d-block" href="#!">
+                    <img
+                      className="img-fluid"
+                      src={v.image}
+                      alt={''}
+                    ></img>
+                  </a>
+                </div>
+              </div>
+              <div className="col-9 pr-0 content-word">
+                <div>
+                  <p className="m-0 text-left font-weight-bold">
+                    {v.name}
+                  </p>
+                  <p className="m-0 text-left font-weight-bold">
+                    數量
+      <span
+                      className="mx-2"
+                      style={{
+                        width: '20px',
+                        display: 'inline-block',
+                        textAlign: 'center',
+                        borderBottom: '1px solid black',
+                      }}
+                    >
+                      {v.amount}
+                    </span>
+                  </p>
+                  <p className="m-0 text-left font-weight-bold">
+                    NT$ {v.price}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </>
+        )
+      })
+      : ''
+  }
+  // 
+  // 
+  // 
   const history = useHistory()
   const [id, setId] = useState(
     !!localStorage.getItem('user')
@@ -940,120 +997,47 @@ function HeaderOther() {
                       alt={''}
                     ></img>
                   </a>
-                  <div className="cart-icon-wrap position-absolute pt-3">
-                    <div
-                      className="cart-icon-ul-wrap position-relative rounded"
-                      style={{ padding: '8px 15px' }}
-                    >
-                      <ul className="cart-icon-ul list-unstyled">
-                        <li
-                          style={{ borderBottom: '1px solid gray' }}
-                          className="my-2"
-                        >
-                          <div className="row m-0 pb-2">
-                            <div className="col-3 pl-0 content-img">
-                              <div>
-                                <a className="d-block" href="#!">
-                                  <img
-                                    className="img-fluid"
-                                    src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                                    alt={''}
-                                  ></img>
-                                </a>
-                              </div>
+                  {/*  */}
+                  {/*  */}
+                  {/*  */}
+                  {shoppingCartStorage ?
+                    (
+                      <>
+                        <div className="cart-icon-wrap position-absolute pt-3">
+                          <div
+                            className="cart-icon-ul-wrap position-relative rounded"
+                            style={{ padding: '8px 15px' }}
+                          >
+                            <ul className="cart-icon-ul list-unstyled">
+                              {cartMap()}
+                            </ul>
+                            <div className="total-price-wrap">
+                              <p className="d-flex justify-content-between font-weight-bold">
+                                <span>結帳金額：</span>
+                                <span>NT$3,000</span>
+                              </p>
                             </div>
-                            <div className="col-9 pr-0 content-word">
-                              <div>
-                                <p className="m-0 text-left font-weight-bold">
-                                  GOFE兩雙一組 / 右手超人襪
-                                </p>
-                                <p className="m-0 text-left font-weight-bold">
-                                  數量
-                                  <span
-                                    className="mx-2"
-                                    style={{
-                                      width: '20px',
-                                      display: 'inline-block',
-                                      textAlign: 'center',
-                                      borderBottom: '1px solid black',
-                                    }}
-                                  >
-                                    1
-                                  </span>
-                                </p>
-                                <p className="m-0 text-left font-weight-bold">
-                                  NT$3,000
-                                </p>
-                              </div>
+                            <div className="checkout-btn-wrap d-flex flex-column">
+                              <a
+                                href="#!"
+                                className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+                              >
+                                查看購物車
+                        </a>
+                              <a
+                                href="#!"
+                                className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+                              >
+                                前往結帳
+                        </a>
                             </div>
                           </div>
-                        </li>
+                        </div>
+                      </>
 
-                        <li
-                          style={{ borderBottom: '1px solid gray' }}
-                          className="my-2"
-                        >
-                          <div className="row m-0 pb-2">
-                            <div className="col-3 pl-0 content-img">
-                              <div>
-                                <a className="d-block" href="#!">
-                                  <img
-                                    className="img-fluid"
-                                    src="/images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                                    alt={''}
-                                  ></img>
-                                </a>
-                              </div>
-                            </div>
-                            <div className="col-9 pr-0 content-word">
-                              <div>
-                                <p className="m-0 text-left font-weight-bold">
-                                  GOFE兩雙一組 / 右手超人襪
-                                </p>
-                                <p className="m-0 text-left font-weight-bold">
-                                  數量
-                                  <span
-                                    className="mx-2"
-                                    style={{
-                                      width: '20px',
-                                      display: 'inline-block',
-                                      textAlign: 'center',
-                                      borderBottom: '1px solid black',
-                                    }}
-                                  >
-                                    1
-                                  </span>
-                                </p>
-                                <p className="m-0 text-left font-weight-bold">
-                                  NT$3,000
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                      <div className="total-price-wrap">
-                        <p className="d-flex justify-content-between font-weight-bold">
-                          <span>結帳金額：</span>
-                          <span>NT$3,000</span>
-                        </p>
-                      </div>
-                      <div className="checkout-btn-wrap d-flex flex-column">
-                        <a
-                          href="#!"
-                          className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                        >
-                          查看購物車
-                        </a>
-                        <a
-                          href="#!"
-                          className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                        >
-                          前往結帳
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                    )
+                    : ''}
+
                 </li>
 
                 {/* 會員 */}
@@ -1084,12 +1068,12 @@ function HeaderOther() {
         {show && modal === 1
           ? login()
           : show && modal === 2
-          ? signUp()
-          : show && modal === 3
-          ? getPassword()
-          : show && modal === 4
-          ? success()
-          : ''}
+            ? signUp()
+            : show && modal === 3
+              ? getPassword()
+              : show && modal === 4
+                ? success()
+                : ''}
 
         {/* mega menu */}
         <div

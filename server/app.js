@@ -52,9 +52,11 @@ app.get("/shoppningcart", function (req, res) {
 app.get("/detail/:brand/:id", function (req, res) {
   db.query(
     // 兩張表成功
-    "SELECT * FROM product INNER JOIN product_images ON product.id = product_images.product_id  WHERE product.id =" + req.params.id + " ORDER BY color",
+    "SELECT * FROM product INNER JOIN product_images ON product.id = product_images.product_id  WHERE product.id =" +
+      req.params.id +
+      " ORDER BY color",
 
-        (err, result) => {
+    (err, result) => {
       if (err) {
         console.log(err);
       }
@@ -67,8 +69,10 @@ app.get("/detail/:brand/:id", function (req, res) {
 // 商品詳細頁 post product_stock
 app.post("/detail/:brand/:id", function (req, res) {
   db.query(
-    "SELECT * FROM product INNER JOIN product_stock ON product.id = product_stock.product_id  WHERE product.id =" + req.params.id + " ORDER BY color , size",
-        (err, result) => {
+    "SELECT * FROM product INNER JOIN product_stock ON product.id = product_stock.product_id  WHERE product.id =" +
+      req.params.id +
+      " ORDER BY color , size",
+    (err, result) => {
       if (err) {
         console.log(err);
       }
@@ -284,12 +288,16 @@ app.get("/member/order/:status", function (req, res) {
 // 蒐藏清單
 app.get("/member/favorites", function (req, res) {
   const sqlSelect =
-    "SELECT id,member_no,product_no,valid,'/images/product/product-0001.png' as image FROM favorites WHERE member_no = ? AND valid = ? ";
+    "SELECT favorites.id AS fav_ID,  product.id AS pro_ID, CONCAT(product.brand,'^',product.name) AS name, product.brand, product.price, product.image " +
+    "FROM favorites " +
+    "INNER JOIN product on favorites.product_no = product.id " +
+    "WHERE favorites.member_no = ? AND favorites.valid = ? ";
   db.query(
     sqlSelect,
     [req.query.memberNo, req.query.valid],
     (req, result, fields) => {
       res.send(result);
+      console.log(result);
     }
   );
 });
@@ -356,6 +364,16 @@ app.post("/member/contact", function (req, res) {
       res.send(result);
     }
   );
+});
+
+app.post("/test", function (req, res) {
+  const sql =
+    "INSERT INTO cool_order (order_no) " +
+    "SELECT CONCAT('20201215',SUBSTRING(MAX(order_no),9,4))+1 AS new_order_no FROM cool_order WHERE order_no like '20201215%' " +
+    ";SELECT LAST_INSERT_ID() ";
+  db.query(sql, [], (req, result, fields) => {
+    console.log(req)
+  });
 });
 
 app.listen(3001, () => {
