@@ -837,27 +837,36 @@ function HeaderProduct() {
             <a
               href="#!"
               className="category-choose-btn d-inline-block py-3 px-5 mb-5 "
+              onClick={(e) => { e.preventDefault(); document.getElementById("product-horizon-lg").scrollIntoView({ behavior: "smooth" }); }}
             >
               按類別購物
             </a>
             <ul className="d-flex list-unstyled w-100 justify-content-center">
               <li>
-                <a href="#!" className="mx-4 ">
+                <a href="#!" className="mx-4 "
+                  onClick={(e) => { e.preventDefault(); document.getElementById("product-horizon-lg").scrollIntoView({ behavior: "smooth" }); }}
+                >
                   上衣
                 </a>
               </li>
               <li>
-                <a href="#!" className="mx-4 ">
-                  下身
+                <a href="#!" className="mx-4 "
+                  onClick={(e) => { e.preventDefault(); document.getElementById("product-horizon-lg").scrollIntoView({ behavior: "smooth" }); }}
+                >
+                  下著
                 </a>
               </li>
               <li>
-                <a href="#!" className="mx-4 ">
+                <a href="#!" className="mx-4 "
+                  onClick={(e) => { e.preventDefault(); document.getElementById("product-horizon-lg").scrollIntoView({ behavior: "smooth" }); }}
+                >
                   外套
                 </a>
               </li>
               <li>
-                <a href="#!" className="mx-4 ">
+                <a href="#!" className="mx-4 "
+                  onClick={(e) => { e.preventDefault(); document.getElementById("product-horizon-lg").scrollIntoView({ behavior: "smooth" }); }}
+                >
                   配件
                 </a>
               </li>
@@ -868,12 +877,12 @@ function HeaderProduct() {
         {show && modal === 1
           ? login()
           : show && modal === 2
-          ? signUp()
-          : show && modal === 3
-          ? getPassword()
-          : show && modal === 4
-          ? success()
-          : ''}
+            ? signUp()
+            : show && modal === 3
+              ? getPassword()
+              : show && modal === 4
+                ? success()
+                : ''}
 
         {/* mega menu */}
         <div

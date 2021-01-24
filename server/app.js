@@ -35,13 +35,30 @@ app.get("/product", function (req, res) {
   });
 });
 
-// 商品詳細頁 get
+// 商品詳細頁 get product_image
 app.get("/detail/:brand/:id", function (req, res) {
   db.query(
-    "SELECT * FROM product " +
-      "INNER JOIN product_images ON product.id = product_images.product_id " +
-      "WHERE product.id = ? ORDER BY color",
-    [req.params.id],
+    // 兩張表成功
+    "SELECT * FROM product INNER JOIN product_images ON product.id = product_images.product_id  WHERE product.id =" +
+      req.params.id +
+      " ORDER BY color",
+
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+
+// 商品詳細頁 post product_stock
+app.post("/detail/:brand/:id", function (req, res) {
+  db.query(
+    "SELECT * FROM product INNER JOIN product_stock ON product.id = product_stock.product_id  WHERE product.id =" +
+      req.params.id +
+      " ORDER BY color , size",
     (err, result) => {
       if (err) {
         console.log(err);
@@ -258,12 +275,16 @@ app.get("/member/order/:status", function (req, res) {
 // 蒐藏清單
 app.get("/member/favorites", function (req, res) {
   const sqlSelect =
-    "SELECT id,member_no,product_no,valid,'/images/product/product-0001.png' as image FROM favorites WHERE member_no = ? AND valid = ? ";
+    "SELECT favorites.id AS fav_ID,  product.id AS pro_ID, CONCAT(product.brand,'^',product.name) AS name, product.brand, product.price, product.image " +
+    "FROM favorites " +
+    "INNER JOIN product on favorites.product_no = product.id " +
+    "WHERE favorites.member_no = ? AND favorites.valid = ? ";
   db.query(
     sqlSelect,
     [req.query.memberNo, req.query.valid],
     (req, result, fields) => {
       res.send(result);
+      console.log(result)
     }
   );
 });

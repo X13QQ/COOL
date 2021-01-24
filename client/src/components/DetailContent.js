@@ -4,20 +4,36 @@ import { Link, withRouter } from 'react-router-dom'
 import FakeRes from '../data/FakeRes'
 import Product from '../pages/Product'
 import ProductContent from './ProductContent'
+import Black from '../images/素材/icon/Clothes color_B.svg'
+import Magnifier from 'react-magnifier'
+
+const testData = [
+  { color: 'blue' },
+  { color: 'black' },
+  { size: 's' },
+  { size: 'm' },
+  { size: 'l' },
+  { size: 'xl' },
+]
 // 目前會顯示很多prettier warnings，暫時無視
 // Link 路由還沒寫的精準
 function DetailContent(props) {
   let ProductBrand = props.match.params.brand
   let ProductId = props.match.params.id
-
   // 老師的fetch寫法
   // 步驟一：設一個空detailRes，setDetailRes為之後fetch response
   const [DetailRes, setDetailRes] = useState('')
+  const [StockRes, setStockRes] = useState('')
+  const [colorState, setColorState] = useState(0)
+  const [sizeState, setSizeState] = useState(0)
+  const [maxAmount, setMaxAmout] = useState('')
+
   // const [browseHistory, setBrowseHistory] = useState(true)
 
   // dom生成後，執行fetch函式，再影響setProductRes
   useEffect(() => {
-    // async await
+
+    // async await  抓product INNER JOIN product_image
     async function getDetail() {
       // 要使用try-catch來作錯誤處理
       try {
@@ -34,6 +50,7 @@ function DetailContent(props) {
 
           // 設定資料到DetailRes狀態
           setDetailRes(data)
+          // console.log(data)
         }
       } catch (error) {
         // 發生錯誤的處理情況
@@ -43,8 +60,45 @@ function DetailContent(props) {
     }
     getDetail()
     // setBrowseHistory(true)
-  }, [ProductBrand, ProductId])
 
+
+    //
+    // async await 抓product INNER JOIN product_stock
+    async function getStock() {
+      // 要使用try-catch來作錯誤處理
+      try {
+        // 從伺服器得到資料
+        const response = await fetch(
+          'http://localhost:3001/detail/' + ProductBrand + '/' + ProductId,
+          {
+            method: 'post',
+          }
+        )
+        if (response.ok) {
+          // 剖析資料為JS的數值
+          const data = await response.json()
+
+          // 設定資料到DetailRes狀態
+          setStockRes(data)
+          // console.log(data)
+        }
+      } catch (error) {
+        // 發生錯誤的處理情況
+        alert('無法得到伺服器資料，請稍後再重試')
+        console.log(error)
+      }
+    }
+    getStock()
+
+
+  }, [ProductBrand, ProductId])
+  console.log(DetailRes)
+  console.log(StockRes)
+  // 
+  // 
+  // 
+  // 
+  // 
   function BrowseHistoryFunc() {
     // 設定變數，並判斷是否已有localstorage資料來做賦值
     let browseArr = !!JSON.parse(localStorage.getItem('browseHistory'))
@@ -55,8 +109,7 @@ function DetailContent(props) {
           brand: DetailRes ? DetailRes[0].brand : '',
           name: DetailRes ? DetailRes[0].name : '',
           price: DetailRes ? DetailRes[0].price : '',
-          image: DetailRes ? DetailRes[0].image : ''
-
+          image: DetailRes ? DetailRes[0].image : '',
         },
       ]
 
@@ -77,8 +130,7 @@ function DetailContent(props) {
             brand: DetailRes ? DetailRes[0].brand : '',
             name: DetailRes ? DetailRes[0].name : '',
             price: DetailRes ? DetailRes[0].price : '',
-            image: DetailRes ? DetailRes[0].image : ''
-
+            image: DetailRes ? DetailRes[0].image : '',
           })
         }
       } else {
@@ -95,7 +147,7 @@ function DetailContent(props) {
             brand: DetailRes ? DetailRes[0].brand : '',
             name: DetailRes ? DetailRes[0].name : '',
             price: DetailRes ? DetailRes[0].price : '',
-            image: DetailRes ? DetailRes[0].image : ''
+            image: DetailRes ? DetailRes[0].image : '',
           })
         }
       }
@@ -853,27 +905,74 @@ function DetailContent(props) {
             <div className="row justify-content-between mb-5">
               <div
                 className="photo-display col-12 col-lg-5 mb-5 mb-lg-0"
-                style={{ height: '1000px', overflowY: 'hidden' }}
+                style={{ height: 'auto' }}
               >
-                <img
-                  className="img-fluid my-2"
-                  src={DetailRes ? DetailRes[0].image : ''}
-                  alt={''}
-                ></img>
-                <img
-                  className="img-fluid my-2"
-                  src={DetailRes ? DetailRes[0].image : ''}
-                  alt={''}
-                ></img>
-                <img
-                  className="img-fluid my-2"
-                  src={DetailRes ? DetailRes[0].image : ''}
-                  alt={''}
-                ></img>
+                {/* NO.1 */}
+                {/* NO.1 */}
+                {/* NO.1 */}
+                {DetailRes ? (
+                  !!DetailRes[colorState].src1 ? (
+                    <img
+                      className=" my-2 img-fluid"
+                      src={DetailRes[colorState].src1}
+                      alt={''}
+                    ></img>
+                  ) : (
+                      ''
+                    )
+                ) : (
+                    ''
+                  )}
+                {/* NO.2 */}
+                {/* NO.2 */}
+                {/* NO.2 */}
+                {DetailRes ? (
+                  !!DetailRes[colorState].src2 ? (
+                    <img
+                      className="img-fluid my-2"
+                      src={DetailRes[colorState].src2}
+                      alt={''}
+                    ></img>
+                  ) : (
+                      ''
+                    )
+                ) : (
+                    ''
+                  )}
+                {/* NO.3 */}
+                {/* NO.3 */}
+                {/* NO.3 */}
+                {DetailRes ? (
+                  !!DetailRes[colorState].src3 ? (
+                    <img
+                      className="img-fluid my-2"
+                      src={DetailRes[colorState].src3}
+                      alt={''}
+                    ></img>
+                  ) : (
+                      ''
+                    )
+                ) : (
+                    ''
+                  )}
+                {/* NO.4 */}
+                {DetailRes ? (
+                  !!DetailRes[colorState].src4 ? (
+                    <img
+                      className="img-fluid my-2"
+                      src={DetailRes[colorState].src4}
+                      alt={''}
+                    ></img>
+                  ) : (
+                      ''
+                    )
+                ) : (
+                    ''
+                  )}
               </div>
               <div
-                className="detail-display col-12 col-lg-5 mb-5 mb-lg-0"
-                style={{ height: '1000px', overflowY: 'hidden' }}
+                className="detail-display col-12 col-lg-5 mb-5 mb-lg-0 align-self-start px-3 pb-3"
+                style={{ height: 'auto', position: 'sticky', top: '16px' }}
               >
                 <div>
                   <h2 className="font-weight-bold">
@@ -898,86 +997,132 @@ function DetailContent(props) {
                 <div>
                   <p className="mb-2 font-weight-bold">COLOR</p>
                   <div className="color-choose mb-2">
-                    <a href="#!">
-                      <img
-                        src="/images/素材/icon/Clothes color_B.svg"
-                        alt={''}
-                      ></img>
-                    </a>
-                    <a href="#!">
-                      <img
-                        src="/images/素材/icon/Clothes color_Blue.svg"
-                        alt={''}
-                      ></img>
-                    </a>
-                    <a href="#!">
-                      <img
-                        src="/images/素材/icon/Clothes color_R.svg"
-                        alt={''}
-                      ></img>
-                    </a>
-                    <a href="#!">
-                      <img
-                        src="/images/素材/icon/Clothes color_W.svg"
-                        alt={''}
-                      ></img>
-                    </a>
-                    <a href="#!">
-                      <img
-                        src="/images/素材/icon/Clothes color_Y.svg"
-                        alt={''}
-                      ></img>
-                    </a>
+                    {DetailRes ? DetailRes.map((v, i) => {
+                      return (
+                        <a
+                          className={"d-inline-block mr-3 color-choose-a " + (colorState === i ? 'color-choose-actived' : '')}
+                          style={{ backgroundColor: (v.color), width: '25px', height: '25px', border: '1px solid rgba(0,0,0,0.3)' }}
+                          href="#!"
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setColorState(i)
+                            setSizeState(0)
+                            document.getElementById('detail-amount-input').value = 1;
+                          }}
+                        >
+                        </a>)
+                    }) : 'wait'}
                   </div>
                   <p className="mb-2 font-weight-bold">SIZE</p>
                   <div className="size-choose mb-2">
-                    <a
-                      href="#!"
-                      className="d-inline-block text-center text-decoration-none mr-2"
-                    >
-                      S
-                    </a>
-                    <a
-                      href="#!"
-                      className="d-inline-block text-center text-decoration-none mx-2"
-                    >
-                      M
-                    </a>
-                    <a
-                      href="#!"
-                      className="d-inline-block text-center text-decoration-none mx-2"
-                    >
-                      L
-                    </a>
-                    <a
-                      href="#!"
-                      className="d-inline-block text-center text-decoration-none mx-2"
-                    >
-                      XL
-                    </a>
+                    {DetailRes ? (StockRes ? StockRes.filter((item) => { return item.color === DetailRes[colorState].color }).map((v, i) => {
+                      return (
+                        <a
+                          href="#!"
+                          style={{ textTransform: 'uppercase' }}
+                          className={"size-choose-a d-inline-block text-center text-decoration-none mr-3 " + (sizeState === i ? 'size-choose-actived' : '')}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setSizeState(i)
+                            document.getElementById('detail-amount-input').value = 1;
+
+                          }}
+                        >
+                          {v.size}
+                        </a>
+                      )
+                    }
+                    ) : '') : ''}
+
                   </div>
                   <p className="mb-2 font-weight-bold">AMOUNT</p>
-                  <div className="amount-choose mb-3 d-flex justify-content-start align-items-center">
-                    <a
-                      href="#!"
-                      className="text-decoration-none d-inline-block font-weight-bold mr-3"
-                      style={{ fontSize: '28px', color: '#353c1d' }}
-                    >
-                      +
+                  <div className="amount-choose ">
+                    <div className="d-flex justify-content-start align-items-center mb-2">
+                      <a
+                        href="#!"
+                        className="text-decoration-none d-inline-block font-weight-bold mr-3"
+                        style={{ fontSize: '28px', color: '#353c1d' }}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          let val = Number(document.getElementById('detail-amount-input').value);
+                          if (val < Number(document.getElementById('max-amount-display').textContent)) {
+                            document.getElementById('detail-amount-input').value = (val + 1)
+
+                          }
+                        }}
+                      >
+                        +
                     </a>
-                    <input type="number" className="text-center"></input>
-                    <a
-                      href="#!"
-                      className="text-decoration-none d-inline-block font-weight-bold ml-3"
-                      style={{ fontSize: '28px', color: '#353c1d' }}
-                    >
-                      -
+                      <input id="detail-amount-input" disabled type="number" min='1' defaultValue="1" className="text-center"
+                        style={{ fontWeight: 'bold', border: 'none', color: 'red', backgroundColor: 'white' }}
+                        onChange={() => {
+                          if (document.getElementById('detail-amount-input').value < 1) {
+                            document.getElementById('detail-amount-input').value = 1;
+                          }
+                        }}
+                      ></input>
+                      <a
+                        href="#!"
+                        className="text-decoration-none d-inline-block font-weight-bold ml-3"
+                        style={{ fontSize: '28px', color: '#353c1d' }}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          let val = Number(document.getElementById('detail-amount-input').value);
+                          if (val > 1) {
+                            document.getElementById('detail-amount-input').value = (val - 1)
+                          } else {
+                            return
+                          }
+                        }}
+                      >
+                        -
                     </a>
+                    </div>
+                    <div className="mb-2">
+                      <p style={{ fontSize: '12px', fontStyle: 'italic', color: 'lightgray', fontWeight: 'bold' }}>剩餘 <span id="max-amount-display" style={{ color: 'red' }}>
+                        {DetailRes ? (StockRes ? StockRes.filter((e) => {
+                          return e.color === DetailRes[colorState].color
+                        })[sizeState].stock
+                          : '') : ''}
+                      </span> 個</p>
+                    </div>
                   </div>
                   <div className="add-to-cart-btn mb-4">
                     <a
                       href="#!"
                       className="d-inline-block py-2 px-5 text-decoration-none"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        let cartProductPrice = DetailRes ? DetailRes[0].price : ''
+                        let cartProductColor = document.querySelector('.color-choose-actived').style.backgroundColor;
+                        let cartProductSize = document.querySelector('.size-choose-actived').textContent;
+                        let cartProductAmount = document.getElementById('detail-amount-input').value
+                        let cartProductData = [{
+                          id: ProductId,
+                          name: DetailRes ? DetailRes[0].name : '',
+                          brand: ProductBrand,
+                          price: cartProductPrice,
+                          color: cartProductColor,
+                          size: cartProductSize,
+                          amount: cartProductAmount,
+                          image: DetailRes ? DetailRes[0].image : ''
+                        }]
+                        let cartOriginalData = !!JSON.parse(localStorage.getItem('cartList')) ? JSON.parse(localStorage.getItem('cartList')) : cartProductData
+                        let cartNextData = !!JSON.parse(localStorage.getItem('cartList')) ? cartOriginalData.concat({
+                          id: ProductId,
+                          name: DetailRes ? DetailRes[0].name : '',
+                          brand: ProductBrand,
+                          price: cartProductPrice,
+                          color: cartProductColor,
+                          size: cartProductSize,
+                          amount: cartProductAmount,
+                          image: DetailRes ? DetailRes[0].image : ''
+                        }) : cartProductData
+                        let cartList = JSON.stringify(cartNextData)
+                        localStorage.setItem('cartList', cartList)
+                        // 測試
+                        props.setDetailToHeaderCart(true)
+                      }}
                     >
                       加入購物車
                     </a>
@@ -1085,12 +1230,12 @@ function DetailContent(props) {
               <div className="col-12 col-md-6">
                 <img
                   className="img-fluid my-2"
-                  src={DetailRes ? DetailRes[0].image : ''}
+                  src={DetailRes ? DetailRes[0].content_image1 : ''}
                   alt={''}
                 ></img>
                 <img
                   className="img-fluid my-2"
-                  src={DetailRes ? DetailRes[0].image : ''}
+                  src={DetailRes ? DetailRes[0].content_image2 : ''}
                   alt={''}
                 ></img>
               </div>
@@ -1123,7 +1268,7 @@ function DetailContent(props) {
                 </div>
                 <img
                   className="img-fluid my-2"
-                  src={DetailRes ? DetailRes[0].image : ''}
+                  src={DetailRes ? DetailRes[0].content_image3 : ''}
                   alt={''}
                 ></img>
               </div>
@@ -1340,88 +1485,188 @@ function DetailContent(props) {
               {/* NO.1 */}
               {/* NO.1 */}
 
-              {DetailRes ? (JSON.parse(localStorage.getItem('browseHistory')).length > 1 &&
-                // 判斷localStorage長度
-                <Link
-                  // 組路由
-                  to={'/detail/' + (
-                    DetailRes ?
-                      JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 2].brand : '') + '/' + (
-                      DetailRes ?
-                        JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 2].id : '')}
-                  className="d-inline-block p-3 mr-2"
-                  style={{ width: '20%' }}
-                >
-                  <img
-                    // 抓圖片路徑
-                    src={DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 2].image : ''}
-                    className="mb-3"
-                    style={{ width: '100%', height: '146px', objectFit: 'contain' }}
-                    alt={''}
-                  ></img>
-                  <p className="font-weight-bold mb-2" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {/* 抓品名 */}
-                    {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 2].name : ''}
-                  </p>
-                  <p
-                    className=" mb-2"
-                    style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+              {DetailRes
+                ? JSON.parse(localStorage.getItem('browseHistory')).length >
+                1 && (
+                  // 判斷localStorage長度
+                  <Link
+                    // 組路由
+                    to={
+                      '/detail/' +
+                      (DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 2
+                        ].brand
+                        : '') +
+                      '/' +
+                      (DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 2
+                        ].id
+                        : '')
+                    }
+                    className="d-inline-block p-3 mr-2"
+                    style={{ width: '20%' }}
                   >
-                    {/* 抓品牌 */}
-                    {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 2].brand : ''}
-                  </p>
-                  <p
-                    className=" mb-2"
-                    style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
-                  >
-                    {/* 抓價錢 */}
-                    NT$ {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 2].price : ''}                </p>
-                </Link>
-              ) : ''}
+                    <img
+                      // 抓圖片路徑
+                      src={
+                        DetailRes
+                          ? JSON.parse(localStorage.getItem('browseHistory'))[
+                            JSON.parse(
+                              localStorage.getItem('browseHistory')
+                            ).length - 2
+                          ].image
+                          : ''
+                      }
+                      className="mb-3"
+                      style={{
+                        width: '100%',
+                        height: '146px',
+                        objectFit: 'contain',
+                      }}
+                      alt={''}
+                    ></img>
+                    <p
+                      className="font-weight-bold mb-2"
+                      style={{
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {/* 抓品名 */}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 2
+                        ].name
+                        : ''}
+                    </p>
+                    <p
+                      className=" mb-2"
+                      style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+                    >
+                      {/* 抓品牌 */}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 2
+                        ].brand
+                        : ''}
+                    </p>
+                    <p
+                      className=" mb-2"
+                      style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+                    >
+                      {/* 抓價錢 */}
+                        NT${' '}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 2
+                        ].price
+                        : ''}{' '}
+                    </p>
+                  </Link>
+                )
+                : ''}
 
               {/* NO.2 */}
               {/* NO.2 */}
               {/* NO.2 */}
               {/* NO.2 */}
               {/* NO.2 */}
-              {DetailRes ? (JSON.parse(localStorage.getItem('browseHistory')).length > 2 &&
-                // 判斷localStorage長度
-                <Link
-                  // 組路由
-                  to={'/detail/' + (
-                    DetailRes ?
-                      JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 3].brand : '') + '/' + (
-                      DetailRes ?
-                        JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 3].id : '')}
-                  className="d-inline-block p-3 mr-2"
-                  style={{ width: '20%' }}
-                >
-                  <img
-                    // 抓圖片路徑
-                    src={DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 3].image : ''}
-                    className="mb-3"
-                    style={{ width: '100%', height: '146px', objectFit: 'contain' }}
-                    alt={''}
-                  ></img>
-                  <p className="font-weight-bold mb-2" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {/* 抓品名 */}
-                    {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 3].name : ''}
-                  </p>
-                  <p
-                    className=" mb-2"
-                    style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+              {DetailRes
+                ? JSON.parse(localStorage.getItem('browseHistory')).length >
+                2 && (
+                  // 判斷localStorage長度
+                  <Link
+                    // 組路由
+                    to={
+                      '/detail/' +
+                      (DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 3
+                        ].brand
+                        : '') +
+                      '/' +
+                      (DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 3
+                        ].id
+                        : '')
+                    }
+                    className="d-inline-block p-3 mr-2"
+                    style={{ width: '20%' }}
                   >
-                    {/* 抓品牌 */}
-                    {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 3].brand : ''}
-                  </p>
-                  <p
-                    className=" mb-2"
-                    style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
-                  >
-                    {/* 抓價錢 */}
-                    NT$ {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 3].price : ''}                </p>
-                </Link>
-              ) : ''}
+                    <img
+                      // 抓圖片路徑
+                      src={
+                        DetailRes
+                          ? JSON.parse(localStorage.getItem('browseHistory'))[
+                            JSON.parse(
+                              localStorage.getItem('browseHistory')
+                            ).length - 3
+                          ].image
+                          : ''
+                      }
+                      className="mb-3"
+                      style={{
+                        width: '100%',
+                        height: '146px',
+                        objectFit: 'contain',
+                      }}
+                      alt={''}
+                    ></img>
+                    <p
+                      className="font-weight-bold mb-2"
+                      style={{
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {/* 抓品名 */}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 3
+                        ].name
+                        : ''}
+                    </p>
+                    <p
+                      className=" mb-2"
+                      style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+                    >
+                      {/* 抓品牌 */}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 3
+                        ].brand
+                        : ''}
+                    </p>
+                    <p
+                      className=" mb-2"
+                      style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+                    >
+                      {/* 抓價錢 */}
+                        NT${' '}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 3
+                        ].price
+                        : ''}{' '}
+                    </p>
+                  </Link>
+                )
+                : ''}
 
               {/* NO.3 */}
               {/* NO.3 */}
@@ -1429,44 +1674,94 @@ function DetailContent(props) {
               {/* NO.3 */}
               {/* NO.3 */}
 
-              {DetailRes ? (JSON.parse(localStorage.getItem('browseHistory')).length > 3 &&
-                // 判斷localStorage長度
-                <Link
-                  // 組路由
-                  to={'/detail/' + (
-                    DetailRes ?
-                      JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 4].brand : '') + '/' + (
-                      DetailRes ?
-                        JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 4].id : '')}
-                  className="d-inline-block p-3 mr-2"
-                  style={{ width: '20%' }}
-                >
-                  <img
-                    // 抓圖片路徑
-                    src={DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 4].image : ''}
-                    className="mb-3"
-                    style={{ width: '100%', height: '146px', objectFit: 'contain' }}
-                    alt={''}
-                  ></img>
-                  <p className="font-weight-bold mb-2" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {/* 抓品名 */}
-                    {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 4].name : ''}
-                  </p>
-                  <p
-                    className=" mb-2"
-                    style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+              {DetailRes
+                ? JSON.parse(localStorage.getItem('browseHistory')).length >
+                3 && (
+                  // 判斷localStorage長度
+                  <Link
+                    // 組路由
+                    to={
+                      '/detail/' +
+                      (DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 4
+                        ].brand
+                        : '') +
+                      '/' +
+                      (DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 4
+                        ].id
+                        : '')
+                    }
+                    className="d-inline-block p-3 mr-2"
+                    style={{ width: '20%' }}
                   >
-                    {/* 抓品牌 */}
-                    {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 4].brand : ''}
-                  </p>
-                  <p
-                    className=" mb-2"
-                    style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
-                  >
-                    {/* 抓價錢 */}
-                    NT$ {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 4].price : ''}                </p>
-                </Link>
-              ) : ''}
+                    <img
+                      // 抓圖片路徑
+                      src={
+                        DetailRes
+                          ? JSON.parse(localStorage.getItem('browseHistory'))[
+                            JSON.parse(
+                              localStorage.getItem('browseHistory')
+                            ).length - 4
+                          ].image
+                          : ''
+                      }
+                      className="mb-3"
+                      style={{
+                        width: '100%',
+                        height: '146px',
+                        objectFit: 'contain',
+                      }}
+                      alt={''}
+                    ></img>
+                    <p
+                      className="font-weight-bold mb-2"
+                      style={{
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {/* 抓品名 */}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 4
+                        ].name
+                        : ''}
+                    </p>
+                    <p
+                      className=" mb-2"
+                      style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+                    >
+                      {/* 抓品牌 */}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 4
+                        ].brand
+                        : ''}
+                    </p>
+                    <p
+                      className=" mb-2"
+                      style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+                    >
+                      {/* 抓價錢 */}
+                        NT${' '}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 4
+                        ].price
+                        : ''}{' '}
+                    </p>
+                  </Link>
+                )
+                : ''}
 
               {/* NO.4 */}
               {/* NO.4 */}
@@ -1474,44 +1769,94 @@ function DetailContent(props) {
               {/* NO.4 */}
               {/* NO.4 */}
 
-              {DetailRes ? (JSON.parse(localStorage.getItem('browseHistory')).length > 4 &&
-                // 判斷localStorage長度
-                <Link
-                  // 組路由
-                  to={'/detail/' + (
-                    DetailRes ?
-                      JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 5].brand : '') + '/' + (
-                      DetailRes ?
-                        JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 5].id : '')}
-                  className="d-inline-block p-3 mr-2"
-                  style={{ width: '20%' }}
-                >
-                  <img
-                    // 抓圖片路徑
-                    src={DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 5].image : ''}
-                    className="mb-3"
-                    style={{ width: '100%', height: '146px', objectFit: 'contain' }}
-                    alt={''}
-                  ></img>
-                  <p className="font-weight-bold mb-2" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {/* 抓品名 */}
-                    {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 5].name : ''}
-                  </p>
-                  <p
-                    className=" mb-2"
-                    style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+              {DetailRes
+                ? JSON.parse(localStorage.getItem('browseHistory')).length >
+                4 && (
+                  // 判斷localStorage長度
+                  <Link
+                    // 組路由
+                    to={
+                      '/detail/' +
+                      (DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 5
+                        ].brand
+                        : '') +
+                      '/' +
+                      (DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 5
+                        ].id
+                        : '')
+                    }
+                    className="d-inline-block p-3 mr-2"
+                    style={{ width: '20%' }}
                   >
-                    {/* 抓品牌 */}
-                    {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 5].brand : ''}
-                  </p>
-                  <p
-                    className=" mb-2"
-                    style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
-                  >
-                    {/* 抓價錢 */}
-                    NT$ {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 5].price : ''}                </p>
-                </Link>
-              ) : ''}
+                    <img
+                      // 抓圖片路徑
+                      src={
+                        DetailRes
+                          ? JSON.parse(localStorage.getItem('browseHistory'))[
+                            JSON.parse(
+                              localStorage.getItem('browseHistory')
+                            ).length - 5
+                          ].image
+                          : ''
+                      }
+                      className="mb-3"
+                      style={{
+                        width: '100%',
+                        height: '146px',
+                        objectFit: 'contain',
+                      }}
+                      alt={''}
+                    ></img>
+                    <p
+                      className="font-weight-bold mb-2"
+                      style={{
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {/* 抓品名 */}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 5
+                        ].name
+                        : ''}
+                    </p>
+                    <p
+                      className=" mb-2"
+                      style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+                    >
+                      {/* 抓品牌 */}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 5
+                        ].brand
+                        : ''}
+                    </p>
+                    <p
+                      className=" mb-2"
+                      style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+                    >
+                      {/* 抓價錢 */}
+                        NT${' '}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 5
+                        ].price
+                        : ''}{' '}
+                    </p>
+                  </Link>
+                )
+                : ''}
 
               {/* NO.5 */}
               {/* NO.5 */}
@@ -1519,44 +1864,94 @@ function DetailContent(props) {
               {/* NO.5 */}
               {/* NO.5 */}
 
-              {DetailRes ? (JSON.parse(localStorage.getItem('browseHistory')).length > 5 &&
-                // 判斷localStorage長度
-                <Link
-                  // 組路由
-                  to={'/detail/' + (
-                    DetailRes ?
-                      JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 6].brand : '') + '/' + (
-                      DetailRes ?
-                        JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 6].id : '')}
-                  className="d-inline-block p-3 mr-2"
-                  style={{ width: '20%' }}
-                >
-                  <img
-                    // 抓圖片路徑
-                    src={DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 6].image : ''}
-                    className="mb-3"
-                    style={{ width: '100%', height: '146px', objectFit: 'contain' }}
-                    alt={''}
-                  ></img>
-                  <p className="font-weight-bold mb-2" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {/* 抓品名 */}
-                    {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 6].name : ''}
-                  </p>
-                  <p
-                    className=" mb-2"
-                    style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+              {DetailRes
+                ? JSON.parse(localStorage.getItem('browseHistory')).length >
+                5 && (
+                  // 判斷localStorage長度
+                  <Link
+                    // 組路由
+                    to={
+                      '/detail/' +
+                      (DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 6
+                        ].brand
+                        : '') +
+                      '/' +
+                      (DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 6
+                        ].id
+                        : '')
+                    }
+                    className="d-inline-block p-3 mr-2"
+                    style={{ width: '20%' }}
                   >
-                    {/* 抓品牌 */}
-                    {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 6].brand : ''}
-                  </p>
-                  <p
-                    className=" mb-2"
-                    style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
-                  >
-                    {/* 抓價錢 */}
-                    NT$ {DetailRes ? JSON.parse(localStorage.getItem('browseHistory'))[JSON.parse(localStorage.getItem('browseHistory')).length - 6].price : ''}                </p>
-                </Link>
-              ) : ''}
+                    <img
+                      // 抓圖片路徑
+                      src={
+                        DetailRes
+                          ? JSON.parse(localStorage.getItem('browseHistory'))[
+                            JSON.parse(
+                              localStorage.getItem('browseHistory')
+                            ).length - 6
+                          ].image
+                          : ''
+                      }
+                      className="mb-3"
+                      style={{
+                        width: '100%',
+                        height: '146px',
+                        objectFit: 'contain',
+                      }}
+                      alt={''}
+                    ></img>
+                    <p
+                      className="font-weight-bold mb-2"
+                      style={{
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {/* 抓品名 */}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 6
+                        ].name
+                        : ''}
+                    </p>
+                    <p
+                      className=" mb-2"
+                      style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+                    >
+                      {/* 抓品牌 */}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 6
+                        ].brand
+                        : ''}
+                    </p>
+                    <p
+                      className=" mb-2"
+                      style={{ letterSpacing: '0.1rem', fontSize: '14px' }}
+                    >
+                      {/* 抓價錢 */}
+                        NT${' '}
+                      {DetailRes
+                        ? JSON.parse(localStorage.getItem('browseHistory'))[
+                          JSON.parse(localStorage.getItem('browseHistory'))
+                            .length - 6
+                        ].price
+                        : ''}{' '}
+                    </p>
+                  </Link>
+                )
+                : ''}
             </div>
           </section>
         </div>

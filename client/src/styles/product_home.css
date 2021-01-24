@@ -663,8 +663,8 @@ section.hot-sale {
 
 /*  */
 .page-all {
-  border: 1px solid #353c1d;
-  color: #353c1d;
+  border: 1px solid #f37022;
+  color: #f37022;
   height: 35px;
   line-height: 32px;
   transition: 0.15s;
@@ -673,7 +673,7 @@ section.hot-sale {
 }
 
 .main-content .page-select .page-all:hover {
-  background-color: #353c1d;
+  background-color: #f37022 !important;
   color: white;
 }
 /*  */
