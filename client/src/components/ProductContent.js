@@ -6,7 +6,7 @@ import FakeRes from '../data/FakeRes'
 
 // 目前會顯示很多prettier warnings，暫時無視
 // Link 路由還沒寫的精準
-function ProductContent() {
+function ProductContent(props) {
   // 老師的fetch寫法
   // 步驟一：設一個空productRes，setProductRes為之後fetch response
   const [ProductRes, setProductRes] = useState([])
@@ -40,7 +40,7 @@ function ProductContent() {
   //
   //
   //
-  const [categoryState, setCategoryState] = useState(0)
+  const [categoryState, setCategoryState] = useState(props.childCategoryState)
   const [brandState, setBrandState] = useState('所有品牌')
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
@@ -63,6 +63,9 @@ function ProductContent() {
     categoryConvertName = '配件'
   }
 
+  useEffect(() => {
+    setCategoryState(props.childCategoryState)
+  }, [props.childCategoryState])
 
   let pages = Math.ceil(ProductRes.filter((item) => {
     if (categoryState !== 0) { return Number(item.category) === categoryState }

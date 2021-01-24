@@ -1303,12 +1303,6 @@ function DetailContent(props) {
                       className=" d-flex align-items-center justify-content-between"
                     >
                       <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
-                        style={{ transform: 'rotate(180deg)' }}
-                      ></img>
-                      <img
                         className="img-fluid"
                         src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
@@ -1316,11 +1310,6 @@ function DetailContent(props) {
                           e.preventDefault()
                           setStatus(3)
                         }}
-                      ></img>
-                      <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
                       ></img>
                     </a>
                   </div>
@@ -1330,12 +1319,6 @@ function DetailContent(props) {
                       className=" d-flex align-items-center justify-content-between"
                     >
                       <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
-                        style={{ transform: 'rotate(180deg)' }}
-                      ></img>
-                      <img
                         className="img-fluid"
                         src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
@@ -1343,11 +1326,6 @@ function DetailContent(props) {
                           e.preventDefault()
                           setStatus(3)
                         }}
-                      ></img>
-                      <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
                       ></img>
                     </a>
                   </div>
@@ -1357,12 +1335,6 @@ function DetailContent(props) {
                       className=" d-flex align-items-center justify-content-between"
                     >
                       <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
-                        style={{ transform: 'rotate(180deg)' }}
-                      ></img>
-                      <img
                         className="img-fluid"
                         src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
@@ -1370,11 +1342,6 @@ function DetailContent(props) {
                           e.preventDefault()
                           setStatus(3)
                         }}
-                      ></img>
-                      <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
                       ></img>
                     </a>
                   </div>
@@ -1384,12 +1351,6 @@ function DetailContent(props) {
                       className=" d-flex align-items-center justify-content-between"
                     >
                       <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
-                        style={{ transform: 'rotate(180deg)' }}
-                      ></img>
-                      <img
                         className="img-fluid"
                         src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
@@ -1397,11 +1358,6 @@ function DetailContent(props) {
                           e.preventDefault()
                           setStatus(3)
                         }}
-                      ></img>
-                      <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
                       ></img>
                     </a>
                   </div>
@@ -1411,12 +1367,6 @@ function DetailContent(props) {
                       className=" d-flex align-items-center justify-content-between"
                     >
                       <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
-                        style={{ transform: 'rotate(180deg)' }}
-                      ></img>
-                      <img
                         className="img-fluid"
                         src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
@@ -1424,11 +1374,6 @@ function DetailContent(props) {
                           e.preventDefault()
                           setStatus(3)
                         }}
-                      ></img>
-                      <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
                       ></img>
                     </a>
                   </div>
@@ -1438,12 +1383,6 @@ function DetailContent(props) {
                       className=" d-flex align-items-center justify-content-between"
                     >
                       <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
-                        style={{ transform: 'rotate(180deg)' }}
-                      ></img>
-                      <img
                         className="img-fluid"
                         src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
                         alt={''}
@@ -1451,11 +1390,6 @@ function DetailContent(props) {
                           e.preventDefault()
                           setStatus(3)
                         }}
-                      ></img>
-                      <img
-                        className="d-none d-lg-inline-block"
-                        src="/images/素材/icon/Right arrow_G.svg"
-                        alt={''}
                       ></img>
                     </a>
                   </div>
