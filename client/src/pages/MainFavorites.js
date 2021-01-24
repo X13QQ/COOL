@@ -17,8 +17,10 @@ function MainFavorites() {
         <div className="mx-2 favorites-wrap ">
           <InputGroup
             className="favorites-wrap-container mx-auto row justify-content-between"
-            onFocus={(e) => {
+            onChange={(e) => {
               console.log(e.target.value)
+            }}
+            onFocus={(e) => {
               setFavorites(JSON.parse(localStorage.getItem('favorites')))
             }}
           >

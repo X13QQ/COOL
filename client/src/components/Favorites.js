@@ -54,7 +54,7 @@ function Favorites() {
     <>
       {FavoritesData.length > 0
         ? localStorage.setItem('favorites', JSON.stringify(FavoritesData))
-        : 'NO FAVORITES'}
+        : '無蒐藏清單'}
       <div className="row mt-3" style={{ width: '95%', margin: 'auto' }}>
         {FavoritesData.map((val, key) => {
           return (
