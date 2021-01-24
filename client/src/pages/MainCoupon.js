@@ -40,7 +40,11 @@ function MainCoupon() {
           <div className="linkTop"></div>
           <div className="mx-auto border border-0" style={{ width: '95%' }}>
             {couponData.map((v, k) => {
-              return <div key={k}>{v.code}</div>
+              return (
+                <div key={k}>
+                  <img src={v.image} alt={''} className="w-50"></img>
+                </div>
+              )
             })}
           </div>
         </div>

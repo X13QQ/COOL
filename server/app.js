@@ -272,6 +272,18 @@ app.get("/member/order/:status", function (req, res) {
   });
 });
 
+// 訂單紀錄
+app.get("/member/orderdetail", function (req, res) {
+  const sqlSelect =
+    "SELECT a.order_no, b.product_id, b.name, b.amount, b.size, b.brand, b.color, b.price " + 
+    "FROM cool_order a , cool_order_detailed b " +
+    "WHERE a.id = b.order_id AND a.member_no = ? ";
+  db.query(sqlSelect, [req.query.memberNo], (err, result, fields) => {
+    res.send(result);
+    // console.log(result)
+  });
+});
+
 // 蒐藏清單
 app.get("/member/favorites", function (req, res) {
   const sqlSelect =
@@ -284,7 +296,7 @@ app.get("/member/favorites", function (req, res) {
     [req.query.memberNo, req.query.valid],
     (req, result, fields) => {
       res.send(result);
-      console.log(result);
+      // console.log(result);
     }
   );
 });
