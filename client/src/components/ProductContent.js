@@ -6,7 +6,7 @@ import FakeRes from '../data/FakeRes'
 
 // 目前會顯示很多prettier warnings，暫時無視
 // Link 路由還沒寫的精準
-function ProductContent() {
+function ProductContent(props) {
   // 老師的fetch寫法
   // 步驟一：設一個空productRes，setProductRes為之後fetch response
   const [ProductRes, setProductRes] = useState([])
@@ -40,13 +40,13 @@ function ProductContent() {
   //
   //
   //
-  const [categoryState, setCategoryState] = useState(0)
+  const [categoryState, setCategoryState] = useState(props.childCategoryState)
   const [brandState, setBrandState] = useState('所有品牌')
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
   const [listOrder, setListOrder] = useState(1)
   const [imgSideState, setImgSideState] = useState('')
-  let categoryConvertName;
+  let categoryConvertName
   if (categoryState === 0) {
     categoryConvertName = '所有類別'
   } else if (categoryState === 1) {
@@ -63,18 +63,25 @@ function ProductContent() {
     categoryConvertName = '配件'
   }
 
+  useEffect(() => {
+    setCategoryState(props.childCategoryState)
+  }, [props.childCategoryState])
 
-  let pages = Math.ceil(ProductRes.filter((item) => {
-    if (categoryState !== 0) { return Number(item.category) === categoryState }
-    else if (categoryState === 0) {
-      return item
-    }
-  }).filter((item) => {
-    if (brandState !== '所有品牌') { return item.brand === brandState }
-    else if (brandState === '所有品牌') {
-      return item
-    }
-  }).length / itemsPerPage)
+  let pages = Math.ceil(
+    ProductRes.filter((item) => {
+      if (categoryState !== 0) {
+        return Number(item.category) === categoryState
+      } else if (categoryState === 0) {
+        return item
+      }
+    }).filter((item) => {
+      if (brandState !== '所有品牌') {
+        return item.brand === brandState
+      } else if (brandState === '所有品牌') {
+        return item
+      }
+    }).length / itemsPerPage
+  )
 
   return (
     <>
@@ -120,7 +127,10 @@ function ProductContent() {
         </div>
       </section>
       <div className="horizon-line-sm position-relative my-4 mx-auto"></div>
-      <div id="product-horizon-lg" className="horizon-line-lg position-relative mt-5 my-lg-5 mx-auto"></div>
+      <div
+        id="product-horizon-lg"
+        className="horizon-line-lg position-relative mt-5 my-lg-5 mx-auto"
+      ></div>
       <main className="product-home-main">
         <div className="container">
           <nav aria-label="breadcrumb">
@@ -164,8 +174,14 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault() }}
-                          style={{ pointerEvents: 'none', textDecoration: 'line-through', color: 'gray' }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                          }}
+                          style={{
+                            pointerEvents: 'none',
+                            textDecoration: 'line-through',
+                            color: 'gray',
+                          }}
                         >
                           優惠倒數-超值折扣
                         </a>
@@ -174,9 +190,14 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault() }}
-                          style={{ pointerEvents: 'none', textDecoration: 'line-through', color: 'gray' }}
-
+                          onClick={(e) => {
+                            e.preventDefault()
+                          }}
+                          style={{
+                            pointerEvents: 'none',
+                            textDecoration: 'line-through',
+                            color: 'gray',
+                          }}
                         >
                           STUDIO 7 買千送百
                         </a>
@@ -185,9 +206,14 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault() }}
-                          style={{ pointerEvents: 'none', textDecoration: 'line-through', color: 'gray' }}
-
+                          onClick={(e) => {
+                            e.preventDefault()
+                          }}
+                          style={{
+                            pointerEvents: 'none',
+                            textDecoration: 'line-through',
+                            color: 'gray',
+                          }}
                         >
                           CANDY 後背包第二件8折
                         </a>
@@ -196,9 +222,14 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault() }}
-                          style={{ pointerEvents: 'none', textDecoration: 'line-through', color: 'gray' }}
-
+                          onClick={(e) => {
+                            e.preventDefault()
+                          }}
+                          style={{
+                            pointerEvents: 'none',
+                            textDecoration: 'line-through',
+                            color: 'gray',
+                          }}
                         >
                           換季特賣
                         </a>
@@ -207,9 +238,14 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault() }}
-                          style={{ pointerEvents: 'none', textDecoration: 'line-through', color: 'gray' }}
-
+                          onClick={(e) => {
+                            e.preventDefault()
+                          }}
+                          style={{
+                            pointerEvents: 'none',
+                            textDecoration: 'line-through',
+                            color: 'gray',
+                          }}
                         >
                           免運活動
                         </a>
@@ -243,7 +279,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setCategoryState(0); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setCategoryState(0)
+                            setCurrentPage(1)
+                          }}
                         >
                           所有類別
                         </a>
@@ -252,7 +292,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setCategoryState(1); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setCategoryState(1)
+                            setCurrentPage(1)
+                          }}
                         >
                           上衣
                         </a>
@@ -261,7 +305,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setCategoryState(2); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setCategoryState(2)
+                            setCurrentPage(1)
+                          }}
                         >
                           帽子
                         </a>
@@ -270,7 +318,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setCategoryState(3); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setCategoryState(3)
+                            setCurrentPage(1)
+                          }}
                         >
                           外套
                         </a>
@@ -279,7 +331,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setCategoryState(4); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setCategoryState(4)
+                            setCurrentPage(1)
+                          }}
                         >
                           下著
                         </a>
@@ -288,7 +344,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setCategoryState(5); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setCategoryState(5)
+                            setCurrentPage(1)
+                          }}
                         >
                           鞋子
                         </a>
@@ -297,7 +357,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setCategoryState(6); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setCategoryState(6)
+                            setCurrentPage(1)
+                          }}
                         >
                           配件
                         </a>
@@ -331,7 +395,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setBrandState('所有品牌'); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setBrandState('所有品牌')
+                            setCurrentPage(1)
+                          }}
                         >
                           所有品牌
                         </a>
@@ -340,7 +408,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setBrandState('UNDEFEATED'); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setBrandState('UNDEFEATED')
+                            setCurrentPage(1)
+                          }}
                         >
                           UNDEFEATED
                         </a>
@@ -349,7 +421,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setBrandState('STUDIO SEVEN'); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setBrandState('STUDIO SEVEN')
+                            setCurrentPage(1)
+                          }}
                         >
                           STUDIO SEVEN
                         </a>
@@ -358,7 +434,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setBrandState('PALACE'); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setBrandState('PALACE')
+                            setCurrentPage(1)
+                          }}
                         >
                           PALACE
                         </a>
@@ -367,7 +447,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setBrandState('OnlyNY'); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setBrandState('OnlyNY')
+                            setCurrentPage(1)
+                          }}
                         >
                           OnlyNY
                         </a>
@@ -376,7 +460,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setBrandState('GOLF'); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setBrandState('GOLF')
+                            setCurrentPage(1)
+                          }}
                         >
                           GOLF
                         </a>
@@ -385,7 +473,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setBrandState('Dickies'); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setBrandState('Dickies')
+                            setCurrentPage(1)
+                          }}
                         >
                           Dickies
                         </a>
@@ -394,7 +486,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setBrandState('Champion'); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setBrandState('Champion')
+                            setCurrentPage(1)
+                          }}
                         >
                           Champion
                         </a>
@@ -403,7 +499,11 @@ function ProductContent() {
                         <a
                           href="#!"
                           className="d-inline-block px-3 py-2 font-weight-bold"
-                          onClick={(e) => { e.preventDefault(); setBrandState('BAPE'); setCurrentPage(1) }}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            setBrandState('BAPE')
+                            setCurrentPage(1)
+                          }}
                         >
                           BAPE
                         </a>
@@ -607,10 +707,22 @@ function ProductContent() {
                     </div>
                   </div>
                   <div className="category-brand-display d-flex align-items-center ml-auto">
-                    <p className="mr-3 mb-0" style={{ fontSize: '12px', fontWeight: 'bold' }}>目前類別： <span style={{ color: '#f37022' }}>
-                      {categoryConvertName}
-                    </span></p>
-                    <p className="mr-3 mb-0" style={{ fontSize: '12px', fontWeight: 'bold' }}>目前品牌： <span style={{ color: '#f37022' }}>{brandState}</span></p>
+                    <p
+                      className="mr-3 mb-0"
+                      style={{ fontSize: '12px', fontWeight: 'bold' }}
+                    >
+                      目前類別：{' '}
+                      <span style={{ color: '#f37022' }}>
+                        {categoryConvertName}
+                      </span>
+                    </p>
+                    <p
+                      className="mr-3 mb-0"
+                      style={{ fontSize: '12px', fontWeight: 'bold' }}
+                    >
+                      目前品牌：{' '}
+                      <span style={{ color: '#f37022' }}>{brandState}</span>
+                    </p>
                   </div>
                 </div>
                 <div
@@ -627,226 +739,262 @@ function ProductContent() {
                   {listOrder === 1 &&
                     ProductRes.sort(function (a, b) {
                       return a.id < b.id ? 1 : -1
-                    }).filter((item) => {
-                      if (categoryState !== 0) { return Number(item.category) === categoryState }
-                      else if (categoryState === 0) {
-                        return item
-                      }
-                    }).filter((item) => {
-                      if (brandState !== '所有品牌') { return item.brand === brandState }
-                      else if (brandState === '所有品牌') {
-                        return item
-                      }
-                    }).map((v, i) => {
-                      if (
-                        i >= itemsPerPage * (currentPage - 1) &&
-                        i <= itemsPerPage * currentPage - 1
-                      ) {
-                        return (
-                          <>
-                            <Link
-                              to={'/detail/' + v.brand + '/' + v.id}
-                              className="col-6 col-md-3"
-                              onMouseEnter={() => {
-                                setImgSideState(v.name)
-                              }}
-                              onMouseLeave={() => {
-                                setImgSideState('')
-                              }}
-                            >
-                              <div className="m-3">
-                                <img
-                                  id={"product-" + v.id}
-                                  className="mb-3"
-                                  src={imgSideState === v.name ? v.image2 : v.image}
-                                  width="100%"
-                                  style={{
-                                    height: '140px',
-                                    objectFit: 'contain',
-                                  }}
-                                  alt={''}
-                                ></img>
-                                <p className="m-0 text-center d-none d-sm-block">
-                                  {v.name}
-                                </p>
-                                <p className="m-0 text-center">{v.brand}</p>
-                                <p className="m-0 text-center font-weight-bold">
-                                  NT$ {v.price}
-                                </p>
-                              </div>
-                            </Link>
-                          </>
-                        )
-                      }
-                    })}
+                    })
+                      .filter((item) => {
+                        if (categoryState !== 0) {
+                          return Number(item.category) === categoryState
+                        } else if (categoryState === 0) {
+                          return item
+                        }
+                      })
+                      .filter((item) => {
+                        if (brandState !== '所有品牌') {
+                          return item.brand === brandState
+                        } else if (brandState === '所有品牌') {
+                          return item
+                        }
+                      })
+                      .map((v, i) => {
+                        if (
+                          i >= itemsPerPage * (currentPage - 1) &&
+                          i <= itemsPerPage * currentPage - 1
+                        ) {
+                          return (
+                            <>
+                              <Link
+                                to={'/detail/' + v.brand + '/' + v.id}
+                                className="col-6 col-md-3"
+                                onMouseEnter={() => {
+                                  setImgSideState(v.name)
+                                }}
+                                onMouseLeave={() => {
+                                  setImgSideState('')
+                                }}
+                              >
+                                <div className="m-3">
+                                  <img
+                                    id={'product-' + v.id}
+                                    className="mb-3"
+                                    src={
+                                      imgSideState === v.name
+                                        ? v.image2
+                                        : v.image
+                                    }
+                                    width="100%"
+                                    style={{
+                                      height: '140px',
+                                      objectFit: 'contain',
+                                    }}
+                                    alt={''}
+                                  ></img>
+                                  <p className="m-0 text-center d-none d-sm-block">
+                                    {v.name}
+                                  </p>
+                                  <p className="m-0 text-center">{v.brand}</p>
+                                  <p className="m-0 text-center font-weight-bold">
+                                    NT$ {v.price}
+                                  </p>
+                                </div>
+                              </Link>
+                            </>
+                          )
+                        }
+                      })}
                   {/* 依時間最舊排列 */}
                   {listOrder === 2 &&
                     ProductRes.sort(function (a, b) {
                       return a.id > b.id ? 1 : -1
-                    }).filter((item) => {
-                      if (categoryState !== 0) { return Number(item.category) === categoryState }
-                      else if (categoryState === 0) {
-                        return item
-                      }
-                    }).filter((item) => {
-                      if (brandState !== '所有品牌') { return item.brand === brandState }
-                      else if (brandState === '所有品牌') {
-                        return item
-                      }
-                    }).map((v, i) => {
-                      if (
-                        i >= itemsPerPage * (currentPage - 1) &&
-                        i <= itemsPerPage * currentPage - 1
-                      ) {
-                        return (
-                          <>
-                            <Link
-                              to={'/detail/' + v.brand + '/' + v.id}
-                              className="col-6 col-md-3"
-                              onMouseEnter={() => {
-                                setImgSideState(v.name)
-                              }}
-                              onMouseLeave={() => {
-                                setImgSideState('')
-                              }}
-                            >
-                              <div className="m-3">
-                                <img
-                                  className="mb-3"
-                                  src={imgSideState === v.name ? v.image2 : v.image}
-                                  width="100%"
-                                  style={{
-                                    height: '140px',
-                                    objectFit: 'contain',
-                                  }}
-                                  alt={''}
-                                ></img>
-                                <p className="m-0 text-center d-none d-sm-block">
-                                  {v.name}
-                                </p>
-                                <p className="m-0 text-center">{v.brand}</p>
-                                <p className="m-0 text-center font-weight-bold">
-                                  NT$ {v.price}
-                                </p>
-                              </div>
-                            </Link>
-                          </>
-                        )
-                      }
-                    })}
+                    })
+                      .filter((item) => {
+                        if (categoryState !== 0) {
+                          return Number(item.category) === categoryState
+                        } else if (categoryState === 0) {
+                          return item
+                        }
+                      })
+                      .filter((item) => {
+                        if (brandState !== '所有品牌') {
+                          return item.brand === brandState
+                        } else if (brandState === '所有品牌') {
+                          return item
+                        }
+                      })
+                      .map((v, i) => {
+                        if (
+                          i >= itemsPerPage * (currentPage - 1) &&
+                          i <= itemsPerPage * currentPage - 1
+                        ) {
+                          return (
+                            <>
+                              <Link
+                                to={'/detail/' + v.brand + '/' + v.id}
+                                className="col-6 col-md-3"
+                                onMouseEnter={() => {
+                                  setImgSideState(v.name)
+                                }}
+                                onMouseLeave={() => {
+                                  setImgSideState('')
+                                }}
+                              >
+                                <div className="m-3">
+                                  <img
+                                    className="mb-3"
+                                    src={
+                                      imgSideState === v.name
+                                        ? v.image2
+                                        : v.image
+                                    }
+                                    width="100%"
+                                    style={{
+                                      height: '140px',
+                                      objectFit: 'contain',
+                                    }}
+                                    alt={''}
+                                  ></img>
+                                  <p className="m-0 text-center d-none d-sm-block">
+                                    {v.name}
+                                  </p>
+                                  <p className="m-0 text-center">{v.brand}</p>
+                                  <p className="m-0 text-center font-weight-bold">
+                                    NT$ {v.price}
+                                  </p>
+                                </div>
+                              </Link>
+                            </>
+                          )
+                        }
+                      })}
                   {/* 依價格最低排列 */}
                   {listOrder === 3 &&
                     ProductRes.sort(function (a, b) {
                       return a.price > b.price ? 1 : -1
-                    }).filter((item) => {
-                      if (categoryState !== 0) { return Number(item.category) === categoryState }
-                      else if (categoryState === 0) {
-                        return item
-                      }
-                    }).filter((item) => {
-                      if (brandState !== '所有品牌') { return item.brand === brandState }
-                      else if (brandState === '所有品牌') {
-                        return item
-                      }
-                    }).map((v, i) => {
-                      console.log(v)
-                      if (
-                        i >= itemsPerPage * (currentPage - 1) &&
-                        i <= itemsPerPage * currentPage - 1
-                      ) {
-                        return (
-                          <>
-                            <Link
-                              to={'/detail/' + v.brand + '/' + v.id}
-                              className="col-6 col-md-3"
-                              onMouseEnter={() => {
-                                setImgSideState(v.name)
-                              }}
-                              onMouseLeave={() => {
-                                setImgSideState('')
-                              }}
-                            >
-                              <div className="m-3">
-                                <img
-                                  className="mb-3"
-                                  src={imgSideState === v.name ? v.image2 : v.image}
-                                  width="100%"
-                                  style={{
-                                    height: '140px',
-                                    objectFit: 'contain',
-                                  }}
-                                  alt={''}
-                                ></img>
-                                <p className="m-0 text-center d-none d-sm-block">
-                                  {v.name}
-                                </p>
-                                <p className="m-0 text-center">{v.brand}</p>
-                                <p className="m-0 text-center font-weight-bold">
-                                  NT$ {v.price}
-                                </p>
-                              </div>
-                            </Link>
-                          </>
-                        )
-                      }
-                    })}
+                    })
+                      .filter((item) => {
+                        if (categoryState !== 0) {
+                          return Number(item.category) === categoryState
+                        } else if (categoryState === 0) {
+                          return item
+                        }
+                      })
+                      .filter((item) => {
+                        if (brandState !== '所有品牌') {
+                          return item.brand === brandState
+                        } else if (brandState === '所有品牌') {
+                          return item
+                        }
+                      })
+                      .map((v, i) => {
+                        console.log(v)
+                        if (
+                          i >= itemsPerPage * (currentPage - 1) &&
+                          i <= itemsPerPage * currentPage - 1
+                        ) {
+                          return (
+                            <>
+                              <Link
+                                to={'/detail/' + v.brand + '/' + v.id}
+                                className="col-6 col-md-3"
+                                onMouseEnter={() => {
+                                  setImgSideState(v.name)
+                                }}
+                                onMouseLeave={() => {
+                                  setImgSideState('')
+                                }}
+                              >
+                                <div className="m-3">
+                                  <img
+                                    className="mb-3"
+                                    src={
+                                      imgSideState === v.name
+                                        ? v.image2
+                                        : v.image
+                                    }
+                                    width="100%"
+                                    style={{
+                                      height: '140px',
+                                      objectFit: 'contain',
+                                    }}
+                                    alt={''}
+                                  ></img>
+                                  <p className="m-0 text-center d-none d-sm-block">
+                                    {v.name}
+                                  </p>
+                                  <p className="m-0 text-center">{v.brand}</p>
+                                  <p className="m-0 text-center font-weight-bold">
+                                    NT$ {v.price}
+                                  </p>
+                                </div>
+                              </Link>
+                            </>
+                          )
+                        }
+                      })}
                   {/* 依價格最高 */}
                   {listOrder === 4 &&
                     ProductRes.sort(function (a, b) {
                       return a.price < b.price ? 1 : -1
-                    }).filter((item) => {
-                      if (categoryState !== 0) { return Number(item.category) === categoryState }
-                      else if (categoryState === 0) {
-                        return item
-                      }
-                    }).filter((item) => {
-                      if (brandState !== '所有品牌') { return item.brand === brandState }
-                      else if (brandState === '所有品牌') {
-                        return item
-                      }
-                    }).map((v, i) => {
-                      console.log(v)
+                    })
+                      .filter((item) => {
+                        if (categoryState !== 0) {
+                          return Number(item.category) === categoryState
+                        } else if (categoryState === 0) {
+                          return item
+                        }
+                      })
+                      .filter((item) => {
+                        if (brandState !== '所有品牌') {
+                          return item.brand === brandState
+                        } else if (brandState === '所有品牌') {
+                          return item
+                        }
+                      })
+                      .map((v, i) => {
+                        console.log(v)
 
-                      if (
-                        i >= itemsPerPage * (currentPage - 1) &&
-                        i <= itemsPerPage * currentPage - 1
-                      ) {
-                        return (
-                          <>
-                            <Link
-                              to={'/detail/' + v.brand + '/' + v.id}
-                              className="col-6 col-md-3"
-                              onMouseEnter={() => {
-                                setImgSideState(v.name)
-                              }}
-                              onMouseLeave={() => {
-                                setImgSideState('')
-                              }}
-                            >
-                              <div className="m-3">
-                                <img
-                                  className="mb-3"
-                                  src={imgSideState === v.name ? v.image2 : v.image}
-                                  width="100%"
-                                  style={{
-                                    height: '140px',
-                                    objectFit: 'contain',
-                                  }}
-                                  alt={''}
-                                ></img>
-                                <p className="m-0 text-center d-none d-sm-block">
-                                  {v.name}
-                                </p>
-                                <p className="m-0 text-center">{v.brand}</p>
-                                <p className="m-0 text-center font-weight-bold">
-                                  NT$ {v.price}
-                                </p>
-                              </div>
-                            </Link>
-                          </>
-                        )
-                      }
-                    })}
+                        if (
+                          i >= itemsPerPage * (currentPage - 1) &&
+                          i <= itemsPerPage * currentPage - 1
+                        ) {
+                          return (
+                            <>
+                              <Link
+                                to={'/detail/' + v.brand + '/' + v.id}
+                                className="col-6 col-md-3"
+                                onMouseEnter={() => {
+                                  setImgSideState(v.name)
+                                }}
+                                onMouseLeave={() => {
+                                  setImgSideState('')
+                                }}
+                              >
+                                <div className="m-3">
+                                  <img
+                                    className="mb-3"
+                                    src={
+                                      imgSideState === v.name
+                                        ? v.image2
+                                        : v.image
+                                    }
+                                    width="100%"
+                                    style={{
+                                      height: '140px',
+                                      objectFit: 'contain',
+                                    }}
+                                    alt={''}
+                                  ></img>
+                                  <p className="m-0 text-center d-none d-sm-block">
+                                    {v.name}
+                                  </p>
+                                  <p className="m-0 text-center">{v.brand}</p>
+                                  <p className="m-0 text-center font-weight-bold">
+                                    NT$ {v.price}
+                                  </p>
+                                </div>
+                              </Link>
+                            </>
+                          )
+                        }
+                      })}
                   {/*  */}
                   {/*  */}
                   {/*  */}
@@ -949,7 +1097,12 @@ function ProductContent() {
                   <a
                     href="#!"
                     className=" font-weight-bold position-absolute page-all mx-2 text-center px-3 text-decoration-none"
-                    onClick={(e) => { e.preventDefault(); setBrandState('所有品牌'); setCategoryState(0); setCurrentPage(1) }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setBrandState('所有品牌')
+                      setCategoryState(0)
+                      setCurrentPage(1)
+                    }}
                   >
                     所有商品
                   </a>
