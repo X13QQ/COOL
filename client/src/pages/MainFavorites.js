@@ -19,6 +19,8 @@ function MainFavorites() {
             className="favorites-wrap-container mx-auto row justify-content-between"
             onChange={(e) => {
               console.log(e.target.value)
+            }}
+            onFocus={(e) => {
               setFavorites(JSON.parse(localStorage.getItem('favorites')))
             }}
           >

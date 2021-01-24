@@ -54,16 +54,25 @@ function Favorites() {
     <>
       {FavoritesData.length > 0
         ? localStorage.setItem('favorites', JSON.stringify(FavoritesData))
-        : 'NO FAVORITES'}
-      <div className="row mt-3" style={{width:'95%',margin:'auto'}}>
+        : '無蒐藏清單'}
+      <div className="row mt-3" style={{ width: '95%', margin: 'auto' }}>
         {FavoritesData.map((val, key) => {
           return (
             <div key={key} className="col-12 col-sm-6 col-md-4 col-lg-3 px-0">
               <div className="text-center border position-relative rounded">
-                <a className="d-inline-block p-2"
+                <a
+                  className="d-inline-block p-2"
                   href={`http://localhost:3000/detail/${val.brand}/${val.pro_ID}`}
                 >
-                  <img src={val.image} alt="" style={{width:'100%',height:"150px",objectFit:'contain'}}></img>
+                  <img
+                    src={val.image}
+                    alt=""
+                    style={{
+                      width: '100%',
+                      height: '150px',
+                      objectFit: 'contain',
+                    }}
+                  ></img>
                 </a>
                 <a
                   href="#!"
@@ -79,13 +88,24 @@ function Favorites() {
                 </a>
               </div>
               <div className="card-body p-1">
-                <h5 className="card-title m-0 mx-2 my-1 font-weight-bold text-center" style={{fontSize:'12px'}}>
+                <h5
+                  className="card-title m-0 mx-2 my-1 font-weight-bold text-center"
+                  style={{ fontSize: '12px' }}
+                >
                   {val.name.slice(0, val.name.indexOf('^'))}
                 </h5>
-                <p className="card-text m-0 mx-2 my-1 font-weight-bold text-center" style={{fontSize:'14px',color:'#f37022'}}>
+                <p
+                  className="card-text m-0 mx-2 my-1 font-weight-bold text-center"
+                  style={{ fontSize: '14px', color: '#f37022' }}
+                >
                   {val.name.slice(val.name.indexOf('^') + 1, val.name.length)}
                 </p>
-                <p className="card-text m-0 mx-2 my-1 font-weight-bold text-center" style={{fontSize:'12px'}}>NT$: {val.price}</p>
+                <p
+                  className="card-text m-0 mx-2 my-1 font-weight-bold text-center"
+                  style={{ fontSize: '12px' }}
+                >
+                  NT$: {val.price}
+                </p>
                 {/* <a href="#!" className="btn btn-primary w-100">
                   加入購物車
                 </a> */}
