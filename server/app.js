@@ -284,7 +284,7 @@ app.get("/member/favorites", function (req, res) {
     [req.query.memberNo, req.query.valid],
     (req, result, fields) => {
       res.send(result);
-      console.log(result)
+      console.log(result);
     }
   );
 });
@@ -351,6 +351,16 @@ app.post("/member/contact", function (req, res) {
       res.send(result);
     }
   );
+});
+
+app.post("/test", function (req, res) {
+  const sql =
+    "INSERT INTO cool_order (order_no) " +
+    "SELECT CONCAT('20201215',SUBSTRING(MAX(order_no),9,4))+1 AS new_order_no FROM cool_order WHERE order_no like '20201215%' " +
+    ";SELECT LAST_INSERT_ID() ";
+  db.query(sql, [], (req, result, fields) => {
+    console.log(req)
+  });
 });
 
 app.listen(3001, () => {
