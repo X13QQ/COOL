@@ -477,7 +477,7 @@ function News() {
                 </a>
                 <div
                   id="items-per-page-wrap"
-                  className="items-per-page-wrap position-absolute"
+                  className="items-per-page-wrap position-absolute ;"
                   onMouseEnter={() => {
                     document.getElementById('items-per-page-wrap').style[
                       'display'
@@ -529,7 +529,7 @@ function News() {
                           style={{
                             backgroundImage: `url('${v.src}')`,
                           }}
-                          className="img-fluid news-small-cover-image"
+                          className="img-fluid news-small-cover-image "
                           alt={''}
                         ></img>
                       </div>
