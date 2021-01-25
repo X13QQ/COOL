@@ -527,6 +527,8 @@ body {
 }
 .justify-content-between .card .row .d-flex .img-fluid {
   height: 179px;
+  background-size: cover;
+  background-position: center center;
 }
 .news-small-cover-image {
   width: 100%;

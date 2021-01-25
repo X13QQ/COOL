@@ -71,23 +71,12 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
-}
-.home-header .photo-mask-img1 {
-  background-image: url(../images/首頁/lane_131219_09-5_1024x1024.jpg);
+  background-image: url('../images/首頁/https___hk.hypebeast.com_files_2021_01_virgil-abloh-off-white-nike-the-twenty-collection-rumor-0.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: top;
-  height: 100%;
-  width: 60%;
+  background-position: center;
 }
-.home-header .photo-mask-img2 {
-  background-image: url(../images/首頁/03_1024x1024.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top;
-  height: 100%;
-  width: 40%;
-}
+
 .home-header .main-navbar .navbar-menu a {
   font-size: 16px;
   font-weight: 700;
@@ -390,7 +379,7 @@ body {
 .home-main .shop-now-top {
   width: 100%;
   height: 800px;
-  background-image: url(../images/首頁/Home_image_2-2.png);
+  background-image: url('../images/首頁/Golf-Wang-Highlark-Featured.jpg');
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;

@@ -275,7 +275,7 @@ app.get("/member/order/:status", function (req, res) {
 // 訂單紀錄
 app.get("/member/orderdetail", function (req, res) {
   const sqlSelect =
-    "SELECT a.order_no, b.product_id, b.name, b.amount, b.size, b.brand, b.color, b.price " + 
+    "SELECT a.order_no, b.product_id, b.name, b.amount, b.size, b.brand, b.color, b.price " +
     "FROM cool_order a , cool_order_detailed b " +
     "WHERE a.id = b.order_id AND a.member_no = ? ";
   db.query(sqlSelect, [req.query.memberNo], (err, result, fields) => {
@@ -366,7 +366,6 @@ app.post("/member/contact", function (req, res) {
 });
 
 
-
 //news
 app.get("/news", function (req, res) {
   db.query(
@@ -380,6 +379,17 @@ app.get("/news", function (req, res) {
       res.send(JSON.stringify(result));
     }
   );
+});
+
+//營運分析 基本報表
+app.get("/dashboard/report/orderlist", function (req, res) {
+  const sqlSelect =
+    "SELECT order_no, date, name, receiver_cellphone AS phone, price " +
+    ", CASE status WHEN '1' THEN '處理中' WHEN '2' THEN '已完成' WHEN '3' THEN '申請退款' ELSE '' END AS status " +
+    "FROM cool_order ";
+  db.query(sqlSelect, [], (req, result, fields) => {
+    res.send(result);
+  });
 });
 
 app.listen(3001, () => {
