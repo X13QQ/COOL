@@ -46,7 +46,7 @@ function MainMember() {
           }}
         >
           <Row className="m-3">
-            <div className="circle">
+            <div className="circle active">
               <LV1 className="circle-icon1" />
             </div>
             <ul className="memberlv m-3 flex-fill list-unstyled d-flex flex-column">
