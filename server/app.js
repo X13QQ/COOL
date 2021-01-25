@@ -40,15 +40,54 @@ app.get("/detail/:brand/:id", function (req, res) {
   db.query(
     // 兩張表成功
     "SELECT * FROM product INNER JOIN product_images ON product.id = product_images.product_id  WHERE product.id =" +
-      req.params.id +
-      " ORDER BY color",
+    req.params.id +
+    " ORDER BY color",
 
     (err, result) => {
       if (err) {
         console.log(err);
       }
-      console.log(result);
+      // console.log(result);
       res.send(JSON.stringify(result));
+    }
+  );
+});
+
+// 商品詳細頁 get favorites 
+app.get("/detail/favorite/:userId/:productId", function (req, res) {
+  db.query(
+    "SELECT * FROM favorites WHERE member_no = " + req.params.userId + "",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+
+// 商品詳細頁 post favorites
+app.post("/detail/favorite/:userId/:productId", function (req, res) {
+  db.query(
+    "INSERT INTO favorites (member_no ,product_no ,valid) VALUES (" + req.params.userId + "," + req.params.productId + ", 1)",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      // res.send(JSON.stringify(result));
+    }
+  );
+});
+
+// 商品詳細頁 post favorites
+app.put("/detail/favorite/:userId/:productId", function (req, res) {
+  db.query(
+    "UPDATE favorites SET valid = 1 WHERE member_no = " + req.params.userId + " AND product_no = " + req.params.productId + "",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      // res.send(JSON.stringify(result));
     }
   );
 });
@@ -57,13 +96,13 @@ app.get("/detail/:brand/:id", function (req, res) {
 app.post("/detail/:brand/:id", function (req, res) {
   db.query(
     "SELECT * FROM product INNER JOIN product_stock ON product.id = product_stock.product_id  WHERE product.id =" +
-      req.params.id +
-      " ORDER BY color , size",
+    req.params.id +
+    " ORDER BY color , size",
     (err, result) => {
       if (err) {
         console.log(err);
       }
-      console.log(result);
+      // console.log(result);
       res.send(JSON.stringify(result));
     }
   );
