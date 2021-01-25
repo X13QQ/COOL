@@ -400,7 +400,7 @@ function HeaderOther(props) {
                       color: '#353c1d',
                     }}
                     onClick={() => {
-                      setShow(false)
+                      props.setShowParent(false)
                       cleanData()
                     }}
                   >
@@ -624,7 +624,7 @@ function HeaderOther(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setModal(1)}
+                    onClick={() => props.setShowParent(false)}
                   >
                     取消
                   </button>

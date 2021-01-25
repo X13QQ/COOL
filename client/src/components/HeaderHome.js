@@ -141,8 +141,13 @@ function HeaderHome(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].name
       : ''
   )
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
+
+  useEffect(() => {
+    setShow(props.showParent)
+  }, [props.showParent])
+
   const [user, setUser] = useState({ account: '', password: '', email: '' })
   const [loginStatus, setLoginStatus] = useState(0)
   const [certificateEmail, setCertificateEmail] = useState('')
@@ -198,7 +203,7 @@ function HeaderHome(props) {
   const close = (id) => {
     document.addEventListener('click', function (e) {
       if (e.target.id === id) {
-        setShow(false)
+        props.setShowParent(false)
         setModal(1)
         cleanData()
       }
@@ -397,7 +402,7 @@ function HeaderHome(props) {
                       color: '#353c1d',
                     }}
                     onClick={() => {
-                      setShow(false)
+                      props.setShowParent(false)
                       cleanData()
                     }}
                   >
@@ -620,7 +625,7 @@ function HeaderHome(props) {
                     }}
                     onClick={(e) => {
                       e.preventDefault()
-                      setModal(1)
+                      props.setShowParent(false)
                     }}
                   >
                     取消
@@ -1009,10 +1014,7 @@ function HeaderHome(props) {
         style={{ marginBottom: '100px' }}
       >
         <div className="photo-mask">
-          <div className="photo-mask-mask d-flex">
-            <div className="photo-mask-img1"></div>
-            <div className="photo-mask-img2"></div>
-          </div>
+          <div className="photo-mask-mask"></div>
         </div>
         <div className="container position-relative" style={{ height: '100%' }}>
           <nav className="main-navbar navbar navbar-expand-lg px-0 pt-5">
@@ -1114,7 +1116,7 @@ function HeaderHome(props) {
                     onClick={(e) => {
                       e.preventDefault()
                       setModal(1)
-                      if (loginStatus === 0) setShow(true)
+                      if (loginStatus === 0) props.setShowParent(true)
                     }}
                   >
                     <img src="images/素材/icon/Profile_W.svg" alt={''}></img>
