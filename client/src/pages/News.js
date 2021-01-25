@@ -23,7 +23,7 @@ function News() {
   for (let i = 9; i < newsImages.length - 14; i++) {
     newsImages2.push(newsImages[i])
   }
-  console.log(newsImages2)
+  // console.log(newsImages2)
   useEffect(() => {
     // async await
     async function getNews() {
@@ -39,12 +39,12 @@ function News() {
 
           // 設定資料到ProductRes狀態
           setNewsImages(data)
-          console.log(data)
+          // console.log(data)
         }
       } catch (error) {
         // 發生錯誤的處理情況
         alert('無法得到伺服器資料，請稍後再重試')
-        console.log(error)
+        // console.log(error)
       }
     }
     getNews()
@@ -85,7 +85,7 @@ function News() {
                 zIndex: '1',
                 objectFit: 'cover',
               }}
-              alt=""
+              alt={''}
             ></img>
             <div className="row mx-0">
               <div className="col-6 pr-0">
@@ -117,7 +117,7 @@ function News() {
                   <a
                     className="font-weight-bold"
                     style={{ fontSize: '12px' }}
-                    href="#!"
+                    href="/product"
                   >
                     {newsLink}
                   </a>
@@ -172,9 +172,9 @@ function News() {
                 <div
                   className="newsImageMain1 newsBg-cover newsRow newsBig-pic-mask "
                   style={{
-                    backgroundImage: `url('${
+                    backgroundImage: `url(${
                       newsImages.length > 0 ? newsImages[0].src : ''
-                      }')`,
+                    })`,
                   }}
                   onClick={(e) => {
                     e.preventDefault()
@@ -192,8 +192,8 @@ function News() {
                     <span className="zox-byline-name">
                       {newsImages.length > 0 ? newsImages[0].news_title2 : ''}
                     </span>
-                    <span class="zox-byline-date">
-                      <i class="far fa-clock"></i>
+                    <span className="zox-byline-date">
+                      <i className="far fa-clock"></i>
                       {newsImages.length > 0 ? newsImages[0].date : ''}
                     </span>
                   </h5>
@@ -203,17 +203,17 @@ function News() {
                 <div
                   className="newsImageMain2 newsBg-cover newsBox "
                   style={{
-                    backgroundImage: `url('${
+                    backgroundImage: `url(${
                       newsImages.length > 0 ? newsImages[1].src : ''
-                      }')`,
+                    })`,
                   }}
                 ></div>
                 <div
                   className="newsImageMain4 newsBg-cover newsBox newsBig-pic-mask "
                   style={{
-                    backgroundImage: `url('${
+                    backgroundImage: `url(${
                       newsImages.length > 0 ? newsImages[3].src : ''
-                      }')`,
+                    })`,
                   }}
                   onClick={(e) => {
                     e.preventDefault()
@@ -231,8 +231,8 @@ function News() {
                     <span className="zox-byline-name">
                       {newsImages.length > 0 ? newsImages[3].news_title2 : ''}
                     </span>
-                    <span class="zox-byline-date">
-                      <i class="far fa-clock"></i>
+                    <span className="zox-byline-date">
+                      <i className="far fa-clock"></i>
                       {newsImages.length > 0 ? newsImages[3].date : ''}
                     </span>
                   </h5>
@@ -244,9 +244,9 @@ function News() {
                 <div
                   className="newsImageMain6 newsBg-cover newsBox newsBig-pic-mask "
                   style={{
-                    backgroundImage: `url('${
+                    backgroundImage: `url(${
                       newsImages.length > 0 ? newsImages[5].src : ''
-                      }')`,
+                    })`,
                   }}
                   onClick={(e) => {
                     e.preventDefault()
@@ -264,8 +264,8 @@ function News() {
                     <span className="zox-byline-name">
                       {newsImages.length > 0 ? newsImages[5].news_title2 : ''}
                     </span>
-                    <span class="zox-byline-date">
-                      <i class="far fa-clock"></i>
+                    <span className="zox-byline-date">
+                      <i className="far fa-clock"></i>
                       {newsImages.length > 0 ? newsImages[5].date : ''}
                     </span>
                   </h5>
@@ -273,9 +273,9 @@ function News() {
                 <div
                   className="newsImageMain8 newsBg-cover newsBox newsBig-pic-mask "
                   style={{
-                    backgroundImage: `url('${
+                    backgroundImage: `url(${
                       newsImages.length > 0 ? newsImages[7].src : ''
-                      }')`,
+                    })`,
                   }}
                   onClick={(e) => {
                     e.preventDefault()
@@ -293,8 +293,8 @@ function News() {
                     <span className="zox-byline-name">
                       {newsImages.length > 0 ? newsImages[7].news_title2 : ''}
                     </span>
-                    <span class="zox-byline-date">
-                      <i class="far fa-clock"></i>
+                    <span className="zox-byline-date">
+                      <i className="far fa-clock"></i>
                       {newsImages.length > 0 ? newsImages[7].date : ''}
                     </span>
                   </h5>
@@ -304,9 +304,9 @@ function News() {
                 <div
                   className="newsImageMain7 newsBg-cover newsRow newsBig-pic-mask "
                   style={{
-                    backgroundImage: `url('${
+                    backgroundImage: `url(${
                       newsImages.length > 0 ? newsImages[6].src : ''
-                      }')`,
+                    })`,
                   }}
                   onClick={(e) => {
                     e.preventDefault()
@@ -324,8 +324,8 @@ function News() {
                     <span className="zox-byline-name">
                       {newsImages.length > 0 ? newsImages[6].news_title2 : ''}
                     </span>
-                    <span class="zox-byline-date">
-                      <i class="far fa-clock"></i>
+                    <span className="zox-byline-date">
+                      <i className="far fa-clock"></i>
                       {newsImages.length > 0 ? newsImages[6].date : ''}
                     </span>
                   </h5>
@@ -337,9 +337,9 @@ function News() {
             <div
               className=" newsImageMain3 newsBg-cover newsBox newsBig-pic-mask "
               style={{
-                backgroundImage: `url('${
+                backgroundImage: `url(${
                   newsImages.length > 0 ? newsImages[2].src : ''
-                  }')`,
+                })`,
               }}
               onClick={(e) => {
                 e.preventDefault()
@@ -357,8 +357,8 @@ function News() {
                 <span className="zox-byline-name">
                   {newsImages.length > 0 ? newsImages[2].news_title2 : ''}
                 </span>
-                <span class="zox-byline-date">
-                  <i class="far fa-clock"></i>
+                <span className="zox-byline-date">
+                  <i className="far fa-clock"></i>
                   {newsImages.length > 0 ? newsImages[2].date : ''}
                 </span>
               </h5>
@@ -366,9 +366,9 @@ function News() {
             <div
               className="newsImageMain5 newsBg-cover newsBox newsBig-pic-mask "
               style={{
-                backgroundImage: `url('${
+                backgroundImage: `url(${
                   newsImages.length > 0 ? newsImages[4].src : ''
-                  }')`,
+                })`,
                 flexGrow: '1',
               }}
               onClick={(e) => {
@@ -387,8 +387,8 @@ function News() {
                 <span className="zox-byline-name">
                   {newsImages.length > 0 ? newsImages[4].news_title2 : ''}
                 </span>
-                <span class="zox-byline-date">
-                  <i class="far fa-clock"></i>
+                <span className="zox-byline-date">
+                  <i className="far fa-clock"></i>
                   {newsImages.length > 0 ? newsImages[4].date : ''}
                 </span>
               </h5>
@@ -396,9 +396,9 @@ function News() {
             <div
               className="newsImageMain9 newsBg-cover newsBox newsBig-pic-mask "
               style={{
-                backgroundImage: `url('${
+                backgroundImage: `url(${
                   newsImages.length > 0 ? newsImages[8].src : ''
-                  }')`,
+                })`,
               }}
               onClick={(e) => {
                 e.preventDefault()
@@ -416,8 +416,8 @@ function News() {
                 <span className="zox-byline-name">
                   {newsImages.length > 0 ? newsImages[8].news_title2 : ''}
                 </span>
-                <span class="zox-byline-date">
-                  <i class="far fa-clock"></i>
+                <span className="zox-byline-date">
+                  <i className="far fa-clock"></i>
                   {newsImages.length > 0 ? newsImages[8].date : ''}
                 </span>
               </h5>
@@ -525,29 +525,20 @@ function News() {
             {/* <!-- 小圖開始 --> */}
             {newsImages2.length > 0
               ? newsImages2.map((v, i) => (
-                <div
-                  className=" card mb-3 col-6"
-                  style={{ maxWidth: '540px', cursor: 'pointer' }}
-                >
-                  <div className="row no-gutters">
-                    <div className="col-md-4 d-flex justify-content-center align-items-center">
-                      <img
-                        style={{
-                          backgroundImage: `url('${v.src}')`,
-                        }}
-                        className="img-fluid news-small-cover-image "
-                        alt={''}
-                      ></img>
-                    </div>
-                    <div className="col-md-8">
-                      <div className="card-body news-card-body-text">
-                        {/* <h5 className="card-title"></h5> */}
-                        <p
-                          className="news-article card-text font-weight-bold"
-                          style={{ color: '#353c1d' }}
-                        >
-                          {v.news_title1}
-                        </p>
+                  <div
+                    className="card mb-3 col-6"
+                    style={{ maxWidth: '540px', cursor: 'pointer' }}
+                    key={i}
+                  >
+                    <div className="row no-gutters">
+                      <div className="col-md-4 d-flex justify-content-center align-items-center">
+                        <img
+                          style={{
+                            backgroundImage: `url(${v.src})`,
+                          }}
+                          className="img-fluid news-small-cover-image"
+                          alt={''}
+                        ></img>
                       </div>
                       <div className="card-body news-card-body-link">
                         <p className="card-text d-flex justify-content-end ">
@@ -577,9 +568,9 @@ function News() {
           <div className="page-select position-relative d-none d-lg-flex justify-content-center align-items-center my-5">
             <a
               href="#!"
-              className=" font-weight-bold page-previous d-flex justify-content-between align-items-center px-2 mx-2 text-center text-decoration-none"
+              className="font-weight-bold page-previous d-flex justify-content-between align-items-center px-2 mx-2 text-center text-decoration-none"
             >
-              <img src="images/素材/icon/arrow_W.svg" alt=""></img>上一頁
+              <img src="images/素材/icon/arrow_W.svg" alt={''}></img>上一頁
             </a>
             <a
               href="#!"
@@ -601,9 +592,9 @@ function News() {
             </a>
             <a
               href="#!"
-              className=" font-weight-bold page-next d-flex justify-content-between align-items-center px-3 mx-2 text-center text-decoration-none"
+              className="font-weight-bold page-next d-flex justify-content-between align-items-center px-2 mx-2 text-center text-decoration-none"
             >
-              下一頁<img src="images/素材/icon/arrow_W.svg" alt=""></img>
+              下一頁<img src="images/素材/icon/arrow_W.svg" alt={''}></img>
             </a>
           </div>
         </div>
