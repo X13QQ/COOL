@@ -163,7 +163,7 @@ function Clothing() {
                       >
                         <Card.Body className="px-5">
                           <Link
-                            // to={'/detail/{${this.brand}}/{${this.id}}'}
+                            to={`/detail/${val.brand}/${val.id}`}
                             style={{
                               fontSize: '12px',
                               textOverflow: 'ellipsis',
@@ -177,7 +177,7 @@ function Clothing() {
                           <p style={{ fontSize: '12px' }}>
                             NT${`${val.price}`}
                           </p>
-                          <div className="row dropdownbtn">
+                          {/* <div className="row dropdownbtn">
                             <DropdownButton
                               id="dropdown-basic-button-down "
                               drop={'down'}
@@ -239,7 +239,7 @@ function Clothing() {
                             >
                               加入購物車
                             </a>
-                          </div>
+                          </div> */}
                         </Card.Body>
                       </Accordion.Collapse>
                     </Card>
