@@ -1,10 +1,117 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-function HeaderProduct() {
+function HeaderProduct(props) {
   const [show, setShow] = useState(false)
   const [modal, setModal] = useState(1)
+  const [shoppingCartStorage, setShoppingCartStorage] = useState(props.detailToHeaderCart)
 
+  const cartMap = () => {
+    let cartTotalValue = new Number;
+    return shoppingCartStorage ?
+      (
+        <>
+          <div className="cart-icon-wrap position-absolute pt-3">
+            <div
+              className="cart-icon-ul-wrap position-relative rounded"
+              style={{ padding: '8px 15px' }}
+            >
+              <ul className="cart-icon-ul list-unstyled">
+                {JSON.parse(localStorage.getItem('cartList')).map((v, i) => {
+                  cartTotalValue += Number(v.price) * Number(v.amount)
+                  return (<>
+                    <li
+                      style={{ borderBottom: '1px solid gray' }}
+                      className="my-2"
+                    >
+                      <div className="row m-0 pb-2">
+                        <div className="col-3 pl-0 content-img">
+                          <div>
+                            <a className="d-block" href="#!">
+                              <img
+                                className="img-fluid"
+                                src={v.image}
+                                alt={''}
+                              ></img>
+                            </a>
+                          </div>
+                        </div>
+                        <div className="col-7 pr-0 content-word">
+                          <div>
+                            <p className="m-0 text-left font-weight-bold">
+                              {v.name}
+                            </p>
+                            <p className="m-0 text-left font-weight-bold">
+                              數量
+                              <span
+                                className="mx-2"
+                                style={{
+                                  width: '20px',
+                                  display: 'inline-block',
+                                  textAlign: 'center',
+                                  borderBottom: '1px solid black',
+                                }}
+                              >
+                                {v.amount}
+                              </span>
+                            </p>
+                            <p className="m-0 text-left font-weight-bold">
+                              NT$ {Number(v.price) * Number(v.amount)}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="col-2 d-flex align-items-center">
+                          <a href="#!" style={{ color: 'red' }} className="text-decoration-none font-weight-bold" onClick={(e) => {
+                            e.preventDefault()
+                            let removeData = JSON.parse(localStorage.getItem('cartList'))
+                            let removeList = [].concat(removeData.slice(0, i)).concat(removeData.slice(i + 1))
+                            console.log(removeList)
+                            localStorage.setItem('cartList', JSON.stringify(removeList))
+                            props.setDetailToHeaderCart(props.detailToHeaderCart - 1)
+                          }}>
+                            x
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                  </>
+                  )
+                })}
+              </ul>
+              <div className="total-price-wrap">
+                <p className="d-flex justify-content-between font-weight-bold">
+                  <span>結帳金額：</span>
+                  <span>NT${Number(cartTotalValue)}</span>
+                </p>
+              </div>
+              <div className="checkout-btn-wrap d-flex flex-column">
+                <Link
+                  to="/shoppingcart"
+                  className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+                >
+                  查看購物車
+                </Link>
+                <Link
+                  to="/shoppingcart"
+                  className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+                >
+                  前往結帳
+        </Link>
+              </div>
+            </div>
+          </div>
+        </>
+
+      )
+      : ''
+  }
+  useEffect(() => {
+    setShoppingCartStorage(props.detailToHeaderCart)
+  }, [props.detailToHeaderCart])
+  // 
+  // 
+  // 
+  // 
   const close = (id) => {
     document.addEventListener('click', function (e) {
       if (e.target.id === id) {
@@ -605,121 +712,12 @@ function HeaderProduct() {
                       src={'images/素材/icon/shopping_cart_W.svg'}
                       alt={''}
                     ></img>
+                    {shoppingCartStorage ? <span class="badge position-absolute rounded-pill bg-danger d-flex align-items-center justify-content-center" style={{ color: 'white', textAlign: 'center', top: '-3px', left: '15px', minHeight: '20px', minWidth: '20px' }}>{!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : ''}</span>
+                      : ''}
                   </a>
-                  <div className="cart-icon-wrap position-absolute pt-3">
-                    <div
-                      className="cart-icon-ul-wrap position-relative rounded"
-                      style={{ padding: '8px 15px' }}
-                    >
-                      <ul className="cart-icon-ul list-unstyled">
-                        <li
-                          style={{ borderBottom: '1px solid gray' }}
-                          className="my-2"
-                        >
-                          <div className="row m-0 pb-2">
-                            <div className="col-3 pl-0 content-img">
-                              <div>
-                                <a className="d-block" href="#!">
-                                  <img
-                                    className="img-fluid"
-                                    src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                                    alt={''}
-                                  ></img>
-                                </a>
-                              </div>
-                            </div>
-                            <div className="col-9 pr-0 content-word">
-                              <div>
-                                <p className="m-0 text-left font-weight-bold">
-                                  GOFE兩雙一組 / 右手超人襪
-                                </p>
-                                <p className="m-0 text-left font-weight-bold">
-                                  數量
-                                  <span
-                                    className="mx-2"
-                                    style={{
-                                      width: '20px',
-                                      display: 'inline-block',
-                                      textAlign: 'center',
-                                      borderBottom: '1px solid black',
-                                    }}
-                                  >
-                                    1
-                                  </span>
-                                </p>
-                                <p className="m-0 text-left font-weight-bold">
-                                  NT$3,000
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-
-                        <li
-                          style={{ borderBottom: '1px solid gray' }}
-                          className="my-2"
-                        >
-                          <div className="row m-0 pb-2">
-                            <div className="col-3 pl-0 content-img">
-                              <div>
-                                <a className="d-block" href="#!">
-                                  <img
-                                    className="img-fluid"
-                                    src="images/商品/商品組圖(尚未依品牌分類)/1/z-70864313-1.jpg"
-                                    alt={''}
-                                  ></img>
-                                </a>
-                              </div>
-                            </div>
-                            <div className="col-9 pr-0 content-word">
-                              <div>
-                                <p className="m-0 text-left font-weight-bold">
-                                  GOFE兩雙一組 / 右手超人襪
-                                </p>
-                                <p className="m-0 text-left font-weight-bold">
-                                  數量
-                                  <span
-                                    className="mx-2"
-                                    style={{
-                                      width: '20px',
-                                      display: 'inline-block',
-                                      textAlign: 'center',
-                                      borderBottom: '1px solid black',
-                                    }}
-                                  >
-                                    1
-                                  </span>
-                                </p>
-                                <p className="m-0 text-left font-weight-bold">
-                                  NT$3,000
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                      <div className="total-price-wrap">
-                        <p className="d-flex justify-content-between font-weight-bold">
-                          <span>結帳金額：</span>
-                          <span>NT$3,000</span>
-                        </p>
-                      </div>
-                      <div className="checkout-btn-wrap d-flex flex-column">
-                        <a
-                          href="#!"
-                          className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                        >
-                          查看購物車
-                        </a>
-                        <a
-                          href="#!"
-                          className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                        >
-                          前往結帳
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                  {shoppingCartStorage ?
+                    cartMap()
+                    : ''}
                 </li>
 
                 {/* 會員 */}
@@ -837,27 +835,74 @@ function HeaderProduct() {
             <a
               href="#!"
               className="category-choose-btn d-inline-block py-3 px-5 mb-5 "
+              onClick={(e) => {
+                e.preventDefault()
+                document
+                  .getElementById('product-horizon-lg')
+                  .scrollIntoView({ behavior: 'smooth' })
+                props.setChildCategoryState(0)
+              }}
             >
               按類別購物
             </a>
             <ul className="d-flex list-unstyled w-100 justify-content-center">
               <li>
-                <a href="#!" className="mx-4 ">
+                <a
+                  href="#!"
+                  className="mx-4 "
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('product-horizon-lg')
+                      .scrollIntoView({ behavior: 'smooth' })
+                    props.setChildCategoryState(1)
+                  }}
+                >
                   上衣
                 </a>
               </li>
               <li>
-                <a href="#!" className="mx-4 ">
-                  下身
+                <a
+                  href="#!"
+                  className="mx-4 "
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('product-horizon-lg')
+                      .scrollIntoView({ behavior: 'smooth' })
+                    props.setChildCategoryState(4)
+                  }}
+                >
+                  下著
                 </a>
               </li>
               <li>
-                <a href="#!" className="mx-4 ">
+                <a
+                  href="#!"
+                  className="mx-4 "
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('product-horizon-lg')
+                      .scrollIntoView({ behavior: 'smooth' })
+                    props.setChildCategoryState(3)
+                  }}
+                >
                   外套
                 </a>
               </li>
               <li>
-                <a href="#!" className="mx-4 ">
+                <a
+                  href="#!"
+                  className="mx-4 "
+                  onClick={(e) => {
+                    e.preventDefault()
+                    document
+                      .getElementById('product-horizon-lg')
+                      .scrollIntoView({ behavior: 'smooth' })
+                    props.setChildCategoryState(6)
+                  }}
+                >
                   配件
                 </a>
               </li>

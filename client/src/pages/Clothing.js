@@ -5,6 +5,8 @@ import Footer from '../components/Footer'
 import Magnifier from 'react-magnifier'
 // clothing
 function Clothing() {
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+
   const [status, setStatus] = useState(0)
   // const [accordionActived, setAccordionActived] = useState(false)
 
@@ -278,7 +280,7 @@ function Clothing() {
   }
   return (
     <>
-      <HeaderOther />
+      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
       <main style={{ marginTop: '24px' }}>
         <div>
           <div className="row headerwrapper">
