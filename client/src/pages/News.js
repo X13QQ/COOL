@@ -93,6 +93,7 @@ function News() {
                   style={{ backgroundColor: '#353c1d', color: 'white' }}
                 >
                   <h5 className="font-weight-bold">{Content1}</h5>
+                  <br></br>
                   <p className="font-weight-bold" style={{ fontSize: '14px' }}>
                     {Content2}
                   </p>
@@ -109,9 +110,9 @@ function News() {
                 ></div>
               </div>
             </div>
-            <div className="row mx-0">
-              <div className="col-6 pr-0">
-                <div className="p-5" style={{ backgroundColor: 'white' }}>
+            <div className="row mx-3">
+              <div className="col-12 pr-0">
+                <div className="p-4" style={{ backgroundColor: 'white' }}>
                   <a
                     className="font-weight-bold"
                     style={{ fontSize: '12px' }}
