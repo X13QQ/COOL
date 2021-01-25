@@ -7,11 +7,22 @@ import HeaderProduct from '../components/HeaderProduct'
 // 尚未導入header
 function Product() {
   const [childCategoryState, setChildCategoryState] = useState(0)
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
+  const [showParent, setShowParent] = useState(false)
 
   return (
     <>
-      <HeaderProduct detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart} setChildCategoryState={setChildCategoryState}></HeaderProduct>
+      <HeaderProduct
+        showParent={showParent}
+        setShowParent={setShowParent}
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+        setChildCategoryState={setChildCategoryState}
+      ></HeaderProduct>
       <ProductContent childCategoryState={childCategoryState}></ProductContent>
       <Topbtn />
       <Footer />

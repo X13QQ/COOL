@@ -7,6 +7,7 @@ import News from '../pages/News'
 import ShoppingCart from '../pages/ShoppingCart'
 import MessageBoard from '../components/MessageBoard'
 import Dashboard from '../pages/Dashboard'
+import ClothingBackstage from '../pages/ClothingBackstage'
 
 import {
   Mail,
@@ -43,6 +44,10 @@ const routes = [
   {
     path: '/clothing',
     component: Clothing,
+  },
+  {
+    path: '/clothingbackstage',
+    component: ClothingBackstage,
   },
   {
     path: '/setting',

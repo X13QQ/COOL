@@ -27,11 +27,21 @@ const onMatchedRoutes = (matchedRoutes) => {
 }
 
 const Setting = ({ route, location }) => {
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
+  const [showParent, setShowParent] = useState(false)
 
   return (
     <>
-      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
+      <HeaderOther
+        showParent={showParent}
+        setShowParent={setShowParent}
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      />
       <Container>
         <Row>
           <Breadcrumb
@@ -47,11 +57,18 @@ const Setting = ({ route, location }) => {
 }
 
 const Mail = ({ route, location }) => {
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
 
   return (
     <>
-      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
+      <HeaderOther
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      />
       <Container>
         <Row>
           <Breadcrumb
@@ -67,11 +84,18 @@ const Mail = ({ route, location }) => {
 }
 
 const Order = ({ route, location }) => {
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
 
   return (
     <>
-      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
+      <HeaderOther
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      />
       <Container>
         <Row>
           <Breadcrumb
@@ -87,11 +111,18 @@ const Order = ({ route, location }) => {
 }
 
 const Member = ({ route, location }) => {
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
 
   return (
     <>
-      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
+      <HeaderOther
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      />
       <Container>
         <Row>
           <Breadcrumb
@@ -107,11 +138,18 @@ const Member = ({ route, location }) => {
 }
 
 const Favorites = ({ route, location }) => {
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
 
   return (
     <>
-      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
+      <HeaderOther
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      />
       <Container>
         <Row>
           <Breadcrumb
@@ -127,11 +165,18 @@ const Favorites = ({ route, location }) => {
 }
 
 const Coupon = ({ route, location }) => {
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
 
   return (
     <>
-      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
+      <HeaderOther
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      />
       <Container>
         <Row>
           <Breadcrumb
@@ -147,11 +192,18 @@ const Coupon = ({ route, location }) => {
 }
 
 const Contact = ({ route, location }) => {
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
 
   return (
     <>
-      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
+      <HeaderOther
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      />
       <Container>
         <Row>
           <Breadcrumb

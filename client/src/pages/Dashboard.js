@@ -16,7 +16,7 @@ import {
   faPowerOff,
   faAngleDown,
 } from '@fortawesome/free-solid-svg-icons'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 import OrderListDashboardContent from '../components/OrderListDahboardContent'
 
 function Dashboard() {
@@ -32,7 +32,7 @@ function Dashboard() {
             </div>
             <ul className="menu-ul google-font list-unstyled">
               <li className="menu-li">
-                <a className="menu-a">
+                <a href="#!" className="menu-a">
                   <i>
                     <FontAwesomeIcon icon={faHome} />
                   </i>
@@ -41,6 +41,7 @@ function Dashboard() {
               </li>
               <li className="menu-li" id="menuLi">
                 <a
+                  href="#!"
                   className="menu-a"
                   data-num="1"
                   id="menuu"
@@ -77,6 +78,7 @@ function Dashboard() {
               </li>
               <li className="menu-li" id="menuLi2">
                 <a
+                  href="#!"
                   className="menu-a"
                   data-num="2"
                   onClick={() => {
@@ -102,7 +104,7 @@ function Dashboard() {
                   data-num="2"
                 >
                   <li>
-                    <a href="#!">基本報表</a>
+                    <Link to="/dashboard/orderlist">基本報表</Link>
                   </li>
                   <li>
                     <a href="#!">商品圖表</a>
@@ -126,6 +128,7 @@ function Dashboard() {
               </li>
               <li className="menu-li" id="menuLi3">
                 <a
+                  href="#!"
                   className="menu-a"
                   data-num="3"
                   onClick={() => {
@@ -167,6 +170,7 @@ function Dashboard() {
               </li>
               <li className="menu-li" id="menuLi4">
                 <a
+                  href="#!"
                   className="menu-a"
                   data-num="4"
                   onClick={() => {
@@ -208,6 +212,7 @@ function Dashboard() {
               </li>
               <li className="menu-li" id="menuLi5">
                 <a
+                  href="#!"
                   className="menu-a"
                   data-num="4"
                   onClick={() => {
@@ -255,6 +260,7 @@ function Dashboard() {
               </li>
               <li className="menu-li" id="menuLi6">
                 <a
+                  href="#!"
                   className="menu-a"
                   data-num="4"
                   onClick={() => {
@@ -321,7 +327,7 @@ function Dashboard() {
                   </a>
                 </li>
                 <li className="main-nav-ul-li" style={{ marginRight: '40px' }}>
-                  <a className="nav-a" style={{ cursor: 'default' }}>
+                  <a href="#!" className="nav-a" style={{ cursor: 'default' }}>
                     <i className="far faUserCircle"></i>
                     {/* <i className="fas fa-home"></i> */}
                     <i>
@@ -347,6 +353,7 @@ function Dashboard() {
                   id="nav-ul1"
                 >
                   <a
+                    href="#!"
                     className="nav-a setting-li-a"
                     onClick={() => {
                       document

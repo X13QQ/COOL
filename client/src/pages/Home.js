@@ -5,11 +5,21 @@ import Footer from '../components/Footer'
 import HeaderHome from '../components/HeaderHome'
 
 function Home() {
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
+  const [showParent, setShowParent] = useState(false)
 
   return (
     <>
-      <HeaderHome  detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}></HeaderHome>
+      <HeaderHome
+        showParent={showParent}
+        setShowParent={setShowParent}
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      ></HeaderHome>
       <HomeContent></HomeContent>
       <Topbtn />
       <Footer />

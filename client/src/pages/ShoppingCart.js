@@ -13,6 +13,8 @@ function ShoppingCart(props) {
   )
   console.log(JSON.parse(localStorage.getItem('cartList')))
   let FakeRes = JSON.parse(localStorage.getItem('cartList'))
+  const [showParent, setShowParent] = useState(false)
+
   const [status, setStatus] = useState(1)
   const [total, setTotal] = useState(0)
   const [shippingstatus, setshipping] = useState(1)
@@ -831,6 +833,11 @@ function ShoppingCart(props) {
   return (
     <>
       <HeaderOther
+<<<<<<< HEAD
+=======
+        showParent={showParent}
+        setShowParent={setShowParent}
+>>>>>>> 494b16e07ac48b1c89b18badde8c1641c0dda02c
         detailToHeaderCart={detailToHeaderCart}
         setDetailToHeaderCart={setDetailToHeaderCart}
       />

@@ -161,8 +161,10 @@ app.post("/profile/:logintype", function (req, res) {
       return;
     } else {
       const sqlSelect =
-        "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
-        "FROM member WHERE account = ? and password = ? and type = 'N' ";
+        "SELECT a.id, CASE a.name WHEN '' THEN 'Hi' ELSE a.name END AS name,a.account,a.password,a.phone,a.email,a.address,a.birth,a.letter,a.type " +
+        ", SUM(b.price) AS total " +
+        "FROM member a INNER JOIN cool_order b ON a.id = b.member_no " +
+        "WHERE a.account = ? and a.password = ? and a.type = 'N' ";
       db.query(
         sqlSelect,
         [req.body.account, req.body.password],
@@ -264,10 +266,13 @@ app.post("/profile/:logintype", function (req, res) {
       });
     }
   } else if ("googlelogin" === req.params.logintype) {
-    console.log(req.body.name);
+    // console.log(req.body.name);
     const sqlSelect =
-      "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
-      "FROM member WHERE email = ? AND type = 'G' ";
+      "SELECT a.id, CASE a.name WHEN '' THEN 'Hi' ELSE a.name END AS name,a.account,a.password,a.phone,a.email,a.address,a.birth,a.letter,a.type " +
+      ", SUM(b.price) AS total " +
+      "FROM member a INNER JOIN cool_order b ON a.id = b.member_no " +
+      "WHERE a.email = ? AND a.type = 'G' ";
+
     db.query(sqlSelect, [req.body.email], (err, result, fields) => {
       if (err) res.send({ err: err });
 
@@ -323,10 +328,22 @@ app.get("/member/order/:status", function (req, res) {
   });
 });
 
+// 會員等級
+app.get("/member/member", function (req, res) {
+  const sqlSelect =
+    "SELECT COUNT(id) AS count, SUM(price) AS total " +
+    "FROM cool_order " +
+    "WHERE member_no = ? ";
+  db.query(sqlSelect, [req.query.memberNo], (err, result, fields) => {
+    res.send(result);
+    // console.log(result)
+  });
+});
+
 // 訂單紀錄
 app.get("/member/orderdetail", function (req, res) {
   const sqlSelect =
-    "SELECT a.order_no, b.product_id, b.name, b.amount, b.size, b.brand, b.color, b.price " + 
+    "SELECT a.order_no, b.product_id, b.name, b.amount, b.size, b.brand, b.color, b.price " +
     "FROM cool_order a , cool_order_detailed b " +
     "WHERE a.id = b.order_id AND a.member_no = ? ";
   db.query(sqlSelect, [req.query.memberNo], (err, result, fields) => {
@@ -414,6 +431,33 @@ app.post("/member/contact", function (req, res) {
       res.send(result);
     }
   );
+});
+
+
+//news
+app.get("/news", function (req, res) {
+  db.query(
+    "SELECT * FROM pages_data WHERE news_id != '' ORDER BY CONVERT(news_id,SIGNED ) ",
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      // console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+
+//營運分析 基本報表
+app.get("/dashboard/report/orderlist", function (req, res) {
+  const sqlSelect =
+    "SELECT order_no, date, name, receiver_cellphone AS phone, price " +
+    ", CASE status WHEN '1' THEN '處理中' WHEN '2' THEN '已完成' WHEN '3' THEN '申請退款' ELSE '' END AS status " +
+    "FROM cool_order ";
+  db.query(sqlSelect, [], (req, result, fields) => {
+    res.send(result);
+  });
 });
 
 app.listen(3001, () => {

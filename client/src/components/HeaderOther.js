@@ -9,19 +9,19 @@ function HeaderOther(props) {
     props.detailToHeaderCart
   )
   const cartMap = () => {
-    let cartTotalValue = new Number;
-    return shoppingCartStorage ?
-      (
-        <>
-          <div className="cart-icon-wrap position-absolute pt-3">
-            <div
-              className="cart-icon-ul-wrap position-relative rounded"
-              style={{ padding: '8px 15px' }}
-            >
-              <ul className="cart-icon-ul list-unstyled">
-                {JSON.parse(localStorage.getItem('cartList')).map((v, i) => {
-                  cartTotalValue += Number(v.price) * Number(v.amount)
-                  return (<>
+    let cartTotalValue = Number(0)
+    return shoppingCartStorage ? (
+      <>
+        <div className="cart-icon-wrap position-absolute pt-3">
+          <div
+            className="cart-icon-ul-wrap position-relative rounded"
+            style={{ padding: '8px 15px' }}
+          >
+            <ul className="cart-icon-ul list-unstyled">
+              {JSON.parse(localStorage.getItem('cartList')).map((v, i) => {
+                cartTotalValue += Number(v.price) * Number(v.amount)
+                return (
+                  <>
                     <li
                       style={{ borderBottom: '1px solid gray' }}
                       className="my-2"
@@ -63,56 +63,70 @@ function HeaderOther(props) {
                           </div>
                         </div>
                         <div className="col-2 d-flex align-items-center">
-                          <a href="#!" style={{ color: 'red' }} className="text-decoration-none font-weight-bold" onClick={(e) => {
-                            e.preventDefault()
-                            let removeData = JSON.parse(localStorage.getItem('cartList'))
-                            let removeList = [].concat(removeData.slice(0, i)).concat(removeData.slice(i + 1))
-                            console.log(removeList)
-                            localStorage.setItem('cartList', JSON.stringify(removeList))
-                            props.setDetailToHeaderCart(props.detailToHeaderCart - 1)
-                          }}>
+                          <a
+                            href="#!"
+                            style={{ color: 'red' }}
+                            className="text-decoration-none font-weight-bold"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              let removeData = JSON.parse(
+                                localStorage.getItem('cartList')
+                              )
+                              let removeList = []
+                                .concat(removeData.slice(0, i))
+                                .concat(removeData.slice(i + 1))
+                              console.log(removeList)
+                              localStorage.setItem(
+                                'cartList',
+                                JSON.stringify(removeList)
+                              )
+                              props.setDetailToHeaderCart(
+                                props.detailToHeaderCart - 1
+                              )
+                            }}
+                          >
                             x
                           </a>
                         </div>
                       </div>
                     </li>
                   </>
-                  )
-                })}
-              </ul>
-              <div className="total-price-wrap">
-                <p className="d-flex justify-content-between font-weight-bold">
-                  <span>結帳金額：</span>
-                  <span>NT${Number(cartTotalValue)}</span>
-                </p>
-              </div>
-              <div className="checkout-btn-wrap d-flex flex-column">
-                <Link
-                  to="/shoppingcart"
-                  className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                >
-                  查看購物車
-                </Link>
-                <Link
-                  to="/shoppingcart"
-                  className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                >
-                  前往結帳
-        </Link>
-              </div>
+                )
+              })}
+            </ul>
+            <div className="total-price-wrap">
+              <p className="d-flex justify-content-between font-weight-bold">
+                <span>結帳金額：</span>
+                <span>NT${Number(cartTotalValue)}</span>
+              </p>
+            </div>
+            <div className="checkout-btn-wrap d-flex flex-column">
+              <Link
+                to="/shoppingcart"
+                className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+              >
+                查看購物車
+              </Link>
+              <Link
+                to="/shoppingcart"
+                className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+              >
+                前往結帳
+              </Link>
             </div>
           </div>
-        </>
-
-      )
-      : ''
+        </div>
+      </>
+    ) : (
+      ''
+    )
   }
   useEffect(() => {
     setShoppingCartStorage(props.detailToHeaderCart)
   }, [props.detailToHeaderCart])
-  // 
-  // 
-  // 
+  //
+  //
+  //
   const history = useHistory()
   const [id, setId] = useState(
     !!localStorage.getItem('user')
@@ -124,8 +138,18 @@ function HeaderOther(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].name
       : ''
   )
-  const [show, setShow] = useState(false)
+  const [total, setTotal] = useState(
+    !!localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))[0].total
+      : 0
+  )
+  const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
+
+  useEffect(() => {
+    setShow(props.showParent)
+  }, [props.showParent])
+
   const [user, setUser] = useState({ account: '', password: '', email: '' })
   const [loginStatus, setLoginStatus] = useState(0)
   const [certificateEmail, setCertificateEmail] = useState('')
@@ -181,7 +205,8 @@ function HeaderOther(props) {
   const close = (id) => {
     document.addEventListener('click', function (e) {
       if (e.target.id === id) {
-        setShow(false)
+        // setShow(false)
+        props.setShowParent(false)
         setModal(1)
         cleanData()
       }
@@ -208,6 +233,7 @@ function HeaderOther(props) {
           setShow(false)
           setName(res[0].name)
           setId(res[0].id)
+          setTotal(res[0].total)
           localStorage.setItem('user', JSON.stringify(res))
         } else {
           setLoginMessage(res.message)
@@ -380,7 +406,7 @@ function HeaderOther(props) {
                       color: '#353c1d',
                     }}
                     onClick={() => {
-                      setShow(false)
+                      props.setShowParent(false)
                       cleanData()
                     }}
                   >
@@ -604,7 +630,7 @@ function HeaderOther(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setModal(1)}
+                    onClick={() => props.setShowParent(false)}
                   >
                     取消
                   </button>
@@ -875,7 +901,11 @@ function HeaderOther(props) {
                 >
                   {name}
                   <img
-                    src="/images/素材/會員等級icon/winner.svg"
+                    src={
+                      total > 10000
+                        ? '/images/素材/會員等級icon/winner.svg'
+                        : '/images/素材/會員等級icon/award.svg'
+                    }
                     alt={''}
                     className="ml-2"
                   ></img>
@@ -908,7 +938,7 @@ function HeaderOther(props) {
                       className="py-1 pr-3 pl-1"
                       style={{ color: 'gray', fontSize: '12px' }}
                     >
-                      黃金會員
+                      {total > 10000 ? '黃金會員' : '一般會員'}
                     </div>
                   </li>
                   <li>
@@ -916,9 +946,9 @@ function HeaderOther(props) {
                       className="py-1 pr-3 pl-1"
                       style={{ color: 'gray', fontSize: '12px' }}
                     >
-                      累積消費金額
+                      累積消費
                       <br />
-                      <span>1000</span>
+                      <span>{total}</span>
                     </div>
                   </li>
                 </ul>
@@ -1045,20 +1075,38 @@ function HeaderOther(props) {
 
                 {/* 購物車 */}
                 <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-                  <a className="cart-navbar-a nav-link position-relative" href="#!">
+                  <a
+                    className="cart-navbar-a nav-link position-relative"
+                    href="#!"
+                  >
                     <img
                       src={'/images/素材/icon/shopping_cart_G.svg'}
                       alt={''}
                     ></img>
-                    {shoppingCartStorage ? <span class="badge position-absolute rounded-pill bg-danger d-flex align-items-center justify-content-center" style={{ color: 'white', textAlign: 'center', top: '-3px', left: '15px', minHeight: '20px', minWidth: '20px' }}>{!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : ''}</span>
-                      : ''}
+                    {shoppingCartStorage ? (
+                      <span
+                        class="badge position-absolute rounded-pill bg-danger d-flex align-items-center justify-content-center"
+                        style={{
+                          color: 'white',
+                          textAlign: 'center',
+                          top: '-3px',
+                          left: '15px',
+                          minHeight: '20px',
+                          minWidth: '20px',
+                        }}
+                      >
+                        {!!localStorage.getItem('cartList')
+                          ? JSON.parse(localStorage.getItem('cartList')).length
+                          : ''}
+                      </span>
+                    ) : (
+                      ''
+                    )}
                   </a>
                   {/*  */}
                   {/*  */}
                   {/*  */}
-                  {shoppingCartStorage ?
-                    cartMap()
-                    : ''}
+                  {shoppingCartStorage ? cartMap() : ''}
                 </li>
 
                 {/* 會員 */}
@@ -1068,7 +1116,8 @@ function HeaderOther(props) {
                     href="#!"
                     onClick={(e) => {
                       e.preventDefault()
-                      if (loginStatus === 0) setShow(true)
+                      setModal(1)
+                      if (loginStatus === 0) props.setShowParent(true)
                     }}
                   >
                     <img src="/images/素材/icon/Profile_G.svg" alt={''}></img>
