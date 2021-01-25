@@ -365,16 +365,18 @@ app.post("/member/contact", function (req, res) {
   );
 });
 
+
+
 //news
-app.get("/news/:id", function (req, res) {
+app.get("/news", function (req, res) {
   db.query(
-    "SELECT * FROM  page_data" + "WHERE news_id = ? ",
-    [req.params.id],
+    "SELECT * FROM pages_data WHERE news_id != '' ORDER BY CONVERT(news_id,SIGNED ) ",
+    [],
     (err, result) => {
       if (err) {
         console.log(err);
       }
-      console.log(result);
+      // console.log(result);
       res.send(JSON.stringify(result));
     }
   );
