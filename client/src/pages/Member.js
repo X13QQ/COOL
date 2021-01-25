@@ -32,10 +32,13 @@ const Setting = ({ route, location }) => {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
+  const [showParent, setShowParent] = useState(false)
 
   return (
     <>
       <HeaderOther
+        showParent={showParent}
+        setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
         setDetailToHeaderCart={setDetailToHeaderCart}
       />
