@@ -19,6 +19,7 @@ function Clothing() {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
+  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
 
   const [showParent, setShowParent] = useState(false)
 
@@ -121,25 +122,25 @@ function Clothing() {
                         style={{ color: '#353c1d', fontSize: '20px' }}
                         as={Card.Header}
                         eventKey="0"
-                        // onClick={(e) => {
-                        //   e.preventDefault()
-                        //   // document.getElementById('top')
-                        //   // setAccordionActived(!accordionActived)
-                        // }}
+                      // onClick={(e) => {
+                      //   e.preventDefault()
+                      //   // document.getElementById('top')
+                      //   // setAccordionActived(!accordionActived)
+                      // }}
                       >
                         {val.category === '1'
                           ? '上衣'
                           : val.category === '2'
-                          ? '帽子'
-                          : val.category === '3'
-                          ? '外套'
-                          : val.category === '4'
-                          ? '褲子'
-                          : val.category === '5'
-                          ? '鞋款'
-                          : val.category === '6'
-                          ? '配件'
-                          : ''}
+                            ? '帽子'
+                            : val.category === '3'
+                              ? '外套'
+                              : val.category === '4'
+                                ? '褲子'
+                                : val.category === '5'
+                                  ? '鞋款'
+                                  : val.category === '6'
+                                    ? '配件'
+                                    : ''}
                         {/* 帽子右邊的箭頭 ↓ */}
                         <img
                           src="images/素材/icon/arrow_G.svg"
@@ -155,10 +156,10 @@ function Clothing() {
                       <Accordion.Collapse
                         eventKey="0"
                         id={`sort${val.id}`}
-                        // className={
-                        //   'clothing-accordion-ul list-unstyled mb-0 ' +
-                        //   (accordionActived ? 'accordion-actived' : '')
-                        // }
+                      // className={
+                      //   'clothing-accordion-ul list-unstyled mb-0 ' +
+                      //   (accordionActived ? 'accordion-actived' : '')
+                      // }
                       >
                         <Card.Body className="px-5">
                           <p
@@ -260,6 +261,7 @@ function Clothing() {
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
         showParent={showParent}
         setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
@@ -320,7 +322,7 @@ function Clothing() {
               style={{
                 backgroundImage: `url('${
                   clothingImages.length > 0 ? clothingImages[4].src : ''
-                }')`,
+                  }')`,
               }}
               onClick={() => {
                 setChoose(4)
@@ -337,7 +339,7 @@ function Clothing() {
                   width: '100%',
                   backgroundImage: `url('${
                     clothingImages.length > 0 ? clothingImages[1].src : ''
-                  }')`,
+                    }')`,
                 }}
                 onClick={() => {
                   setChoose(1)
@@ -352,7 +354,7 @@ function Clothing() {
                   width: '100%',
                   backgroundImage: `url('${
                     clothingImages.length > 0 ? clothingImages[3].src : ''
-                  }')`,
+                    }')`,
                 }}
                 onClick={() => {
                   setChoose(3)
@@ -369,7 +371,7 @@ function Clothing() {
                   width: '100%',
                   backgroundImage: `url('${
                     clothingImages.length > 0 ? clothingImages[0].src : ''
-                  }')`,
+                    }')`,
                 }}
                 onClick={() => {
                   setChoose(0)
@@ -384,7 +386,7 @@ function Clothing() {
                   width: '100%',
                   backgroundImage: `url('${
                     clothingImages.length > 0 ? clothingImages[2].src : ''
-                  }')`,
+                    }')`,
                 }}
                 onClick={() => {
                   setChoose(2)
@@ -416,7 +418,7 @@ function Clothing() {
                 width: '100%',
                 backgroundImage: `url('${
                   clothingImages.length > 0 ? clothingImages[5].src : ''
-                }')`,
+                  }')`,
               }}
               onClick={() => {
                 setChoose(5)
@@ -433,7 +435,7 @@ function Clothing() {
                     width: '100%',
                     backgroundImage: `url('${
                       clothingImages.length > 0 ? clothingImages[6].src : ''
-                    }')`,
+                      }')`,
                   }}
                   onClick={() => {
                     setChoose(6)
@@ -448,7 +450,7 @@ function Clothing() {
                     width: '100%',
                     backgroundImage: `url('${
                       clothingImages.length > 0 ? clothingImages[8].src : ''
-                    }')`,
+                      }')`,
                   }}
                   onClick={() => {
                     setChoose(8)
@@ -465,7 +467,7 @@ function Clothing() {
                     width: '100%',
                     backgroundImage: `url('${
                       clothingImages.length > 0 ? clothingImages[7].src : ''
-                    }')`,
+                      }')`,
                   }}
                   onClick={() => {
                     setChoose(7)
@@ -480,7 +482,7 @@ function Clothing() {
                     width: '100%',
                     backgroundImage: `url('${
                       clothingImages.length > 0 ? clothingImages[9].src : ''
-                    }')`,
+                      }')`,
                   }}
                   onClick={() => {
                     setChoose(9)
@@ -498,7 +500,7 @@ function Clothing() {
                     margin: '10px auto',
                     backgroundImage: `url('${
                       clothingImages.length > 0 ? clothingImages[10].src : ''
-                    }')`,
+                      }')`,
                   }}
                   onClick={() => {
                     setChoose(10)

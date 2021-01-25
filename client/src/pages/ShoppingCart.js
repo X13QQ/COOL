@@ -12,6 +12,7 @@ function ShoppingCart(props) {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
 
   const [status, setStatus] = useState(1)
   const [total, setTotal] = useState(0)
@@ -379,7 +380,7 @@ function ShoppingCart(props) {
                                 type="radio"
                                 name="invoice"
                                 value="0"
-                                // checked={shippingstatus ? 'checked' : ''}
+                              // checked={shippingstatus ? 'checked' : ''}
                               />
                               <span className="ml-3 font-weight-bold">
                                 捐贈
@@ -491,7 +492,7 @@ function ShoppingCart(props) {
                                 name="invoice"
                                 value="0"
                                 id="donate-2"
-                                // checked={!shippingstatus ? 'checked' : ''}
+                              // checked={!shippingstatus ? 'checked' : ''}
                               />
                               <label
                                 htmlFor="donate-2"
@@ -764,6 +765,7 @@ function ShoppingCart(props) {
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
         showParent={showParent}
         setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
@@ -772,10 +774,10 @@ function ShoppingCart(props) {
       {status === 1
         ? checkout()
         : status === 2
-        ? PaymentMethod()
-        : status === 3
-        ? CompleteOrder()
-        : ''}
+          ? PaymentMethod()
+          : status === 3
+            ? CompleteOrder()
+            : ''}
 
       <Footer />
     </>

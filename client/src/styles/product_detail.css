@@ -388,6 +388,11 @@ body {
   /* height: 25.3px;
     line-height: 25.3px; */
   color: #353c1d;
+  transition: 0.15s;
+}
+
+.detail-display .other-function a:active{
+transform: scale(0.97);
 }
 
 .size-tryon-modal {
@@ -657,6 +662,14 @@ body {
   background-color: white;
   max-width: 960px;
 }
+.recommend-content .recommend-modal-sm-img{
+transition: 1s;
+box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+}
+.recommend-content .recommend-modal-sm-img-actived{
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
 .recommend-content .close-button {
   top: 30px;
   right: 30px;

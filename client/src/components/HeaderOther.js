@@ -127,6 +127,7 @@ function HeaderOther(props) {
   //
   //
   //
+
   const history = useHistory()
   const [id, setId] = useState(
     !!localStorage.getItem('user')
@@ -138,6 +139,8 @@ function HeaderOther(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].name
       : ''
   )
+  const [total, setTotal] = useState(!!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user'))[0].total : 0)
+
   const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
 
@@ -228,6 +231,8 @@ function HeaderOther(props) {
           setShow(false)
           setName(res[0].name)
           setId(res[0].id)
+          setTotal(res[0].total)
+
           localStorage.setItem('user', JSON.stringify(res))
         } else {
           setLoginMessage(res.message)
@@ -391,23 +396,23 @@ function HeaderOther(props) {
                   </a>
                 </div>
                 <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
-                  <button
-                    type="button"
+                  <a
+                    href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       props.setShowParent(false)
                       cleanData()
                     }}
                   >
                     取消
-                  </button>
-                  <button
-                    type="button"
+                  </a>
+                  <a
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
@@ -415,13 +420,18 @@ function HeaderOther(props) {
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
+                    href="#!"
                     onClick={(e) => {
                       e.preventDefault()
                       Login({ user })
+                      // 
+                      // 
+                      // 
+                      props.setWhetherLoginParent(true)
                     }}
                   >
                     登入
-                  </button>
+                  </a>
                   <div className="invalid-feedback text-center mt-3">
                     {loginMessage}
                   </div>
@@ -616,20 +626,20 @@ function HeaderOther(props) {
                   </a>
                 </div>
                 <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
-                  <button
-                    type="button"
+                  <a
+                    href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => props.setShowParent(false)}
+                    onClick={(e) => {e.preventDefault();props.setShowParent(false)}}
                   >
                     取消
-                  </button>
-                  <button
-                    type="button"
+                  </a>
+                  <a
+                    href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
@@ -637,12 +647,13 @@ function HeaderOther(props) {
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       SignUp({ signupData })
                     }}
                   >
                     註冊
-                  </button>
+                  </a>
                   <div className="invalid-feedback text-center mt-3">
                     {signupMessage}
                   </div>
@@ -750,22 +761,23 @@ function HeaderOther(props) {
                   ></img>
                 </div>
                 <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
-                  <button
-                    type="button"
+                  <a
+                    href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       setModal(1)
                     }}
                   >
                     返回
-                  </button>
-                  <button
-                    type="button"
+                  </a>
+                  <a
+                    href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
@@ -773,12 +785,13 @@ function HeaderOther(props) {
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       certificate(certificateEmail)
                     }}
                   >
                     送出
-                  </button>
+                  </a>
                   <div className="invalid-feedback text-center mt-3">
                     {certificateMessage}
                   </div>
@@ -895,7 +908,7 @@ function HeaderOther(props) {
                 >
                   {name}
                   <img
-                    src="/images/素材/會員等級icon/winner.svg"
+                    src={total > 10000 ? '/images/素材/會員等級icon/winner.svg' : '/images/素材/會員等級icon/award.svg'}
                     alt={''}
                     className="ml-2"
                   ></img>
@@ -928,7 +941,7 @@ function HeaderOther(props) {
                       className="py-1 pr-3 pl-1"
                       style={{ color: 'gray', fontSize: '12px' }}
                     >
-                      黃金會員
+                      {total > 10000 ? '黃金會員' : '一般會員'}
                     </div>
                   </li>
                   <li>
@@ -938,7 +951,7 @@ function HeaderOther(props) {
                     >
                       累積消費金額
                       <br />
-                      <span>1000</span>
+                      <span>{total}</span>
                     </div>
                   </li>
                 </ul>
@@ -990,7 +1003,7 @@ function HeaderOther(props) {
                     setLoginStatus(0)
                     localStorage.removeItem('user')
                     localStorage.removeItem('favorites')
-                    history.push('/clothing')
+                    history.push('/')
                   }}
                 >
                   登出
@@ -1066,15 +1079,8 @@ function HeaderOther(props) {
 
                 {/* 購物車 */}
                 <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-<<<<<<< HEAD
                   <a className="cart-navbar-a nav-link position-relative" href="#!"
                   onClick={(e)=>{e.preventDefault()}}>
-=======
-                  <a
-                    className="cart-navbar-a nav-link position-relative"
-                    href="#!"
-                  >
->>>>>>> 9e0f9011ad1799eb5328ba65df76d79d3e6bc156
                     <img
                       src={'/images/素材/icon/shopping_cart_G.svg'}
                       alt={''}

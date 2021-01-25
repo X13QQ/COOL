@@ -10,6 +10,7 @@ function News() {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
 
   const [status, setStatus] = useState(0)
   const [newsLink, setNewsLink] = useState('')
@@ -141,6 +142,7 @@ function News() {
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
         showParent={showParent}
         setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
@@ -172,7 +174,7 @@ function News() {
                   style={{
                     backgroundImage: `url('${
                       newsImages.length > 0 ? newsImages[0].src : ''
-                    }')`,
+                      }')`,
                   }}
                   onClick={(e) => {
                     e.preventDefault()
@@ -203,7 +205,7 @@ function News() {
                   style={{
                     backgroundImage: `url('${
                       newsImages.length > 0 ? newsImages[1].src : ''
-                    }')`,
+                      }')`,
                   }}
                 ></div>
                 <div
@@ -211,7 +213,7 @@ function News() {
                   style={{
                     backgroundImage: `url('${
                       newsImages.length > 0 ? newsImages[3].src : ''
-                    }')`,
+                      }')`,
                   }}
                   onClick={(e) => {
                     e.preventDefault()
@@ -244,7 +246,7 @@ function News() {
                   style={{
                     backgroundImage: `url('${
                       newsImages.length > 0 ? newsImages[5].src : ''
-                    }')`,
+                      }')`,
                   }}
                   onClick={(e) => {
                     e.preventDefault()
@@ -273,7 +275,7 @@ function News() {
                   style={{
                     backgroundImage: `url('${
                       newsImages.length > 0 ? newsImages[7].src : ''
-                    }')`,
+                      }')`,
                   }}
                   onClick={(e) => {
                     e.preventDefault()
@@ -304,7 +306,7 @@ function News() {
                   style={{
                     backgroundImage: `url('${
                       newsImages.length > 0 ? newsImages[6].src : ''
-                    }')`,
+                      }')`,
                   }}
                   onClick={(e) => {
                     e.preventDefault()
@@ -337,7 +339,7 @@ function News() {
               style={{
                 backgroundImage: `url('${
                   newsImages.length > 0 ? newsImages[2].src : ''
-                }')`,
+                  }')`,
               }}
               onClick={(e) => {
                 e.preventDefault()
@@ -366,7 +368,7 @@ function News() {
               style={{
                 backgroundImage: `url('${
                   newsImages.length > 0 ? newsImages[4].src : ''
-                }')`,
+                  }')`,
                 flexGrow: '1',
               }}
               onClick={(e) => {
@@ -396,7 +398,7 @@ function News() {
               style={{
                 backgroundImage: `url('${
                   newsImages.length > 0 ? newsImages[8].src : ''
-                }')`,
+                  }')`,
               }}
               onClick={(e) => {
                 e.preventDefault()
@@ -523,52 +525,52 @@ function News() {
             {/* <!-- 小圖開始 --> */}
             {newsImages2.length > 0
               ? newsImages2.map((v, i) => (
-                  <div
-                    className=" card mb-3 col-6"
-                    style={{ maxWidth: '540px', cursor: 'pointer' }}
-                  >
-                    <div className="row no-gutters">
-                      <div className="col-md-4 d-flex justify-content-center align-items-center">
-                        <img
-                          style={{
-                            backgroundImage: `url('${v.src}')`,
-                          }}
-                          className="img-fluid news-small-cover-image "
-                          alt={''}
-                        ></img>
+                <div
+                  className=" card mb-3 col-6"
+                  style={{ maxWidth: '540px', cursor: 'pointer' }}
+                >
+                  <div className="row no-gutters">
+                    <div className="col-md-4 d-flex justify-content-center align-items-center">
+                      <img
+                        style={{
+                          backgroundImage: `url('${v.src}')`,
+                        }}
+                        className="img-fluid news-small-cover-image "
+                        alt={''}
+                      ></img>
+                    </div>
+                    <div className="col-md-8">
+                      <div className="card-body news-card-body-text">
+                        {/* <h5 className="card-title"></h5> */}
+                        <p
+                          className="news-article card-text font-weight-bold"
+                          style={{ color: '#353c1d' }}
+                        >
+                          {v.news_title1}
+                        </p>
                       </div>
-                      <div className="col-md-8">
-                        <div className="card-body news-card-body-text">
-                          {/* <h5 className="card-title"></h5> */}
-                          <p
-                            className="news-article card-text font-weight-bold"
-                            style={{ color: '#353c1d' }}
+                      <div className="card-body news-card-body-link">
+                        <p className="card-text d-flex justify-content-end ">
+                          <a
+                            href="#!"
+                            style={{ color: '#353c1d', fontSize: '12px' }}
+                            onClick={(e) => {
+                              e.preventDefault()
+                              setStatus(1)
+                              setContent1(v.news_content1)
+                              setContent2(v.news_content2)
+                              setNewsLink(v.news_link)
+                              setSrc(v.src)
+                            }}
                           >
-                            {v.news_title1}
-                          </p>
-                        </div>
-                        <div className="card-body news-card-body-link">
-                          <p className="card-text d-flex justify-content-end ">
-                            <a
-                              href="#!"
-                              style={{ color: '#353c1d', fontSize: '12px' }}
-                              onClick={(e) => {
-                                e.preventDefault()
-                                setStatus(1)
-                                setContent1(v.news_content1)
-                                setContent2(v.news_content2)
-                                setNewsLink(v.news_link)
-                                setSrc(v.src)
-                              }}
-                            >
-                              繼續閱讀 ...
+                            繼續閱讀 ...
                             </a>
-                          </p>
-                        </div>
+                        </p>
                       </div>
                     </div>
                   </div>
-                ))
+                </div>
+              ))
               : ''}
           </div>
           {/* 段落 */}
