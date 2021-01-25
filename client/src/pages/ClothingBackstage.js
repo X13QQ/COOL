@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import HeaderOther from '../components/HeaderOther'
-import Topbtn from '../components/Topbtn'
-import Footer from '../components/Footer'
-import Magnifier from 'react-magnifier'
-import { Link } from 'react-router-dom'
 import {
-  DropdownButton,
-  Dropdown,
+  Form,
   Accordion,
   Card,
-  Form,
+  DropdownButton,
+  Dropdown,
 } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-// clothing
-function Clothing() {
+function ClothingBackstage() {
   const [status, setStatus] = useState(0)
   // const [accordionActived, setAccordionActived] = useState(false)
 
@@ -64,7 +60,7 @@ function Clothing() {
     return (
       <div
         id="what"
-        className="clothing-modal d-flex justify-content-center align-items-center"
+        className="clothingbackstage clothing-modal d-flex justify-content-center align-items-center"
         onClick={(e) => {
           // console.log(e.target.id)
           if (e.target.id === 'what') {
@@ -87,7 +83,12 @@ function Clothing() {
           <h3 className="text-center font-weight-bold mb-4">產品詳情</h3>
           <div className="row mb-4">
             <div className="col-6">
-              <Magnifier
+              <Form className="mx-3">
+                <Form.Group>
+                  <Form.File id="exampleFormControlFile1" label="上傳相片" />
+                </Form.Group>
+              </Form>
+              <img
                 className="btn"
                 type="button"
                 data-bs-toggle="modal"
@@ -95,7 +96,7 @@ function Clothing() {
                 src={clothingImages[choose].src}
                 style={{
                   width: '100%',
-                  height: '100%',
+                  height: '80%',
                   objectFit: 'cover',
                 }}
                 alt={' '}
@@ -108,18 +109,17 @@ function Clothing() {
                     <Card className="pb-3">
                       {/* 帽子標籤 ↓ */}
                       <Accordion.Toggle
-                        // href="#!"
-                        className="clothing-accordion-a d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
-                        style={{ color: '#353c1d', fontSize: '20px' }}
                         as={Card.Header}
                         eventKey="0"
-                        // onClick={(e) => {
-                        //   e.preventDefault()
-                        //   // document.getElementById('top')
-                        //   // setAccordionActived(!accordionActived)
-                        // }}
+                        className="row justify-content-between"
                       >
-                        {val.category === '1'
+                        <a
+                          href="#!"
+                          className="clothing-accordion-a  d-flex align-items-center font-weight-bold text-decoration-none h5"
+                          style={{ color: '#353c1d' }}
+                        >
+                          上衣
+                          {/* {val.category === '1'
                           ? '上衣'
                           : val.category === '2'
                           ? '帽子'
@@ -131,19 +131,34 @@ function Clothing() {
                           ? '鞋款'
                           : val.category === '6'
                           ? '配件'
-                          : ''}
-                        {/* 帽子右邊的箭頭 ↓ */}
-                        <img
-                          src="images/素材/icon/arrow_G.svg"
-                          style={{
-                            width: '20px',
-                            transform: 'rotate(-90deg)',
-                            position: 'relative',
-                            top: '-3.5px',
-                          }}
-                          alt={' '}
-                        />
+                          : ''} */}
+                          {/* 帽子右邊的箭頭 ↓ */}
+                          <img
+                            src="images/素材/icon/arrow_G.svg"
+                            style={{
+                              width: '20px',
+                              transform: 'rotate(-90deg)',
+                              position: 'relative',
+                              top: '-3.5px',
+                              margin: '0 0 0 15px',
+                            }}
+                            alt={' '}
+                          />
+                        </a>
+                        <a>
+                          <FontAwesomeIcon
+                            className="mx-3"
+                            style={{ cursor: 'pointer' }}
+                            icon={faPlusCircle}
+                          />
+                          <FontAwesomeIcon
+                            className="mx-3"
+                            style={{ cursor: 'pointer' }}
+                            icon={faTrash}
+                          />
+                        </a>
                       </Accordion.Toggle>
+
                       <Accordion.Collapse
                         eventKey="0"
                         id={`sort${val.id}`}
@@ -152,53 +167,27 @@ function Clothing() {
                         //   (accordionActived ? 'accordion-actived' : '')
                         // }
                       >
-                        <Card.Body className="px-5">
-                          <p
-                            style={{
-                              fontSize: '12px',
-                              textOverflow: 'ellipsis',
-                              whiteSpace: 'nowrap',
-                              overflow: 'hidden',
-                              display: 'block',
-                            }}
-                          >
-                            YEEZY BOOST 350 V2 - CBLACK/ RED
-                          </p>
-                          <p style={{ fontSize: '12px' }}>NT$6,800</p>
-                          <div className="row">
+                        <li className="px-5">
+                          <div className="">
                             <DropdownButton
                               id="dropdown-basic-button"
                               className="mx-2 my-2"
-                              title="顏色"
+                              title="品牌"
                             >
                               <Dropdown.Item href="#/action-1">
                                 黑
                               </Dropdown.Item>
-                              <Dropdown.Item href="#/action-2">
-                                白
-                              </Dropdown.Item>
-                              <Dropdown.Item href="#/action-3">
-                                紅
-                              </Dropdown.Item>
-                              <Dropdown.Item href="#/action-4">
-                                藍
-                              </Dropdown.Item>
                             </DropdownButton>
 
                             <DropdownButton
                               id="dropdown-basic-button"
                               className="mx-2 my-2"
-                              title="尺寸"
+                              title="品名"
                             >
                               <Dropdown.Item href="#/action-1">S</Dropdown.Item>
-                              <Dropdown.Item href="#/action-2">M</Dropdown.Item>
-                              <Dropdown.Item href="#/action-3">L</Dropdown.Item>
-                              <Dropdown.Item href="#/action-4">
-                                XL
-                              </Dropdown.Item>
                             </DropdownButton>
 
-                            <Form.Group controlId="amount" className="row my-0">
+                            <Form.Group controlId="amount" className="row">
                               <Form.Label
                                 style={{
                                   fontSize: '16px',
@@ -206,7 +195,7 @@ function Clothing() {
                                 }}
                                 className="mx-2 my-2"
                               >
-                                數量
+                                金額
                               </Form.Label>
                               <Form.Control
                                 type="number"
@@ -215,17 +204,7 @@ function Clothing() {
                               />
                             </Form.Group>
                           </div>
-
-                          <div className="d-flex justify-content-end mb-3">
-                            <a
-                              className="d-block text-right my-2"
-                              style={{ fontSize: '12px' }}
-                              href="/#"
-                            >
-                              加入購物車
-                            </a>
-                          </div>
-                        </Card.Body>
+                        </li>
                       </Accordion.Collapse>
                     </Card>
                   </Accordion>
@@ -234,58 +213,32 @@ function Clothing() {
             </div>
           </div>
           <div
-            className="d-flex justify-content-center py-3 "
+            className="d-flex justify-content-center py-3 row "
             style={{ backgroundColor: 'rgba(53, 60, 29, 0.2)' }}
           >
-            <Link
-              to="/product"
-              className="d-inline-block font-weight-bold text-decoration-none py-2 px-5 allProductbtn"
+            <button
+              href="#!"
+              className="d-inline-block font-weight-bold text-decoration-none py-2 px-5 allProductbtn mx-2"
             >
-              查看全部商品
-            </Link>
+              確認
+            </button>
+            <button
+              className="d-inline-block font-weight-bold text-decoration-none py-2 px-5 allProductbtn mx-2"
+              onClick={(e) => {
+                e.preventDefault()
+                setStatus(0)
+              }}
+            >
+              取消
+            </button>
           </div>
         </div>
       </div>
     )
   }
-
   return (
     <>
-      <HeaderOther />
       <main style={{ marginTop: '24px' }}>
-        <div>
-          <div className="row headerwrapper">
-            <div
-              className="col-10 h_box h_box1"
-              style={{ paddingRight: '0px', paddingLeft: '0px' }}
-            >
-              <div
-                className="text-center h_box1_title1"
-                style={{ width: '25%' }}
-              >
-                <span>Do what</span>
-              </div>
-              <div
-                className="text-center h_box1_title2"
-                style={{ width: '40%' }}
-              >
-                <span>you want to do</span>
-              </div>
-            </div>
-            <div
-              className="col-2 h_box2"
-              style={{ paddingRight: '0px', paddingLeft: '0px' }}
-            >
-              <div className="h_box h_box2-1" style={{ width: '100%' }}></div>
-              <div className="h_box h_box2-2 " style={{ width: '100%' }}>
-                <h5 className="text-center title_text ">
-                  {' '}
-                  The best clothes of the year are here
-                </h5>
-              </div>
-            </div>
-          </div>
-        </div>
         <br />
         {/*  modal */}
         {status === 1 ? modal() : ''}
@@ -496,11 +449,29 @@ function Clothing() {
                 ></div>
               </div>
             </div>
+            <div
+              className="d-flex justify-content-center py-3 row "
+              style={{ backgroundColor: 'rgba(53, 60, 29, 0.2)' }}
+            >
+              <button
+                href="#!"
+                className="d-inline-block font-weight-bold text-decoration-none py-2 px-5 allProductbtn mx-2"
+              >
+                確認
+              </button>
+              <button
+                className="d-inline-block font-weight-bold text-decoration-none py-2 px-5 allProductbtn mx-2"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setStatus(0)
+                }}
+              >
+                取消
+              </button>
+            </div>
           </div>
         </div>
       </main>
-      <Topbtn />
-      <Footer></Footer>
       <script
         src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
         crossorigin
@@ -510,5 +481,4 @@ function Clothing() {
     </>
   )
 }
-
-export default Clothing
+export default ClothingBackstage
