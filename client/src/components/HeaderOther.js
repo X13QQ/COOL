@@ -9,7 +9,7 @@ function HeaderOther(props) {
     props.detailToHeaderCart
   )
   const cartMap = () => {
-    let cartTotalValue = new Number;
+    let cartTotalValue = Number(0);
     return shoppingCartStorage ?
       (
         <>
@@ -1038,14 +1038,16 @@ function HeaderOther(props) {
                   <div className="d-flex align-items-end search-icon-input-wrap mx-2">
                     <input type="text" className="px-2"></input>
                   </div>
-                  <a className="nav-link active" aria-current="page" href="#!">
+                  <a className="nav-link active" aria-current="page" href="#!"
+                   onClick={(e)=>{e.preventDefault()}}>
                     <img src={'/images/素材/icon/Search_G.svg'} alt={''}></img>
                   </a>
                 </li>
 
                 {/* 購物車 */}
                 <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-                  <a className="cart-navbar-a nav-link position-relative" href="#!">
+                  <a className="cart-navbar-a nav-link position-relative" href="#!"
+                  onClick={(e)=>{e.preventDefault()}}>
                     <img
                       src={'/images/素材/icon/shopping_cart_G.svg'}
                       alt={''}

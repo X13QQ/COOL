@@ -7,7 +7,7 @@ function HeaderAbout(props) {
 
   const [shoppingCartStorage, setShoppingCartStorage] = useState(props.detailToHeaderCart)
   const cartMap = () => {
-    let cartTotalValue = new Number;
+    let cartTotalValue = Number(0);
     return shoppingCartStorage ?
       (
         <>
