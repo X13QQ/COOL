@@ -379,6 +379,7 @@ function DetailContent(props) {
                       href="#!"
                       className="review-btn d-inline-block text-decoration-none py-1 px-3 mx-2 rounded"
                       style={{ fontSize: '14px' }}
+                      onClick={(e) => { e.preventDefault() }}
                     >
                       清除
                     </a>
@@ -386,6 +387,7 @@ function DetailContent(props) {
                       href="#!"
                       className="review-btn d-inline-block text-decoration-none py-1 px-3 ml-2 rounded"
                       style={{ fontSize: '14px' }}
+                      onClick={(e) => { e.preventDefault() }}
                     >
                       送出
                     </a>
@@ -716,7 +718,7 @@ function DetailContent(props) {
                     <img
                       className="img-fluid"
                       style={{ height: '150px', objectFit: 'cover' }}
-                      src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
+                      src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-10.jpg"
                       alt={''}
                     ></img>
                   </div>
@@ -724,7 +726,7 @@ function DetailContent(props) {
                     <img
                       className="img-fluid"
                       style={{ height: '150px', objectFit: 'cover' }}
-                      src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
+                      src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-11.jpg"
                       alt={''}
                     ></img>
                   </div>
@@ -732,7 +734,7 @@ function DetailContent(props) {
                     <img
                       className="img-fluid"
                       style={{ height: '150px', objectFit: 'cover' }}
-                      src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
+                      src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-9.jpg"
                       alt={''}
                     ></img>
                   </div>
@@ -779,86 +781,108 @@ function DetailContent(props) {
               <div>
                 <p className="mb-2 font-weight-bold">COLOR</p>
                 <div className="color-choose mb-2">
-                  <a href="#!">
-                    <img
-                      src="/images/素材/icon/Clothes color_B.svg"
-                      alt={''}
-                    ></img>
+                  <a
+                    className={"d-inline-block mr-3 color-choose-a color-choose-actived "}
+                    style={{ backgroundColor: 'red', width: '25px', height: '25px', border: '1px solid rgba(0,0,0,0.3)' }}
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                   </a>
-                  <a href="#!">
-                    <img
-                      src="/images/素材/icon/Clothes color_Blue.svg"
-                      alt={''}
-                    ></img>
+                  <a
+                    className={"d-inline-block mr-3 color-choose-a "}
+                    style={{ backgroundColor: 'white', width: '25px', height: '25px', border: '1px solid rgba(0,0,0,0.3)' }}
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                   </a>
-                  <a href="#!">
-                    <img
-                      src="/images/素材/icon/Clothes color_R.svg"
-                      alt={''}
-                    ></img>
+                  <a
+                    className={"d-inline-block mr-3 color-choose-a "}
+                    style={{ backgroundColor: 'black', width: '25px', height: '25px', border: '1px solid rgba(0,0,0,0.3)' }}
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                   </a>
-                  <a href="#!">
-                    <img
-                      src="/images/素材/icon/Clothes color_W.svg"
-                      alt={''}
-                    ></img>
-                  </a>
-                  <a href="#!">
-                    <img
-                      src="/images/素材/icon/Clothes color_Y.svg"
-                      alt={''}
-                    ></img>
+                  <a
+                    className={"d-inline-block mr-3 color-choose-a "}
+                    style={{ backgroundColor: 'pink', width: '25px', height: '25px', border: '1px solid rgba(0,0,0,0.3)' }}
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                   </a>
                 </div>
                 <p className="mb-2 font-weight-bold">SIZE</p>
                 <div className="size-choose mb-2">
                   <a
                     href="#!"
-                    className="d-inline-block text-center text-decoration-none mr-2"
+                    className="size-choose-a d-inline-block size-choose-actived text-center text-decoration-none mr-3"
+                    onClick={(e) => { e.preventDefault() }}
                   >
                     S
                   </a>
                   <a
                     href="#!"
-                    className="d-inline-block text-center text-decoration-none mx-2"
+                    className="size-choose-a d-inline-block text-center text-decoration-none mr-3"
+                    onClick={(e) => { e.preventDefault() }}
                   >
                     M
                   </a>
                   <a
                     href="#!"
-                    className="d-inline-block text-center text-decoration-none mx-2"
+                    className="size-choose-a d-inline-block text-center text-decoration-none mr-3"
+                    onClick={(e) => { e.preventDefault() }}
                   >
                     L
                   </a>
                   <a
                     href="#!"
-                    className="d-inline-block text-center text-decoration-none mx-2"
+                    className="size-choose-a d-inline-block text-center text-decoration-none mr-3"
+                    onClick={(e) => { e.preventDefault() }}
                   >
                     XL
                   </a>
                 </div>
                 <p className="mb-2 font-weight-bold">AMOUNT</p>
-                <div className="amount-choose mb-3 d-flex justify-content-start align-items-center">
-                  <a
-                    href="#!"
-                    className="text-decoration-none d-inline-block font-weight-bold mr-3"
-                    style={{ fontSize: '28px', color: '#353c1d' }}
-                  >
-                    +
+                <div className="amount-choose">
+                  <div className=" mb-2 d-flex justify-content-start align-items-center">
+                    <a
+                      href="#!"
+                      className="text-decoration-none d-inline-block font-weight-bold mr-3"
+                      style={{ fontSize: '28px', color: '#353c1d' }}
+                      onClick={(e)=>{e.preventDefault()}}
+                    >
+                      +
+                    </a>
+                    <input style={{ fontWeight: 'bold', border: 'none', color: 'red', backgroundColor: 'white' }} min='1' defaultValue="1" className="text-center" disabled type="number" class="text-center"></input>
+                    <a
+                      href="#!"
+                      className="text-decoration-none d-inline-block font-weight-bold ml-3"
+                      style={{ fontSize: '28px', color: '#353c1d' }}
+                      onClick={(e)=>{e.preventDefault()}}
+
+                    >
+                      -
                   </a>
-                  <input type="number" class="text-center"></input>
-                  <a
-                    href="#!"
-                    className="text-decoration-none d-inline-block font-weight-bold ml-3"
-                    style={{ fontSize: '28px', color: '#353c1d' }}
-                  >
-                    -
-                  </a>
+                  </div>
+                  <div className="mb-2">
+                    <p style={{ fontSize: '12px', fontStyle: 'italic', color: 'lightgray', fontWeight: 'bold' }}>剩餘 <span id="max-amount-display" style={{ color: 'red' }}>
+                      3
+                    </span> 個</p>
+                  </div>
+
                 </div>
                 <div className="add-to-cart-btn mb-4">
                   <a
                     href="#!"
                     class="d-inline-block py-2 px-5 text-decoration-none"
+                    onClick={(e) => { e.preventDefault() }}
                   >
                     加入購物車
                   </a>
@@ -870,12 +894,12 @@ function DetailContent(props) {
             className="d-flex justify-content-center py-3"
             style={{ backgroundColor: 'rgba(53, 60, 29, 0.2)' }}
           >
-            <a
-              href="#!"
+            <Link
+              to="/product"
               className="see-all-btn d-inline-block font-weight-bold text-decoration-none py-2 px-5"
             >
               查看全部商品
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -1121,7 +1145,7 @@ function DetailContent(props) {
                         let cartList = JSON.stringify(cartNextData)
                         localStorage.setItem('cartList', cartList)
                         // 測試
-                        props.setDetailToHeaderCart(true)
+                        props.setDetailToHeaderCart(Number(props.detailToHeaderCart) + 1)
                       }}
                     >
                       加入購物車
@@ -1304,7 +1328,23 @@ function DetailContent(props) {
                     >
                       <img
                         className="img-fluid"
-                        src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                        src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
+                        alt={''}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          setStatus(3)
+                        }}
+                      ></img>
+                    </a>
+                  </div>
+                  <div className="col-6 col-lg-5 mb-3 d-flex align-items-center">
+                    <a
+                      href="#!"
+                      className=" d-flex align-items-center justify-content-between"
+                    >
+                      <img
+                        className="img-fluid"
+                        src="/images/product/UNDEFEATED/LIGHTWEIGHT_BASEBALL_JACKET/LIGHTWEIGHT_BASEBALL_JACKET_O01.jpg"
                         alt={''}
                         onClick={(e) => {
                           e.preventDefault()
@@ -1320,7 +1360,7 @@ function DetailContent(props) {
                     >
                       <img
                         className="img-fluid"
-                        src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                        src="/images/product/UNDEFEATED/BEACH_SHORT/BEACH_SHORT_P01.jpg"
                         alt={''}
                         onClick={(e) => {
                           e.preventDefault()
@@ -1336,7 +1376,7 @@ function DetailContent(props) {
                     >
                       <img
                         className="img-fluid"
-                        src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                        src="/images/商品/商品組圖(尚未依品牌分類)/6/z-70864377-1.jpg"
                         alt={''}
                         onClick={(e) => {
                           e.preventDefault()
@@ -1352,23 +1392,7 @@ function DetailContent(props) {
                     >
                       <img
                         className="img-fluid"
-                        src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
-                        alt={''}
-                        onClick={(e) => {
-                          e.preventDefault()
-                          setStatus(3)
-                        }}
-                      ></img>
-                    </a>
-                  </div>
-                  <div className="col-6 col-lg-5 mb-3">
-                    <a
-                      href="#!"
-                      className=" d-flex align-items-center justify-content-between"
-                    >
-                      <img
-                        className="img-fluid"
-                        src="/images/商品/商品組圖(尚未依品牌分類)/4/z-70864367-1.jpg"
+                        src="/images/product/Dickies/Orcutt_Belt/6a236ce8aca2bc75cc6dac3b89f6d408_1024x1024.jpg"
                         alt={''}
                         onClick={(e) => {
                           e.preventDefault()
