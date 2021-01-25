@@ -9,7 +9,7 @@ function HeaderOther(props) {
     props.detailToHeaderCart
   )
   const cartMap = () => {
-    let cartTotalValue = new Number()()
+    let cartTotalValue = Number(0)
     return shoppingCartStorage ? (
       <>
         <div className="cart-icon-wrap position-absolute pt-3">
@@ -138,8 +138,13 @@ function HeaderOther(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].name
       : ''
   )
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
+
+  useEffect(() => {
+    setShow(props.showParent)
+  }, [props.showParent])
+
   const [user, setUser] = useState({ account: '', password: '', email: '' })
   const [loginStatus, setLoginStatus] = useState(0)
   const [certificateEmail, setCertificateEmail] = useState('')
@@ -195,7 +200,8 @@ function HeaderOther(props) {
   const close = (id) => {
     document.addEventListener('click', function (e) {
       if (e.target.id === id) {
-        setShow(false)
+        // setShow(false)
+        props.setShowParent(false)
         setModal(1)
         cleanData()
       }
@@ -394,7 +400,7 @@ function HeaderOther(props) {
                       color: '#353c1d',
                     }}
                     onClick={() => {
-                      setShow(false)
+                      props.setShowParent(false)
                       cleanData()
                     }}
                   >
@@ -618,7 +624,7 @@ function HeaderOther(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setModal(1)}
+                    onClick={() => props.setShowParent(false)}
                   >
                     取消
                   </button>
@@ -1100,7 +1106,8 @@ function HeaderOther(props) {
                     href="#!"
                     onClick={(e) => {
                       e.preventDefault()
-                      if (loginStatus === 0) setShow(true)
+                      setModal(1)
+                      if (loginStatus === 0) props.setShowParent(true)
                     }}
                   >
                     <img src="/images/素材/icon/Profile_G.svg" alt={''}></img>

@@ -8,12 +8,26 @@ import HeaderOther from '../components/HeaderOther'
 // 尚未導入header
 function Detail() {
   // 測試
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
+  const [showParent, setShowParent] = useState(false)
   return (
     <>
-      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}></HeaderOther>
+      <HeaderOther
+        showParent={showParent}
+        setShowParent={setShowParent}
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      ></HeaderOther>
       <Route path="/detail/:brand?/:id?">
-        <DetailContent detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}></DetailContent>
+        <DetailContent
+          setShowParent={setShowParent}
+          detailToHeaderCart={detailToHeaderCart}
+          setDetailToHeaderCart={setDetailToHeaderCart}
+        ></DetailContent>
       </Route>
       <Topbtn />
       <Footer />

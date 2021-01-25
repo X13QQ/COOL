@@ -20,6 +20,8 @@ function Clothing() {
       : 0
   )
 
+  const [showParent, setShowParent] = useState(false)
+
   const [status, setStatus] = useState(0)
   // const [accordionActived, setAccordionActived] = useState(false)
 
@@ -110,7 +112,7 @@ function Clothing() {
             <div className="col-6">
               {clothingData.map((val, key) => {
                 return (
-                  <Accordion defaultActiveKey="0">
+                  <Accordion defaultActiveKey="0" key={key}>
                     <Card className="pb-3">
                       {/* 帽子標籤 ↓ */}
                       <Accordion.Toggle
@@ -258,6 +260,8 @@ function Clothing() {
   return (
     <>
       <HeaderOther
+        showParent={showParent}
+        setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
         setDetailToHeaderCart={setDetailToHeaderCart}
       />
@@ -512,7 +516,7 @@ function Clothing() {
       <Footer></Footer>
       <script
         src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
-        crossorigin
+        crossOrigin
       ></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
