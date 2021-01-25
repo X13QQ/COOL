@@ -90,6 +90,7 @@ function ClothingBackstage() {
               </Form>
               <img
                 className="btn"
+                id="image"
                 type="button"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
@@ -474,7 +475,7 @@ function ClothingBackstage() {
       </main>
       <script
         src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
-        crossorigin
+        crossOrigin
       ></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
