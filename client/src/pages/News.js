@@ -52,7 +52,7 @@ function News() {
       >
         <div className="news-content pt-5 position-relative">
           <a
-            href="#!"
+            href="/#"
             className="close-button position-absolute "
             onClick={(e) => {
               e.preventDefault()
@@ -185,14 +185,22 @@ function News() {
                       newsImages.length > 0 ? newsImages[0].src : ''
                     }')`,
                   }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setStatus(1)
+                    setContent(document.getElementById('target-p').textContent)
+                  }}
                 >
                   <h3 className="newsBig-pic-text ">
-                    TOMMY HILFIGER 2021年推出TOMMY JEANS
+                    {newsImages.length > 0 ? newsImages[0].news_title1 : ''}
                   </h3>
                   <h5 className="newsBig-pic-text-sm ">
-                    <span className="zox-byline-name"> Sheng.</span>
+                    <span className="zox-byline-name">
+                      {newsImages.length > 0 ? newsImages[0].news_title2 : ''}
+                    </span>
                     <span class="zox-byline-date">
-                      <i class="far fa-clock"></i> 2 小時 ago
+                      <i class="far fa-clock"></i>
+                      {newsImages.length > 0 ? newsImages[0].date : ''}
                     </span>
                   </h5>
                 </div>
@@ -205,6 +213,11 @@ function News() {
                       newsImages.length > 0 ? newsImages[1].src : ''
                     }')`,
                   }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setStatus(1)
+                    setContent(document.getElementById('target-p').textContent)
+                  }}
                 ></div>
                 <div
                   className="newsImageMain4 newsBg-cover newsBox newsBig-pic-mask "
@@ -213,12 +226,24 @@ function News() {
                       newsImages.length > 0 ? newsImages[3].src : ''
                     }')`,
                   }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setStatus(1)
+                    setContent(document.getElementById('target-p').textContent)
+                  }}
                 >
                   <h3 className="newsBig-pic-text3">
-                    大地色系工裝 X 機能！ THE NORTH FACE URBAN EXPLORATION
-                    春夏膠囊 UTILITY GEAR 系列開始發售！
+                    {newsImages.length > 0 ? newsImages[3].news_title1 : ''}
                   </h3>
-                  <h5 className="newsBig-pic-text-sm">Eric.</h5>
+                  <h5 className="newsBig-pic-text-sm">
+                    <span className="zox-byline-name">
+                      {newsImages.length > 0 ? newsImages[3].news_title2 : ''}
+                    </span>
+                    <span class="zox-byline-date">
+                      <i class="far fa-clock"></i>
+                      {newsImages.length > 0 ? newsImages[3].date : ''}
+                    </span>
+                  </h5>
                 </div>
               </div>
             </div>
@@ -233,10 +258,17 @@ function News() {
                   }}
                 >
                   <h3 className="newsBig-pic-text3">
-                    全球限量 300 件！村上隆「頂級收藏品」MELTING
-                    DOB，誰搶到誰就從貧民變老闆
+                    {newsImages.length > 0 ? newsImages[5].news_title1 : ''}
                   </h3>
-                  <h5 className="newsBig-pic-text-sm">Miya.</h5>
+                  <h5 className="newsBig-pic-text-sm">
+                    <span className="zox-byline-name">
+                      {newsImages.length > 0 ? newsImages[5].news_title2 : ''}
+                    </span>
+                    <span class="zox-byline-date">
+                      <i class="far fa-clock"></i>
+                      {newsImages.length > 0 ? newsImages[5].date : ''}
+                    </span>
+                  </h5>
                 </div>
                 <div
                   className="newsImageMain8 newsBg-cover newsBox newsBig-pic-mask "
@@ -247,10 +279,17 @@ function News() {
                   }}
                 >
                   <h3 className="newsBig-pic-text3">
-                    STÜSSY X MATTEL CREATIONS 打造 MAGIC 8 BALL
-                    占卜玩具，搖晃就告訴你 YES 或 NO ！
+                    {newsImages.length > 0 ? newsImages[7].news_title1 : ''}
                   </h3>
-                  <h5 className="newsBig-pic-text-sm">Eric.</h5>
+                  <h5 className="newsBig-pic-text-sm">
+                    <span className="zox-byline-name">
+                      {newsImages.length > 0 ? newsImages[7].news_title2 : ''}
+                    </span>
+                    <span class="zox-byline-date">
+                      <i class="far fa-clock"></i>
+                      {newsImages.length > 0 ? newsImages[7].date : ''}
+                    </span>
+                  </h5>
                 </div>
               </div>
               <div className="col-8 px-0">
@@ -263,9 +302,17 @@ function News() {
                   }}
                 >
                   <h3 className="newsBig-pic-text">
-                    愛神回來到－GIRLS DON’T CRY 全新 2021 膠囊系列發佈
+                    {newsImages.length > 0 ? newsImages[6].news_title1 : ''}
                   </h3>
-                  <h5 className="newsBig-pic-text-sm">Miya.</h5>
+                  <h5 className="newsBig-pic-text-sm">
+                    <span className="zox-byline-name">
+                      {newsImages.length > 0 ? newsImages[6].news_title2 : ''}
+                    </span>
+                    <span class="zox-byline-date">
+                      <i class="far fa-clock"></i>
+                      {newsImages.length > 0 ? newsImages[6].date : ''}
+                    </span>
+                  </h5>
                 </div>
               </div>
             </div>
@@ -280,9 +327,17 @@ function News() {
               }}
             >
               <h3 className="newsBig-pic-text2">
-                肯爺怒告 YEEZY 實習生私自曝光品牌最新設計，要求賠償千萬違約金！
+                {newsImages.length > 0 ? newsImages[2].news_title1 : ''}
               </h3>
-              <h5 className="newsBig-pic-text-sm">Sheng.</h5>
+              <h5 className="newsBig-pic-text-sm">
+                <span className="zox-byline-name">
+                  {newsImages.length > 0 ? newsImages[2].news_title2 : ''}
+                </span>
+                <span class="zox-byline-date">
+                  <i class="far fa-clock"></i>
+                  {newsImages.length > 0 ? newsImages[2].date : ''}
+                </span>
+              </h5>
             </div>
             <div
               className="newsImageMain5 newsBg-cover newsBox newsBig-pic-mask "
@@ -294,10 +349,17 @@ function News() {
               }}
             >
               <h3 className="newsBig-pic-text2">
-                絲綢、唐裝通通回歸！ CLOT X POLO RALPH LAUREN
-                聯乘系列全品項和販售資訊正式發佈！
+                {newsImages.length > 0 ? newsImages[4].news_title1 : ''}
               </h3>
-              <h5 className="newsBig-pic-text-sm">Sheng.</h5>
+              <h5 className="newsBig-pic-text-sm">
+                <span className="zox-byline-name">
+                  {newsImages.length > 0 ? newsImages[4].news_title2 : ''}
+                </span>
+                <span class="zox-byline-date">
+                  <i class="far fa-clock"></i>
+                  {newsImages.length > 0 ? newsImages[4].date : ''}
+                </span>
+              </h5>
             </div>
             <div
               className="newsImageMain9 newsBg-cover newsBox newsBig-pic-mask "
@@ -308,10 +370,17 @@ function News() {
               }}
             >
               <h3 className="newsBig-pic-text2">
-                SUPREME 母公司將經營中心移到上海，「SUPREME
-                首間中國門店」要開了？
+                {newsImages.length > 0 ? newsImages[8].news_title1 : ''}
               </h3>
-              <h5 className="newsBig-pic-text-sm">Sheng.</h5>
+              <h5 className="newsBig-pic-text-sm">
+                <span className="zox-byline-name">
+                  {newsImages.length > 0 ? newsImages[8].news_title2 : ''}
+                </span>
+                <span class="zox-byline-date">
+                  <i class="far fa-clock"></i>
+                  {newsImages.length > 0 ? newsImages[8].date : ''}
+                </span>
+              </h5>
             </div>
           </div>
         </div>
@@ -383,11 +452,18 @@ function News() {
           {status === 1 ? modal() : ''}
           <div className=" d-flex justify-content-between ">
             {/* <!-- 左邊card 小圖 --> */}
-            <div className=" card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className=" card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex justify-content-center align-items-center">
                   <img
-                    src="images/新聞頁/文章列-小圖/小圖1.jpg"
+                    style={{
+                      backgroundImage: `url('${
+                        newsImages.length > 0 ? newsImages[10].src : ''
+                      }')`,
+                    }}
                     className="img-fluid news-small-cover-image"
                     alt={''}
                   ></img>
@@ -425,7 +501,10 @@ function News() {
               </div>
             </div>
             {/* <!--  右邊card 小圖 -->   */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex justify-content-center align-items-center">
                   <img
@@ -465,7 +544,10 @@ function News() {
           </div>
           <div className="d-flex justify-content-between">
             {/* <!-- 左邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex  justify-content-center align-items-center">
                   <img
@@ -502,7 +584,10 @@ function News() {
               </div>
             </div>
             {/* <!--  右邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex  justify-content-center align-items-center">
                   <img
@@ -541,7 +626,10 @@ function News() {
           </div>
           <div className="d-flex justify-content-between">
             {/* <!-- 左邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex justify-content-center align-items-center">
                   <img
@@ -578,7 +666,10 @@ function News() {
               </div>
             </div>
             {/* <!--  右邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex  justify-content-center align-items-center">
                   <img
@@ -617,7 +708,10 @@ function News() {
           </div>
           <div className="d-flex justify-content-between">
             {/* <!-- 左邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex justify-content-center align-items-center">
                   <img
@@ -654,7 +748,10 @@ function News() {
               </div>
             </div>
             {/* <!--  右邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex justify-content-center align-items-center">
                   <img
@@ -693,7 +790,10 @@ function News() {
           </div>
           <div className="d-flex justify-content-between">
             {/* <!-- 左邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex  justify-content-center align-items-center">
                   <img
@@ -730,7 +830,10 @@ function News() {
               </div>
             </div>
             {/* <!--  右邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex justify-content-center align-items-center">
                   <img
@@ -769,7 +872,10 @@ function News() {
           </div>
           <div className="d-flex justify-content-between">
             {/* <!-- 左邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex justify-content-center align-items-center">
                   <img
@@ -806,7 +912,10 @@ function News() {
               </div>
             </div>
             {/* <!--  右邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex justify-content-center align-items-center">
                   <img
@@ -845,7 +954,10 @@ function News() {
           </div>
           <div className="d-flex justify-content-between">
             {/* <!-- 左邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex justify-content-center align-items-center">
                   <img
@@ -882,7 +994,10 @@ function News() {
               </div>
             </div>
             {/* <!--  右邊card 小圖 --> */}
-            <div className="card mb-3" style={{ maxWidth: '540px' }}>
+            <div
+              className="card mb-3"
+              style={{ maxWidth: '540px', cursor: 'pointer' }}
+            >
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex justify-content-center align-items-center">
                   <img

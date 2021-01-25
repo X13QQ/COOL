@@ -5,7 +5,11 @@ import Footer from '../components/Footer'
 import Magnifier from 'react-magnifier'
 // clothing
 function Clothing() {
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
 
   const [status, setStatus] = useState(0)
   // const [accordionActived, setAccordionActived] = useState(false)
@@ -67,7 +71,7 @@ function Clothing() {
       >
         <div className="clothing-content p-5 position-relative">
           <a
-            href="/#"
+            href="#!"
             className="close-button position-absolute "
             onClick={(e) => {
               e.preventDefault()
@@ -280,7 +284,10 @@ function Clothing() {
   }
   return (
     <>
-      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
+      <HeaderOther
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      />
       <main style={{ marginTop: '24px' }}>
         <div>
           <div className="row headerwrapper">
