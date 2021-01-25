@@ -1,60 +1,60 @@
- import React, { useEffect, useState } from 'react'
- import {
-   Form,
-   Accordion,
-   Card,
-   DropdownButton,
-   Dropdown,
- } from 'react-bootstrap'
- import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
- import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
- import Cropper from 'react-cropper'
- import 'cropperjs/dist/cropper.css'
+import React, { useEffect, useState } from 'react'
+import {
+  Form,
+  Accordion,
+  Card,
+  DropdownButton,
+  Dropdown,
+} from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons'
 
- function ClothingBackstage() {
-   const [status, setStatus] = useState(0)
-   // const [accordionActived, setAccordionActived] = useState(false)
+function ClothingBackstage() {
+  const [status, setStatus] = useState(0)
+  // const [accordionActived, setAccordionActived] = useState(false)
 
-   const [clothingImages, setClothingImages] = useState([])
-   const [clothingData, setClothingData] = useState([])
+  const [clothingImages, setClothingImages] = useState([])
+  const [clothingData, setClothingData] = useState([])
 
-   const [choose, setChoose] = useState(0)
+  const [choose, setChoose] = useState(0)
 
-   const [image, setImage] = useState(defaultSrc)
-   const [cropData, setCropData] = useState('#')
-   // const [cropper, setCropper] = useState<any>();
-   // const onChange = (e:any) => {
-   //   e.preventDefault();
-   //   let files;
-   //   if (e.dataTransfer) {
-   //     files = e.dataTransfer.files;
-   //   } else if (e.target) {
-   //     files = e.target.files;
-   //   }
-   //   const reader = new FileReader();
-   //   reader.onload = () => {
-   //     setImage(reader.result as any);
-   //   };
-   //   reader.readAsDataURL(files[0]);
+  useEffect(() => {
+    // async await
+    async function getClothing() {
+      // 要使用try-catch來作錯誤處理
+      try {
+        // 從伺服器得到資料
+        const response = await fetch('http://localhost:3001/clothing', {
+          method: 'get',
+        })
+        if (response.ok) {
+          // 剖析資料為JS的數值
+          const data = await response.json()
 
-   const getCropData = () => {
-     if (typeof cropper !== 'undefined') {
-       setCropData(cropper.getCroppedCanvas().toDataURL())
-     }
-   }
+          // 設定資料到ProductRes狀態
+          setClothingImages(data)
+          console.log(data)
+        }
+      } catch (error) {
+        // 發生錯誤的處理情況
+        alert('無法得到伺服器資料，請稍後再重試')
+        console.log(error)
+      }
+    }
+    getClothing()
+  }, [])
 
-   useEffect(() => {
-     // async await
-     async function getClothing() {
-       // 要使用try-catch來作錯誤處理
-       try {
-         // 從伺服器得到資料
-         const response = await fetch('http://localhost:3001/clothing', {
-           method: 'get',
-         })
-         if (response.ok) {
-           // 剖析資料為JS的數值
-           const data = await response.json()
+  function getClothingData(id) {
+    // 從伺服器得到資料
+    let url = new URL('http://localhost:3001/clothing/' + id)
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        setClothingData(data)
+      })
+      .catch((err) => console.log(err))
+  }
 
   const modal = () => {
     return (
@@ -180,39 +180,13 @@
                               </Dropdown.Item>
                             </DropdownButton>
 
-   const modal = () => {
-     return (
-       <div
-         id="what"
-         className="clothingbackstage clothing-modal d-flex justify-content-center align-items-center"
-         onClick={(e) => {
-           // console.log(e.target.id)
-           if (e.target.id === 'what') {
-             setStatus(0)
-           }
-         }}
-       >
-         <div className="clothing-content p-5 position-relative">
-           <a
-             href="/#"
-             className="close-button position-absolute "
-            onClick={(e) => {
-               e.preventDefault()
-               setStatus(0)
-             }}
-           >
-             CLOSE
-             <span>X</span>
-                        </a>
-           <h3 className="text-center font-weight-bold mb-4">產品詳情</h3>
-           <div className="row mb-4">
-             <div className="col-6">
-               <div className="row">
-                 <input type="file" onChange={onChange} />
-                 <button style={{ float: 'right' }} onClick={getCropData}>
-                   確定
-                 </button>
-               </div>
+                            <DropdownButton
+                              id="dropdown-basic-button"
+                              className="mx-2 my-2"
+                              title="品名"
+                            >
+                              <Dropdown.Item href="#/action-1">S</Dropdown.Item>
+                            </DropdownButton>
 
                             <Form.Group controlId="amount" className="row">
                               <Form.Label
