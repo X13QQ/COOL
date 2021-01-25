@@ -166,7 +166,10 @@ function DetailContent(props) {
           if (e.target.id === 'size-modal') setStatus(0)
         }}
       >
-        <div className="size-tryon-content  p-5 position-relative">
+        <div
+          className="size-tryon-content  p-5 position-relative"
+          style={{ zIndex: '9999' }}
+        >
           <a
             href="#!"
             className="close-button position-absolute"
@@ -185,7 +188,8 @@ function DetailContent(props) {
                 id="table-choose-size"
                 href="#!"
                 className="table-choose-size text-center d-block py-2 text-decoration-none active-table-choose"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault()
                   document
                     .getElementById('table-choose-size')
                     .classList.add('active-table-choose')
@@ -206,7 +210,8 @@ function DetailContent(props) {
                 id="table-choose-tryon"
                 href="#!"
                 className="table-choose-tryon text-center tryon-table-choose d-block py-2 text-decoration-none"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault()
                   document
                     .getElementById('table-choose-tryon')
                     .classList.add('active-table-choose')
@@ -782,9 +787,7 @@ function DetailContent(props) {
                 <p className="mb-2 font-weight-bold">COLOR</p>
                 <div className="color-choose mb-2">
                   <a
-                    className={
-                      'd-inline-block mr-3 color-choose-a color-choose-actived '
-                    }
+                    className="d-inline-block mr-3 color-choose-a color-choose-actived "
                     style={{
                       backgroundColor: 'red',
                       width: '25px',
@@ -797,7 +800,7 @@ function DetailContent(props) {
                     }}
                   ></a>
                   <a
-                    className={'d-inline-block mr-3 color-choose-a '}
+                    className="d-inline-block mr-3 color-choose-a "
                     style={{
                       backgroundColor: 'white',
                       width: '25px',
@@ -810,7 +813,7 @@ function DetailContent(props) {
                     }}
                   ></a>
                   <a
-                    className={'d-inline-block mr-3 color-choose-a '}
+                    className="d-inline-block mr-3 color-choose-a "
                     style={{
                       backgroundColor: 'black',
                       width: '25px',
@@ -823,7 +826,7 @@ function DetailContent(props) {
                     }}
                   ></a>
                   <a
-                    className={'d-inline-block mr-3 color-choose-a '}
+                    className="d-inline-block mr-3 color-choose-a "
                     style={{
                       backgroundColor: 'pink',
                       width: '25px',
@@ -1293,6 +1296,13 @@ function DetailContent(props) {
                       <a
                         href="#!"
                         className="d-flex align-items-center px-1 mr-3 text-decoration-none"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          if (!!localStorage.getItem('user')) {
+                          } else {
+                            props.setShowParent(true)
+                          }
+                        }}
                       >
                         <img
                           className="mr-2"
@@ -1584,9 +1594,9 @@ function DetailContent(props) {
                 ? JSON.parse(localStorage.getItem('browseHistory')).length >
                     1 && (
                     // 判斷localStorage長度
-                    <Link
+                    <a
                       // 組路由
-                      to={
+                      href={
                         '/detail/' +
                         (DetailRes
                           ? JSON.parse(localStorage.getItem('browseHistory'))[
@@ -1665,7 +1675,7 @@ function DetailContent(props) {
                             ].price
                           : ''}{' '}
                       </p>
-                    </Link>
+                    </a>
                   )
                 : ''}
 
@@ -1678,9 +1688,9 @@ function DetailContent(props) {
                 ? JSON.parse(localStorage.getItem('browseHistory')).length >
                     2 && (
                     // 判斷localStorage長度
-                    <Link
+                    <a
                       // 組路由
-                      to={
+                      href={
                         '/detail/' +
                         (DetailRes
                           ? JSON.parse(localStorage.getItem('browseHistory'))[
@@ -1759,7 +1769,7 @@ function DetailContent(props) {
                             ].price
                           : ''}{' '}
                       </p>
-                    </Link>
+                    </a>
                   )
                 : ''}
 
@@ -1773,9 +1783,9 @@ function DetailContent(props) {
                 ? JSON.parse(localStorage.getItem('browseHistory')).length >
                     3 && (
                     // 判斷localStorage長度
-                    <Link
+                    <a
                       // 組路由
-                      to={
+                      href={
                         '/detail/' +
                         (DetailRes
                           ? JSON.parse(localStorage.getItem('browseHistory'))[
@@ -1854,7 +1864,7 @@ function DetailContent(props) {
                             ].price
                           : ''}{' '}
                       </p>
-                    </Link>
+                    </a>
                   )
                 : ''}
 
@@ -1868,9 +1878,9 @@ function DetailContent(props) {
                 ? JSON.parse(localStorage.getItem('browseHistory')).length >
                     4 && (
                     // 判斷localStorage長度
-                    <Link
+                    <a
                       // 組路由
-                      to={
+                      href={
                         '/detail/' +
                         (DetailRes
                           ? JSON.parse(localStorage.getItem('browseHistory'))[
@@ -1949,7 +1959,7 @@ function DetailContent(props) {
                             ].price
                           : ''}{' '}
                       </p>
-                    </Link>
+                    </a>
                   )
                 : ''}
 
@@ -1963,9 +1973,9 @@ function DetailContent(props) {
                 ? JSON.parse(localStorage.getItem('browseHistory')).length >
                     5 && (
                     // 判斷localStorage長度
-                    <Link
+                    <a
                       // 組路由
-                      to={
+                      href={
                         '/detail/' +
                         (DetailRes
                           ? JSON.parse(localStorage.getItem('browseHistory'))[
@@ -2044,7 +2054,7 @@ function DetailContent(props) {
                             ].price
                           : ''}{' '}
                       </p>
-                    </Link>
+                    </a>
                   )
                 : ''}
             </div>

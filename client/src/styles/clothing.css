@@ -242,6 +242,18 @@ body {
   text-decoration: underline;
 } */
 /*  */
+.allProductbtn {
+  border: 3px solid #353c1d;
+  color: #353c1d;
+  background: white;
+  transition: 0.3s;
+}
+
+.allProductbtn:hover {
+  background: #353c1d;
+  color: #ffffff;
+}
+
 .sign-up-modal,
 .log-in-modal,
 .certificate-modal,

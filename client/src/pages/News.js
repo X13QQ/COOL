@@ -9,6 +9,7 @@ function News() {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
+  const [showParent, setShowParent] = useState(false)
 
   const [status, setStatus] = useState(0)
   const [newsLink, setNewsLink] = useState('')
@@ -139,6 +140,8 @@ function News() {
   return (
     <>
       <HeaderOther
+        showParent={showParent}
+        setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
         setDetailToHeaderCart={setDetailToHeaderCart}
       />
