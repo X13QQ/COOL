@@ -10,7 +10,9 @@ function News() {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
-  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
 
   const [status, setStatus] = useState(0)
   const [newsLink, setNewsLink] = useState('')
@@ -555,14 +557,14 @@ function News() {
                             }}
                           >
                             繼續閱讀 ...
-                            </a>
+                          </a>
                         </p>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))
+                ))
               : ''}
+            {/* </div> */}
           </div>
           {/* 段落 */}
           <div className="page-select position-relative d-none d-lg-flex justify-content-center align-items-center my-5">
