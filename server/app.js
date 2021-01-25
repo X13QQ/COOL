@@ -365,6 +365,22 @@ app.post("/member/contact", function (req, res) {
   );
 });
 
+
+//news
+app.get("/news", function (req, res) {
+  db.query(
+    "SELECT * FROM pages_data WHERE news_id != '' ORDER BY CONVERT(news_id,SIGNED ) ",
+    [],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      // console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+
 //營運分析 基本報表
 app.get("/dashboard/report/orderlist", function (req, res) {
   const sqlSelect =
