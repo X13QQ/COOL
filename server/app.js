@@ -365,20 +365,7 @@ app.post("/member/contact", function (req, res) {
   );
 });
 
-//news
-app.get("/news/:id", function (req, res) {
-  db.query(
-    "SELECT * FROM  page_data" + "WHERE news_id = ? ORDER BY category",
-    [req.params.id],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      console.log(result);
-      res.send(JSON.stringify(result));
-    }
-  );
-});
+
 
 app.listen(3001, () => {
   console.log("port 3001");
