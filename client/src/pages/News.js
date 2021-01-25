@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
-import Magnifier from 'react-magnifier'
+
 function News() {
   const [detailToHeaderCart, setDetailToHeaderCart] = useState(
     !!localStorage.getItem('cartList')
@@ -11,9 +11,17 @@ function News() {
   )
 
   const [status, setStatus] = useState(0)
-  const [Content, setContent] = useState('')
+  const [newsLink, setNewsLink] = useState('')
+  const [Content1, setContent1] = useState('')
+  const [Content2, setContent2] = useState('')
+  const [Src, setSrc] = useState('')
   const [newsImages, setNewsImages] = useState([])
+  const newsImages2 = []
 
+  for (let i = 9; i < newsImages.length - 14; i++) {
+    newsImages2.push(newsImages[i])
+  }
+  console.log(newsImages2)
   useEffect(() => {
     // async await
     async function getNews() {
@@ -64,7 +72,7 @@ function News() {
           </a>
           <div className="row mt-4  position-relative">
             <img
-              src="images/新聞頁/文章頁-主視覺/news1.jpg"
+              src={Src}
               className="position-absolute"
               style={{
                 width: '40%',
@@ -83,11 +91,9 @@ function News() {
                   className="p-5"
                   style={{ backgroundColor: '#353c1d', color: 'white' }}
                 >
-                  <h3 className="font-weight-bold">
-                    Constant dropping wears the stone
-                  </h3>
-                  <p className="font-weight-bold" style={{ fontSize: '16px' }}>
-                    {Content}
+                  <h5 className="font-weight-bold">{Content1}</h5>
+                  <p className="font-weight-bold" style={{ fontSize: '14px' }}>
+                    {Content2}
                   </p>
                 </div>
               </div>
@@ -107,31 +113,10 @@ function News() {
                 <div className="p-5" style={{ backgroundColor: 'white' }}>
                   <a
                     className="font-weight-bold"
-                    style={{ fontSize: '14px' }}
+                    style={{ fontSize: '12px' }}
                     href="#!"
                   >
-                    巴爾瑪肯大衣 NT$2,990 (預計10月下旬販售)
-                  </a>
-                  <a
-                    className="font-weight-bold"
-                    style={{ fontSize: '14px' }}
-                    href="#!"
-                  >
-                    喀什米爾圓領毛衣(長袖) NT$2,990
-                  </a>
-                  <a
-                    className="font-weight-bold"
-                    style={{ fontSize: '14px' }}
-                    href="#!"
-                  >
-                    HEATTECH SMART SlimFit長褲 NT$1,290
-                  </a>
-                  <a
-                    className="font-weight-bold"
-                    style={{ fontSize: '14px' }}
-                    href="#!"
-                  >
-                    麂皮風中筒靴 NT$1,990
+                    {newsLink}
                   </a>
                 </div>
               </div>
@@ -188,7 +173,10 @@ function News() {
                   onClick={(e) => {
                     e.preventDefault()
                     setStatus(1)
-                    setContent(document.getElementById('target-p').textContent)
+                    setContent1(newsImages[0].news_content1)
+                    setContent2(newsImages[0].news_content2)
+                    setNewsLink(newsImages[0].news_link)
+                    setSrc(newsImages[0].src)
                   }}
                 >
                   <h3 className="newsBig-pic-text ">
@@ -213,11 +201,6 @@ function News() {
                       newsImages.length > 0 ? newsImages[1].src : ''
                     }')`,
                   }}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    setStatus(1)
-                    setContent(document.getElementById('target-p').textContent)
-                  }}
                 ></div>
                 <div
                   className="newsImageMain4 newsBg-cover newsBox newsBig-pic-mask "
@@ -229,7 +212,10 @@ function News() {
                   onClick={(e) => {
                     e.preventDefault()
                     setStatus(1)
-                    setContent(document.getElementById('target-p').textContent)
+                    setContent1(newsImages[3].news_content1)
+                    setContent2(newsImages[3].news_content2)
+                    setNewsLink(newsImages[3].news_link)
+                    setSrc(newsImages[3].src)
                   }}
                 >
                   <h3 className="newsBig-pic-text3">
@@ -256,6 +242,14 @@ function News() {
                       newsImages.length > 0 ? newsImages[5].src : ''
                     }')`,
                   }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setStatus(1)
+                    setContent1(newsImages[5].news_content1)
+                    setContent2(newsImages[5].news_content2)
+                    setNewsLink(newsImages[5].news_link)
+                    setSrc(newsImages[5].src)
+                  }}
                 >
                   <h3 className="newsBig-pic-text3">
                     {newsImages.length > 0 ? newsImages[5].news_title1 : ''}
@@ -276,6 +270,14 @@ function News() {
                     backgroundImage: `url('${
                       newsImages.length > 0 ? newsImages[7].src : ''
                     }')`,
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setStatus(1)
+                    setContent1(newsImages[7].news_content1)
+                    setContent2(newsImages[7].news_content2)
+                    setNewsLink(newsImages[7].news_link)
+                    setSrc(newsImages[7].src)
                   }}
                 >
                   <h3 className="newsBig-pic-text3">
@@ -299,6 +301,14 @@ function News() {
                     backgroundImage: `url('${
                       newsImages.length > 0 ? newsImages[6].src : ''
                     }')`,
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setStatus(1)
+                    setContent1(newsImages[6].news_content1)
+                    setContent2(newsImages[6].news_content2)
+                    setNewsLink(newsImages[6].news_link)
+                    setSrc(newsImages[6].src)
                   }}
                 >
                   <h3 className="newsBig-pic-text">
@@ -325,6 +335,14 @@ function News() {
                   newsImages.length > 0 ? newsImages[2].src : ''
                 }')`,
               }}
+              onClick={(e) => {
+                e.preventDefault()
+                setStatus(1)
+                setContent1(newsImages[2].news_content1)
+                setContent2(newsImages[2].news_content2)
+                setNewsLink(newsImages[2].news_link)
+                setSrc(newsImages[2].src)
+              }}
             >
               <h3 className="newsBig-pic-text2">
                 {newsImages.length > 0 ? newsImages[2].news_title1 : ''}
@@ -347,6 +365,14 @@ function News() {
                 }')`,
                 flexGrow: '1',
               }}
+              onClick={(e) => {
+                e.preventDefault()
+                setStatus(1)
+                setContent1(newsImages[4].news_content1)
+                setContent2(newsImages[4].news_content2)
+                setNewsLink(newsImages[4].news_link)
+                setSrc(newsImages[4].src)
+              }}
             >
               <h3 className="newsBig-pic-text2">
                 {newsImages.length > 0 ? newsImages[4].news_title1 : ''}
@@ -367,6 +393,14 @@ function News() {
                 backgroundImage: `url('${
                   newsImages.length > 0 ? newsImages[8].src : ''
                 }')`,
+              }}
+              onClick={(e) => {
+                e.preventDefault()
+                setStatus(1)
+                setContent1(newsImages[8].news_content1)
+                setContent2(newsImages[8].news_content2)
+                setNewsLink(newsImages[8].news_link)
+                setSrc(newsImages[8].src)
               }}
             >
               <h3 className="newsBig-pic-text2">
@@ -415,17 +449,48 @@ function News() {
             <div className="dropdown d-flex py-2">
               <div className="position-relative">
                 <a
+                  id="items-per-page-link"
                   href="#!"
-                  className="d-inline-block position-relative px-2 mx-3 text-decoration-none"
+                  className="d-inline-block px-2 mx-3 text-decoration-none"
+                  onMouseEnter={() => {
+                    document.getElementById('items-per-page-wrap').style[
+                      'display'
+                    ] = 'block'
+                  }}
+                  onMouseLeave={(e) => {
+                    if (e.target.id !== 'items-per-page-wrap') {
+                      document.getElementById('items-per-page-wrap').style[
+                        'display'
+                      ] = 'none'
+                    }
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                  }}
                 >
                   排序
                   <img
                     className="mx-3"
-                    src="images/素材/icon/arrow_G.svg "
+                    src="images/素材/icon/arrow_G.svg"
                     alt={''}
-                  />
+                  ></img>
                 </a>
-                <div className="sort-ul-wrap position-absolute py-2 rounded">
+                <div
+                  id="items-per-page-wrap"
+                  className="items-per-page-wrap position-absolute"
+                  onMouseEnter={() => {
+                    document.getElementById('items-per-page-wrap').style[
+                      'display'
+                    ] = 'block'
+                  }}
+                  onMouseLeave={(e) => {
+                    if (e.target.id !== 'items-per-page-link') {
+                      document.getElementById('items-per-page-wrap').style[
+                        'display'
+                      ] = 'none'
+                    }
+                  }}
+                >
                   <ul className="sort-ul  list-unstyled mb-0">
                     <li>
                       <a
@@ -450,590 +515,59 @@ function News() {
           </div>
           {/*  */}
           {status === 1 ? modal() : ''}
-          <div className=" d-flex justify-content-between ">
-            {/* <!-- 左邊card 小圖 --> */}
-            <div
-              className=" card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                  <img
-                    style={{
-                      backgroundImage: `url('${
-                        newsImages.length > 0 ? newsImages[10].src : ''
-                      }')`,
-                    }}
-                    className="img-fluid news-small-cover-image"
-                    alt={''}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      id="target-p"
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      過年拿到錢就是要買鞋！IG
-                      網友新年最想入手球鞋排行榜，第一名果然還是「它」！。{' '}
-                    </p>
+          <div className=" d-flex justify-content-between flex-wrap">
+            {/* <!-- 小圖開始 --> */}
+            {newsImages2.length > 0
+              ? newsImages2.map((v, i) => (
+                  <div
+                    className=" card mb-3 col-6"
+                    style={{ maxWidth: '540px', cursor: 'pointer' }}
+                  >
+                    <div className="row no-gutters">
+                      <div className="col-md-4 d-flex justify-content-center align-items-center">
+                        <img
+                          style={{
+                            backgroundImage: `url('${v.src}')`,
+                          }}
+                          className="img-fluid news-small-cover-image"
+                          alt={''}
+                        ></img>
+                      </div>
+                      <div className="col-md-8">
+                        <div className="card-body news-card-body-text">
+                          {/* <h5 className="card-title"></h5> */}
+                          <p
+                            className="news-article card-text font-weight-bold"
+                            style={{ color: '#353c1d' }}
+                          >
+                            {v.news_title1}
+                          </p>
+                        </div>
+                        <div className="card-body news-card-body-link">
+                          <p className="card-text d-flex justify-content-end ">
+                            <a
+                              href="#!"
+                              style={{ color: '#353c1d', fontSize: '12px' }}
+                              onClick={(e) => {
+                                e.preventDefault()
+                                setStatus(1)
+                                setContent1(v.news_content1)
+                                setContent2(v.news_content2)
+                                setNewsLink(v.news_link)
+                                setSrc(v.src)
+                              }}
+                            >
+                              繼續閱讀 ...
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                        onClick={(e) => {
-                          e.preventDefault()
-                          setStatus(1)
-                          setContent(
-                            document.getElementById('target-p').textContent
-                          )
-                        }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!--  右邊card 小圖 -->   */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖2.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      過年前最後一波！潮流名店開啟「季末折扣，最低 3
-                      折」，SACAI、STÜSSY 等品牌都幫你含在內了！
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                        onClick={(e) => {
-                          e.preventDefault()
-                          setStatus(1)
-                        }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+                ))
+              : ''}
           </div>
-          <div className="d-flex justify-content-between">
-            {/* <!-- 左邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex  justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖3.png"
-                    className="img-fluid news-small-cover-image"
-                    alt="{...}"
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!--  右邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex  justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖4.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="d-flex justify-content-between">
-            {/* <!-- 左邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖5.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!--  右邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex  justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖6.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="d-flex justify-content-between">
-            {/* <!-- 左邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖7.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!--  右邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖8.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="d-flex justify-content-between">
-            {/* <!-- 左邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex  justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖9.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!--  右邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖10.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="d-flex justify-content-between">
-            {/* <!-- 左邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖11.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!--  右邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖12.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="d-flex justify-content-between">
-            {/* <!-- 左邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖13.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* <!--  右邊card 小圖 --> */}
-            <div
-              className="card mb-3"
-              style={{ maxWidth: '540px', cursor: 'pointer' }}
-            >
-              <div className="row no-gutters">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                  <img
-                    src="images/新聞頁/文章列-小圖/小圖14.jpg"
-                    className="img-fluid news-small-cover-image"
-                    alt={'...'}
-                  ></img>
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body news-card-body-text">
-                    {/* <h5 className="card-title"></h5> */}
-                    <p
-                      className="news-article card-text font-weight-bold"
-                      style={{ color: '#353c1d' }}
-                    >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
-                    </p>
-                  </div>
-                  <div className="card-body news-card-body-link">
-                    <p className="card-text d-flex justify-content-end ">
-                      <a
-                        href="#!"
-                        style={{ color: '#353c1d', fontSize: '12px' }}
-                      >
-                        繼續閱讀 ...
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* 段落 */}
           <div className="page-select position-relative d-none d-lg-flex justify-content-center align-items-center my-5">
             <a
               href="#!"
