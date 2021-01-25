@@ -82,7 +82,7 @@ function Clothing() {
       >
         <div className="clothing-content p-5 position-relative">
           <a
-            href="/#"
+            href="#!"
             className="close-button position-absolute "
             onClick={(e) => {
               e.preventDefault()

@@ -49,7 +49,7 @@ function DetailContent(props) {
 
           // 設定資料到DetailRes狀態
           setDetailRes(data)
-          // console.log(data)
+          console.log(data)
         }
       } catch (error) {
         // 發生錯誤的處理情況
