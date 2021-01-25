@@ -110,8 +110,10 @@ app.post("/profile/:logintype", function (req, res) {
       return;
     } else {
       const sqlSelect =
-        "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
-        "FROM member WHERE account = ? and password = ? and type = 'N' ";
+        "SELECT a.id, CASE a.name WHEN '' THEN 'Hi' ELSE a.name END AS name,a.account,a.password,a.phone,a.email,a.address,a.birth,a.letter,a.type " +
+        ", SUM(b.price) AS total " +
+        "FROM member a INNER JOIN cool_order b ON a.id = b.member_no " +
+        "WHERE a.account = ? and a.password = ? and a.type = 'N' ";
       db.query(
         sqlSelect,
         [req.body.account, req.body.password],
@@ -213,10 +215,13 @@ app.post("/profile/:logintype", function (req, res) {
       });
     }
   } else if ("googlelogin" === req.params.logintype) {
-    console.log(req.body.name);
+    // console.log(req.body.name);
     const sqlSelect =
-      "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
-      "FROM member WHERE email = ? AND type = 'G' ";
+      "SELECT a.id, CASE a.name WHEN '' THEN 'Hi' ELSE a.name END AS name,a.account,a.password,a.phone,a.email,a.address,a.birth,a.letter,a.type " +
+      ", SUM(b.price) AS total " +
+      "FROM member a INNER JOIN cool_order b ON a.id = b.member_no " +
+      "WHERE a.email = ? AND a.type = 'G' ";
+
     db.query(sqlSelect, [req.body.email], (err, result, fields) => {
       if (err) res.send({ err: err });
 
@@ -269,6 +274,18 @@ app.get("/member/order/:status", function (req, res) {
     "SELECT * FROM cool_order WHERE status = ? and member_no = ? ";
   db.query(sqlSelect, [status, req.query.memberNo], (err, result, fields) => {
     res.send(result);
+  });
+});
+
+// 會員等級
+app.get("/member/member", function (req, res) {
+  const sqlSelect =
+    "SELECT COUNT(id) AS count, SUM(price) AS total " +
+    "FROM cool_order " +
+    "WHERE member_no = ? ";
+  db.query(sqlSelect, [req.query.memberNo], (err, result, fields) => {
+    res.send(result);
+    // console.log(result)
   });
 });
 

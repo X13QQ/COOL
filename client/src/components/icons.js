@@ -15,7 +15,7 @@ import no from '../images/No.svg'
 // MainMember
 import lv1 from '../images/lv1.svg'
 import lv2 from '../images/lv2.svg'
-// import lv3 from '../images/lv3.svg'
+import lv3 from '../images/lv3.svg'
 //Main Favorites
 import { ReactComponent as Search } from '../images/Search.svg'
 import { ReactComponent as Heart } from '../images/Heart.svg'
@@ -52,12 +52,27 @@ const LV1 = styled.img.attrs({
   width: 100px;
 `
 
+const Lv2 = styled.img.attrs({
+  src: `${lv2}`,
+})`
+  width: 80px;
+`
 const LV2 = styled.img.attrs({
   src: `${lv2}`,
 })`
   width: 120px;
 `
+const Lv3 = styled.img.attrs({
+  src: `${lv3}`,
+})`
+  width: 80px;
+`
 
+const LV3 = styled.img.attrs({
+  src: `${lv3}`,
+})`
+  width: 100px;
+`
 export {
   Logo,
   No,
@@ -72,7 +87,10 @@ export {
   ArrowUp,
   Lv1,
   LV1,
+  Lv2,
   LV2,
+  Lv3,
+  LV3,
   Search,
   Heart,
 }

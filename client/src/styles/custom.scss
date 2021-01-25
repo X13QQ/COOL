@@ -178,7 +178,7 @@
     }
   }
   .circle {
-    border: 3px solid #666;
+    border: 2px solid #666;
     width: 140px;
     height: 140px;
     border-radius: 50%;
@@ -193,7 +193,15 @@
       left: calc(50% - 60px);
       position: absolute;
     }
+    .active {
+      border: 2px solid orange;
+    }
   }
+
+  .circle.active {
+    border: 2px solid orange;
+  }
+
   .memberlv {
     border: 2px solid #666;
     border-radius: 10px 10px;
@@ -203,8 +211,8 @@
       border-bottom: 2px solid #666;
     }
   }
-  .active {
-    border: 3px solid orange;
+  .memberlv.active {
+    border: 2px solid orange;
   }
 
   // 蒐藏清單
