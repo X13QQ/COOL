@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
+import Magnifier from 'react-magnifier'
 function News() {
   const [detailToHeaderCart, setDetailToHeaderCart] = useState(
     !!localStorage.getItem('cartList')
@@ -399,11 +400,8 @@ function News() {
                       className="news-article card-text font-weight-bold"
                       style={{ color: '#353c1d' }}
                     >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。{' '}
+                      過年拿到錢就是要買鞋！IG
+                      網友新年最想入手球鞋排行榜，第一名果然還是「它」！。{' '}
                     </p>
                   </div>
                   <div className="card-body news-card-body-link">
@@ -443,11 +441,8 @@ function News() {
                       className="news-article card-text font-weight-bold"
                       style={{ color: '#353c1d' }}
                     >
-                      普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。普賽爾曾經提到過,所謂企業管理就是解
-                      決一連串關係密切的問題,必須有系統地
-                      予以解決,否則將會造成損失。
+                      過年前最後一波！潮流名店開啟「季末折扣，最低 3
+                      折」，SACAI、STÜSSY 等品牌都幫你含在內了！
                     </p>
                   </div>
                   <div className="card-body news-card-body-link">
