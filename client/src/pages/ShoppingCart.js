@@ -2,24 +2,34 @@ import React, { useState, useEffect } from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
 import HeaderOther from '../components/HeaderOther'
 import Footer from '../components/Footer'
-// import Session from 'react-session-api'
-import FakeRes from '../data/FakeRes'
+import ReactHtmlParser from 'react-html-parser'
+// import FakeRes from '../data/FakeRes'
 
 function ShoppingCart(props) {
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
-
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
+  console.log(JSON.parse(localStorage.getItem('cartList')))
+  let FakeRes = JSON.parse(localStorage.getItem('cartList'))
   const [status, setStatus] = useState(1)
   const [total, setTotal] = useState(0)
   const [shippingstatus, setshipping] = useState(1)
   const [buyerinfo, setbuyer] = useState([])
   var totalprice = 0
-  FakeRes.map((v, i) => (totalprice += v.price))
+  // FakeRes.map((v, i) => (totalprice += Number(v.price) * Number(v.amount)))
 
   //--------------------------------------------------------------------
 
   useEffect(() => {
+    FakeRes = JSON.parse(localStorage.getItem('cartList'))
+  }, [JSON.parse(localStorage.getItem('cartList'))])
+
+  useEffect(() => {
+    // console.log(FakeRes)
     const SignUp = (data) => {
-      // console.log(data)
+      console.log(data)
       const orderData = {
         method: 'POST',
         body: JSON.stringify(data),
@@ -33,10 +43,10 @@ function ShoppingCart(props) {
     }
     if (buyerinfo.length > 0) SignUp(buyerinfo[0])
   }, [buyerinfo])
-  // 訂單欄位：訂單標號(id)、收件人地址、收件人電話、訂單日期、付款方式、取貨門市、優惠券代碼、發票(捐或隨函附帶)
   // -----------------------------------------------------------------
 
   const OrderSummary = () => {
+    // totalprice = Number(document.getElementById('totalprice').innerHTML)
     return (
       <div className="col-3 order-summary border px-0">
         <h4
@@ -47,14 +57,14 @@ function ShoppingCart(props) {
         </h4>
         <div className="d-flex align-items-center justify-content-center mb-3">
           <p className="font-weight-bold mb-0">商品總計 NT$</p>
-          <span className="font-weight-bold">
+          <span id="totalprice" className="font-weight-bold">
             {status === 1 ? totalprice : total}
           </span>
         </div>
         <div className="d-flex align-items-center justify-content-center mb-3">
           <p className="font-weight-bold mb-0">運費總計 NT$ </p>
           <span className="font-weight-bold">
-            {status === 1 ? 0 : shippingstatus === 0 ? 60 : 150}
+            {status === 1 ? 0 : shippingstatus === 2 ? 60 : 150}
           </span>
         </div>
         <a href="#!" className="font-weight-bold">
@@ -63,10 +73,8 @@ function ShoppingCart(props) {
         <hr style={{ width: '85%', margin: '16px auto' }} />
         <div className="d-flex align-items-center justify-content-center mb-3">
           <p className="font-weight-bold mb-0">結帳總金額 NT$ </p>
-          <span className="font-weight-bold">
-            {status === 1
-              ? totalprice
-              : totalprice + (shippingstatus === 0 ? 60 : 150)}
+          <span id="totalprice2" className="font-weight-bold">
+            {status === 2 ? total + (shippingstatus === 2 ? 60 : 150) : ''}
           </span>
         </div>
         <button
@@ -83,25 +91,41 @@ function ShoppingCart(props) {
           type="button"
           className="btn btn-danger mx-2"
           onClick={() => {
+            console.log(totalprice)
             setStatus(status + 1)
-            setTotal(totalprice)
+            if (status === 1) setTotal(totalprice)
             if (status === 2) {
               let today = new Date()
               let ordernum = '' //訂單編號
-              let addresseeaddress = document.getElementById(
-                'recipient-address'
-              ).value //收件人地址
-              let addresseecellphone = document.getElementById(
-                'recipient-cellphone'
-              ).value //收件人電話
+              let name = function () {
+                if (shippingstatus === 1)
+                  return document.getElementById('recipient-name').value
+                else return document.getElementById('recipient-name2').value
+              }
+              let addresseeaddress = function () {
+                if (shippingstatus === 1)
+                  return document.getElementById('recipient-address').value
+                else return '超商取貨無收件地址:)'
+              } //收件人地址
+              let email = function () {
+                if (shippingstatus === 2)
+                  return document.getElementById('recipient-email').value
+              } //email
+              let addresseecellphone = function () {
+                if (shippingstatus === 1)
+                  return document.getElementById('recipient-cellphone').value
+                else
+                  return document.getElementById('recipient-cellphone2').value
+              } //收件人電話
               let orderdate =
                 today.getFullYear().toString() +
                 (today.getMonth() + 1).toString() +
                 today.getDate().toString() //訂單日期
-              let paymentmethod = shippingstatus //付款方式(包含運送方式) 宅配(VISA)=1 超取=0
+              let paymentmethod = shippingstatus //付款方式(包含運送方式) 宅配(VISA)=1 超取=2
               let pickup_store = '' //取貨門市名稱
               let coupon = '' //優惠券代碼
               let invoiceArr = document.getElementsByName('invoice') //隨商品附上發票 0=捐贈 1=隨附
+              let price = total + (shippingstatus === 2 ? 60 : 150)
               let invoiceValue
               for (let i = 0; i < invoiceArr.length; i++) {
                 if (invoiceArr[i].checked) {
@@ -113,13 +137,16 @@ function ShoppingCart(props) {
                 {
                   orderno: orderdate + 'xxxx',
                   member_no: '', //會員編號 從登入狀態抓
-                  addresseeaddress: addresseeaddress,
-                  addresseecellphone: addresseecellphone,
-                  pickup_store: pickup_store,
-                  invoice: invoiceValue,
-                  date: today,
-                  paymentmethod: paymentmethod,
-                  coupon: 'coupon',
+                  name: name(), //取件人
+                  addresseeaddress: addresseeaddress(), //宅配地址
+                  addresseecellphone: addresseecellphone(), //電話
+                  pickup_store: pickup_store, //超取店家
+                  invoice: invoiceValue, //發票
+                  date: today, //訂單日期
+                  paymentmethod: paymentmethod, //付款方式
+                  coupon: 'coupon', //優惠券
+                  price: price, //總價格
+                  data: FakeRes,
                 },
               ])
             }
@@ -132,8 +159,7 @@ function ShoppingCart(props) {
   }
   const brand = () => {
     return FakeRes.map((v, i) => {
-      // console.log(v)
-      // setTotal(total + v.price)
+      let subtotal = 0
       return (
         <div key={i} className=" brand border mx-0 mb-2">
           <div className="px-3 py-2">
@@ -163,20 +189,45 @@ function ShoppingCart(props) {
               {v.name}
             </div>
             <div className="col-3  d-flex justify-content-center align-items-center">
-              <select style={{ width: '50px' }}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+              <select
+                id="product_amount"
+                style={{ width: '50px' }}
+                onChange={(e) => {
+                  let amount = e.target.value
+                  console.log(amount)
+                  subtotal = Number(v.price) * amount
+                  console.log(subtotal) //單項商品小計
+                  document.getElementById(
+                    `subtotal${v.id}`
+                  ).innerHTML = subtotal
+                  totalprice += subtotal
+                  document.getElementById('totalprice').innerHTML = totalprice
+                  document.getElementById('totalprice2').innerHTML = totalprice
+                }}
+              >
+                {(function () {
+                  let str = ''
+                  for (let d = 0; d <= Number(v.amount); d++) {
+                    str += `<option value=${d}>${d}</option>`
+                  }
+                  return <>{ReactHtmlParser(str)}</>
+                })()}
+                {/* <span>數量：{v.amount}</span> */}
               </select>
             </div>
             <div className="col-3 d-flex justify-content-center align-items-center font-weight-bold">
-              NT$ <span>{v.price}</span>
+              NT${' '}
+              <span id={`subtotal${v.id}`}>
+                {/* {v.price * v.amount} */}
+                {subtotal}
+              </span>
             </div>
           </div>
         </div>
       )
     })
   }
+
   const checkout = () => {
     return (
       <>
@@ -277,7 +328,7 @@ function ShoppingCart(props) {
                     defaultActiveKey="VISA"
                     onSelect={(k) => {
                       // console.log(k)
-                      k === 'VISA' ? setshipping(1) : setshipping(0)
+                      k === 'VISA' ? setshipping(1) : setshipping(2)
                     }}
                   >
                     <Tab
@@ -462,24 +513,27 @@ function ShoppingCart(props) {
                           <div className="d-flex align-items-center px-3 py-3">
                             <div className="title-template"></div>
                             <label className="title-fontsize mb-0 ml-3">
-                              選擇門市
+                              取貨人資訊
                             </label>
                           </div>
                           <div className="py-2 px-5">
                             <input
                               type="text"
-                              placeholder="收件人姓名"
+                              id="recipient-name2"
+                              placeholder="取件人姓名"
                               className="store-info-textbox font-weight-bold mx-3 my-2  p-2"
                               style={{ width: '180px' }}
                             />
                             <input
                               type="text"
+                              id="recipient-cellphone2"
                               placeholder="行動電話"
                               className="store-info-textbox font-weight-bold mx-3  my-2 p-2"
                               style={{ width: '180px' }}
                             />
                             <input
                               type="text"
+                              id="recipient-email"
                               placeholder="電子郵件地址"
                               className="store-info-textbox font-weight-bold mx-3  my-2 p-2"
                               style={{ width: '180px' }}
@@ -623,7 +677,7 @@ function ShoppingCart(props) {
                   className="font-color-gray font-weight-bold"
                   style={{ fontSize: '14px' }}
                 >
-                  收件人姓名：
+                  收件人姓名：{buyerinfo[0].name}
                 </p>
                 <p
                   className="font-color-gray font-weight-bold"
@@ -654,7 +708,11 @@ function ShoppingCart(props) {
                   className="font-color-gray font-weight-bold"
                   style={{ fontSize: '14px' }}
                 >
-                  超商取貨付款：
+                  {shippingstatus === 1
+                    ? '送貨到府'
+                    : shippingstatus === 2
+                    ? '指定超商取貨'
+                    : ''}
                 </p>
                 <p
                   className="font-color-gray font-weight-bold"
@@ -746,7 +804,7 @@ function ShoppingCart(props) {
                   <div className="d-flex justify-content-between">
                     <p className="font-weight-bold">運費：</p>
                     <p className="font-weight-bold">
-                      NT$ {shippingstatus === 0 ? 60 : 150}
+                      NT$ {shippingstatus === 2 ? 60 : 150}
                     </p>
                   </div>
                   <div className="d-flex justify-content-between">
@@ -759,7 +817,7 @@ function ShoppingCart(props) {
                       className="final-price font-weight-bold"
                       style={{ fontSize: '20px' }}
                     >
-                      NT$ {total + (shippingstatus === 0 ? 60 : 150)}
+                      NT$ {total + (shippingstatus === 2 ? 60 : 150)}
                     </p>
                   </div>
                 </div>
@@ -772,7 +830,10 @@ function ShoppingCart(props) {
   }
   return (
     <>
-      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
+      <HeaderOther
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      />
       {status === 1
         ? checkout()
         : status === 2

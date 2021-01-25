@@ -24,22 +24,60 @@ const credentials = {
   },
 };
 var emailService = require("./lib/email.js")(credentials);
+// 
 // 正在測試的訂單寫入
+
 app.post("/shoppingcart", function (req, res){
-  const sqlInsert ="INSERT INTO cool_order (order_no, member_no, receiver's_address, receiver's_cellphone, pickup_store, invoice, date, amount, price, status, coupon) " 
-  + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '?') ";
-  console.log(req.body)
-  //   db.query(sqlInsert,[............................]],
-  //   (err, result, fields) => {
-  //     if (err) {
-  //       res.send({ err: err });
-  //     }
-  //     res.send(result);
-  //   }
-  // );
+  var getinsertId='';
+  const sqlInsert ="INSERT INTO cool_order (order_no, member_no, name, receiver_address, receiver_cellphone, pickup_store, invoice, date, price, status, coupon) " 
+  + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '0', ?) ";
+  const sqlInsert2 ="INSERT INTO cool_order_detailed ( order_id,product_id,name,amount,size,brand,color,price ) VALUES ( ?,?,?,?,?,?,?,? ) " 
+
+  console.log(req.body.data)
+    db.query(sqlInsert,
+      [
+        req.body.orderno, 
+        '', 
+        req.body.name, 
+        req.body.addresseeaddress, 
+        req.body.addresseecellphone, 
+        req.body.pickup_store, 
+        req.body.invoice, 
+        req.body.date, 
+        req.body.price, 
+        req.body.coupon
+      ],
+    (err, result, fields) => {
+      if (err) {
+        res.send({ err: err });
+      }
+      res.send(result);
+      getinsertId = result.insertId
+      for (let i =0; i<req.body.data.length; i++){
+        db.query(sqlInsert2,[
+          getinsertId,
+          req.body.data[i].id,
+          req.body.data[i].name,
+          req.body.data[i].amount,
+          req.body.data[i].size,
+          req.body.data[i].brand,
+          req.body.data[i].color,
+          req.body.data[i].price
+        ],
+          (err, result, fields) => {
+            if (err) {
+              res.send({ err: err });
+            }
+          }
+        );
+      }
+    }
+  );
+  // -------------
 })
+
 // 商品首頁 get
-app.get("/shoppningcart", function (req, res) {
+app.get("/product", function (req, res) {
   db.query("SELECT * FROM product", "", (err, result) => {
     if (err) {
       console.log(err);
