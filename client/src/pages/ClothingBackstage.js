@@ -104,14 +104,14 @@ function ClothingBackstage() {
               />
             </div>
             <div className="col-6">
-              {clothingData.map((val, key) => {
-                return (
-                  <Accordion defaultActiveKey="0">
+              <Accordion defaultActiveKey="0">
+                {clothingData.map((val, key) => {
+                  return (
                     <Card className="pb-3">
                       {/* 帽子標籤 ↓ */}
                       <Accordion.Toggle
                         as={Card.Header}
-                        eventKey="0"
+                        eventKey={val.id}
                         className="row justify-content-between"
                       >
                         <a
@@ -161,7 +161,7 @@ function ClothingBackstage() {
                       </Accordion.Toggle>
 
                       <Accordion.Collapse
-                        eventKey="0"
+                        eventKey={val.id}
                         id={`sort${val.id}`}
                         // className={
                         //   'clothing-accordion-ul list-unstyled mb-0 ' +
@@ -208,9 +208,9 @@ function ClothingBackstage() {
                         </li>
                       </Accordion.Collapse>
                     </Card>
-                  </Accordion>
-                )
-              })}
+                  )
+                })}
+              </Accordion>
             </div>
           </div>
           <div
