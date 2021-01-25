@@ -20,30 +20,28 @@ function ClothingBackstage() {
 
   const [choose, setChoose] = useState(0)
 
-
-  const [image, setImage] = useState(defaultSrc);
-  const [cropData, setCropData] = useState("#");
+  const [image, setImage] = useState(defaultSrc)
+  const [cropData, setCropData] = useState('#')
   const [cropper, setCropper] = useState<any>();
-  const onChange = (e:any) => {
-    e.preventDefault();
-    let files;
-    if (e.dataTransfer) {
-      files = e.dataTransfer.files;
-    } else if (e.target) {
-      files = e.target.files;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImage(reader.result as any);
-    };
-    reader.readAsDataURL(files[0]);
+  // const onChange = (e:any) => {
+  //   e.preventDefault();
+  //   let files;
+  //   if (e.dataTransfer) {
+  //     files = e.dataTransfer.files;
+  //   } else if (e.target) {
+  //     files = e.target.files;
+  //   }
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     setImage(reader.result as any);
+  //   };
+  //   reader.readAsDataURL(files[0]);
 
   const getCropData = () => {
-    if (typeof cropper !== "undefined") {
-      setCropData(cropper.getCroppedCanvas().toDataURL());
+    if (typeof cropper !== 'undefined') {
+      setCropData(cropper.getCroppedCanvas().toDataURL())
     }
-  }; 
-
+  }
 
   useEffect(() => {
     // async await
@@ -110,13 +108,13 @@ function ClothingBackstage() {
           <h3 className="text-center font-weight-bold mb-4">產品詳情</h3>
           <div className="row mb-4">
             <div className="col-6">
-            <div className="row">
-              <input type="file" onChange={onChange} />
-              <button style={{ float: "right" }} onClick={getCropData}>
-                確定
-              </button>
-            </div>
-             
+              <div className="row">
+                <input type="file" onChange={onChange} />
+                <button style={{ float: 'right' }} onClick={getCropData}>
+                  確定
+                </button>
+              </div>
+
               <Cropper
                 className="btn"
                 type="button"
