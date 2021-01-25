@@ -10,6 +10,7 @@ import {
   Accordion,
   Card,
   Form,
+  ButtonGroup,
 } from 'react-bootstrap'
 
 // clothing
@@ -19,7 +20,9 @@ function Clothing() {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
-  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
 
   const [showParent, setShowParent] = useState(false)
 
@@ -111,36 +114,36 @@ function Clothing() {
               />
             </div>
             <div className="col-6">
-              {clothingData.map((val, key) => {
-                return (
-                  <Accordion defaultActiveKey="0" key={key}>
-                    <Card className="pb-3">
+              <Accordion>
+                {clothingData.map((val, key) => {
+                  return (
+                    <Card className="pb-3" key={key}>
                       {/* 帽子標籤 ↓ */}
                       <Accordion.Toggle
                         // href="#!"
-                        className="clothing-accordion-a d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
+                        className="clothing-accordion-a d-flex mb-3 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
                         style={{ color: '#353c1d', fontSize: '20px' }}
                         as={Card.Header}
-                        eventKey="0"
-                      // onClick={(e) => {
-                      //   e.preventDefault()
-                      //   // document.getElementById('top')
-                      //   // setAccordionActived(!accordionActived)
-                      // }}
+                        eventKey={val.id}
+                        // onClick={(e) => {
+                        //   e.preventDefault()
+                        //   // document.getElementById('top')
+                        //   // setAccordionActived(!accordionActived)
+                        // }}
                       >
                         {val.category === '1'
                           ? '上衣'
                           : val.category === '2'
-                            ? '帽子'
-                            : val.category === '3'
-                              ? '外套'
-                              : val.category === '4'
-                                ? '褲子'
-                                : val.category === '5'
-                                  ? '鞋款'
-                                  : val.category === '6'
-                                    ? '配件'
-                                    : ''}
+                          ? '帽子'
+                          : val.category === '3'
+                          ? '外套'
+                          : val.category === '4'
+                          ? '褲子'
+                          : val.category === '5'
+                          ? '鞋款'
+                          : val.category === '6'
+                          ? '配件'
+                          : ''}
                         {/* 帽子右邊的箭頭 ↓ */}
                         <img
                           src="images/素材/icon/arrow_G.svg"
@@ -154,15 +157,16 @@ function Clothing() {
                         />
                       </Accordion.Toggle>
                       <Accordion.Collapse
-                        eventKey="0"
+                        eventKey={val.id}
                         id={`sort${val.id}`}
-                      // className={
-                      //   'clothing-accordion-ul list-unstyled mb-0 ' +
-                      //   (accordionActived ? 'accordion-actived' : '')
-                      // }
+                        // className={
+                        //   'clothing-accordion-ul list-unstyled mb-0 ' +
+                        //   (accordionActived ? 'accordion-actived' : '')
+                        // }
                       >
                         <Card.Body className="px-5">
-                          <p
+                          <Link
+                            to={`/detail/${val.brand}/${val.id}`}
                             style={{
                               fontSize: '12px',
                               textOverflow: 'ellipsis',
@@ -171,13 +175,18 @@ function Clothing() {
                               display: 'block',
                             }}
                           >
-                            YEEZY BOOST 350 V2 - CBLACK/ RED
+                            {`${val.name}`}
+                          </Link>
+                          <p style={{ fontSize: '12px' }}>
+                            NT${`${val.price}`}
                           </p>
-                          <p style={{ fontSize: '12px' }}>NT$6,800</p>
-                          <div className="row">
+                          {/* <div className="row dropdownbtn">
                             <DropdownButton
-                              id="dropdown-basic-button"
+                              id="dropdown-basic-button-down "
+                              drop={'down'}
                               className="mx-2 my-2"
+                              as={ButtonGroup}
+                              style={{ fontSize: '12px' }}
                               title="顏色"
                             >
                               <Dropdown.Item href="#/action-1">
@@ -195,34 +204,34 @@ function Clothing() {
                             </DropdownButton>
 
                             <DropdownButton
-                              id="dropdown-basic-button"
+                              id="dropdown-basic-button-down "
+                              drop={'down'}
                               className="mx-2 my-2"
+                              as={ButtonGroup}
+                              style={{ fontSize: '12px' }}
                               title="尺寸"
                             >
-                              <Dropdown.Item href="#/action-1">S</Dropdown.Item>
-                              <Dropdown.Item href="#/action-2">M</Dropdown.Item>
-                              <Dropdown.Item href="#/action-3">L</Dropdown.Item>
-                              <Dropdown.Item href="#/action-4">
+                              <Dropdown.Item href="#/action-1">
                                 XL
                               </Dropdown.Item>
+                              <Dropdown.Item href="#/action-2">L</Dropdown.Item>
+                              <Dropdown.Item href="#/action-3">M</Dropdown.Item>
+                              <Dropdown.Item href="#/action-4">S</Dropdown.Item>
                             </DropdownButton>
 
-                            <Form.Group controlId="amount" className="row my-0">
-                              <Form.Label
-                                style={{
-                                  fontSize: '16px',
-                                  padding: '0 0 0 28px',
-                                }}
-                                className="mx-2 my-2"
-                              >
-                                數量
-                              </Form.Label>
-                              <Form.Control
-                                type="number"
-                                // placeholder="amount"
-                                className="col-4 mx-2 col-4"
-                              />
-                            </Form.Group>
+                            <DropdownButton
+                              id="dropdown-basic-button-down "
+                              drop={'down'}
+                              className="mx-2 my-2"
+                              as={ButtonGroup}
+                              style={{ fontSize: '12px' }}
+                              title="數量"
+                            >
+                              <Dropdown.Item href="#/action-4">4</Dropdown.Item>
+                              <Dropdown.Item href="#/action-3">3</Dropdown.Item>
+                              <Dropdown.Item href="#/action-2">2</Dropdown.Item>
+                              <Dropdown.Item href="#/action-1">1</Dropdown.Item>
+                            </DropdownButton>
                           </div>
 
                           <div className="d-flex justify-content-end mb-3">
@@ -233,13 +242,13 @@ function Clothing() {
                             >
                               加入購物車
                             </a>
-                          </div>
+                          </div> */}
                         </Card.Body>
                       </Accordion.Collapse>
                     </Card>
-                  </Accordion>
-                )
-              })}
+                  )
+                })}
+              </Accordion>
             </div>
           </div>
           <div
@@ -322,7 +331,7 @@ function Clothing() {
               style={{
                 backgroundImage: `url('${
                   clothingImages.length > 0 ? clothingImages[4].src : ''
-                  }')`,
+                }')`,
               }}
               onClick={() => {
                 setChoose(4)
@@ -339,7 +348,7 @@ function Clothing() {
                   width: '100%',
                   backgroundImage: `url('${
                     clothingImages.length > 0 ? clothingImages[1].src : ''
-                    }')`,
+                  }')`,
                 }}
                 onClick={() => {
                   setChoose(1)
@@ -354,7 +363,7 @@ function Clothing() {
                   width: '100%',
                   backgroundImage: `url('${
                     clothingImages.length > 0 ? clothingImages[3].src : ''
-                    }')`,
+                  }')`,
                 }}
                 onClick={() => {
                   setChoose(3)
@@ -371,7 +380,7 @@ function Clothing() {
                   width: '100%',
                   backgroundImage: `url('${
                     clothingImages.length > 0 ? clothingImages[0].src : ''
-                    }')`,
+                  }')`,
                 }}
                 onClick={() => {
                   setChoose(0)
@@ -386,7 +395,7 @@ function Clothing() {
                   width: '100%',
                   backgroundImage: `url('${
                     clothingImages.length > 0 ? clothingImages[2].src : ''
-                    }')`,
+                  }')`,
                 }}
                 onClick={() => {
                   setChoose(2)
@@ -418,7 +427,7 @@ function Clothing() {
                 width: '100%',
                 backgroundImage: `url('${
                   clothingImages.length > 0 ? clothingImages[5].src : ''
-                  }')`,
+                }')`,
               }}
               onClick={() => {
                 setChoose(5)
@@ -435,7 +444,7 @@ function Clothing() {
                     width: '100%',
                     backgroundImage: `url('${
                       clothingImages.length > 0 ? clothingImages[6].src : ''
-                      }')`,
+                    }')`,
                   }}
                   onClick={() => {
                     setChoose(6)
@@ -450,7 +459,7 @@ function Clothing() {
                     width: '100%',
                     backgroundImage: `url('${
                       clothingImages.length > 0 ? clothingImages[8].src : ''
-                      }')`,
+                    }')`,
                   }}
                   onClick={() => {
                     setChoose(8)
@@ -467,7 +476,7 @@ function Clothing() {
                     width: '100%',
                     backgroundImage: `url('${
                       clothingImages.length > 0 ? clothingImages[7].src : ''
-                      }')`,
+                    }')`,
                   }}
                   onClick={() => {
                     setChoose(7)
@@ -482,7 +491,7 @@ function Clothing() {
                     width: '100%',
                     backgroundImage: `url('${
                       clothingImages.length > 0 ? clothingImages[9].src : ''
-                      }')`,
+                    }')`,
                   }}
                   onClick={() => {
                     setChoose(9)
@@ -500,7 +509,7 @@ function Clothing() {
                     margin: '10px auto',
                     backgroundImage: `url('${
                       clothingImages.length > 0 ? clothingImages[10].src : ''
-                      }')`,
+                    }')`,
                   }}
                   onClick={() => {
                     setChoose(10)
