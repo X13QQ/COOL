@@ -375,7 +375,9 @@ function DetailContent(props) {
                       href="#!"
                       className="review-btn d-inline-block text-decoration-none py-1 px-3 mx-2 rounded"
                       style={{ fontSize: '14px' }}
-                      onClick={(e) => { e.preventDefault() }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                      }}
                     >
                       清除
                     </a>
@@ -383,7 +385,9 @@ function DetailContent(props) {
                       href="#!"
                       className="review-btn d-inline-block text-decoration-none py-1 px-3 ml-2 rounded"
                       style={{ fontSize: '14px' }}
-                      onClick={(e) => { e.preventDefault() }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                      }}
                     >
                       送出
                     </a>
@@ -778,69 +782,95 @@ function DetailContent(props) {
                 <p className="mb-2 font-weight-bold">COLOR</p>
                 <div className="color-choose mb-2">
                   <a
-                    className={"d-inline-block mr-3 color-choose-a color-choose-actived "}
-                    style={{ backgroundColor: 'red', width: '25px', height: '25px', border: '1px solid rgba(0,0,0,0.3)' }}
+                    className={
+                      'd-inline-block mr-3 color-choose-a color-choose-actived '
+                    }
+                    style={{
+                      backgroundColor: 'red',
+                      width: '25px',
+                      height: '25px',
+                      border: '1px solid rgba(0,0,0,0.3)',
+                    }}
                     href="#!"
                     onClick={(e) => {
                       e.preventDefault()
                     }}
-                  >
-                  </a>
+                  ></a>
                   <a
-                    className={"d-inline-block mr-3 color-choose-a "}
-                    style={{ backgroundColor: 'white', width: '25px', height: '25px', border: '1px solid rgba(0,0,0,0.3)' }}
+                    className={'d-inline-block mr-3 color-choose-a '}
+                    style={{
+                      backgroundColor: 'white',
+                      width: '25px',
+                      height: '25px',
+                      border: '1px solid rgba(0,0,0,0.3)',
+                    }}
                     href="#!"
                     onClick={(e) => {
                       e.preventDefault()
                     }}
-                  >
-                  </a>
+                  ></a>
                   <a
-                    className={"d-inline-block mr-3 color-choose-a "}
-                    style={{ backgroundColor: 'black', width: '25px', height: '25px', border: '1px solid rgba(0,0,0,0.3)' }}
+                    className={'d-inline-block mr-3 color-choose-a '}
+                    style={{
+                      backgroundColor: 'black',
+                      width: '25px',
+                      height: '25px',
+                      border: '1px solid rgba(0,0,0,0.3)',
+                    }}
                     href="#!"
                     onClick={(e) => {
                       e.preventDefault()
                     }}
-                  >
-                  </a>
+                  ></a>
                   <a
-                    className={"d-inline-block mr-3 color-choose-a "}
-                    style={{ backgroundColor: 'pink', width: '25px', height: '25px', border: '1px solid rgba(0,0,0,0.3)' }}
+                    className={'d-inline-block mr-3 color-choose-a '}
+                    style={{
+                      backgroundColor: 'pink',
+                      width: '25px',
+                      height: '25px',
+                      border: '1px solid rgba(0,0,0,0.3)',
+                    }}
                     href="#!"
                     onClick={(e) => {
                       e.preventDefault()
                     }}
-                  >
-                  </a>
+                  ></a>
                 </div>
                 <p className="mb-2 font-weight-bold">SIZE</p>
                 <div className="size-choose mb-2">
                   <a
                     href="#!"
                     className="size-choose-a d-inline-block size-choose-actived text-center text-decoration-none mr-3"
-                    onClick={(e) => { e.preventDefault() }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
                   >
                     S
                   </a>
                   <a
                     href="#!"
                     className="size-choose-a d-inline-block text-center text-decoration-none mr-3"
-                    onClick={(e) => { e.preventDefault() }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
                   >
                     M
                   </a>
                   <a
                     href="#!"
                     className="size-choose-a d-inline-block text-center text-decoration-none mr-3"
-                    onClick={(e) => { e.preventDefault() }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
                   >
                     L
                   </a>
                   <a
                     href="#!"
                     className="size-choose-a d-inline-block text-center text-decoration-none mr-3"
-                    onClick={(e) => { e.preventDefault() }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
                   >
                     XL
                   </a>
@@ -852,33 +882,61 @@ function DetailContent(props) {
                       href="#!"
                       className="text-decoration-none d-inline-block font-weight-bold mr-3"
                       style={{ fontSize: '28px', color: '#353c1d' }}
-                      onClick={(e)=>{e.preventDefault()}}
+                      onClick={(e) => {
+                        e.preventDefault()
+                      }}
                     >
                       +
                     </a>
-                    <input style={{ fontWeight: 'bold', border: 'none', color: 'red', backgroundColor: 'white' }} min='1' defaultValue="1" className="text-center" disabled type="number" class="text-center"></input>
+                    <input
+                      style={{
+                        fontWeight: 'bold',
+                        border: 'none',
+                        color: 'red',
+                        backgroundColor: 'white',
+                      }}
+                      min="1"
+                      defaultValue="1"
+                      className="text-center"
+                      disabled
+                      type="number"
+                      class="text-center"
+                    ></input>
                     <a
                       href="#!"
                       className="text-decoration-none d-inline-block font-weight-bold ml-3"
                       style={{ fontSize: '28px', color: '#353c1d' }}
-                      onClick={(e)=>{e.preventDefault()}}
-
+                      onClick={(e) => {
+                        e.preventDefault()
+                      }}
                     >
                       -
-                  </a>
+                    </a>
                   </div>
                   <div className="mb-2">
-                    <p style={{ fontSize: '12px', fontStyle: 'italic', color: 'lightgray', fontWeight: 'bold' }}>剩餘 <span id="max-amount-display" style={{ color: 'red' }}>
-                      3
-                    </span> 個</p>
+                    <p
+                      style={{
+                        fontSize: '12px',
+                        fontStyle: 'italic',
+                        color: 'lightgray',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      剩餘{' '}
+                      <span id="max-amount-display" style={{ color: 'red' }}>
+                        3
+                      </span>{' '}
+                      個
+                    </p>
                   </div>
-
                 </div>
                 <div className="add-to-cart-btn mb-4">
                   <a
                     href="#!"
                     class="d-inline-block py-2 px-5 text-decoration-none"
-                    onClick={(e) => { e.preventDefault() }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
                   >
                     加入購物車
                   </a>
@@ -1017,7 +1075,6 @@ function DetailContent(props) {
                 <div>
                   <p className="mb-2 font-weight-bold">COLOR</p>
                   <div className="color-choose mb-2">
-<<<<<<< HEAD
                     {DetailRes
                       ? DetailRes.map((v, i) => {
                           return (
@@ -1036,6 +1093,10 @@ function DetailContent(props) {
                               onClick={(e) => {
                                 e.preventDefault()
                                 setColorState(i)
+                                setSizeState(0)
+                                document.getElementById(
+                                  'detail-amount-input'
+                                ).value = 1
                               }}
                             ></a>
                           )
@@ -1046,71 +1107,31 @@ function DetailContent(props) {
                   <div className="size-choose mb-2">
                     {DetailRes
                       ? StockRes
-                        ? StockRes.map((v, i) => {
-                            if (
-                              StockRes[i].color === DetailRes[colorState].color
-                            ) {
-                              return (
-                                <a
-                                  href="#!"
-                                  style={{ textTransform: 'uppercase' }}
-                                  className={
-                                    'size-choose-a d-inline-block text-center text-decoration-none mr-3 ' +
-                                    (sizeState === i
-                                      ? 'size-choose-actived'
-                                      : '')
-                                  }
-                                  onClick={(e) => {
-                                    e.preventDefault()
-                                    setSizeState(i)
-                                  }}
-                                >
-                                  {v.size}
-                                </a>
-                              )
-                            }
+                        ? StockRes.filter((item) => {
+                            return item.color === DetailRes[colorState].color
+                          }).map((v, i) => {
+                            return (
+                              <a
+                                href="#!"
+                                style={{ textTransform: 'uppercase' }}
+                                className={
+                                  'size-choose-a d-inline-block text-center text-decoration-none mr-3 ' +
+                                  (sizeState === i ? 'size-choose-actived' : '')
+                                }
+                                onClick={(e) => {
+                                  e.preventDefault()
+                                  setSizeState(i)
+                                  document.getElementById(
+                                    'detail-amount-input'
+                                  ).value = 1
+                                }}
+                              >
+                                {v.size}
+                              </a>
+                            )
                           })
                         : ''
                       : ''}
-=======
-                    {DetailRes ? DetailRes.map((v, i) => {
-                      return (
-                        <a
-                          className={"d-inline-block mr-3 color-choose-a " + (colorState === i ? 'color-choose-actived' : '')}
-                          style={{ backgroundColor: (v.color), width: '25px', height: '25px', border: '1px solid rgba(0,0,0,0.3)' }}
-                          href="#!"
-                          onClick={(e) => {
-                            e.preventDefault()
-                            setColorState(i)
-                            setSizeState(0)
-                            document.getElementById('detail-amount-input').value = 1;
-                          }}
-                        >
-                        </a>)
-                    }) : 'wait'}
-                  </div>
-                  <p className="mb-2 font-weight-bold">SIZE</p>
-                  <div className="size-choose mb-2">
-                    {DetailRes ? (StockRes ? StockRes.filter((item) => { return item.color === DetailRes[colorState].color }).map((v, i) => {
-                      return (
-                        <a
-                          href="#!"
-                          style={{ textTransform: 'uppercase' }}
-                          className={"size-choose-a d-inline-block text-center text-decoration-none mr-3 " + (sizeState === i ? 'size-choose-actived' : '')}
-                          onClick={(e) => {
-                            e.preventDefault()
-                            setSizeState(i)
-                            document.getElementById('detail-amount-input').value = 1;
-
-                          }}
-                        >
-                          {v.size}
-                        </a>
-                      )
-                    }
-                    ) : '') : ''}
-
->>>>>>> fc273a1c4b4a0fd55fc64f57f45a64c40e3f4965
                   </div>
                   <p className="mb-2 font-weight-bold">AMOUNT</p>
                   <div className="amount-choose ">
@@ -1138,7 +1159,6 @@ function DetailContent(props) {
                         }}
                       >
                         +
-<<<<<<< HEAD
                       </a>
                       <input
                         id="detail-amount-input"
@@ -1153,11 +1173,6 @@ function DetailContent(props) {
                           color: 'red',
                           backgroundColor: 'white',
                         }}
-=======
-                    </a>
-                      <input id="detail-amount-input" disabled type="number" min='1' defaultValue="1" className="text-center"
-                        style={{ fontWeight: 'bold', border: 'none', color: 'red', backgroundColor: 'white' }}
->>>>>>> fc273a1c4b4a0fd55fc64f57f45a64c40e3f4965
                         onChange={() => {
                           if (
                             document.getElementById('detail-amount-input')
@@ -1191,7 +1206,6 @@ function DetailContent(props) {
                       </a>
                     </div>
                     <div className="mb-2">
-<<<<<<< HEAD
                       <p
                         style={{
                           fontSize: '12px',
@@ -1212,14 +1226,6 @@ function DetailContent(props) {
                         </span>{' '}
                         個
                       </p>
-=======
-                      <p style={{ fontSize: '12px', fontStyle: 'italic', color: 'lightgray', fontWeight: 'bold' }}>剩餘 <span id="max-amount-display" style={{ color: 'red' }}>
-                        {DetailRes ? (StockRes ? StockRes.filter((e) => {
-                          return e.color === DetailRes[colorState].color
-                        })[sizeState].stock
-                          : '') : ''}
-                      </span> 個</p>
->>>>>>> fc273a1c4b4a0fd55fc64f57f45a64c40e3f4965
                     </div>
                   </div>
                   <div className="add-to-cart-btn mb-4">
@@ -1227,36 +1233,56 @@ function DetailContent(props) {
                       href="#!"
                       className="d-inline-block py-2 px-5 text-decoration-none"
                       onClick={(e) => {
-                        e.preventDefault();
-                        let cartProductPrice = DetailRes ? DetailRes[0].price : ''
-                        let cartProductColor = document.querySelector('.color-choose-actived').style.backgroundColor;
-                        let cartProductSize = document.querySelector('.size-choose-actived').textContent;
-                        let cartProductAmount = document.getElementById('detail-amount-input').value
-                        let cartProductData = [{
-                          id: ProductId,
-                          name: DetailRes ? DetailRes[0].name : '',
-                          brand: ProductBrand,
-                          price: cartProductPrice,
-                          color: cartProductColor,
-                          size: cartProductSize,
-                          amount: cartProductAmount,
-                          image: DetailRes ? DetailRes[0].image : ''
-                        }]
-                        let cartOriginalData = !!JSON.parse(localStorage.getItem('cartList')) ? JSON.parse(localStorage.getItem('cartList')) : cartProductData
-                        let cartNextData = !!JSON.parse(localStorage.getItem('cartList')) ? cartOriginalData.concat({
-                          id: ProductId,
-                          name: DetailRes ? DetailRes[0].name : '',
-                          brand: ProductBrand,
-                          price: cartProductPrice,
-                          color: cartProductColor,
-                          size: cartProductSize,
-                          amount: cartProductAmount,
-                          image: DetailRes ? DetailRes[0].image : ''
-                        }) : cartProductData
+                        e.preventDefault()
+                        let cartProductPrice = DetailRes
+                          ? DetailRes[0].price
+                          : ''
+                        let cartProductColor = document.querySelector(
+                          '.color-choose-actived'
+                        ).style.backgroundColor
+                        let cartProductSize = document.querySelector(
+                          '.size-choose-actived'
+                        ).textContent
+                        let cartProductAmount = document.getElementById(
+                          'detail-amount-input'
+                        ).value
+                        let cartProductData = [
+                          {
+                            id: ProductId,
+                            name: DetailRes ? DetailRes[0].name : '',
+                            brand: ProductBrand,
+                            price: cartProductPrice,
+                            color: cartProductColor,
+                            size: cartProductSize,
+                            amount: cartProductAmount,
+                            image: DetailRes ? DetailRes[0].image : '',
+                          },
+                        ]
+                        let cartOriginalData = !!JSON.parse(
+                          localStorage.getItem('cartList')
+                        )
+                          ? JSON.parse(localStorage.getItem('cartList'))
+                          : cartProductData
+                        let cartNextData = !!JSON.parse(
+                          localStorage.getItem('cartList')
+                        )
+                          ? cartOriginalData.concat({
+                              id: ProductId,
+                              name: DetailRes ? DetailRes[0].name : '',
+                              brand: ProductBrand,
+                              price: cartProductPrice,
+                              color: cartProductColor,
+                              size: cartProductSize,
+                              amount: cartProductAmount,
+                              image: DetailRes ? DetailRes[0].image : '',
+                            })
+                          : cartProductData
                         let cartList = JSON.stringify(cartNextData)
                         localStorage.setItem('cartList', cartList)
                         // 測試
-                        props.setDetailToHeaderCart(Number(props.detailToHeaderCart) + 1)
+                        props.setDetailToHeaderCart(
+                          Number(props.detailToHeaderCart) + 1
+                        )
                       }}
                     >
                       加入購物車
