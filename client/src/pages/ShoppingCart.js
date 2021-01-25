@@ -6,7 +6,12 @@ import Footer from '../components/Footer'
 import FakeRes from '../data/FakeRes'
 
 function ShoppingCart(props) {
-  const [detailToHeaderCart, setDetailToHeaderCart] = useState(!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : 0)
+  const [detailToHeaderCart, setDetailToHeaderCart] = useState(
+    !!localStorage.getItem('cartList')
+      ? JSON.parse(localStorage.getItem('cartList')).length
+      : 0
+  )
+  const [showParent, setShowParent] = useState(false)
 
   const [status, setStatus] = useState(1)
   const [total, setTotal] = useState(0)
@@ -758,7 +763,12 @@ function ShoppingCart(props) {
   }
   return (
     <>
-      <HeaderOther detailToHeaderCart={detailToHeaderCart} setDetailToHeaderCart={setDetailToHeaderCart}/>
+      <HeaderOther
+        showParent={showParent}
+        setShowParent={setShowParent}
+        detailToHeaderCart={detailToHeaderCart}
+        setDetailToHeaderCart={setDetailToHeaderCart}
+      />
       {status === 1
         ? checkout()
         : status === 2

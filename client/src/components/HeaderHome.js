@@ -1,25 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
+/* global gapi */
 function HeaderHome(props) {
-  const [show, setShow] = useState(false)
-  const [modal, setModal] = useState(1)
-  
-  const [shoppingCartStorage, setShoppingCartStorage] = useState(props.detailToHeaderCart)
+  // const [show, setShow] = useState(false)
+  // const [modal, setModal] = useState(1)
+
+  const [shoppingCartStorage, setShoppingCartStorage] = useState(
+    props.detailToHeaderCart
+  )
   const cartMap = () => {
-    let cartTotalValue = Number(0);
-    return shoppingCartStorage ?
-      (
-        <>
-          <div className="cart-icon-wrap position-absolute pt-3">
-            <div
-              className="cart-icon-ul-wrap position-relative rounded"
-              style={{ padding: '8px 15px' }}
-            >
-              <ul className="cart-icon-ul list-unstyled">
-                {JSON.parse(localStorage.getItem('cartList')).map((v, i) => {
-                  cartTotalValue += Number(v.price) * Number(v.amount)
-                  return (<>
+    let cartTotalValue = Number(0)
+    return shoppingCartStorage ? (
+      <>
+        <div className="cart-icon-wrap position-absolute pt-3">
+          <div
+            className="cart-icon-ul-wrap position-relative rounded"
+            style={{ padding: '8px 15px' }}
+          >
+            <ul className="cart-icon-ul list-unstyled">
+              {JSON.parse(localStorage.getItem('cartList')).map((v, i) => {
+                cartTotalValue += Number(v.price) * Number(v.amount)
+                return (
+                  <>
                     <li
                       style={{ borderBottom: '1px solid gray' }}
                       className="my-2"
@@ -61,65 +64,229 @@ function HeaderHome(props) {
                           </div>
                         </div>
                         <div className="col-2 d-flex align-items-center">
-                          <a href="#!" style={{ color: 'red' }} className="text-decoration-none font-weight-bold" onClick={(e) => {
-                            e.preventDefault()
-                            let removeData = JSON.parse(localStorage.getItem('cartList'))
-                            let removeList = [].concat(removeData.slice(0, i)).concat(removeData.slice(i + 1))
-                            console.log(removeList)
-                            localStorage.setItem('cartList', JSON.stringify(removeList))
-                            props.setDetailToHeaderCart(props.detailToHeaderCart - 1)
-                          }}>
+                          <a
+                            href="#!"
+                            style={{ color: 'red' }}
+                            className="text-decoration-none font-weight-bold"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              let removeData = JSON.parse(
+                                localStorage.getItem('cartList')
+                              )
+                              let removeList = []
+                                .concat(removeData.slice(0, i))
+                                .concat(removeData.slice(i + 1))
+                              console.log(removeList)
+                              localStorage.setItem(
+                                'cartList',
+                                JSON.stringify(removeList)
+                              )
+                              props.setDetailToHeaderCart(
+                                props.detailToHeaderCart - 1
+                              )
+                            }}
+                          >
                             x
                           </a>
                         </div>
                       </div>
                     </li>
                   </>
-                  )
-                })}
-              </ul>
-              <div className="total-price-wrap">
-                <p className="d-flex justify-content-between font-weight-bold">
-                  <span>結帳金額：</span>
-                  <span>NT${Number(cartTotalValue)}</span>
-                </p>
-              </div>
-              <div className="checkout-btn-wrap d-flex flex-column">
-                <Link
-                  to="/shoppingcart"
-                  className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                >
-                  查看購物車
-                </Link>
-                <Link
-                  to="/shoppingcart"
-                  className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
-                >
-                  前往結帳
-        </Link>
-              </div>
+                )
+              })}
+            </ul>
+            <div className="total-price-wrap">
+              <p className="d-flex justify-content-between font-weight-bold">
+                <span>結帳金額：</span>
+                <span>NT${Number(cartTotalValue)}</span>
+              </p>
+            </div>
+            <div className="checkout-btn-wrap d-flex flex-column">
+              <Link
+                to="/shoppingcart"
+                className="see-cart-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+              >
+                查看購物車
+              </Link>
+              <Link
+                to="/shoppingcart"
+                className="go-check-btn my-1 py-1 d-block font-weight-bold rounded text-decoration-none"
+              >
+                前往結帳
+              </Link>
             </div>
           </div>
-        </>
-
-      )
-      : ''
+        </div>
+      </>
+    ) : (
+      ''
+    )
   }
   useEffect(() => {
     setShoppingCartStorage(props.detailToHeaderCart)
   }, [props.detailToHeaderCart])
-  // 
-  // 
-  // 
-  // 
-  // 
+  //
+  //
+  //
+  //
+  //
+  const history = useHistory()
+  const [id, setId] = useState(
+    !!localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))[0].id
+      : null
+  )
+  const [name, setName] = useState(
+    !!localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))[0].name
+      : ''
+  )
+  const [show, setShow] = useState(props.showParent)
+  const [modal, setModal] = useState(1)
+
+  useEffect(() => {
+    setShow(props.showParent)
+  }, [props.showParent])
+
+  const [user, setUser] = useState({ account: '', password: '', email: '' })
+  const [loginStatus, setLoginStatus] = useState(0)
+  const [certificateEmail, setCertificateEmail] = useState('')
+  const [signupData, setSignupData] = useState({
+    account: '',
+    password: '',
+    email: '',
+    letter: 'N',
+    type: 'N',
+  })
+  const [loginMessage, setLoginMessage] = useState('')
+  const [certificateMessage, setCertificateMessage] = useState('')
+  const [signupMessage, setSignpMessage] = useState('')
+
+  useEffect(() => {
+    const apiLogin = (login) => {
+      var btnSignIn = document.getElementById(login)
+      if (btnSignIn) {
+        btnSignIn.addEventListener('click', function () {
+          GoogleLogin()
+        })
+      }
+    }
+    const apiLogout = (logout) => {
+      var btnDisconnect = document.getElementById(logout)
+      if (btnDisconnect) {
+        btnDisconnect.addEventListener('click', function () {
+          Google_disconnect()
+        })
+      }
+    }
+    if (!!name) setLoginStatus(1)
+    if (loginStatus === 1) apiLogout('logout')
+    if (show || modal !== 0) apiLogin('gmail')
+  }, [name, show, loginStatus, modal])
+
+  const cleanData = () => {
+    setName('')
+    setUser({ account: '', password: '' })
+    setCertificateEmail('')
+    setSignupData({
+      account: '',
+      password: '',
+      email: '',
+      letter: 'N',
+      type: 'N',
+    })
+    setLoginMessage('')
+    setCertificateMessage('')
+    setSignpMessage()
+  }
+
   const close = (id) => {
     document.addEventListener('click', function (e) {
       if (e.target.id === id) {
-        setShow(false)
+        props.setShowParent(false)
         setModal(1)
+        cleanData()
       }
     })
+  }
+
+  const Login = (user) => {
+    const data = {
+      account: user.user.account,
+      password: user.user.password,
+    }
+    const loginMethod = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }
+    fetch('http://localhost:3001/profile/login', loginMethod)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.length > 0) {
+          setLoginStatus(1)
+          setShow(false)
+          setName(res[0].name)
+          setId(res[0].id)
+          localStorage.setItem('user', JSON.stringify(res))
+        } else {
+          setLoginMessage(res.message)
+        }
+      })
+      .catch((err) => console.log('錯誤:', err))
+  }
+
+  const SignUp = (signupData) => {
+    const data = {
+      account: signupData.signupData.account,
+      password: signupData.signupData.password,
+      email: signupData.signupData.email,
+      letter: signupData.signupData.letter,
+      type: signupData.signupData.type,
+    }
+    const signupMethod = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }
+    fetch('http://localhost:3001/profile/signup', signupMethod)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.message) {
+          setSignpMessage(res.message)
+        } else {
+          setModal(4)
+        }
+      })
+      .catch((err) => console.log('錯誤:', err))
+  }
+
+  const certificate = (email) => {
+    const data = {
+      email: email,
+    }
+    const certificateMethod = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    }
+    fetch('http://localhost:3001/profile/certificate', certificateMethod)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+        if (res.length > 0) {
+          setModal(4)
+        } else {
+          setCertificateMessage(res.message)
+        }
+      })
+      .catch((err) => console.log('錯誤:', err))
   }
 
   const login = () => {
@@ -153,6 +320,10 @@ function HeaderHome(props) {
                     type="text"
                     placeholder="請輸入帳號"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={user.account}
+                    onChange={(e) => {
+                      setUser({ ...user, account: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -178,6 +349,10 @@ function HeaderHome(props) {
                     type="text"
                     placeholder="請輸入密碼"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={user.password}
+                    onChange={(e) => {
+                      setUser({ ...user, password: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -195,7 +370,11 @@ function HeaderHome(props) {
                     href="#!"
                     className="font-weight-bold"
                     style={{ fontSize: '14px' }}
-                    onClick={() => setModal(3)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setModal(3)
+                      cleanData()
+                    }}
                   >
                     忘記密碼
                   </a>
@@ -205,12 +384,15 @@ function HeaderHome(props) {
                     href="#!"
                     className="font-weight-bold"
                     style={{ fontSize: '14px' }}
-                    onClick={() => setModal(2)}
+                    onClick={() => {
+                      setModal(2)
+                      cleanData()
+                    }}
                   >
                     立即註冊新帳號
                   </a>
                 </div>
-                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4">
+                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
                   <a
                     href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
@@ -219,22 +401,32 @@ function HeaderHome(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setShow(false)}
+                    onClick={() => {
+                      props.setShowParent(false)
+                      cleanData()
+                    }}
                   >
                     取消
                   </a>
                   <a
                     href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      Login({ user })
+                    }}
                   >
                     登入
                   </a>
+                  <div className="invalid-feedback text-center mt-3">
+                    {loginMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -255,6 +447,9 @@ function HeaderHome(props) {
                         width: '25px',
                         height: '25px',
                         border: '1px solid #353c1d',
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault()
                       }}
                     >
                       <img
@@ -318,6 +513,10 @@ function HeaderHome(props) {
                     type="text"
                     placeholder="請輸入帳號"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={signupData.account}
+                    onChange={(e) => {
+                      setSignupData({ ...signupData, account: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -343,6 +542,10 @@ function HeaderHome(props) {
                     type="text"
                     placeholder="請輸入密碼"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={signupData.password}
+                    onChange={(e) => {
+                      setSignupData({ ...signupData, password: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -368,6 +571,10 @@ function HeaderHome(props) {
                     type="text"
                     placeholder="請輸入信箱"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={signupData.email}
+                    onChange={(e) => {
+                      setSignupData({ ...signupData, email: e.target.value })
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -381,7 +588,15 @@ function HeaderHome(props) {
                   ></img>
                 </div>
                 <div className="subscribe-wrap mb-2 d-flex align-items-center">
-                  <input type="checkbox"></input>
+                  <input
+                    type="checkbox"
+                    onChange={(e) => {
+                      setSignupData({
+                        ...signupData,
+                        letter: e.target.checked ? 'Y' : 'N',
+                      })
+                    }}
+                  ></input>
                   <span
                     className="font-weight-bold ml-1"
                     style={{ fontSize: '14px' }}
@@ -399,7 +614,7 @@ function HeaderHome(props) {
                     已經有帳號了嗎？
                   </a>
                 </div>
-                <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4">
+                <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
                   <a
                     href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
@@ -408,23 +623,32 @@ function HeaderHome(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setModal(1)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      props.setShowParent(false)
+                    }}
                   >
                     取消
                   </a>
                   <a
                     href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => setModal(4)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      SignUp({ signupData })
+                    }}
                   >
                     註冊
                   </a>
+                  <div className="invalid-feedback text-center mt-3">
+                    {signupMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -439,6 +663,7 @@ function HeaderHome(props) {
                   </p>
                   <div className="d-flex justify-content-center align-items-center">
                     <a
+                      id="gmail"
                       href="#!"
                       className="mx-2 rounded d-flex justify-content-center align-items-center"
                       style={{
@@ -446,6 +671,7 @@ function HeaderHome(props) {
                         height: '25px',
                         border: '1px solid #353c1d',
                       }}
+                      onClick={(e) => e.preventDefault()}
                     >
                       <img
                         src="images/素材/icon/1004px-Google__G__Logo.svg.png"
@@ -509,6 +735,10 @@ function HeaderHome(props) {
                     type="text"
                     placeholder="請輸入信箱"
                     style={{ width: '100%', paddingLeft: '38px' }}
+                    value={certificateEmail}
+                    onChange={(e) => {
+                      setCertificateEmail(e.target.value)
+                    }}
                   ></input>
                   <img
                     className="position-absolute"
@@ -521,7 +751,7 @@ function HeaderHome(props) {
                     alt={''}
                   ></img>
                 </div>
-                <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4">
+                <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
                   <a
                     href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
@@ -530,23 +760,32 @@ function HeaderHome(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setModal(1)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setModal(1)
+                    }}
                   >
                     返回
                   </a>
                   <a
                     href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => setModal(4)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      certificate(certificateEmail)
+                    }}
                   >
                     送出
                   </a>
+                  <div className="invalid-feedback text-center mt-3">
+                    {certificateMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -562,6 +801,7 @@ function HeaderHome(props) {
                   </p>
                   <div className="d-flex justify-content-center align-items-center">
                     <a
+                      id="gmail"
                       href="#!"
                       className="mx-2 rounded d-flex justify-content-center align-items-center"
                       style={{
@@ -569,6 +809,7 @@ function HeaderHome(props) {
                         height: '25px',
                         border: '1px solid #353c1d',
                       }}
+                      onClick={(e) => e.preventDefault()}
                     >
                       <img
                         src="images/素材/icon/1004px-Google__G__Logo.svg.png"
@@ -639,6 +880,133 @@ function HeaderHome(props) {
     )
   }
 
+  const profileNavbar = () => {
+    return (
+      <>
+        <div className="profile-icon-wrap position-absolute pt-3">
+          <div
+            className="profile-icon-ul-wrap position-relative rounded"
+            style={{ padding: '8px 15px' }}
+          >
+            <ul className="profile-icon-ul  list-unstyled w-100">
+              <li className="d-flex justify-content-start">
+                <Link
+                  to={{
+                    pathname: '/setting',
+                    state: { id: id },
+                  }}
+                  className="font-weight-bold d-flex justify-content-center align-items-center py-1"
+                >
+                  {name}
+                  <img
+                    src="/images/素材/會員等級icon/winner.svg"
+                    alt={''}
+                    className="ml-2"
+                  ></img>
+                </Link>
+              </li>
+              <li className="d-flex justify-content-start">
+                <Link
+                  to={{
+                    pathname: '/mail',
+                    state: { id: id },
+                  }}
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  我的信箱
+                </Link>
+              </li>
+              <li className="d-flex align-items-start flex-column">
+                <Link
+                  to={{
+                    pathname: '/member',
+                    state: { id: id },
+                  }}
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  會員專區
+                </Link>
+                <ul className="list-unstyled text-left">
+                  <li>
+                    <div
+                      className="py-1 pr-3 pl-1"
+                      style={{ color: 'gray', fontSize: '12px' }}
+                    >
+                      黃金會員
+                    </div>
+                  </li>
+                  <li>
+                    <div
+                      className="py-1 pr-3 pl-1"
+                      style={{ color: 'gray', fontSize: '12px' }}
+                    >
+                      累積消費金額
+                      <br />
+                      <span>1000</span>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li className="d-flex justify-content-start">
+                <Link
+                  to={{
+                    pathname: '/coupon',
+                    state: { id: id },
+                  }}
+                  className=" font-weight-bold d-inline-block py-1"
+                >
+                  優惠券
+                </Link>
+              </li>
+              <li className="d-flex justify-content-start">
+                <Link
+                  to={{
+                    pathname: '/order',
+                    state: { id: id },
+                  }}
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  購買紀錄
+                </Link>
+              </li>
+              <li
+                className="d-flex justify-content-start"
+                style={{ borderBottom: '1px solid black' }}
+              >
+                <Link
+                  to={{
+                    pathname: '/setting',
+                    state: { id: id },
+                  }}
+                  className="font-weight-bold d-inline-block py-1"
+                >
+                  帳號設定
+                </Link>
+              </li>
+              <li className="d-flex justify-content-start">
+                <a
+                  id="logout"
+                  href="#!"
+                  className="font-weight-bold d-inline-block py-1"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    cleanData()
+                    setLoginStatus(0)
+                    localStorage.removeItem('user')
+                    localStorage.removeItem('favorites')
+                    history.push('/clothing')
+                  }}
+                >
+                  登出
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
       <header
@@ -646,10 +1014,7 @@ function HeaderHome(props) {
         style={{ marginBottom: '100px' }}
       >
         <div className="photo-mask">
-          <div className="photo-mask-mask d-flex">
-            <div className="photo-mask-img1"></div>
-            <div className="photo-mask-img2"></div>
-          </div>
+          <div className="photo-mask-mask"></div>
         </div>
         <div className="container position-relative" style={{ height: '100%' }}>
           <nav className="main-navbar navbar navbar-expand-lg px-0 pt-5">
@@ -720,12 +1085,27 @@ function HeaderHome(props) {
                       src={'images/素材/icon/shopping_cart_W.svg'}
                       alt={''}
                     ></img>
-                      {shoppingCartStorage ? <span class="badge position-absolute rounded-pill bg-danger d-flex align-items-center justify-content-center" style={{ color: 'white', textAlign: 'center', top: '-3px', left: '15px', minHeight: '20px', minWidth: '20px' }}>{!!localStorage.getItem('cartList') ? JSON.parse(localStorage.getItem('cartList')).length : ''}</span>
-                      : ''}
+                    {shoppingCartStorage ? (
+                      <span
+                        class="badge position-absolute rounded-pill bg-danger d-flex align-items-center justify-content-center"
+                        style={{
+                          color: 'white',
+                          textAlign: 'center',
+                          top: '-3px',
+                          left: '15px',
+                          minHeight: '20px',
+                          minWidth: '20px',
+                        }}
+                      >
+                        {!!localStorage.getItem('cartList')
+                          ? JSON.parse(localStorage.getItem('cartList')).length
+                          : ''}
+                      </span>
+                    ) : (
+                      ''
+                    )}
                   </a>
-                  {shoppingCartStorage ?
-                    cartMap()
-                    : ''}
+                  {shoppingCartStorage ? cartMap() : ''}
                 </li>
 
                 {/* 會員 */}
@@ -733,103 +1113,15 @@ function HeaderHome(props) {
                   <a
                     className="nav-link"
                     href="#!"
-                    onClick={() => setShow(true)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setModal(1)
+                      if (loginStatus === 0) props.setShowParent(true)
+                    }}
                   >
                     <img src="images/素材/icon/Profile_W.svg" alt={''}></img>
                   </a>
-                  <div className="profile-icon-wrap position-absolute pt-3">
-                    <div
-                      className="profile-icon-ul-wrap position-relative rounded"
-                      style={{ padding: '8px 15px' }}
-                    >
-                      <ul className="profile-icon-ul  list-unstyled w-100">
-                        <li className="d-flex justify-content-start">
-                          <Link
-                            to="/setting"
-                            className="font-weight-bold d-flex justify-content-center align-items-center py-1"
-                          >
-                            江小明
-                            <img
-                              src="images/素材/會員等級icon/winner.svg"
-                              alt={''}
-                              className="ml-2"
-                            ></img>
-                          </Link>
-                        </li>
-                        <li className="d-flex justify-content-start">
-                          <Link
-                            to="/mail"
-                            className="font-weight-bold d-inline-block py-1"
-                          >
-                            我的信箱
-                          </Link>
-                        </li>
-                        <li className="d-flex align-items-start flex-column">
-                          <Link
-                            to="/member"
-                            className="font-weight-bold d-inline-block py-1"
-                          >
-                            會員專區
-                          </Link>
-                          <ul className="list-unstyled text-left">
-                            <li>
-                              <div
-                                className="py-1 pr-3 pl-1"
-                                style={{ color: 'gray', fontSize: '12px' }}
-                              >
-                                黃金會員
-                              </div>
-                            </li>
-                            <li>
-                              <div
-                                className="py-1 pr-3 pl-1"
-                                style={{ color: 'gray', fontSize: '12px' }}
-                              >
-                                累積消費金額
-                                <br />
-                                <span>1000</span>
-                              </div>
-                            </li>
-                          </ul>
-                        </li>
-                        <li className="d-flex justify-content-start">
-                          <Link
-                            to="/coupon"
-                            className=" font-weight-bold d-inline-block py-1"
-                          >
-                            優惠券
-                          </Link>
-                        </li>
-                        <li className="d-flex justify-content-start">
-                          <Link
-                            to="/order"
-                            className="font-weight-bold d-inline-block py-1"
-                          >
-                            購買紀錄
-                          </Link>
-                        </li>
-                        <li
-                          className="d-flex justify-content-start"
-                          style={{ borderBottom: '1px solid black' }}
-                        >
-                          <Link
-                            to="/setting"
-                            className="font-weight-bold d-inline-block py-1"
-                          >
-                            帳號設定
-                          </Link>
-                        </li>
-                        <li className="d-flex justify-content-start">
-                          <a
-                            href="#!"
-                            className="font-weight-bold d-inline-block py-1"
-                          >
-                            登出
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  {loginStatus === 1 ? profileNavbar() : ''}
                 </li>
                 <li className="nav-item mx-2 mx-sm-3 mx-lg-2 d-block d-lg-none">
                   <a className="nav-link" href="#!">
@@ -999,6 +1291,112 @@ function HeaderHome(props) {
       </header>
     </>
   )
+
+  function GoogleLogin() {
+    let auth2 = gapi.auth2.getAuthInstance() //取得GoogleAuth物件
+    auth2.signIn().then(
+      function (GoogleUser) {
+        console.log('Google登入成功')
+        setLoginStatus(1)
+        setShow(false)
+        let user_id = GoogleUser.getId() //取得user id，不過要發送至Server端的話，為了資安請使用id_token，本人另一篇文章有範例：https://dotblogs.com.tw/shadow/2019/01/31/113026
+        console.log(`user_id:${user_id}`)
+        let AuthResponse = GoogleUser.getAuthResponse(true) //true會回傳包含access token ，false則不會
+        let id_token = AuthResponse.id_token //取得id_token
+        //people.get方法參考：https://developers.google.com/people/api/rest/v1/people/get
+        gapi.client.people.people
+          .get({
+            resourceName: 'people/me',
+            //通常你會想要知道的用戶個資↓
+            personFields:
+              'names,phoneNumbers,emailAddresses,addresses,residences,genders,birthdays,occupations',
+          })
+          .then(function (res) {
+            //success
+            let str = JSON.stringify(res.result) //將物件列化成string，方便顯示結果在畫面上
+            console.log(str)
+            //顯示授權你網站存取的用戶個資
+            let name = '',
+              email = '',
+              yyyy = '',
+              mm = '',
+              dd = '',
+              phone = '',
+              address = ''
+            if (res.result.hasOwnProperty('names'))
+              name =
+                res.result.names[0].familyName + res.result.names[0].givenName
+            if (res.result.hasOwnProperty('emailAddresses'))
+              email = res.result.emailAddresses[0].value
+            if (res.result.hasOwnProperty('birthdays')) {
+              yyyy = res.result.birthdays[0].date.year
+              mm =
+                res.result.birthdays[0].date.month.length === 2
+                  ? res.result.birthdays[0].date.month
+                  : '0' + res.result.birthdays[0].date.month
+              dd =
+                res.result.birthdays[0].date.day.length === 2
+                  ? res.result.birthdays[0].date.day
+                  : '0' + res.result.birthdays[0].date.day
+            }
+            if (res.result.hasOwnProperty('phoneNumbers'))
+              phone = res.result.phoneNumbers[0].value
+            if (res.result.hasOwnProperty('addresses'))
+              address = res.result.addresses[0].formattedValue
+            let data = {
+              name: name,
+              account: email.substr(0, email.indexOf('@')),
+              password: '',
+              email: email,
+              letter: 'Y',
+              birth: yyyy + '-' + mm + '-' + dd,
+              birth2: mm + dd,
+              phone: phone,
+              address: address,
+              type: 'G',
+            }
+            // console.log(data)
+            fetch('http://localhost:3001/profile/googlelogin', {
+              method: 'POST',
+              body: JSON.stringify(data),
+              headers: new Headers({
+                'Content-Type': 'application/json',
+              }),
+            })
+              .then((res) => res.json())
+              .then((res) => {
+                // gmail註冊過
+                if (res.length > 0) {
+                  setLoginStatus(1)
+                  setName(res[0].name)
+                  setId(res[0].id)
+                }
+                localStorage.setItem('user', JSON.stringify(res))
+                // console.log(res)
+              })
+              .catch((err) => console.log('錯誤:', err))
+            //↑通常metadata標記primary:true的個資就是你該抓的資料
+
+            //請再自行Parse JSON，可以將JSON字串丟到線上parse工具查看：http://json.parser.online.fr/
+
+            //最終，取得用戶個資後看要填在畫面表單上或是透過Ajax儲存到資料庫(記得是傳id_token給你的Web Server而不是明碼的user_id喔)，本範例就不贅述，請自行努力XD
+            console.log(id_token)
+          })
+      },
+      function (error) {
+        console.log('Google登入失敗')
+        console.log(error)
+      }
+    )
+  } //end function GoogleLogin
+
+  function Google_disconnect() {
+    let auth2 = gapi.auth2.getAuthInstance() //取得GoogleAuth物件
+
+    auth2.disconnect().then(function () {
+      console.log('User disconnect.')
+    })
+  }
 }
 
 export default HeaderHome
