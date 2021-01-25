@@ -116,7 +116,7 @@ function News() {
                   <a
                     className="font-weight-bold"
                     style={{ fontSize: '12px' }}
-                    href="#!"
+                    href="/product"
                   >
                     {newsLink}
                   </a>
