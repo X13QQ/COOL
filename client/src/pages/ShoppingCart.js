@@ -833,11 +833,8 @@ function ShoppingCart(props) {
   return (
     <>
       <HeaderOther
-<<<<<<< HEAD
-=======
         showParent={showParent}
         setShowParent={setShowParent}
->>>>>>> 494b16e07ac48b1c89b18badde8c1641c0dda02c
         detailToHeaderCart={detailToHeaderCart}
         setDetailToHeaderCart={setDetailToHeaderCart}
       />
