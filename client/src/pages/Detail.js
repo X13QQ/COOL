@@ -13,7 +13,9 @@ function Detail() {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
-  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   const [showParent, setShowParent] = useState(false)
   return (
     <>
