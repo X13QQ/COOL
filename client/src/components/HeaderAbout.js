@@ -137,6 +137,11 @@ function HeaderAbout(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].name
       : ''
   )
+  const [total, setTotal] = useState(
+    !!localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))[0].total
+      : 0
+  )
   const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
 
@@ -227,6 +232,7 @@ function HeaderAbout(props) {
           setShow(false)
           setName(res[0].name)
           setId(res[0].id)
+          setTotal(res[0].total)
           localStorage.setItem('user', JSON.stringify(res))
         } else {
           setLoginMessage(res.message)
@@ -389,7 +395,7 @@ function HeaderAbout(props) {
                     立即註冊新帳號
                   </a>
                 </div>
-                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4">
+                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
                   <a
                     href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
@@ -398,7 +404,8 @@ function HeaderAbout(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       props.setShowParent(false)
                       cleanData()
                     }}
@@ -407,7 +414,7 @@ function HeaderAbout(props) {
                   </a>
                   <a
                     href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -421,6 +428,9 @@ function HeaderAbout(props) {
                   >
                     登入
                   </a>
+                  <div className="invalid-feedback text-center mt-3">
+                    {loginMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -609,7 +619,7 @@ function HeaderAbout(props) {
                     已經有帳號了嗎？
                   </a>
                 </div>
-                <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4">
+                <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
                   <a
                     href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
@@ -618,20 +628,26 @@ function HeaderAbout(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => props.setShowParent(false)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      props.setShowParent(false)
+                    }}
                   >
                     取消
                   </a>
                   <a
                     href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => setModal(4)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      SignUp({ signupData })
+                    }}
                   >
                     註冊
                   </a>
@@ -740,7 +756,7 @@ function HeaderAbout(props) {
                     alt={''}
                   ></img>
                 </div>
-                <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4">
+                <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
                   <a
                     href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
@@ -755,7 +771,7 @@ function HeaderAbout(props) {
                   </a>
                   <a
                     href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -884,7 +900,11 @@ function HeaderAbout(props) {
                 >
                   {name}
                   <img
-                    src="/images/素材/會員等級icon/winner.svg"
+                    src={
+                      total > 10000
+                        ? '/images/素材/會員等級icon/winner.svg'
+                        : '/images/素材/會員等級icon/award.svg'
+                    }
                     alt={''}
                     className="ml-2"
                   ></img>
@@ -917,7 +937,7 @@ function HeaderAbout(props) {
                       className="py-1 pr-3 pl-1"
                       style={{ color: 'gray', fontSize: '12px' }}
                     >
-                      黃金會員
+                      {total > 10000 ? '黃金會員' : '一般會員'}
                     </div>
                   </li>
                   <li>
@@ -927,7 +947,7 @@ function HeaderAbout(props) {
                     >
                       累積消費金額
                       <br />
-                      <span>1000</span>
+                      <span>{total}</span>
                     </div>
                   </li>
                 </ul>
@@ -979,7 +999,7 @@ function HeaderAbout(props) {
                     setLoginStatus(0)
                     localStorage.removeItem('user')
                     localStorage.removeItem('favorites')
-                    history.push('/clothing')
+                    history.push('/')
                   }}
                 >
                   登出
@@ -1055,14 +1075,27 @@ function HeaderAbout(props) {
                       style={{ color: 'white', borderColor: 'white' }}
                     ></input>
                   </div>
-                  <a className="nav-link active" aria-current="page" href="#!">
+                  <a
+                    className="nav-link active"
+                    aria-current="page"
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                     <img src={'images/素材/icon/Search_W.svg'} alt={''}></img>
                   </a>
                 </li>
 
                 {/* 購物車 */}
                 <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-                  <a className="cart-navbar-a nav-link" href="#!">
+                  <a
+                    className="cart-navbar-a nav-link"
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                     <img
                       src={'images/素材/icon/shopping_cart_W.svg'}
                       alt={''}

@@ -33,10 +33,14 @@ const Setting = ({ route, location }) => {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
 
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
         showParent={showParent}
         setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
@@ -62,10 +66,16 @@ const Mail = ({ route, location }) => {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
-
+  const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
+        showParent={showParent}
+        setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
         setDetailToHeaderCart={setDetailToHeaderCart}
       />
@@ -89,10 +99,16 @@ const Order = ({ route, location }) => {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
-
+  const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
+        showParent={showParent}
+        setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
         setDetailToHeaderCart={setDetailToHeaderCart}
       />
@@ -116,10 +132,16 @@ const Member = ({ route, location }) => {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
-
+  const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
+        showParent={showParent}
+        setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
         setDetailToHeaderCart={setDetailToHeaderCart}
       />
@@ -143,10 +165,16 @@ const Favorites = ({ route, location }) => {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
-
+  const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
+        showParent={showParent}
+        setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
         setDetailToHeaderCart={setDetailToHeaderCart}
       />
@@ -170,10 +198,16 @@ const Coupon = ({ route, location }) => {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
-
+  const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
+        showParent={showParent}
+        setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
         setDetailToHeaderCart={setDetailToHeaderCart}
       />
@@ -197,10 +231,16 @@ const Contact = ({ route, location }) => {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
-
+  const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
+        showParent={showParent}
+        setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
         setDetailToHeaderCart={setDetailToHeaderCart}
       />

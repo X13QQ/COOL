@@ -9,10 +9,12 @@ function CompleteOrder() {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
 
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
         showParent={showParent}
         setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}

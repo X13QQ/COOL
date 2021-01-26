@@ -4,13 +4,7 @@ import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
 import Magnifier from 'react-magnifier'
 import { Link } from 'react-router-dom'
-import {
-  DropdownButton,
-  Dropdown,
-  Accordion,
-  Card,
-  Form,
-} from 'react-bootstrap'
+import { Accordion, Card } from 'react-bootstrap'
 
 // clothing
 function Clothing() {
@@ -21,6 +15,9 @@ function Clothing() {
   )
 
   const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
 
   const [status, setStatus] = useState(0)
   // const [accordionActived, setAccordionActived] = useState(false)
@@ -82,7 +79,7 @@ function Clothing() {
       >
         <div className="clothing-content p-5 position-relative">
           <a
-            href="#!"
+            href="/#"
             className="close-button position-absolute "
             onClick={(e) => {
               e.preventDefault()
@@ -110,17 +107,17 @@ function Clothing() {
               />
             </div>
             <div className="col-6">
-              {clothingData.map((val, key) => {
-                return (
-                  <Accordion defaultActiveKey="0" key={key}>
-                    <Card className="pb-3">
+              <Accordion>
+                {clothingData.map((val, key) => {
+                  return (
+                    <Card className="pb-3" key={key}>
                       {/* 帽子標籤 ↓ */}
                       <Accordion.Toggle
                         // href="#!"
-                        className="clothing-accordion-a d-flex mb-4 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
+                        className="clothing-accordion-a d-flex mb-3 justify-content-between align-items-center font-weight-bold text-decoration-none h5"
                         style={{ color: '#353c1d', fontSize: '20px' }}
                         as={Card.Header}
-                        eventKey="0"
+                        eventKey={val.id}
                         // onClick={(e) => {
                         //   e.preventDefault()
                         //   // document.getElementById('top')
@@ -153,7 +150,7 @@ function Clothing() {
                         />
                       </Accordion.Toggle>
                       <Accordion.Collapse
-                        eventKey="0"
+                        eventKey={val.id}
                         id={`sort${val.id}`}
                         // className={
                         //   'clothing-accordion-ul list-unstyled mb-0 ' +
@@ -161,7 +158,8 @@ function Clothing() {
                         // }
                       >
                         <Card.Body className="px-5">
-                          <p
+                          <Link
+                            to={`/detail/${val.brand}/${val.id}`}
                             style={{
                               fontSize: '12px',
                               textOverflow: 'ellipsis',
@@ -170,13 +168,18 @@ function Clothing() {
                               display: 'block',
                             }}
                           >
-                            YEEZY BOOST 350 V2 - CBLACK/ RED
+                            {`${val.name}`}
+                          </Link>
+                          <p style={{ fontSize: '12px' }}>
+                            NT${`${val.price}`}
                           </p>
-                          <p style={{ fontSize: '12px' }}>NT$6,800</p>
-                          <div className="row">
+                          {/* <div className="row dropdownbtn">
                             <DropdownButton
-                              id="dropdown-basic-button"
+                              id="dropdown-basic-button-down "
+                              drop={'down'}
                               className="mx-2 my-2"
+                              as={ButtonGroup}
+                              style={{ fontSize: '12px' }}
                               title="顏色"
                             >
                               <Dropdown.Item href="#/action-1">
@@ -194,34 +197,34 @@ function Clothing() {
                             </DropdownButton>
 
                             <DropdownButton
-                              id="dropdown-basic-button"
+                              id="dropdown-basic-button-down "
+                              drop={'down'}
                               className="mx-2 my-2"
+                              as={ButtonGroup}
+                              style={{ fontSize: '12px' }}
                               title="尺寸"
                             >
-                              <Dropdown.Item href="#/action-1">S</Dropdown.Item>
-                              <Dropdown.Item href="#/action-2">M</Dropdown.Item>
-                              <Dropdown.Item href="#/action-3">L</Dropdown.Item>
-                              <Dropdown.Item href="#/action-4">
+                              <Dropdown.Item href="#/action-1">
                                 XL
                               </Dropdown.Item>
+                              <Dropdown.Item href="#/action-2">L</Dropdown.Item>
+                              <Dropdown.Item href="#/action-3">M</Dropdown.Item>
+                              <Dropdown.Item href="#/action-4">S</Dropdown.Item>
                             </DropdownButton>
 
-                            <Form.Group controlId="amount" className="row my-0">
-                              <Form.Label
-                                style={{
-                                  fontSize: '16px',
-                                  padding: '0 0 0 28px',
-                                }}
-                                className="mx-2 my-2"
-                              >
-                                數量
-                              </Form.Label>
-                              <Form.Control
-                                type="number"
-                                // placeholder="amount"
-                                className="col-4 mx-2 col-4"
-                              />
-                            </Form.Group>
+                            <DropdownButton
+                              id="dropdown-basic-button-down "
+                              drop={'down'}
+                              className="mx-2 my-2"
+                              as={ButtonGroup}
+                              style={{ fontSize: '12px' }}
+                              title="數量"
+                            >
+                              <Dropdown.Item href="#/action-4">4</Dropdown.Item>
+                              <Dropdown.Item href="#/action-3">3</Dropdown.Item>
+                              <Dropdown.Item href="#/action-2">2</Dropdown.Item>
+                              <Dropdown.Item href="#/action-1">1</Dropdown.Item>
+                            </DropdownButton>
                           </div>
 
                           <div className="d-flex justify-content-end mb-3">
@@ -232,13 +235,13 @@ function Clothing() {
                             >
                               加入購物車
                             </a>
-                          </div>
+                          </div> */}
                         </Card.Body>
                       </Accordion.Collapse>
                     </Card>
-                  </Accordion>
-                )
-              })}
+                  )
+                })}
+              </Accordion>
             </div>
           </div>
           <div
@@ -260,6 +263,7 @@ function Clothing() {
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
         showParent={showParent}
         setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}

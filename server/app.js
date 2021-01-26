@@ -24,6 +24,62 @@ const credentials = {
   },
 };
 var emailService = require("./lib/email.js")(credentials);
+//
+// 正在測試的訂單寫入
+
+app.post("/shoppingcart", function (req, res) {
+  var getinsertId = "";
+  const sqlInsert =
+    "INSERT INTO cool_order (order_no, member_no, name, receiver_address, receiver_cellphone, pickup_store, invoice, date, price, status, coupon) " +
+    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '0', ?) ";
+  const sqlInsert2 =
+    "INSERT INTO cool_order_detailed ( order_id,product_id,name,amount,size,brand,color,price ) VALUES ( ?,?,?,?,?,?,?,? ) ";
+
+  console.log(req.body.data);
+  db.query(
+    sqlInsert,
+    [
+      req.body.orderno,
+      "",
+      req.body.name,
+      req.body.addresseeaddress,
+      req.body.addresseecellphone,
+      req.body.pickup_store,
+      req.body.invoice,
+      req.body.date,
+      req.body.price,
+      req.body.coupon,
+    ],
+    (err, result, fields) => {
+      if (err) {
+        res.send({ err: err });
+      }
+      res.send(result);
+      getinsertId = result.insertId;
+      for (let i = 0; i < req.body.data.length; i++) {
+        db.query(
+          sqlInsert2,
+          [
+            getinsertId,
+            req.body.data[i].id,
+            req.body.data[i].name,
+            req.body.data[i].amount,
+            req.body.data[i].size,
+            req.body.data[i].brand,
+            req.body.data[i].color,
+            req.body.data[i].price,
+          ],
+          (err, result, fields) => {
+            if (err) {
+              res.send({ err: err });
+            }
+          }
+        );
+      }
+    }
+  );
+  // -------------
+});
 
 // 商品首頁 get
 app.get("/product", function (req, res) {
@@ -47,8 +103,55 @@ app.get("/detail/:brand/:id", function (req, res) {
       if (err) {
         console.log(err);
       }
-      console.log(result);
+      // console.log(result);
       res.send(JSON.stringify(result));
+    }
+  );
+});
+
+// 商品詳細頁 get favorites
+app.get("/detail/favorite/:userId/:productId", function (req, res) {
+  db.query(
+    "SELECT * FROM favorites WHERE member_no = " + req.params.userId + "",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+
+// 商品詳細頁 post favorites
+app.post("/detail/favorite/:userId/:productId", function (req, res) {
+  db.query(
+    "INSERT INTO favorites (member_no ,product_no ,valid) VALUES (" +
+      req.params.userId +
+      "," +
+      req.params.productId +
+      ", 1)",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      // res.send(JSON.stringify(result));
+    }
+  );
+});
+
+// 商品詳細頁 post favorites
+app.put("/detail/favorite/:userId/:productId", function (req, res) {
+  db.query(
+    "UPDATE favorites SET valid = 1 WHERE member_no = " +
+      req.params.userId +
+      " AND product_no = " +
+      req.params.productId +
+      "",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      // res.send(JSON.stringify(result));
     }
   );
 });
@@ -63,7 +166,7 @@ app.post("/detail/:brand/:id", function (req, res) {
       if (err) {
         console.log(err);
       }
-      console.log(result);
+      // console.log(result);
       res.send(JSON.stringify(result));
     }
   );
@@ -111,7 +214,8 @@ app.post("/profile/:logintype", function (req, res) {
     } else {
       const sqlSelect =
         "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
-        "FROM member WHERE account = ? and password = ? and type = 'N' ";
+        "FROM member " +
+        "WHERE account = ? and password = ? and type = 'N' ";
       db.query(
         sqlSelect,
         [req.body.account, req.body.password],
@@ -119,7 +223,20 @@ app.post("/profile/:logintype", function (req, res) {
           if (err) res.send({ err: err });
 
           if (result.length > 0) {
-            res.send(result);
+            const sqlSelect2 =
+              "SELECT a.id, CASE a.name WHEN '' THEN 'Hi' ELSE a.name END AS name,a.account,a.password,a.phone,a.email,a.address,a.birth,a.letter,a.type " +
+              ", IFNULL(SUM(b.price),0) AS total " +
+              "FROM member a LEFT JOIN cool_order b ON a.id = b.member_no " +
+              "WHERE a.account = ? and a.password = ? and a.type = 'N' ";
+            db.query(
+              sqlSelect2,
+              [req.body.account, req.body.password],
+              (err, result, fields) => {
+                if (err) res.send({ err: err });
+
+                if (result.length > 0) res.send(result);
+              }
+            );
           } else {
             res.send({ message: "帳號 / 密碼錯誤" });
           }
@@ -213,15 +330,26 @@ app.post("/profile/:logintype", function (req, res) {
       });
     }
   } else if ("googlelogin" === req.params.logintype) {
-    console.log(req.body.name);
+    // console.log(req.body.name);
     const sqlSelect =
       "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
-      "FROM member WHERE email = ? AND type = 'G' ";
+      "FROM member " +
+      "WHERE email = ? and type = 'G' ";
+    // console.log(req.body.email);
     db.query(sqlSelect, [req.body.email], (err, result, fields) => {
       if (err) res.send({ err: err });
 
       if (result.length > 0) {
-        res.send(result);
+        const sqlSelect2 =
+          "SELECT a.id, CASE a.name WHEN '' THEN 'Hi' ELSE a.name END AS name,a.account,a.password,a.phone,a.email,a.address,a.birth,a.letter,a.type " +
+          ", IFNULL(SUM(b.price),0) AS total " +
+          "FROM member a LEFT JOIN cool_order b ON a.id = b.member_no " +
+          "WHERE a.email = ? and a.type = 'G' ";
+        db.query(sqlSelect2, [req.body.email], (err, result, fields) => {
+          if (err) res.send({ err: err });
+
+          if (result.length > 0) res.send(result);
+        });
       } else {
         const sqlInsert =
           "INSERT INTO member (name, account, password, email, letter, birth, phone, address, type) " +
@@ -244,7 +372,10 @@ app.post("/profile/:logintype", function (req, res) {
               res.send({ err: err });
             }
             const sqlSelect =
-              "SELECT * FROM member WHERE email = ? AND type = 'G' ";
+              "SELECT a.id, CASE a.name WHEN '' THEN 'Hi' ELSE a.name END AS name,a.account,a.password,a.phone,a.email,a.address,a.birth,a.letter,a.type " +
+              ", IFNULL(SUM(b.price),0) AS total " +
+              "FROM member a LEFT JOIN cool_order b ON a.id = b.member_no " +
+              "WHERE a.email = ? and a.type = 'G' ";
             db.query(sqlSelect, [req.body.email], (err, result, fields) => {
               if (err) res.send({ err: err });
 
@@ -269,6 +400,18 @@ app.get("/member/order/:status", function (req, res) {
     "SELECT * FROM cool_order WHERE status = ? and member_no = ? ";
   db.query(sqlSelect, [status, req.query.memberNo], (err, result, fields) => {
     res.send(result);
+  });
+});
+
+// 會員等級
+app.get("/member/member", function (req, res) {
+  const sqlSelect =
+    "SELECT COUNT(id) AS count, IFNULL(SUM(price), 0) AS total " +
+    "FROM cool_order " +
+    "WHERE member_no = ? ";
+  db.query(sqlSelect, [req.query.memberNo], (err, result, fields) => {
+    res.send(result);
+    // console.log(result)
   });
 });
 
@@ -364,7 +507,6 @@ app.post("/member/contact", function (req, res) {
     }
   );
 });
-
 
 //news
 app.get("/news", function (req, res) {
