@@ -14,7 +14,9 @@ function ShoppingCart(props) {
   console.log(JSON.parse(localStorage.getItem('cartList')))
   let FakeRes = JSON.parse(localStorage.getItem('cartList'))
   const [showParent, setShowParent] = useState(false)
-  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
 
   const [status, setStatus] = useState(1)
   const [total, setTotal] = useState(0)
@@ -843,10 +845,10 @@ function ShoppingCart(props) {
       {status === 1
         ? checkout()
         : status === 2
-          ? PaymentMethod()
-          : status === 3
-            ? CompleteOrder()
-            : ''}
+        ? PaymentMethod()
+        : status === 3
+        ? CompleteOrder()
+        : ''}
 
       <Footer />
     </>

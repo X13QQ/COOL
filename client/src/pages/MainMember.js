@@ -24,6 +24,7 @@ function MainMember() {
           console.log(data)
           setCount(data[0].count)
           setTotal(data[0].total)
+          console.log(data[0])
         })
         .catch((err) => console.log('錯誤:', err))
     }
@@ -44,7 +45,9 @@ function MainMember() {
           <div className="memberlist col-4">
             <ul className="m-0 list-unstyled d-flex flex-column align-items-center">
               <li className="listtitle font-weight-bold">會員等級</li>
-              <li className="listtitle1 font-weight-bold">一般會員</li>
+              <li className="listtitle1 font-weight-bold">
+                {total > 10000 ? '黃金會員' : '一般會員'}
+              </li>
               <li className="m-1">{total > 10000 ? <Lv2 /> : <Lv1 />}</li>
             </ul>
           </div>

@@ -119,21 +119,14 @@ function ClothingBackstage() {
                           className="clothing-accordion-a  d-flex align-items-center font-weight-bold text-decoration-none h5"
                           style={{ color: '#353c1d' }}
                         >
-                          上衣
-                          {/* {val.category === '1'
-                          ? '上衣'
-                          : val.category === '2'
-                          ? '帽子'
-                          : val.category === '3'
-                          ? '外套'
-                          : val.category === '4'
-                          ? '褲子'
-                          : val.category === '5'
-                          ? '鞋款'
-                          : val.category === '6'
-                          ? '配件'
-                          : ''} */}
-                          {/* 帽子右邊的箭頭 ↓ */}
+                          <form>
+                            <label for="country">Country</label>
+                            <select id="country" name="country">
+                              <option value="australia">Australia</option>
+                              <option value="canada">Canada</option>
+                              <option value="usa">USA</option>
+                            </select>
+                          </form>
                           <img
                             src="images/素材/icon/arrow_G.svg"
                             style={{
@@ -146,7 +139,7 @@ function ClothingBackstage() {
                             alt={' '}
                           />
                         </a>
-                        <a>
+                        <a href="#!">
                           <FontAwesomeIcon
                             className="mx-3"
                             style={{ cursor: 'pointer' }}

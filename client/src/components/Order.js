@@ -91,6 +91,7 @@ const Order = () => {
           eventKey="processing"
           title="處理中"
         >
+          {OrderDataProcessing.length > 0 ? '' : '查無訂單資料'}
           {OrderDataProcessing.map((val, key) => {
             return (
               <div className="orderlist m-3" key={key} id={key}>
@@ -145,6 +146,7 @@ const Order = () => {
           eventKey="solved"
           title="已完成"
         >
+          {OrderDataSolved.length > 0 ? '' : '查無訂單資料'}
           {OrderDataSolved.map((val, key) => {
             return (
               <div className="orderlist m-3" key={key} id={key}>
@@ -199,6 +201,7 @@ const Order = () => {
           eventKey="orderlist"
           title="退款紀錄"
         >
+          {OrderDataRefundlist.length > 0 ? '' : '查無訂單資料'}
           {OrderDataRefundlist.map((val, key) => {
             return (
               <div className="orderlist m-3" key={key} id={key}>

@@ -124,9 +124,6 @@ function HeaderOther(props) {
   useEffect(() => {
     setShoppingCartStorage(props.detailToHeaderCart)
   }, [props.detailToHeaderCart])
-  //
-  //
-  //
 
   const history = useHistory()
   const [id, setId] = useState(
@@ -1012,8 +1009,8 @@ function HeaderOther(props) {
                     setLoginStatus(0)
                     localStorage.removeItem('user')
                     localStorage.removeItem('favorites')
-                    history.push('/')
-                    props.setWhetherLoginParent(false)
+                    // history.push('/')
+                    history.push('/clothing')
                   }}
                 >
                   登出
@@ -1396,6 +1393,7 @@ function HeaderOther(props) {
                   setLoginStatus(1)
                   setName(res[0].name)
                   setId(res[0].id)
+                  setTotal(res[0].total)
                 }
                 localStorage.setItem('user', JSON.stringify(res))
                 // console.log(res)

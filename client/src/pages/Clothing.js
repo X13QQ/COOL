@@ -4,14 +4,7 @@ import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
 import Magnifier from 'react-magnifier'
 import { Link } from 'react-router-dom'
-import {
-  DropdownButton,
-  Dropdown,
-  Accordion,
-  Card,
-  Form,
-  ButtonGroup,
-} from 'react-bootstrap'
+import { Accordion, Card } from 'react-bootstrap'
 
 // clothing
 function Clothing() {
@@ -24,6 +17,9 @@ function Clothing() {
     !!localStorage.getItem('user')
   )
   const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
 
   const [status, setStatus] = useState(0)
   // const [accordionActived, setAccordionActived] = useState(false)
