@@ -201,8 +201,8 @@ app.post("/profile/:logintype", function (req, res) {
     } else {
       const sqlSelect =
         "SELECT a.id, CASE a.name WHEN '' THEN 'Hi' ELSE a.name END AS name,a.account,a.password,a.phone,a.email,a.address,a.birth,a.letter,a.type " +
-        ", SUM(b.price) AS total " +
-        "FROM member a INNER JOIN cool_order b ON a.id = b.member_no " +
+        ", IFNULL(SUM(b.price),0) AS total " +
+        "FROM member a LEFT JOIN cool_order b ON a.id = b.member_no " +
         "WHERE a.account = ? and a.password = ? and a.type = 'N' ";
       db.query(
         sqlSelect,
@@ -308,10 +308,10 @@ app.post("/profile/:logintype", function (req, res) {
     // console.log(req.body.name);
     const sqlSelect =
       "SELECT a.id, CASE a.name WHEN '' THEN 'Hi' ELSE a.name END AS name,a.account,a.password,a.phone,a.email,a.address,a.birth,a.letter,a.type " +
-      ", SUM(b.price) AS total " +
-      "FROM member a INNER JOIN cool_order b ON a.id = b.member_no " +
+      ", IFNULL(SUM(b.price),0) AS total " +
+      "FROM member a LEFT JOIN cool_order b ON a.id = b.member_no " +
       "WHERE a.email = ? AND a.type = 'G' ";
-
+    console.log(req.body.email) 
     db.query(sqlSelect, [req.body.email], (err, result, fields) => {
       if (err) res.send({ err: err });
 
