@@ -10,11 +10,12 @@ function News() {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
+  const [itemsPerPage, setItemsPerPage] = useState(14)
   const [showParent, setShowParent] = useState(false)
   const [whetherLoginParent, setWhetherLoginParent] = useState(
     !!localStorage.getItem('user')
   )
-
+  const [currentPage, setCurrentPage] = useState(1)
   const [status, setStatus] = useState(0)
   const [newsLink, setNewsLink] = useState('')
   const [Content1, setContent1] = useState('')
@@ -22,8 +23,11 @@ function News() {
   const [Src, setSrc] = useState('')
   const [newsImages, setNewsImages] = useState([])
   const newsImages2 = []
+  const [sortstatus, setSortStatus] = useState(1)
 
-  for (let i = 9; i < newsImages.length - 14; i++) {
+  let pages = Math.ceil(newsImages.length / itemsPerPage)
+
+  for (let i = 9; i < newsImages.length; i++) {
     newsImages2.push(newsImages[i])
   }
   // console.log(newsImages2)
@@ -96,9 +100,9 @@ function News() {
                   className="p-5"
                   style={{ backgroundColor: '#353c1d', color: 'white' }}
                 >
-                  <h5 className="font-weight-bold">{Content1}</h5>
+                  <h4 className="font-weight-bold">{Content1}</h4>
                   <br></br>
-                  <p className="font-weight-bold" style={{ fontSize: '14px' }}>
+                  <p className="font-weight-bold" style={{ fontSize: '16px' }}>
                     {Content2}
                   </p>
                 </div>
@@ -119,8 +123,8 @@ function News() {
                 <div className="p-4" style={{ backgroundColor: 'white' }}>
                   <a
                     className="font-weight-bold"
-                    style={{ fontSize: '12px' }}
-                    href="/product"
+                    style={{ fontSize: '14px' }}
+                    href="/detail/UNDEFEATED/27"
                   >
                     {newsLink}
                   </a>
@@ -445,18 +449,18 @@ function News() {
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb px-0 d-none d-lg-flex">
                 <li className="breadcrumb-item">
-                  <a href="#!">首頁</a>
+                  <a href="/">首頁</a>
                 </li>
                 <li className="breadcrumb-item">
-                  <a href="#!">商品首頁</a>
+                  <a href="/news">新聞頁面</a>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
-                  新品一覽
+                  推薦新聞
                 </li>
               </ol>
             </nav>
             <div className="dropdown d-flex py-2">
-              <div className="position-relative">
+              <div className="position-relative" style={{ zIndex: '9999' }}>
                 <a
                   id="items-per-page-link"
                   href="#!"
@@ -487,6 +491,7 @@ function News() {
                 <div
                   id="items-per-page-wrap"
                   className="items-per-page-wrap position-absolute ;"
+                  style={{ display: 'none' }}
                   onMouseEnter={() => {
                     document.getElementById('items-per-page-wrap').style[
                       'display'
@@ -500,11 +505,18 @@ function News() {
                     }
                   }}
                 >
-                  <ul className="sort-ul  list-unstyled mb-0">
+                  <ul
+                    className="sort-ul  list-unstyled mb-0"
+                    style={{ backgroundColor: 'white' }}
+                  >
                     <li>
                       <a
                         href="#!"
                         className="d-inline-block py-2 px-3 text-decoration-none"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          setSortStatus(1)
+                        }}
                       >
                         從日期最新
                       </a>
@@ -513,6 +525,10 @@ function News() {
                       <a
                         href="#!"
                         className="d-inline-block py-2 px-3 text-decoration-none"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          setSortStatus(2)
+                        }}
                       >
                         從日期最舊
                       </a>
@@ -526,55 +542,131 @@ function News() {
           {status === 1 ? modal() : ''}
           <div className=" d-flex justify-content-between flex-wrap">
             {/* <!-- 小圖開始 --> */}
-            {newsImages2.length > 0
-              ? newsImages2.map((v, i) => (
-                  <div
-                    className="card mb-3 col-6"
-                    style={{ maxWidth: '540px', cursor: 'pointer' }}
-                    key={i}
-                  >
-                    <div className="row no-gutters">
-                      <div className="col-md-4 d-flex justify-content-center align-items-center">
-                        <img
-                          style={{
-                            backgroundImage: `url(${v.src})`,
-                          }}
-                          className="img-fluid news-small-cover-image"
-                          alt={''}
-                        ></img>
-                      </div>
-                      <div className="col-md-8">
-                        <div className="card-body news-card-body-text">
-                          {/* <h5 className="card-title"></h5> */}
-                          <p
-                            className="news-article card-text font-weight-bold"
-                            style={{ color: '#353c1d' }}
+            {sortstatus === 1
+              ? newsImages2
+                  .sort(function (a, b) {
+                    return a.id > b.id ? 1 : -1
+                  })
+                  .map((v, i) => {
+                    if (
+                      i >= itemsPerPage * (currentPage - 1) &&
+                      i <= itemsPerPage * currentPage - 1
+                    ) {
+                      return (
+                        <>
+                          <div
+                            className="card mb-3 col-6"
+                            style={{ maxWidth: '540px', cursor: 'pointer' }}
+                            key={i}
                           >
-                            {v.news_title1}
-                          </p>
+                            <div className="row no-gutters">
+                              <div className="col-md-4 d-flex justify-content-center align-items-center">
+                                <img
+                                  style={{
+                                    backgroundImage: `url(${v.src})`,
+                                  }}
+                                  className="img-fluid news-small-cover-image"
+                                  alt={''}
+                                ></img>
+                              </div>
+                              <div className="col-md-8">
+                                <div className="card-body news-card-body-text">
+                                  {/* <h5 className="card-title"></h5> */}
+                                  <p
+                                    className="news-article card-text font-weight-bold"
+                                    style={{ color: '#353c1d' }}
+                                  >
+                                    {v.news_title1}
+                                  </p>
+                                </div>
+                                <div className="card-body news-card-body-link">
+                                  <p className="card-text d-flex justify-content-end ">
+                                    <a
+                                      href="#!"
+                                      style={{
+                                        color: '#353c1d',
+                                        fontSize: '12px',
+                                      }}
+                                      onClick={(e) => {
+                                        e.preventDefault()
+                                        setStatus(1)
+                                        setContent1(v.news_content1)
+                                        setContent2(v.news_content2)
+                                        setNewsLink(v.news_link)
+                                        setSrc(v.src)
+                                      }}
+                                    >
+                                      繼續閱讀 ...
+                                    </a>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      )
+                    }
+                  })
+              : sortstatus === 2
+              ? newsImages2
+                  .sort(function (a, b) {
+                    return a.id < b.id ? 1 : -1
+                  })
+                  .map((v, i) => {
+                    return (
+                      <>
+                        <div
+                          className="card mb-3 col-6"
+                          style={{ maxWidth: '540px', cursor: 'pointer' }}
+                          key={i}
+                        >
+                          <div className="row no-gutters">
+                            <div className="col-md-4 d-flex justify-content-center align-items-center">
+                              <img
+                                style={{
+                                  backgroundImage: `url(${v.src})`,
+                                }}
+                                className="img-fluid news-small-cover-image"
+                                alt={''}
+                              ></img>
+                            </div>
+                            <div className="col-md-8">
+                              <div className="card-body news-card-body-text">
+                                {/* <h5 className="card-title"></h5> */}
+                                <p
+                                  className="news-article card-text font-weight-bold"
+                                  style={{ color: '#353c1d' }}
+                                >
+                                  {v.news_title1}
+                                </p>
+                              </div>
+                              <div className="card-body news-card-body-link">
+                                <p className="card-text d-flex justify-content-end ">
+                                  <a
+                                    href="#!"
+                                    style={{
+                                      color: '#353c1d',
+                                      fontSize: '12px',
+                                    }}
+                                    onClick={(e) => {
+                                      e.preventDefault()
+                                      setStatus(1)
+                                      setContent1(v.news_content1)
+                                      setContent2(v.news_content2)
+                                      setNewsLink(v.news_link)
+                                      setSrc(v.src)
+                                    }}
+                                  >
+                                    繼續閱讀 ...
+                                  </a>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <div className="card-body news-card-body-link">
-                          <p className="card-text d-flex justify-content-end ">
-                            <a
-                              href="#!"
-                              style={{ color: '#353c1d', fontSize: '12px' }}
-                              onClick={(e) => {
-                                e.preventDefault()
-                                setStatus(1)
-                                setContent1(v.news_content1)
-                                setContent2(v.news_content2)
-                                setNewsLink(v.news_link)
-                                setSrc(v.src)
-                              }}
-                            >
-                              繼續閱讀 ...
-                            </a>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))
+                      </>
+                    )
+                  })
               : ''}
             {/* </div> */}
           </div>
@@ -583,30 +675,54 @@ function News() {
             <a
               href="#!"
               className="font-weight-bold page-previous d-flex justify-content-between align-items-center px-2 mx-2 text-center text-decoration-none"
+              onClick={(e) => {
+                e.preventDefault()
+                if (currentPage <= pages && currentPage > 1) {
+                  setCurrentPage(currentPage - 1)
+                }
+              }}
             >
               <img src="images/素材/icon/arrow_W.svg" alt={''}></img>上一頁
             </a>
             <a
               href="#!"
               className=" font-weight-bold page-number d-inline-block mx-2 text-center text-decoration-none"
+              onClick={(e) => {
+                e.preventDefault()
+                setCurrentPage(1)
+              }}
             >
               1
             </a>
             <a
               href="#!"
               className=" font-weight-bold page-number d-inline-block mx-2 text-center text-decoration-none"
+              onClick={(e) => {
+                e.preventDefault()
+                setCurrentPage(2)
+              }}
             >
               2
             </a>
             <a
               href="#!"
               className=" font-weight-bold page-number d-inline-block mx-2 text-center text-decoration-none"
+              onClick={(e) => {
+                e.preventDefault()
+                setCurrentPage(3)
+              }}
             >
               3
             </a>
             <a
               href="#!"
               className="font-weight-bold page-next d-flex justify-content-between align-items-center px-2 mx-2 text-center text-decoration-none"
+              onClick={(e) => {
+                e.preventDefault()
+                if (currentPage < pages) {
+                  setCurrentPage(currentPage + 1)
+                }
+              }}
             >
               下一頁<img src="images/素材/icon/arrow_W.svg" alt={''}></img>
             </a>
