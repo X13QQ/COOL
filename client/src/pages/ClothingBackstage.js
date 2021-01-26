@@ -119,25 +119,22 @@ function ClothingBackstage() {
                           className="clothing-accordion-a  d-flex align-items-center font-weight-bold text-decoration-none h5"
                           style={{ color: '#353c1d' }}
                         >
-                          <form>
-                            <label for="country">Country</label>
-                            <select id="country" name="country">
-                              <option value="australia">Australia</option>
-                              <option value="canada">Canada</option>
-                              <option value="usa">USA</option>
+                          <div>
+                            {/* <label for="country">Country</label> */}
+                            <select
+                              className="customSelect"
+                              style={{ width: '200px' }}
+                              id="country"
+                              name="country"
+                            >
+                              <option value="0">上衣</option>
+                              <option value="1">帽子</option>
+                              <option value="2">外套</option>
+                              <option value="3">褲子</option>
+                              <option value="4">鞋款</option>
+                              <option value="5">配件</option>
                             </select>
-                          </form>
-                          <img
-                            src="images/素材/icon/arrow_G.svg"
-                            style={{
-                              width: '20px',
-                              transform: 'rotate(-90deg)',
-                              position: 'relative',
-                              top: '-3.5px',
-                              margin: '0 0 0 15px',
-                            }}
-                            alt={' '}
-                          />
+                          </div>
                         </a>
                         <a href="#!">
                           <FontAwesomeIcon
@@ -145,6 +142,8 @@ function ClothingBackstage() {
                             style={{ cursor: 'pointer' }}
                             icon={faPlusCircle}
                           />
+                        </a>
+                        <a href="#!">
                           <FontAwesomeIcon
                             className="mx-3"
                             style={{ cursor: 'pointer' }}
