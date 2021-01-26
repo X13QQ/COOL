@@ -1011,7 +1011,6 @@ function HeaderOther(props) {
                     localStorage.removeItem('favorites')
                     // history.push('/')
                     history.push('/clothing')
-                    props.setWhetherLoginParent(false)
                   }}
                 >
                   登出
@@ -1394,6 +1393,7 @@ function HeaderOther(props) {
                   setLoginStatus(1)
                   setName(res[0].name)
                   setId(res[0].id)
+                  setTotal(res[0].total)
                 }
                 localStorage.setItem('user', JSON.stringify(res))
                 // console.log(res)
