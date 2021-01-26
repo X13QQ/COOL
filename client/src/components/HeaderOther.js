@@ -426,9 +426,9 @@ function HeaderOther(props) {
                     onClick={(e) => {
                       e.preventDefault()
                       Login({ user })
-                      // 
-                      // 
-                      // 
+                      //
+                      //
+                      //
                       props.setWhetherLoginParent(true)
                     }}
                   >
@@ -636,7 +636,10 @@ function HeaderOther(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={(e) => {e.preventDefault();props.setShowParent(false)}}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      props.setShowParent(false)
+                    }}
                   >
                     取消
                   </a>
@@ -1010,6 +1013,7 @@ function HeaderOther(props) {
                     localStorage.removeItem('user')
                     localStorage.removeItem('favorites')
                     history.push('/')
+                    props.setWhetherLoginParent(false)
                   }}
                 >
                   登出
@@ -1077,16 +1081,27 @@ function HeaderOther(props) {
                   <div className="d-flex align-items-end search-icon-input-wrap mx-2">
                     <input type="text" className="px-2"></input>
                   </div>
-                  <a className="nav-link active" aria-current="page" href="#!"
-                   onClick={(e)=>{e.preventDefault()}}>
+                  <a
+                    className="nav-link active"
+                    aria-current="page"
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                     <img src={'/images/素材/icon/Search_G.svg'} alt={''}></img>
                   </a>
                 </li>
 
                 {/* 購物車 */}
                 <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-                  <a className="cart-navbar-a nav-link position-relative" href="#!"
-                  onClick={(e)=>{e.preventDefault()}}>
+                  <a
+                    className="cart-navbar-a nav-link position-relative"
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                     <img
                       src={'/images/素材/icon/shopping_cart_G.svg'}
                       alt={''}
@@ -1126,6 +1141,7 @@ function HeaderOther(props) {
                       e.preventDefault()
                       setModal(1)
                       if (loginStatus === 0) props.setShowParent(true)
+                      // props.setWhetherLoginParent(true)
                     }}
                   >
                     <img src="/images/素材/icon/Profile_G.svg" alt={''}></img>
