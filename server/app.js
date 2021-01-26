@@ -25,7 +25,7 @@ const credentials = {
 };
 var emailService = require("./lib/email.js")(credentials);
 // 
-// 正在測試的訂單寫入
+// 訂單寫入
 
 app.post("/shoppingcart", function (req, res){
   var getinsertId='';
