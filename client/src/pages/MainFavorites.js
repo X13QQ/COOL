@@ -75,7 +75,7 @@ function MainFavorites() {
           </InputGroup>
           <div className="row mt-3" style={{ width: '95%', margin: 'auto' }}>
             {FavoritesData.map((val, key) =>
-              val.name.toLowerCase().indexOf(search) !== -1 ? (
+              val.name.toLowerCase().indexOf(search.toLowerCase()) !== -1 ? (
                 <div
                   key={key}
                   className="col-12 col-sm-6 col-md-4 col-lg-3 px-0"
