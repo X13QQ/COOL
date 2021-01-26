@@ -116,8 +116,8 @@ function HeaderAbout(props) {
         </div>
       </>
     ) : (
-        ''
-      )
+      ''
+    )
   }
   useEffect(() => {
     setShoppingCartStorage(props.detailToHeaderCart)
@@ -137,7 +137,11 @@ function HeaderAbout(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].name
       : ''
   )
-  const [total, setTotal] = useState(!!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user'))[0].total : 0)
+  const [total, setTotal] = useState(
+    !!localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))[0].total
+      : 0
+  )
   const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
 
@@ -401,7 +405,7 @@ function HeaderAbout(props) {
                       color: '#353c1d',
                     }}
                     onClick={(e) => {
-                      e.preventDefault();
+                      e.preventDefault()
                       props.setShowParent(false)
                       cleanData()
                     }}
@@ -424,6 +428,9 @@ function HeaderAbout(props) {
                   >
                     登入
                   </a>
+                  <div className="invalid-feedback text-center mt-3">
+                    {loginMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -621,7 +628,10 @@ function HeaderAbout(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={(e) => { e.preventDefault(); props.setShowParent(false) }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      props.setShowParent(false)
+                    }}
                   >
                     取消
                   </a>
@@ -637,7 +647,8 @@ function HeaderAbout(props) {
                     onClick={(e) => {
                       e.preventDefault()
                       SignUp({ signupData })
-                    }}                  >
+                    }}
+                  >
                     註冊
                   </a>
                   <div className="invalid-feedback text-center mt-3">
@@ -889,7 +900,11 @@ function HeaderAbout(props) {
                 >
                   {name}
                   <img
-                    src={total > 10000 ? '/images/素材/會員等級icon/winner.svg' : '/images/素材/會員等級icon/award.svg'}
+                    src={
+                      total > 10000
+                        ? '/images/素材/會員等級icon/winner.svg'
+                        : '/images/素材/會員等級icon/award.svg'
+                    }
                     alt={''}
                     className="ml-2"
                   ></img>
@@ -1060,15 +1075,27 @@ function HeaderAbout(props) {
                       style={{ color: 'white', borderColor: 'white' }}
                     ></input>
                   </div>
-                  <a className="nav-link active" aria-current="page" href="#!"
-                    onClick={(e) => { e.preventDefault() }}>
+                  <a
+                    className="nav-link active"
+                    aria-current="page"
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                     <img src={'images/素材/icon/Search_W.svg'} alt={''}></img>
                   </a>
                 </li>
 
                 {/* 購物車 */}
                 <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-                  <a className="cart-navbar-a nav-link" href="#!" onClick={(e) => { e.preventDefault() }}>
+                  <a
+                    className="cart-navbar-a nav-link"
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                     <img
                       src={'images/素材/icon/shopping_cart_W.svg'}
                       alt={''}
@@ -1090,8 +1117,8 @@ function HeaderAbout(props) {
                           : ''}
                       </span>
                     ) : (
-                        ''
-                      )}
+                      ''
+                    )}
                   </a>
                   {shoppingCartStorage ? cartMap() : ''}
                 </li>
@@ -1127,12 +1154,12 @@ function HeaderAbout(props) {
         {show && modal === 1
           ? login()
           : show && modal === 2
-            ? signUp()
-            : show && modal === 3
-              ? getPassword()
-              : show && modal === 4
-                ? success()
-                : ''}
+          ? signUp()
+          : show && modal === 3
+          ? getPassword()
+          : show && modal === 4
+          ? success()
+          : ''}
 
         {/* mega menu */}
         <div

@@ -1,4 +1,4 @@
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 // 購物車要求：品牌名稱、顏色、尺寸、商品圖片路徑、庫存、品名、單價、數量
 
 let FakeRes = JSON.parse(localStorage.getItem('cartList'))

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import DetailContent from '../components/DetailContent'
 import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'

@@ -124,9 +124,6 @@ function HeaderOther(props) {
   useEffect(() => {
     setShoppingCartStorage(props.detailToHeaderCart)
   }, [props.detailToHeaderCart])
-  //
-  //
-  //
 
   const history = useHistory()
   const [id, setId] = useState(

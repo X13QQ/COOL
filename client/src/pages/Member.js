@@ -33,7 +33,9 @@ const Setting = ({ route, location }) => {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
-  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
 
   return (
     <>
@@ -48,7 +50,7 @@ const Setting = ({ route, location }) => {
         <Row>
           <Breadcrumb
             locationPath={location.pathname}
-          // onMatchedRoutes={onMatchedRoutes}
+            // onMatchedRoutes={onMatchedRoutes}
           />
           <MemberSidebar />
           <MainSetting />
@@ -65,7 +67,9 @@ const Mail = ({ route, location }) => {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
-  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther
@@ -96,7 +100,9 @@ const Order = ({ route, location }) => {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
-  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther
@@ -127,7 +133,9 @@ const Member = ({ route, location }) => {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
-  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther
@@ -158,7 +166,9 @@ const Favorites = ({ route, location }) => {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
-  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther
@@ -189,7 +199,9 @@ const Coupon = ({ route, location }) => {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
-  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther
@@ -220,7 +232,9 @@ const Contact = ({ route, location }) => {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
-  const [whetherLoginParent, setWhetherLoginParent] = useState(!!localStorage.getItem('user'))
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   return (
     <>
       <HeaderOther

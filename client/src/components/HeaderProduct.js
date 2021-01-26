@@ -3,8 +3,6 @@ import { Link, useHistory } from 'react-router-dom'
 /* global gapi */
 
 function HeaderProduct(props) {
-  // const [show, setShow] = useState(false)
-  // const [modal, setModal] = useState(1)
   const [shoppingCartStorage, setShoppingCartStorage] = useState(
     props.detailToHeaderCart
   )
@@ -139,7 +137,11 @@ function HeaderProduct(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].name
       : ''
   )
-  const [total, setTotal] = useState(!!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user'))[0].total : 0)
+  const [total, setTotal] = useState(
+    !!localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))[0].total
+      : 0
+  )
 
   const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
@@ -626,7 +628,10 @@ function HeaderProduct(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={(e) => {e.preventDefault();props.setShowParent(false)}}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      props.setShowParent(false)
+                    }}
                   >
                     取消
                   </a>
@@ -646,6 +651,9 @@ function HeaderProduct(props) {
                   >
                     註冊
                   </a>
+                  <div className="invalid-feedback text-center mt-3">
+                    {signupMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -762,7 +770,7 @@ function HeaderProduct(props) {
                   </a>
                   <a
                     href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid" 
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -775,6 +783,9 @@ function HeaderProduct(props) {
                   >
                     送出
                   </a>
+                  <div className="invalid-feedback text-center mt-3">
+                    {certificateMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -888,7 +899,11 @@ function HeaderProduct(props) {
                 >
                   {name}
                   <img
-                    src={total > 10000 ? '/images/素材/會員等級icon/winner.svg' : '/images/素材/會員等級icon/award.svg'}
+                    src={
+                      total > 10000
+                        ? '/images/素材/會員等級icon/winner.svg'
+                        : '/images/素材/會員等級icon/award.svg'
+                    }
                     alt={''}
                     className="ml-2"
                   ></img>
@@ -1059,8 +1074,14 @@ function HeaderProduct(props) {
                       style={{ color: 'white', borderColor: 'white' }}
                     ></input>
                   </div>
-                  <a className="nav-link active" aria-current="page" href="#!"
-                   onClick={(e)=>{e.preventDefault()}}>
+                  <a
+                    className="nav-link active"
+                    aria-current="page"
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                     <img src={'/images/素材/icon/Search_W.svg'} alt={''}></img>
                   </a>
                 </li>
