@@ -91,15 +91,54 @@ app.get("/detail/:brand/:id", function (req, res) {
   db.query(
     // 兩張表成功
     "SELECT * FROM product INNER JOIN product_images ON product.id = product_images.product_id  WHERE product.id =" +
-      req.params.id +
-      " ORDER BY color",
+    req.params.id +
+    " ORDER BY color",
 
     (err, result) => {
       if (err) {
         console.log(err);
       }
-      console.log(result);
+      // console.log(result);
       res.send(JSON.stringify(result));
+    }
+  );
+});
+
+// 商品詳細頁 get favorites 
+app.get("/detail/favorite/:userId/:productId", function (req, res) {
+  db.query(
+    "SELECT * FROM favorites WHERE member_no = " + req.params.userId + "",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+
+// 商品詳細頁 post favorites
+app.post("/detail/favorite/:userId/:productId", function (req, res) {
+  db.query(
+    "INSERT INTO favorites (member_no ,product_no ,valid) VALUES (" + req.params.userId + "," + req.params.productId + ", 1)",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      // res.send(JSON.stringify(result));
+    }
+  );
+});
+
+// 商品詳細頁 post favorites
+app.put("/detail/favorite/:userId/:productId", function (req, res) {
+  db.query(
+    "UPDATE favorites SET valid = 1 WHERE member_no = " + req.params.userId + " AND product_no = " + req.params.productId + "",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      // res.send(JSON.stringify(result));
     }
   );
 });
@@ -108,13 +147,13 @@ app.get("/detail/:brand/:id", function (req, res) {
 app.post("/detail/:brand/:id", function (req, res) {
   db.query(
     "SELECT * FROM product INNER JOIN product_stock ON product.id = product_stock.product_id  WHERE product.id =" +
-      req.params.id +
-      " ORDER BY color , size",
+    req.params.id +
+    " ORDER BY color , size",
     (err, result) => {
       if (err) {
         console.log(err);
       }
-      console.log(result);
+      // console.log(result);
       res.send(JSON.stringify(result));
     }
   );
@@ -162,8 +201,8 @@ app.post("/profile/:logintype", function (req, res) {
     } else {
       const sqlSelect =
         "SELECT a.id, CASE a.name WHEN '' THEN 'Hi' ELSE a.name END AS name,a.account,a.password,a.phone,a.email,a.address,a.birth,a.letter,a.type " +
-        ", SUM(b.price) AS total " +
-        "FROM member a INNER JOIN cool_order b ON a.id = b.member_no " +
+        ", IFNULL(SUM(b.price),0) AS total " +
+        "FROM member a LEFT JOIN cool_order b ON a.id = b.member_no " +
         "WHERE a.account = ? and a.password = ? and a.type = 'N' ";
       db.query(
         sqlSelect,
@@ -269,10 +308,10 @@ app.post("/profile/:logintype", function (req, res) {
     // console.log(req.body.name);
     const sqlSelect =
       "SELECT a.id, CASE a.name WHEN '' THEN 'Hi' ELSE a.name END AS name,a.account,a.password,a.phone,a.email,a.address,a.birth,a.letter,a.type " +
-      ", SUM(b.price) AS total " +
-      "FROM member a INNER JOIN cool_order b ON a.id = b.member_no " +
+      ", IFNULL(SUM(b.price),0) AS total " +
+      "FROM member a LEFT JOIN cool_order b ON a.id = b.member_no " +
       "WHERE a.email = ? AND a.type = 'G' ";
-
+    console.log(req.body.email) 
     db.query(sqlSelect, [req.body.email], (err, result, fields) => {
       if (err) res.send({ err: err });
 

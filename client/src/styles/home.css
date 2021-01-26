@@ -65,16 +65,19 @@ body {
   position: absolute;
   margin: auto;
   overflow: hidden;
-  /* container-width = 1320px */
+  background-image: url('../images/首頁/https___hk.hypebeast.com_files_2021_01_virgil-abloh-off-white-nike-the-twenty-collection-rumor-0.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;  /* container-width = 1320px */
 }
 .home-header .photo-mask .photo-mask-mask {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  background-image: url('../images/首頁/https___hk.hypebeast.com_files_2021_01_virgil-abloh-off-white-nike-the-twenty-collection-rumor-0.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-color: rgba(0, 0, 0, 0.3);
+
 }
 
 .home-header .main-navbar .navbar-menu a {

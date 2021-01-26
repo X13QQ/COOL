@@ -127,6 +127,7 @@ function HeaderOther(props) {
   //
   //
   //
+
   const history = useHistory()
   const [id, setId] = useState(
     !!localStorage.getItem('user')
@@ -397,23 +398,23 @@ function HeaderOther(props) {
                   </a>
                 </div>
                 <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
-                  <button
-                    type="button"
+                  <a
+                    href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       props.setShowParent(false)
                       cleanData()
                     }}
                   >
                     取消
-                  </button>
-                  <button
-                    type="button"
+                  </a>
+                  <a
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
@@ -421,13 +422,18 @@ function HeaderOther(props) {
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
+                    href="#!"
                     onClick={(e) => {
                       e.preventDefault()
                       Login({ user })
+                      //
+                      //
+                      //
+                      props.setWhetherLoginParent(true)
                     }}
                   >
                     登入
-                  </button>
+                  </a>
                   <div className="invalid-feedback text-center mt-3">
                     {loginMessage}
                   </div>
@@ -622,20 +628,23 @@ function HeaderOther(props) {
                   </a>
                 </div>
                 <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
-                  <button
-                    type="button"
+                  <a
+                    href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => props.setShowParent(false)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      props.setShowParent(false)
+                    }}
                   >
                     取消
-                  </button>
-                  <button
-                    type="button"
+                  </a>
+                  <a
+                    href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
@@ -643,12 +652,13 @@ function HeaderOther(props) {
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       SignUp({ signupData })
                     }}
                   >
                     註冊
-                  </button>
+                  </a>
                   <div className="invalid-feedback text-center mt-3">
                     {signupMessage}
                   </div>
@@ -756,22 +766,23 @@ function HeaderOther(props) {
                   ></img>
                 </div>
                 <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
-                  <button
-                    type="button"
+                  <a
+                    href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       setModal(1)
                     }}
                   >
                     返回
-                  </button>
-                  <button
-                    type="button"
+                  </a>
+                  <a
+                    href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
@@ -779,12 +790,13 @@ function HeaderOther(props) {
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       certificate(certificateEmail)
                     }}
                   >
                     送出
-                  </button>
+                  </a>
                   <div className="invalid-feedback text-center mt-3">
                     {certificateMessage}
                   </div>
@@ -1000,7 +1012,8 @@ function HeaderOther(props) {
                     setLoginStatus(0)
                     localStorage.removeItem('user')
                     localStorage.removeItem('favorites')
-                    history.push('/clothing')
+                    history.push('/')
+                    props.setWhetherLoginParent(false)
                   }}
                 >
                   登出
@@ -1068,7 +1081,14 @@ function HeaderOther(props) {
                   <div className="d-flex align-items-end search-icon-input-wrap mx-2">
                     <input type="text" className="px-2"></input>
                   </div>
-                  <a className="nav-link active" aria-current="page" href="#!">
+                  <a
+                    className="nav-link active"
+                    aria-current="page"
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                     <img src={'/images/素材/icon/Search_G.svg'} alt={''}></img>
                   </a>
                 </li>
@@ -1078,6 +1098,9 @@ function HeaderOther(props) {
                   <a
                     className="cart-navbar-a nav-link position-relative"
                     href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
                   >
                     <img
                       src={'/images/素材/icon/shopping_cart_G.svg'}
@@ -1118,6 +1141,7 @@ function HeaderOther(props) {
                       e.preventDefault()
                       setModal(1)
                       if (loginStatus === 0) props.setShowParent(true)
+                      // props.setWhetherLoginParent(true)
                     }}
                   >
                     <img src="/images/素材/icon/Profile_G.svg" alt={''}></img>

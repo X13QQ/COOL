@@ -24,10 +24,12 @@ function DetailContent(props) {
   // 步驟一：設一個空detailRes，setDetailRes為之後fetch response
   const [DetailRes, setDetailRes] = useState('')
   const [StockRes, setStockRes] = useState('')
+  const [UserRes, setUserRes] = useState('')
   const [colorState, setColorState] = useState(0)
   const [sizeState, setSizeState] = useState(0)
   const [maxAmount, setMaxAmout] = useState('')
-
+  const [FavoriteState, setFavoriteState] = useState(true)
+  // const [whetherLogin, setWhetherLogin] = useState(props.whetherLoginParent)
   // const [browseHistory, setBrowseHistory] = useState(true)
 
   // dom生成後，執行fetch函式，再影響setProductRes
@@ -49,7 +51,7 @@ function DetailContent(props) {
 
           // 設定資料到DetailRes狀態
           setDetailRes(data)
-          console.log(data)
+          // console.log(data)
         }
       } catch (error) {
         // 發生錯誤的處理情況
@@ -88,9 +90,41 @@ function DetailContent(props) {
     }
     getStock()
   }, [ProductBrand, ProductId])
-  console.log(DetailRes)
-  console.log(StockRes)
-  //
+  // console.log(DetailRes)
+  // console.log(StockRes)
+  // console.log(UserRes)
+
+  useEffect(() => {
+    if (!!localStorage.getItem('user')) {
+      async function getUser() {
+        // 要使用try-catch來作錯誤處理
+        try {
+          // 從伺服器得到資料
+          let userId = JSON.parse(localStorage.getItem('user'))[0].id
+          const response = await fetch(
+            'http://localhost:3001/detail/favorite/' + userId + '/' + ProductId,
+            {
+              method: 'get',
+            }
+          )
+          if (response.ok) {
+            // 剖析資料為JS的數值
+            const data = await response.json()
+
+            // 設定資料到DetailRes狀態
+            setUserRes(data)
+            // console.log(data)
+          }
+        } catch (error) {
+          // 發生錯誤的處理情況
+          alert('無法得到伺服器資料，請稍後再重試')
+          console.log(error)
+        }
+      }
+      getUser()
+    }
+    console.log('123')
+  }, [ProductBrand, ProductId, FavoriteState, props.whetherLoginParent])
   //
   //
   //
@@ -719,34 +753,143 @@ function DetailContent(props) {
             <div className="col-6">
               <div className="row">
                 <div className="col-4 d-flex flex-column justify-content-between">
-                  <div className="mb-2">
+                  <div
+                    className="mb-2 recommend-modal-sm-img-actived"
+                    id="recommend-modal-sm-img1"
+                    onClick={() => {
+                      document
+                        .getElementById('recommend-modal-sm-img1')
+                        .classList.add('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img2')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img3')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img4')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-bg-img')
+                        .setAttribute(
+                          'src',
+                          '/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-10.jpg'
+                        )
+                    }}
+                  >
                     <img
                       className="img-fluid"
-                      style={{ height: '150px', objectFit: 'cover' }}
+                      style={{
+                        height: '150px',
+                        objectFit: 'cover',
+                        cursor: 'pointer',
+                      }}
                       src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-10.jpg"
                       alt={''}
                     ></img>
                   </div>
-                  <div className="mb-2">
+                  <div
+                    className="mb-2"
+                    id="recommend-modal-sm-img2"
+                    onClick={() => {
+                      document
+                        .getElementById('recommend-modal-sm-img2')
+                        .classList.add('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img1')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img3')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img4')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-bg-img')
+                        .setAttribute(
+                          'src',
+                          '/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-11.jpg'
+                        )
+                    }}
+                  >
                     <img
                       className="img-fluid"
-                      style={{ height: '150px', objectFit: 'cover' }}
+                      style={{
+                        height: '150px',
+                        objectFit: 'cover',
+                        cursor: 'pointer',
+                      }}
                       src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-11.jpg"
                       alt={''}
                     ></img>
                   </div>
-                  <div className="mb-2">
+                  <div
+                    className="mb-2"
+                    id="recommend-modal-sm-img3"
+                    onClick={() => {
+                      document
+                        .getElementById('recommend-modal-sm-img3')
+                        .classList.add('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img1')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img2')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img4')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-bg-img')
+                        .setAttribute(
+                          'src',
+                          '/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-9.jpg'
+                        )
+                    }}
+                  >
                     <img
+                      id="recommend-modal-sm-img3"
                       className="img-fluid"
-                      style={{ height: '150px', objectFit: 'cover' }}
+                      style={{
+                        height: '150px',
+                        objectFit: 'cover',
+                        cursor: 'pointer',
+                      }}
                       src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-9.jpg"
                       alt={''}
                     ></img>
                   </div>
-                  <div className="">
+                  <div
+                    className=""
+                    id="recommend-modal-sm-img4"
+                    onClick={() => {
+                      document
+                        .getElementById('recommend-modal-sm-img4')
+                        .classList.add('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img1')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img2')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-sm-img3')
+                        .classList.remove('recommend-modal-sm-img-actived')
+                      document
+                        .getElementById('recommend-modal-bg-img')
+                        .setAttribute(
+                          'src',
+                          '/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg'
+                        )
+                    }}
+                  >
                     <img
                       className="img-fluid"
-                      style={{ height: '150px', objectFit: 'cover' }}
+                      style={{
+                        height: '150px',
+                        objectFit: 'cover',
+                        cursor: 'pointer',
+                      }}
                       src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304_32-1.jpg"
                       alt={''}
                     ></img>
@@ -755,6 +898,7 @@ function DetailContent(props) {
                 <div className="col-8">
                   <div className="w-100 h-100">
                     <img
+                      id="recommend-modal-bg-img"
                       className="h-100 w-100"
                       style={{ objectFit: 'cover' }}
                       src="/images/商品/商品組圖(尚未依品牌分類)/9/z-70864304-10.jpg"
@@ -897,6 +1041,7 @@ function DetailContent(props) {
                         border: 'none',
                         color: 'red',
                         backgroundColor: 'white',
+                        fontStyle: 'italic',
                       }}
                       min="1"
                       defaultValue="1"
@@ -978,7 +1123,7 @@ function DetailContent(props) {
                 <Link to="/product">商品</Link>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
-                商品詳細
+                商品詳細{Number(props.whetherLoginParent)}
               </li>
             </ol>
           </nav>
@@ -1175,6 +1320,7 @@ function DetailContent(props) {
                           border: 'none',
                           color: 'red',
                           backgroundColor: 'white',
+                          fontStyle: 'italic',
                         }}
                         onChange={() => {
                           if (
@@ -1292,13 +1438,73 @@ function DetailContent(props) {
                     </a>
                   </div>
                   <div className="other-function d-flex">
-                    <div>
+                    <div className="position-relative">
                       <a
                         href="#!"
-                        className="d-flex align-items-center px-1 mr-3 text-decoration-none"
+                        className="d-flex align-items-center px-1 mr-3 text-decoration-none position-relative"
                         onClick={(e) => {
                           e.preventDefault()
                           if (!!localStorage.getItem('user')) {
+                            let userId = JSON.parse(
+                              localStorage.getItem('user')
+                            )[0].id
+                            let whetherAddFavorite = true
+                            let whetherHasFavorite = false
+                            for (let i = 0; i < UserRes.length; i++) {
+                              if (
+                                UserRes[i].product_no == ProductId &&
+                                UserRes[i].valid != 0
+                              ) {
+                                whetherAddFavorite = false
+                              } else if (
+                                UserRes[i].product_no == ProductId &&
+                                UserRes[i].valid == 0
+                              ) {
+                                whetherAddFavorite = true
+                                whetherHasFavorite = true
+                              }
+                            }
+                            if (whetherAddFavorite) {
+                              if (whetherHasFavorite) {
+                                fetch(
+                                  'http://localhost:3001/detail/favorite/' +
+                                    userId +
+                                    '/' +
+                                    ProductId,
+                                  {
+                                    method: 'put',
+                                  }
+                                )
+                                setFavoriteState(!FavoriteState)
+                              } else {
+                                fetch(
+                                  'http://localhost:3001/detail/favorite/' +
+                                    userId +
+                                    '/' +
+                                    ProductId,
+                                  {
+                                    method: 'post',
+                                  }
+                                )
+                                setFavoriteState(!FavoriteState)
+                              }
+
+                              document.querySelector(
+                                '.add-favorite-situation-box p'
+                              ).textContent = '收藏成功！'
+                              document.querySelector(
+                                '.add-favorite-situation-box p'
+                              ).style['color'] = 'green'
+                              // setTimeout(function () { document.querySelector('.add-favorite-situation-box p').textContent = "" }, 1500);
+                            } else {
+                              document.querySelector(
+                                '.add-favorite-situation-box p'
+                              ).textContent = '已經加入囉！'
+                              document.querySelector(
+                                '.add-favorite-situation-box p'
+                              ).style['color'] = 'red'
+                              // setTimeout(function () { document.querySelector('.add-favorite-situation-box p').textContent = "" }, 1500);
+                            }
                           } else {
                             props.setShowParent(true)
                           }
@@ -1369,6 +1575,20 @@ function DetailContent(props) {
                       {status === 2 ? reviewmodal() : ''}
                     </div>
                   </div>
+                  {/*  */}
+                  {/*  */}
+                  {/*  */}
+                  {/*  */}
+                  <div
+                    id="add-favorite-situation-box"
+                    className="add-favorite-situation-box mt-3"
+                  >
+                    <p style={{ fontSize: '14px', fontStyle: 'italic' }}></p>
+                  </div>
+                  {/*  */}
+                  {/*  */}
+                  {/*  */}
+                  {/*  */}
                 </div>
               </div>
             </div>
@@ -1376,8 +1596,14 @@ function DetailContent(props) {
           {/*  */}
         </div>
         {/*  */}
-        <div className=" careful-thing-title d-flex justify-content-center">
-          <h2 className="d-inline-block py-3 m-0 text-center font-weight-bold">
+        <div
+          className=" careful-thing-title d-flex justify-content-center"
+          style={{ zIndex: '-1' }}
+        >
+          <h2
+            className="d-inline-block py-3 m-0 text-center font-weight-bold"
+            style={{ zIndex: '-1' }}
+          >
             注意事項及洗滌方式
           </h2>
         </div>
@@ -1394,11 +1620,14 @@ function DetailContent(props) {
             </p>
           </div>
         </div>
-        <div className="horizon-line-sm position-relative mb-5 mx-auto"></div>
+        <div
+          className="horizon-line-sm position-relative mb-5 mx-auto"
+          style={{ zIndex: '-1' }}
+        ></div>
         <div className="container">
           <section className="main-content-middle-1">
             <div className="row">
-              <div className="col-12 col-md-6">
+              <div className="col-12 col-md-6" style={{ zIndex: '-1' }}>
                 <img
                   className="img-fluid my-2"
                   src={DetailRes ? DetailRes[0].content_image1 : ''}
@@ -1410,7 +1639,7 @@ function DetailContent(props) {
                   alt={''}
                 ></img>
               </div>
-              <div className="col-12 col-md-6">
+              <div className="col-12 col-md-6" style={{ zIndex: '-1' }}>
                 <div className="my-2">
                   <p className="text-center font-weight-bold">
                     衣服會隨著時代而改變，
@@ -1446,8 +1675,14 @@ function DetailContent(props) {
             </div>
           </section>
         </div>
-        <div className="horizon-line-sm position-relative my-4 mx-auto"></div>
-        <div className="horizon-line-lg position-relative my-5 mx-auto text-center font-weight-bold h2">
+        <div
+          className="horizon-line-sm position-relative my-4 mx-auto"
+          style={{ zIndex: '-1' }}
+        ></div>
+        <div
+          className="horizon-line-lg position-relative my-5 mx-auto text-center font-weight-bold h2"
+          style={{ zIndex: '-1' }}
+        >
           推薦搭配
         </div>
         <div className="container">
@@ -1570,7 +1805,10 @@ function DetailContent(props) {
           </section>
         </div>
         {/*  */}
-        <div className="horizon-line-sm position-relative my-5 mx-auto text-center h2">
+        <div
+          className="horizon-line-sm position-relative my-5 mx-auto text-center h2"
+          style={{ zIndex: '-1' }}
+        >
           <span
             className="font-weight-bold position-relative"
             style={{ top: '-16px' }}

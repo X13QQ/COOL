@@ -13,10 +13,14 @@ function Detail() {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
   const [showParent, setShowParent] = useState(false)
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
         showParent={showParent}
         setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
@@ -24,6 +28,8 @@ function Detail() {
       ></HeaderOther>
       <Route path="/detail/:brand?/:id?">
         <DetailContent
+          whetherLoginParent={whetherLoginParent}
+          setWhetherLoginParent={setWhetherLoginParent}
           setShowParent={setShowParent}
           detailToHeaderCart={detailToHeaderCart}
           setDetailToHeaderCart={setDetailToHeaderCart}

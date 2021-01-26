@@ -141,6 +141,8 @@ function HeaderHome(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].name
       : ''
   )
+  const [total, setTotal] = useState(!!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user'))[0].total : 0)
+
   const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
 
@@ -230,6 +232,8 @@ function HeaderHome(props) {
           setShow(false)
           setName(res[0].name)
           setId(res[0].id)
+          setTotal(res[0].total)
+
           localStorage.setItem('user', JSON.stringify(res))
         } else {
           setLoginMessage(res.message)
@@ -899,7 +903,7 @@ function HeaderHome(props) {
                 >
                   {name}
                   <img
-                    src="/images/素材/會員等級icon/winner.svg"
+                    src={total > 10000 ? '/images/素材/會員等級icon/winner.svg' : '/images/素材/會員等級icon/award.svg'}
                     alt={''}
                     className="ml-2"
                   ></img>
@@ -932,7 +936,7 @@ function HeaderHome(props) {
                       className="py-1 pr-3 pl-1"
                       style={{ color: 'gray', fontSize: '12px' }}
                     >
-                      黃金會員
+                      {total > 10000 ? '黃金會員' : '一般會員'}
                     </div>
                   </li>
                   <li>
@@ -942,7 +946,7 @@ function HeaderHome(props) {
                     >
                       累積消費金額
                       <br />
-                      <span>1000</span>
+                      <span>{total}</span>
                     </div>
                   </li>
                 </ul>
@@ -994,7 +998,7 @@ function HeaderHome(props) {
                     setLoginStatus(0)
                     localStorage.removeItem('user')
                     localStorage.removeItem('favorites')
-                    history.push('/clothing')
+                    history.push('/')
                   }}
                 >
                   登出

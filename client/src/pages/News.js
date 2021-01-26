@@ -10,6 +10,9 @@ function News() {
       : 0
   )
   const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
 
   const [status, setStatus] = useState(0)
   const [newsLink, setNewsLink] = useState('')
@@ -116,7 +119,7 @@ function News() {
                   <a
                     className="font-weight-bold"
                     style={{ fontSize: '12px' }}
-                    href="#!"
+                    href="/product"
                   >
                     {newsLink}
                   </a>
@@ -141,6 +144,7 @@ function News() {
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
         showParent={showParent}
         setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
@@ -571,6 +575,7 @@ function News() {
                   </div>
                 ))
               : ''}
+            {/* </div> */}
           </div>
           {/* 段落 */}
           <div className="page-select position-relative d-none d-lg-flex justify-content-center align-items-center my-5">

@@ -329,6 +329,13 @@ body {
   color: black;
   font-size: 12px;
 }
+
+.dropdownbtn .btn-primary {
+  color: black !important;
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
 /* 主視覺-------------------------------- */
 .headerwrapper {
   height: 600px;

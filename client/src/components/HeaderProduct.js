@@ -139,8 +139,15 @@ function HeaderProduct(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].name
       : ''
   )
-  const [show, setShow] = useState(false)
+  const [total, setTotal] = useState(!!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user'))[0].total : 0)
+
+  const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
+
+  useEffect(() => {
+    setShow(props.showParent)
+  }, [props.showParent])
+
   const [user, setUser] = useState({ account: '', password: '', email: '' })
   const [loginStatus, setLoginStatus] = useState(0)
   const [certificateEmail, setCertificateEmail] = useState('')
@@ -196,7 +203,7 @@ function HeaderProduct(props) {
   const close = (id) => {
     document.addEventListener('click', function (e) {
       if (e.target.id === id) {
-        setShow(false)
+        props.setShowParent(false)
         setModal(1)
         cleanData()
       }
@@ -222,6 +229,8 @@ function HeaderProduct(props) {
           setShow(false)
           setName(res[0].name)
           setId(res[0].id)
+          setTotal(res[0].total)
+
           localStorage.setItem('user', JSON.stringify(res))
         } else {
           setLoginMessage(res.message)
@@ -384,7 +393,7 @@ function HeaderProduct(props) {
                     立即註冊新帳號
                   </a>
                 </div>
-                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4">
+                <div className="log-in-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
                   <a
                     href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
@@ -393,8 +402,9 @@ function HeaderProduct(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => {
-                      setShow(false)
+                    onClick={(e) => {
+                      e.preventDefault()
+                      props.setShowParent(false)
                       cleanData()
                     }}
                   >
@@ -402,7 +412,7 @@ function HeaderProduct(props) {
                   </a>
                   <a
                     href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -607,7 +617,7 @@ function HeaderProduct(props) {
                     已經有帳號了嗎？
                   </a>
                 </div>
-                <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4">
+                <div className="sign-up-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
                   <a
                     href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
@@ -616,20 +626,21 @@ function HeaderProduct(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setModal(1)}
+                    onClick={(e) => {e.preventDefault();props.setShowParent(false)}}
                   >
                     取消
                   </a>
                   <a
                     href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none  is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       SignUp({ signupData })
                     }}
                   >
@@ -736,7 +747,7 @@ function HeaderProduct(props) {
                     alt={''}
                   ></img>
                 </div>
-                <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4">
+                <div className="certificate-cancel-btn-wrap d-flex justify-content-between mb-4 flex-wrap">
                   <a
                     href="#!"
                     className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
@@ -751,7 +762,7 @@ function HeaderProduct(props) {
                   </a>
                   <a
                     href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none"
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid" 
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
@@ -877,7 +888,7 @@ function HeaderProduct(props) {
                 >
                   {name}
                   <img
-                    src="/images/素材/會員等級icon/winner.svg"
+                    src={total > 10000 ? '/images/素材/會員等級icon/winner.svg' : '/images/素材/會員等級icon/award.svg'}
                     alt={''}
                     className="ml-2"
                   ></img>
@@ -910,7 +921,7 @@ function HeaderProduct(props) {
                       className="py-1 pr-3 pl-1"
                       style={{ color: 'gray', fontSize: '12px' }}
                     >
-                      黃金會員
+                      {total > 10000 ? '黃金會員' : '一般會員'}
                     </div>
                   </li>
                   <li>
@@ -920,7 +931,7 @@ function HeaderProduct(props) {
                     >
                       累積消費金額
                       <br />
-                      <span>1000</span>
+                      <span>{total}</span>
                     </div>
                   </li>
                 </ul>
@@ -972,7 +983,7 @@ function HeaderProduct(props) {
                     setLoginStatus(0)
                     localStorage.removeItem('user')
                     localStorage.removeItem('favorites')
-                    history.push('/clothing')
+                    history.push('/')
                   }}
                 >
                   登出
@@ -1048,8 +1059,9 @@ function HeaderProduct(props) {
                       style={{ color: 'white', borderColor: 'white' }}
                     ></input>
                   </div>
-                  <a className="nav-link active" aria-current="page" href="#!">
-                    <img src={'images/素材/icon/Search_W.svg'} alt={''}></img>
+                  <a className="nav-link active" aria-current="page" href="#!"
+                   onClick={(e)=>{e.preventDefault()}}>
+                    <img src={'/images/素材/icon/Search_W.svg'} alt={''}></img>
                   </a>
                 </li>
 
@@ -1090,7 +1102,8 @@ function HeaderProduct(props) {
                     href="#!"
                     onClick={(e) => {
                       e.preventDefault()
-                      if (loginStatus === 0) setShow(true)
+                      setModal(1)
+                      if (loginStatus === 0) props.setShowParent(true)
                     }}
                   >
                     <img src="images/素材/icon/Profile_W.svg" alt={''}></img>

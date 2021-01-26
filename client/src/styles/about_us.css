@@ -57,7 +57,7 @@ body {
     }
   }
   .about-header .photo-mask {
-    background-image: url(../images/關於/wo_lane_131219_12_LS_1612_2.jpg);
+    background-image: url('../images/關於/wo_lane_131219_12_LS_1612_2.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
