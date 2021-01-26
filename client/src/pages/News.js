@@ -542,23 +542,34 @@ function News() {
                           alt={''}
                         ></img>
                       </div>
-                      <div className="card-body news-card-body-link">
-                        <p className="card-text d-flex justify-content-end ">
-                          <a
-                            href="#!"
-                            style={{ color: '#353c1d', fontSize: '12px' }}
-                            onClick={(e) => {
-                              e.preventDefault()
-                              setStatus(1)
-                              setContent1(v.news_content1)
-                              setContent2(v.news_content2)
-                              setNewsLink(v.news_link)
-                              setSrc(v.src)
-                            }}
+                      <div className="col-md-8">
+                        <div className="card-body news-card-body-text">
+                          {/* <h5 className="card-title"></h5> */}
+                          <p
+                            className="news-article card-text font-weight-bold"
+                            style={{ color: '#353c1d' }}
                           >
-                            繼續閱讀 ...
-                          </a>
-                        </p>
+                            {v.news_title1}
+                          </p>
+                        </div>
+                        <div className="card-body news-card-body-link">
+                          <p className="card-text d-flex justify-content-end ">
+                            <a
+                              href="#!"
+                              style={{ color: '#353c1d', fontSize: '12px' }}
+                              onClick={(e) => {
+                                e.preventDefault()
+                                setStatus(1)
+                                setContent1(v.news_content1)
+                                setContent2(v.news_content2)
+                                setNewsLink(v.news_link)
+                                setSrc(v.src)
+                              }}
+                            >
+                              繼續閱讀 ...
+                            </a>
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>

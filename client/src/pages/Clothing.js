@@ -22,6 +22,9 @@ function Clothing() {
   )
 
   const [showParent, setShowParent] = useState(false)
+  const [whetherLoginParent, setWhetherLoginParent] = useState(
+    !!localStorage.getItem('user')
+  )
 
   const [status, setStatus] = useState(0)
   // const [accordionActived, setAccordionActived] = useState(false)
@@ -267,6 +270,7 @@ function Clothing() {
   return (
     <>
       <HeaderOther
+        setWhetherLoginParent={setWhetherLoginParent}
         showParent={showParent}
         setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
