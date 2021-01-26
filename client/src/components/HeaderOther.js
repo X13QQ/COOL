@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-
 /* global gapi */
+
 function HeaderOther(props) {
-  // shopping cart local storage
-  // 測試
   const [shoppingCartStorage, setShoppingCartStorage] = useState(
     props.detailToHeaderCart
   )
+
   const cartMap = () => {
     let cartTotalValue = Number(0)
     return shoppingCartStorage ? (
@@ -124,9 +123,6 @@ function HeaderOther(props) {
   useEffect(() => {
     setShoppingCartStorage(props.detailToHeaderCart)
   }, [props.detailToHeaderCart])
-  //
-  //
-  //
 
   const history = useHistory()
   const [id, setId] = useState(
@@ -144,6 +140,7 @@ function HeaderOther(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].total
       : 0
   )
+
   const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
 
@@ -206,7 +203,6 @@ function HeaderOther(props) {
   const close = (id) => {
     document.addEventListener('click', function (e) {
       if (e.target.id === id) {
-        // setShow(false)
         props.setShowParent(false)
         setModal(1)
         cleanData()
@@ -235,6 +231,7 @@ function HeaderOther(props) {
           setName(res[0].name)
           setId(res[0].id)
           setTotal(res[0].total)
+
           localStorage.setItem('user', JSON.stringify(res))
         } else {
           setLoginMessage(res.message)
@@ -426,10 +423,6 @@ function HeaderOther(props) {
                     onClick={(e) => {
                       e.preventDefault()
                       Login({ user })
-                      //
-                      //
-                      //
-                      props.setWhetherLoginParent(true)
                     }}
                   >
                     登入
@@ -1010,10 +1003,11 @@ function HeaderOther(props) {
                     e.preventDefault()
                     cleanData()
                     setLoginStatus(0)
+                    props.setShowParent(false)
                     localStorage.removeItem('user')
                     localStorage.removeItem('favorites')
-                    history.push('/')
-                    props.setWhetherLoginParent(false)
+                    // history.push('/')
+                    history.push('/clothing')
                   }}
                 >
                   登出
@@ -1126,9 +1120,6 @@ function HeaderOther(props) {
                       ''
                     )}
                   </a>
-                  {/*  */}
-                  {/*  */}
-                  {/*  */}
                   {shoppingCartStorage ? cartMap() : ''}
                 </li>
 
@@ -1141,7 +1132,6 @@ function HeaderOther(props) {
                       e.preventDefault()
                       setModal(1)
                       if (loginStatus === 0) props.setShowParent(true)
-                      // props.setWhetherLoginParent(true)
                     }}
                   >
                     <img src="/images/素材/icon/Profile_G.svg" alt={''}></img>
@@ -1396,6 +1386,7 @@ function HeaderOther(props) {
                   setLoginStatus(1)
                   setName(res[0].name)
                   setId(res[0].id)
+                  setTotal(res[0].total)
                 }
                 localStorage.setItem('user', JSON.stringify(res))
                 // console.log(res)

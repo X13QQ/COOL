@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import HeaderOther from '../components/HeaderOther'
 import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
+import { Link } from 'react-router-dom'
 
 function News() {
   const [detailToHeaderCart, setDetailToHeaderCart] = useState(

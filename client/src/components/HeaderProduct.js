@@ -3,8 +3,6 @@ import { Link, useHistory } from 'react-router-dom'
 /* global gapi */
 
 function HeaderProduct(props) {
-  // const [show, setShow] = useState(false)
-  // const [modal, setModal] = useState(1)
   const [shoppingCartStorage, setShoppingCartStorage] = useState(
     props.detailToHeaderCart
   )
@@ -125,9 +123,7 @@ function HeaderProduct(props) {
   useEffect(() => {
     setShoppingCartStorage(props.detailToHeaderCart)
   }, [props.detailToHeaderCart])
-  //
-  //
-  //
+
   const history = useHistory()
   const [id, setId] = useState(
     !!localStorage.getItem('user')
@@ -139,7 +135,11 @@ function HeaderProduct(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].name
       : ''
   )
-  const [total, setTotal] = useState(!!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user'))[0].total : 0)
+  const [total, setTotal] = useState(
+    !!localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))[0].total
+      : 0
+  )
 
   const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
@@ -626,7 +626,10 @@ function HeaderProduct(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={(e) => {e.preventDefault();props.setShowParent(false)}}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      props.setShowParent(false)
+                    }}
                   >
                     取消
                   </a>
@@ -646,6 +649,9 @@ function HeaderProduct(props) {
                   >
                     註冊
                   </a>
+                  <div className="invalid-feedback text-center mt-3">
+                    {signupMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -756,25 +762,32 @@ function HeaderProduct(props) {
                       border: '1px solid #353c1d',
                       color: '#353c1d',
                     }}
-                    onClick={() => setModal(1)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setModal(1)
+                    }}
                   >
                     返回
                   </a>
                   <a
                     href="#!"
-                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid" 
+                    className="font-weight-bold rounded text-center d-inline-block py-2 text-decoration-none is-invalid"
                     style={{
                       width: '45%',
                       border: '1px solid #353c1d',
                       color: 'white',
                       backgroundColor: '#353c1d',
                     }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       certificate(certificateEmail)
                     }}
                   >
                     送出
                   </a>
+                  <div className="invalid-feedback text-center mt-3">
+                    {certificateMessage}
+                  </div>
                 </div>
                 <hr
                   className="mt-0 mb-4"
@@ -888,7 +901,11 @@ function HeaderProduct(props) {
                 >
                   {name}
                   <img
-                    src={total > 10000 ? '/images/素材/會員等級icon/winner.svg' : '/images/素材/會員等級icon/award.svg'}
+                    src={
+                      total > 10000
+                        ? '/images/素材/會員等級icon/winner.svg'
+                        : '/images/素材/會員等級icon/award.svg'
+                    }
                     alt={''}
                     className="ml-2"
                   ></img>
@@ -981,9 +998,10 @@ function HeaderProduct(props) {
                     e.preventDefault()
                     cleanData()
                     setLoginStatus(0)
+                    props.setShowParent(false)
                     localStorage.removeItem('user')
                     localStorage.removeItem('favorites')
-                    history.push('/')
+                    history.push('/product')
                   }}
                 >
                   登出
@@ -1059,17 +1077,29 @@ function HeaderProduct(props) {
                       style={{ color: 'white', borderColor: 'white' }}
                     ></input>
                   </div>
-                  <a className="nav-link active" aria-current="page" href="#!"
-                   onClick={(e)=>{e.preventDefault()}}>
+                  <a
+                    className="nav-link active"
+                    aria-current="page"
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                     <img src={'/images/素材/icon/Search_W.svg'} alt={''}></img>
                   </a>
                 </li>
 
                 {/* 購物車 */}
                 <li className="cart-navbar-li nav-item mx-2 mx-sm-3 mx-lg-2 position-relative">
-                  <a className="cart-navbar-a nav-link" href="#!">
+                  <a
+                    className="cart-navbar-a nav-link"
+                    href="#!"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                     <img
-                      src={'images/素材/icon/shopping_cart_W.svg'}
+                      src={'/images/素材/icon/shopping_cart_G.svg'}
                       alt={''}
                     ></img>
                     {shoppingCartStorage ? (
@@ -1434,6 +1464,7 @@ function HeaderProduct(props) {
                   setLoginStatus(1)
                   setName(res[0].name)
                   setId(res[0].id)
+                  setTotal(res[0].total)
                 }
                 localStorage.setItem('user', JSON.stringify(res))
                 // console.log(res)

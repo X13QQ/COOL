@@ -125,11 +125,7 @@ function HeaderHome(props) {
   useEffect(() => {
     setShoppingCartStorage(props.detailToHeaderCart)
   }, [props.detailToHeaderCart])
-  //
-  //
-  //
-  //
-  //
+
   const history = useHistory()
   const [id, setId] = useState(
     !!localStorage.getItem('user')
@@ -141,7 +137,11 @@ function HeaderHome(props) {
       ? JSON.parse(localStorage.getItem('user'))[0].name
       : ''
   )
-  const [total, setTotal] = useState(!!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user'))[0].total : 0)
+  const [total, setTotal] = useState(
+    !!localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user'))[0].total
+      : 0
+  )
 
   const [show, setShow] = useState(props.showParent)
   const [modal, setModal] = useState(1)
@@ -903,7 +903,11 @@ function HeaderHome(props) {
                 >
                   {name}
                   <img
-                    src={total > 10000 ? '/images/素材/會員等級icon/winner.svg' : '/images/素材/會員等級icon/award.svg'}
+                    src={
+                      total > 10000
+                        ? '/images/素材/會員等級icon/winner.svg'
+                        : '/images/素材/會員等級icon/award.svg'
+                    }
                     alt={''}
                     className="ml-2"
                   ></img>

@@ -1,20 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import context from 'react-bootstrap/esm/AccordionContext'
 import { Link, withRouter } from 'react-router-dom'
-import FakeRes from '../data/FakeRes'
-import Product from '../pages/Product'
-import ProductContent from './ProductContent'
-import Black from '../images/素材/icon/Clothes color_B.svg'
-import Magnifier from 'react-magnifier'
 
-const testData = [
-  { color: 'blue' },
-  { color: 'black' },
-  { size: 's' },
-  { size: 'm' },
-  { size: 'l' },
-  { size: 'xl' },
-]
 // 目前會顯示很多prettier warnings，暫時無視
 // Link 路由還沒寫的精準
 function DetailContent(props) {
@@ -27,7 +13,6 @@ function DetailContent(props) {
   const [UserRes, setUserRes] = useState('')
   const [colorState, setColorState] = useState(0)
   const [sizeState, setSizeState] = useState(0)
-  const [maxAmount, setMaxAmout] = useState('')
   const [FavoriteState, setFavoriteState] = useState(true)
   // const [whetherLogin, setWhetherLogin] = useState(props.whetherLoginParent)
   // const [browseHistory, setBrowseHistory] = useState(true)

@@ -4,14 +4,7 @@ import Topbtn from '../components/Topbtn'
 import Footer from '../components/Footer'
 import Magnifier from 'react-magnifier'
 import { Link } from 'react-router-dom'
-import {
-  DropdownButton,
-  Dropdown,
-  Accordion,
-  Card,
-  Form,
-  ButtonGroup,
-} from 'react-bootstrap'
+import { Accordion, Card } from 'react-bootstrap'
 
 // clothing
 function Clothing() {
@@ -20,11 +13,10 @@ function Clothing() {
       ? JSON.parse(localStorage.getItem('cartList')).length
       : 0
   )
-
+  // const [whetherLoginParent, setWhetherLoginParent] = useState(
+  //   !!localStorage.getItem('user')
+  // )
   const [showParent, setShowParent] = useState(false)
-  const [whetherLoginParent, setWhetherLoginParent] = useState(
-    !!localStorage.getItem('user')
-  )
 
   const [status, setStatus] = useState(0)
   // const [accordionActived, setAccordionActived] = useState(false)
@@ -270,7 +262,7 @@ function Clothing() {
   return (
     <>
       <HeaderOther
-        setWhetherLoginParent={setWhetherLoginParent}
+        // setWhetherLoginParent={setWhetherLoginParent}
         showParent={showParent}
         setShowParent={setShowParent}
         detailToHeaderCart={detailToHeaderCart}
@@ -527,7 +519,7 @@ function Clothing() {
       <Footer></Footer>
       <script
         src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
-        crossOrigin
+        crossOrigin="true"
       ></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
