@@ -534,6 +534,11 @@ app.get("/dashboard/report/orderlist", function (req, res) {
   });
 });
 
+//營運分析 基本報表
+app.get("/dashboard/report/orderlist/chart", function (req, res) {
+  res.send(req.query)
+});
+
 app.listen(3001, () => {
   console.log("port 3001");
 });

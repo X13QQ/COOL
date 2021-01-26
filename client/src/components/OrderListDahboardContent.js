@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
-// import { Link, withRouter } from 'react-router-dom'
-// import { ArrowDown } from '../components/icons'
+import BarChart from './BarChart'
+import LineChart from './LineChart'
 
 // 麵包屑要記得改
 function OrderListDashboardContent() {
   const [orderlist, setOrderList] = useState([])
   const [modalState, setModalState] = useState(false)
+
+  //報表用
+  const [year, setYear] = useState('2020')
+  const [time, setTime] = useState('MONTH')
+  const [type, setType] = useState('REVENUE')
 
   const getOrderList = (id) => {
     let url = new URL('http://localhost:3001/dashboard/report/orderlist')
@@ -19,7 +24,7 @@ function OrderListDashboardContent() {
       .then((res) => res.json())
       .then((data) => {
         setOrderList(data)
-        console.log(data)
+        // console.log(data)
       })
       .catch((err) => console.log('錯誤:', err))
   }
@@ -180,6 +185,59 @@ function OrderListDashboardContent() {
         ) : (
           ''
         )}
+      </div>
+
+      <div>
+        <form className="mx-5">
+          <div className="form-row">
+            <div className="form-group col-md-2">
+              <label htmlFor="inputState">Year</label>
+              <select
+                id="inputState"
+                className="form-control"
+                value={year}
+                onChange={(e) => {
+                  setYear(e.target.value)
+                }}
+              >
+                <option value={'2020'}>2020</option>
+                <option value={'2019'}>2019</option>
+              </select>
+            </div>
+            <div className="form-group col-md-2">
+              <label htmlFor="inputState">Time</label>
+              <select
+                id="inputState"
+                className="form-control"
+                value={time}
+                onChange={(e) => {
+                  setTime(e.target.value)
+                }}
+              >
+                <option value={'MONTH'}>月報表</option>
+                <option value={'QUARTER'}>季報表</option>
+              </select>
+            </div>
+            <div className="form-group col-md-2">
+              <label htmlFor="inputState">Type</label>
+              <select
+                id="inputState"
+                className="form-control"
+                value={type}
+                onChange={(e) => {
+                  setType(e.target.value)
+                }}
+              >
+                <option value={'REVENUE'}>銷售金額</option>
+                <option value={'ORDERCOUNT'}>訂單數量</option>
+              </select>
+            </div>
+          </div>
+        </form>
+        <div className="d-flex flex-wrap">
+          <BarChart year={year} time={time} type={type} />
+          <LineChart />
+        </div>
       </div>
     </>
   )
