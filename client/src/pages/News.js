@@ -124,7 +124,7 @@ function News() {
                   <a
                     className="font-weight-bold"
                     style={{ fontSize: '14px' }}
-                    href="/product"
+                    href="/detail/UNDEFEATED/27"
                   >
                     {newsLink}
                   </a>
@@ -449,13 +449,13 @@ function News() {
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb px-0 d-none d-lg-flex">
                 <li className="breadcrumb-item">
-                  <a href="#!">首頁</a>
+                  <a href="/">首頁</a>
                 </li>
                 <li className="breadcrumb-item">
-                  <a href="#!">商品首頁</a>
+                  <a href="/news">新聞頁面</a>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
-                  新品一覽
+                  推薦新聞
                 </li>
               </ol>
             </nav>
