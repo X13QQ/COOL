@@ -1009,7 +1009,8 @@ function HeaderOther(props) {
                     setLoginStatus(0)
                     localStorage.removeItem('user')
                     localStorage.removeItem('favorites')
-                    history.push('/')
+                    // history.push('/')
+                    history.push('/clothing')
                     props.setWhetherLoginParent(false)
                   }}
                 >

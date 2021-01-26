@@ -335,7 +335,7 @@ app.post("/profile/:logintype", function (req, res) {
       "SELECT id, CASE name WHEN '' THEN 'Hi' ELSE name END AS name,account,password,phone,email,address,birth,letter,type " +
       "FROM member " +
       "WHERE email = ? and type = 'G' ";
-    console.log(req.body.email);
+    // console.log(req.body.email);
     db.query(sqlSelect, [req.body.email], (err, result, fields) => {
       if (err) res.send({ err: err });
 
@@ -406,7 +406,7 @@ app.get("/member/order/:status", function (req, res) {
 // 會員等級
 app.get("/member/member", function (req, res) {
   const sqlSelect =
-    "SELECT COUNT(id) AS count, IFNULL(SUM(price), 0) AS price AS total " +
+    "SELECT COUNT(id) AS count, IFNULL(SUM(price), 0) AS total " +
     "FROM cool_order " +
     "WHERE member_no = ? ";
   db.query(sqlSelect, [req.query.memberNo], (err, result, fields) => {
