@@ -8,9 +8,10 @@ function OrderListDashboardContent() {
   const [modalState, setModalState] = useState(false)
 
   //報表用
-  const [year, setYear] = useState('2020')
+  const [year, setYear] = useState(2020)
   const [time, setTime] = useState('MONTH')
   const [type, setType] = useState('REVENUE')
+  const [orderData, setOrderData] = useState([])
 
   const getOrderList = (id) => {
     let url = new URL('http://localhost:3001/dashboard/report/orderlist')
@@ -28,9 +29,30 @@ function OrderListDashboardContent() {
       })
       .catch((err) => console.log('錯誤:', err))
   }
+
   useEffect(() => {
+    const getOrderData = () => {
+      let url = new URL(
+        'http://localhost:3001/dashboard/report/orderlist/chart'
+      )
+      let params = {
+        year: year,
+        lastyear: year - 1,
+      }
+      url.search = new URLSearchParams(params).toString()
+
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          setOrderData(data)
+          console.log(data)
+        })
+        .catch((err) => console.log('錯誤:', err))
+    }
+
     getOrderList()
-  }, [])
+    getOrderData()
+  }, [year])
 
   return (
     <>
@@ -116,12 +138,12 @@ function OrderListDashboardContent() {
                     className="text-center font-weight-bold"
                     style={{ lineHeight: '37.53px', fontSize: '14px' }}
                   >
-                    <button className="btn btn-secondary mx-1">修改</button>
+                    {/* <button className="btn btn-secondary mx-1">修改</button> */}
                     <button
                       className="btn btn-info mx-1"
                       onClick={() => setModalState(true)}
                     >
-                      查看
+                      查看詳細
                     </button>
                   </td>
                 </tr>
@@ -131,6 +153,7 @@ function OrderListDashboardContent() {
             )}
           </tbody>
         </table>
+
         {/* modal */}
         {modalState ? (
           <div
@@ -200,8 +223,9 @@ function OrderListDashboardContent() {
                   setYear(e.target.value)
                 }}
               >
-                <option value={'2020'}>2020</option>
-                <option value={'2019'}>2019</option>
+                <option value={2020}>2020</option>
+                <option value={2019}>2019</option>
+                <option value={2018}>2018</option>
               </select>
             </div>
             <div className="form-group col-md-2">
@@ -235,8 +259,13 @@ function OrderListDashboardContent() {
           </div>
         </form>
         <div className="d-flex flex-wrap">
-          <BarChart year={year} time={time} type={type} />
-          <LineChart />
+          <BarChart year={year} time={time} type={type} orderData={orderData} />
+          <LineChart
+            year={year}
+            time={time}
+            type={type}
+            orderData={orderData}
+          />
         </div>
       </div>
     </>

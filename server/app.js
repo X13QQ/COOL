@@ -535,8 +535,34 @@ app.get("/dashboard/report/orderlist", function (req, res) {
 });
 
 //營運分析 基本報表
+// app.get("/dashboard/report/orderlist/chart", function (req, res) {
+//   const time = req.query.time
+//   const type = req.query.type === 'REVENUE' ? 'SUM(price)' : req.query.type === 'ORDERCOUNT' ? ' COUNT(id)' : ''
+//   console.log(type)
+//   const sqlSelect =`
+//     SELECT YEAR(date) AS year, MONTH(date) AS time, ${type} AS sum 
+//     FROM cool_order 
+//     WHERE YEAR(date) in (?, ?) 
+//     GROUP BY YEAR(date), ${time}(date) 
+//     ORDER BY year, time
+//     `;
+//     db.query(sqlSelect, [req.query.year, req.query.lastyear], (req, result, fields) => {
+//       res.send(result);
+//     });
+// });
+
+//營運分析 基本報表
 app.get("/dashboard/report/orderlist/chart", function (req, res) {
-  res.send(req.query)
+  const sqlSelect =`
+    SELECT YEAR(date) AS year, MONTH(date) AS time, SUM(price) AS price, COUNT(id) AS sum 
+    FROM cool_order 
+    WHERE YEAR(date) in (?, ?) 
+    GROUP BY YEAR(date), MONTH(date) 
+    ORDER BY year, time
+    `;
+    db.query(sqlSelect, [req.query.year, req.query.lastyear], (req, result, fields) => {
+      res.send(result);
+    });
 });
 
 app.listen(3001, () => {

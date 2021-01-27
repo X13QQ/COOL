@@ -1,71 +1,57 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Bar } from 'react-chartjs-2'
 
 const BarChart = (props) => {
+  // console.log(props)
   const year = props.year
   const lastyear = props.year - 1
   const time = props.time
   const type = props.type
   const typeName =
-    props.type === 'REVENUE'
-      ? '銷售金額'
-      : props.type === 'ORDERCOUNT'
-      ? '訂單數量'
+    type === 'REVENUE' ? '銷售金額' : type === 'ORDERCOUNT' ? '訂單數量' : ''
+  const titleText = time === 'MONTH' ? '(月)' : time === 'QUARTER' ? '(季)' : ''
+
+  const orderData = props.orderData
+
+  // 今年月報表
+  let sumAll =
+    orderData.length > 0
+      ? orderData
+          .filter((item) => item.year === Number(year))
+          .map((v) =>
+            type === 'REVENUE' ? v.price : type === 'ORDERCOUNT' ? v.sum : ''
+          )
       : ''
-  console.log(year + '/' + lastyear)
-  console.log(time + '/' + type)
+  // 季報表
+  if (time === 'QUARTER') {
+    sumAll = QUARTER(sumAll)
+  }
 
-  useEffect(() => {
-    const getOrderData = () => {
-      let url = new URL(
-        'http://localhost:3001/dashboard/report/orderlist/chart'
-      )
-      let params = {
-        year: year,
-        lastyear: lastyear,
-        time: time,
-        type: type,
+  // 去年月報表
+  let lastsumAll =
+    orderData.length > 0
+      ? orderData
+          .filter((item) => item.year === Number(lastyear))
+          .map((v) =>
+            type === 'REVENUE' ? v.price : type === 'ORDERCOUNT' ? v.sum : ''
+          )
+      : 0
+  // 去年季報表
+  if (time === 'QUARTER') {
+    let arr = []
+    let s = 0
+    lastsumAll.forEach((el, i) => {
+      if (i % 3 === 2) {
+        s += Number(el)
+        arr.push(s)
+        s = 0
+      } else {
+        s += Number(el)
       }
-      url.search = new URLSearchParams(params).toString()
+    })
+    lastsumAll = QUARTER(lastsumAll)
+  }
 
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data)
-        })
-        .catch((err) => console.log('錯誤:', err))
-    }
-    getOrderData()
-  }, [year, lastyear, time, type])
-
-  const sum = [
-    1000,
-    9000,
-    25000,
-    15800,
-    14200,
-    60000,
-    18000,
-    29000,
-    78000,
-    10000,
-    90000,
-    6000,
-  ]
-  const lastsum = [
-    10000,
-    90400,
-    2500,
-    15800,
-    42200,
-    60000,
-    80700,
-    22000,
-    48000,
-    10000,
-    20000,
-    60000,
-  ]
   const labels =
     time === 'MONTH'
       ? [
@@ -90,7 +76,7 @@ const BarChart = (props) => {
     datasets: [
       {
         label: `${typeName} ${year}`,
-        data: sum,
+        data: sumAll,
         borderColor: [
           'rgba(255, 99, 132, 0.8)',
           'rgba(255, 99, 132, 0.8)',
@@ -123,7 +109,7 @@ const BarChart = (props) => {
       },
       {
         label: `${typeName} ${lastyear}`,
-        data: lastsum,
+        data: lastsumAll,
         borderColor: [
           'rgba(54, 162, 235, 0.8)',
           'rgba(54, 162, 235, 0.8)',
@@ -161,15 +147,15 @@ const BarChart = (props) => {
     maintainAspectRatio: false,
     title: {
       display: true,
-      text: '每月營業額',
+      text: titleText,
     },
     scales: {
       yAxes: [
         {
           ticks: {
-            min: 0,
-            max: 100000,
-            //   beginAtZero: true,
+            // min: 0,
+            // max: time === 'MONTH' ? 100000 : time === 'QUARTER' ? 300000 : '',
+            beginAtZero: true,
           },
         },
       ],
@@ -181,6 +167,21 @@ const BarChart = (props) => {
       <Bar data={data} options={options}></Bar>
     </div>
   )
+}
+
+function QUARTER(sum) {
+  let arr = []
+  let s = 0
+  sum.forEach((el, i) => {
+    if (i % 3 === 2) {
+      s += Number(el)
+      arr.push(s)
+      s = 0
+    } else {
+      s += Number(el)
+    }
+  })
+  return arr
 }
 
 export default BarChart
