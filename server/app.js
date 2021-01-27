@@ -580,7 +580,7 @@ app.get("/dashboard/report/orderlist/chart", function (req, res) {
 app.get("/dashboard/report/orderlist/doughnutandpie", function (req, res) {
   const sort = req.query.sort
   const sqlSelect =`
-    SELECT ${sort}, SUM(amount) AS amount 
+    SELECT ${sort}, SUM(amount) AS amount, ROUND(SUM(amount)/(SELECT SUM(amount) FROM cool_order_detailed)*100, 2) AS percent
     FROM cool_order_detailed 
     GROUP BY ${sort}
     ORDER BY amount DESC

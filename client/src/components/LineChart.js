@@ -9,8 +9,7 @@ const LineChart = (props) => {
   const type = props.type
   const typeName =
     type === 'REVENUE' ? '銷售金額' : type === 'ORDERCOUNT' ? '訂單數量' : ''
-  const titleText =
-    time === 'MONTH' ? '營業額(月)' : time === 'QUARTER' ? '營業額(季)' : ''
+  const titleText = time === 'MONTH' ? '(月)' : time === 'QUARTER' ? '(季)' : ''
 
   const orderData = props.orderData
 

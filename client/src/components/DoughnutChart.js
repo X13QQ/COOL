@@ -16,10 +16,10 @@ const DoughnutChart = (props) => {
   const count = hotData.length
 
   const labels =
-    sort === 'brand'
-      ? hotData.map((v, i) => v.brand)
-      : sort === 'size'
-      ? hotData.map((v, i) => v.size)
+    hotData.length > 0 && sort === 'brand'
+      ? hotData.map((v, i) => v.brand + '(' + v.percent + '%)')
+      : hotData.length > 0 && sort === 'size'
+      ? hotData.map((v, i) => v.size + '(' + v.percent + '%)')
       : []
   // console.log('labels' + labels)
   const amountAll = hotData.length > 0 ? hotData.map((v) => v.amount) : ''
