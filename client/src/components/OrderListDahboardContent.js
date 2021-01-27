@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import BarChart from './BarChart'
 import LineChart from './LineChart'
+import DoughnutChart from './DoughnutChart'
 
 // 麵包屑要記得改
 function OrderListDashboardContent() {
   const [orderlist, setOrderList] = useState([])
   const [modalState, setModalState] = useState(false)
-
   //報表用
   const [year, setYear] = useState(2020)
   const [time, setTime] = useState('MONTH')
   const [type, setType] = useState('REVENUE')
   const [orderData, setOrderData] = useState([])
+
+  const [sort, setSort] = useState('brand')
+  const [hotData, setHotData] = useState([])
+
+  const [orderNo, setOrderNo] = useState('')
+  const [orderId, setOrderId] = useState(1)
+  const [orderdetail, setOrderDetail] = useState([])
 
   const getOrderList = (id) => {
     let url = new URL('http://localhost:3001/dashboard/report/orderlist')
@@ -26,6 +33,17 @@ function OrderListDashboardContent() {
       .then((data) => {
         setOrderList(data)
         // console.log(data)
+      })
+      .catch((err) => console.log('錯誤:', err))
+  }
+  const getOrderDetail = () => {
+    let url = new URL('http://localhost:3001/dashboard/report/orderdetail')
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setOrderDetail(data)
+        console.log(data)
       })
       .catch((err) => console.log('錯誤:', err))
   }
@@ -50,9 +68,29 @@ function OrderListDashboardContent() {
         .catch((err) => console.log('錯誤:', err))
     }
 
+    const getHotData = () => {
+      let url = new URL(
+        'http://localhost:3001/dashboard/report/orderlist/doughnutandpie'
+      )
+      let params = {
+        sort: sort,
+      }
+      url.search = new URLSearchParams(params).toString()
+
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          setHotData(data)
+          // console.log(data)
+        })
+        .catch((err) => console.log('錯誤:', err))
+    }
+
     getOrderList()
     getOrderData()
-  }, [year])
+    getOrderDetail()
+    getHotData()
+  }, [year, sort])
 
   return (
     <>
@@ -141,7 +179,11 @@ function OrderListDashboardContent() {
                     {/* <button className="btn btn-secondary mx-1">修改</button> */}
                     <button
                       className="btn btn-info mx-1"
-                      onClick={() => setModalState(true)}
+                      onClick={() => {
+                        setModalState(true)
+                        setOrderNo(v.order_no)
+                        setOrderId(v.id)
+                      }}
                     >
                       查看詳細
                     </button>
@@ -173,7 +215,7 @@ function OrderListDashboardContent() {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title font-weight-bold">
-                    編號： <span>20123123</span>
+                    編號： <span>{orderNo}</span>
                   </h5>
                   <button
                     type="button"
@@ -186,10 +228,20 @@ function OrderListDashboardContent() {
                   </button>
                 </div>
                 <div className="modal-body">
-                  <p>內容打在這裡</p>
-                  <p>內容打在這裡</p>
-                  <p>內容打在這裡</p>
-                  <p>內容打在這裡</p>
+                  {orderdetail
+                    .filter((item) => item.order_id === orderId.toString())
+                    .map((v, i) => (
+                      <ul key={i} className="list-unstyled">
+                        <li>商品{i + 1}</li>
+                        <li>
+                          {v.brand} - {v.name}
+                        </li>
+                        <li>
+                          顏色: {v.color} / 尺寸: {v.size} / 數量: {v.amount} /
+                          價格: {v.price}
+                        </li>
+                      </ul>
+                    ))}
                 </div>
                 <div className="modal-footer">
                   <button
@@ -210,13 +262,14 @@ function OrderListDashboardContent() {
         )}
       </div>
 
-      <div>
+      <div className="my-3">
         <form className="mx-5">
+          <h1>訂單</h1>
           <div className="form-row">
             <div className="form-group col-md-2">
-              <label htmlFor="inputState">Year</label>
+              <label htmlFor="year">Year</label>
               <select
-                id="inputState"
+                id="year"
                 className="form-control"
                 value={year}
                 onChange={(e) => {
@@ -225,13 +278,12 @@ function OrderListDashboardContent() {
               >
                 <option value={2020}>2020</option>
                 <option value={2019}>2019</option>
-                <option value={2018}>2018</option>
               </select>
             </div>
             <div className="form-group col-md-2">
-              <label htmlFor="inputState">Time</label>
+              <label htmlFor="time">Time</label>
               <select
-                id="inputState"
+                id="time"
                 className="form-control"
                 value={time}
                 onChange={(e) => {
@@ -243,9 +295,9 @@ function OrderListDashboardContent() {
               </select>
             </div>
             <div className="form-group col-md-2">
-              <label htmlFor="inputState">Type</label>
+              <label htmlFor="type">Type</label>
               <select
-                id="inputState"
+                id="type"
                 className="form-control"
                 value={type}
                 onChange={(e) => {
@@ -266,6 +318,31 @@ function OrderListDashboardContent() {
             type={type}
             orderData={orderData}
           />
+        </div>
+      </div>
+
+      <div className="my-3">
+        <form className="mx-5">
+          <h1>熱門</h1>
+          <div className="form-row">
+            <div className="form-group col-md-2">
+              <label htmlFor="sort">分類</label>
+              <select
+                id="sort"
+                className="form-control"
+                value={sort}
+                onChange={(e) => {
+                  setSort(e.target.value)
+                }}
+              >
+                <option value={'brand'}>品牌</option>
+                <option value={'size'}>尺寸</option>
+              </select>
+            </div>
+          </div>
+        </form>
+        <div className="d-flex flex-wrap">
+          <DoughnutChart sort={sort} hotData={hotData} />
         </div>
       </div>
     </>
