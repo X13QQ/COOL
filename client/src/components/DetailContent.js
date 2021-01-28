@@ -1108,7 +1108,7 @@ function DetailContent(props) {
                 <Link to="/product">商品</Link>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
-                商品詳細{Number(props.whetherLoginParent)}
+                商品詳細
               </li>
             </ol>
           </nav>
@@ -1673,7 +1673,7 @@ function DetailContent(props) {
         <div className="container">
           <section className="main-content-middle2">
             <div className="row justify-content-between">
-              <div className="col-12 col-lg-6 pr-lg-5 mb-3 mb-lg-0">
+              <div className="col-12 col-lg-6 pr-lg-5 mb-3 mb-lg-0  d-flex align-items-center">
                 <img
                   className="img-fluid"
                   src={DetailRes ? DetailRes[0].image : ''}
