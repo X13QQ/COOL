@@ -58,7 +58,7 @@ const MainSetting = () => {
     }
     let url = new URL('http://localhost:3001/member/setting')
     fetch(url, updateMethod)
-      .then(() => alert('update success'))
+      .then(() => alert('更新成功'))
       .catch((err) => console.log('錯誤:', err))
   }
 

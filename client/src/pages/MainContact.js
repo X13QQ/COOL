@@ -27,7 +27,7 @@ function MainContact() {
         setService('')
         setSubject('')
         setContent('')
-        alert('OK')
+        alert('我們會盡快回復你')
       })
       .catch((err) => console.log('錯誤:', err))
   }
