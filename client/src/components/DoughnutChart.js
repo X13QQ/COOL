@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Doughnut, Pie, Radar } from 'react-chartjs-2'
 
 const DoughnutChart = (props) => {
@@ -23,13 +23,32 @@ const DoughnutChart = (props) => {
       : []
   // console.log('labels' + labels)
   const amountAll = hotData.length > 0 ? hotData.map((v) => v.amount) : ''
+  const [color, setColor] = useState([])
+
+  useEffect(() => {
+    function randomColor(a) {
+      var r = Math.round(Math.random() * (255 - 0) + 0)
+      var g = Math.round(Math.random() * (255 - 0) + 0)
+      var b = Math.round(Math.random() * (255 - 0) + 0)
+      return `rgba(${r}, ${g}, ${b}, ${a})`
+    }
+
+    function countColor(count) {
+      let arr = []
+      for (let i = 0; i < count; i++) {
+        arr.push(randomColor(0.8))
+      }
+      return arr
+    }
+    setColor(countColor(count))
+  }, [count])
 
   const data = {
     labels: labels,
     datasets: [
       {
         data: amountAll,
-        backgroundColor: countColor(count),
+        backgroundColor: color,
       },
     ],
   }
@@ -49,21 +68,6 @@ const DoughnutChart = (props) => {
       <Pie data={data} options={options}></Pie>
     </div>
   )
-}
-
-function randomColor(a) {
-  var r = Math.round(Math.random() * (255 - 0) + 0)
-  var g = Math.round(Math.random() * (255 - 0) + 0)
-  var b = Math.round(Math.random() * (255 - 0) + 0)
-  return `rgba(${r}, ${g}, ${b}, ${a})`
-}
-
-function countColor(count) {
-  let arr = []
-  for (let i = 0; i < count; i++) {
-    arr.push(randomColor(0.8))
-  }
-  return arr
 }
 
 export default DoughnutChart

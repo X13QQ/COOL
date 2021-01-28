@@ -23,6 +23,7 @@ function ShoppingCart(props) {
   const [shippingstatus, setshipping] = useState(1)
   const [buyerinfo, setbuyer] = useState([])
   var totalprice = 0
+  const [vip, setVip] = useState(true)
   // FakeRes.map((v, i) => (totalprice += Number(v.price) * Number(v.amount)))
 
   //--------------------------------------------------------------------
@@ -70,17 +71,25 @@ function ShoppingCart(props) {
         <div className="d-flex align-items-center justify-content-center mb-3">
           <p className="font-weight-bold mb-0">運費總計 NT$ </p>
           <span className="font-weight-bold">
-            {status === 1 ? 0 : shippingstatus === 2 ? 60 : 150}
+            {status === 1 ? 0 : vip ? 0 : shippingstatus === 2 ? 60 : 150}
           </span>
         </div>
-        <a href="#!" className="font-weight-bold">
+        <a
+          href="#!"
+          className="font-weight-bold"
+          onClick={() => {
+            setTotal(total - 50)
+          }}
+        >
           使用優惠券
         </a>
         <hr style={{ width: '85%', margin: '16px auto' }} />
         <div className="d-flex align-items-center justify-content-center mb-3">
           <p className="font-weight-bold mb-0">結帳總金額 NT$ </p>
           <span id="totalprice2" className="font-weight-bold">
-            {status === 2 ? total + (shippingstatus === 2 ? 60 : 150) : ''}
+            {status === 2
+              ? total + (vip ? 0 : shippingstatus === 2 ? 60 : 150)
+              : ''}
           </span>
         </div>
         <button
@@ -125,13 +134,14 @@ function ShoppingCart(props) {
               } //收件人電話
               let orderdate =
                 today.getFullYear().toString() +
+                '0' +
                 (today.getMonth() + 1).toString() +
                 today.getDate().toString() //訂單日期
               let paymentmethod = shippingstatus //付款方式(包含運送方式) 宅配(VISA)=1 超取=2
               let pickup_store = '' //取貨門市名稱
               let coupon = '' //優惠券代碼
               let invoiceArr = document.getElementsByName('invoice') //隨商品附上發票 0=捐贈 1=隨附
-              let price = total + (shippingstatus === 2 ? 60 : 150)
+              let price = total + (vip ? 0 : shippingstatus === 2 ? 60 : 150)
               let invoiceValue
               for (let i = 0; i < invoiceArr.length; i++) {
                 if (invoiceArr[i].checked) {
@@ -822,12 +832,12 @@ function ShoppingCart(props) {
                   <div className="d-flex justify-content-between">
                     <p className="font-weight-bold">運費：</p>
                     <p className="font-weight-bold">
-                      NT$ {shippingstatus === 2 ? 60 : 150}
+                      NT$ {vip ? 0 : shippingstatus === 2 ? 60 : 150}
                     </p>
                   </div>
                   <div className="d-flex justify-content-between">
                     <p className="font-weight-bold">優惠券(未使用)：</p>
-                    <p className="font-weight-bold">-NT$ 0</p>
+                    <p className="font-weight-bold">(BKRE1)-NT$ 50</p>
                   </div>
                   <div className="d-flex justify-content-between mb-3">
                     <p className="font-weight-bold">合計金額：</p>
@@ -835,7 +845,7 @@ function ShoppingCart(props) {
                       className="final-price font-weight-bold"
                       style={{ fontSize: '20px' }}
                     >
-                      NT$ {total + (shippingstatus === 2 ? 60 : 150)}
+                      NT$ {total + (vip ? 0 : shippingstatus === 2 ? 60 : 150)}
                     </p>
                   </div>
                 </div>

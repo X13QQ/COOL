@@ -40,7 +40,7 @@ app.post("/shoppingcart", function (req, res) {
     sqlInsert,
     [
       req.body.orderno,
-      "",
+      req.body.member_no,
       req.body.name,
       req.body.addresseeaddress,
       req.body.addresseecellphone,

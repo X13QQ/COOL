@@ -43,7 +43,7 @@ function OrderListDashboardContent() {
       .then((res) => res.json())
       .then((data) => {
         setOrderDetail(data)
-        console.log(data)
+        // console.log(data)
       })
       .catch((err) => console.log('錯誤:', err))
   }
@@ -63,11 +63,17 @@ function OrderListDashboardContent() {
         .then((res) => res.json())
         .then((data) => {
           setOrderData(data)
-          console.log(data)
+          // console.log(data)
         })
         .catch((err) => console.log('錯誤:', err))
     }
 
+    getOrderList()
+    getOrderData()
+    getOrderDetail()
+  }, [year])
+
+  useEffect(() => {
     const getHotData = () => {
       let url = new URL(
         'http://localhost:3001/dashboard/report/orderlist/doughnutandpie'
@@ -86,20 +92,27 @@ function OrderListDashboardContent() {
         .catch((err) => console.log('錯誤:', err))
     }
 
-    getOrderList()
-    getOrderData()
-    getOrderDetail()
     getHotData()
-  }, [year, sort])
+  }, [sort])
+  const [desc, setDesc] = useState(1)
 
   return (
     <>
-      <div style={{ padding: '12px 16px' }}>
+      <div
+        className="overflow-auto"
+        style={{ height: '75vh', padding: '12px 16px' }}
+      >
         {/* <h3>訂單記錄</h3> */}
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th className="text-center font-weight-bold" scope="col">
+              <th
+                className="text-center font-weight-bold"
+                scope="col"
+                onClick={() => {
+                  setDesc(desc * -1)
+                }}
+              >
                 #
               </th>
               <th className="text-center font-weight-bold" scope="col">
@@ -125,7 +138,8 @@ function OrderListDashboardContent() {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
+            {setOrderBy()}
             {orderlist.map((v, i) =>
               orderlist.length > 0 ? (
                 <tr key={i}>
@@ -134,7 +148,7 @@ function OrderListDashboardContent() {
                     style={{ lineHeight: '37.53px', fontSize: '14px' }}
                     scope="row"
                   >
-                    {i + 1}
+                    {desc > 0 ? i + 1 : orderlist.length - i}
                   </th>
                   <td
                     className="text-center font-weight-bold"
@@ -347,6 +361,12 @@ function OrderListDashboardContent() {
       </div>
     </>
   )
+
+  function setOrderBy() {
+    orderlist.sort(function (a, b) {
+      return a.id > b.id ? 1 * desc : -1 * desc
+    })
+  }
 }
 
 export default OrderListDashboardContent
