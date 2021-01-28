@@ -10,6 +10,8 @@ function ProductContent(props) {
   // 老師的fetch寫法
   // 步驟一：設一個空productRes，setProductRes為之後fetch response
   const [ProductRes, setProductRes] = useState([])
+  const [ProductSearch, setProductSearch] = useState('')
+
   // async await
   async function getProducts() {
     // 要使用try-catch來作錯誤處理
@@ -69,6 +71,8 @@ function ProductContent(props) {
 
   let pages = Math.ceil(
     ProductRes.filter((item) => {
+      return item.name.slice(0, document.getElementById('product-search-input').value.length).toLowerCase() === ProductSearch || item.brand.slice(0, document.getElementById('product-search-input').value.length).toLowerCase() === ProductSearch
+    }).filter((item) => {
       if (categoryState !== 0) {
         return Number(item.category) === categoryState
       } else if (categoryState === 0) {
@@ -147,6 +151,18 @@ function ProductContent(props) {
             <div className="row">
               <div className="d-none d-lg-block col-lg-3 position-sticky">
                 <ul className="accordion-ul list-unstyled">
+                  <li className="h5">
+                    <div className="d-flex justify-content-between py-2 font-weight-bold">
+                      <input id="product-search-input" type="search" className="py-2 px-2 w-100 font-weight-bold" style={{ outlineOffset: '0px', letterSpacing: '0.2rem', fontSize: '14px', lineHeight: '16px',border:'1px solid black' }}
+                        onChange={() => {
+                          let val = document.getElementById('product-search-input').value.replace(/(^\s*)|(\s*$)/g,"").toLowerCase()
+                          console.log(val)
+                          console.log(document.getElementById('product-search-input').value.replace(/(^\s*)|(\s*$)/g,"").length)
+                          setProductSearch(val)
+                        }}>
+                      </input>
+                    </div>
+                  </li>
                   <li className="h5">
                     <div
                       className="d-flex justify-content-between py-2 font-weight-bold"
@@ -753,6 +769,8 @@ function ProductContent(props) {
                         } else if (brandState === '所有品牌') {
                           return item
                         }
+                      }).filter((item) => {
+                        return item.name.slice(0, document.getElementById('product-search-input').value.replace(/(^\s*)|(\s*$)/g,"").length).toLowerCase() === ProductSearch || item.brand.slice(0, document.getElementById('product-search-input').value.replace(/(^\s*)|(\s*$)/g,"").length).toLowerCase() === ProductSearch
                       })
                       .map((v, i) => {
                         if (
@@ -818,6 +836,8 @@ function ProductContent(props) {
                         } else if (brandState === '所有品牌') {
                           return item
                         }
+                      }).filter((item) => {
+                        return item.name.slice(0, document.getElementById('product-search-input').value.replace(/(^\s*)|(\s*$)/g,"").length).toLowerCase() === ProductSearch || item.brand.slice(0, document.getElementById('product-search-input').value.replace(/(^\s*)|(\s*$)/g,"").length).toLowerCase() === ProductSearch
                       })
                       .map((v, i) => {
                         if (
@@ -882,6 +902,8 @@ function ProductContent(props) {
                         } else if (brandState === '所有品牌') {
                           return item
                         }
+                      }).filter((item) => {
+                        return item.name.slice(0, document.getElementById('product-search-input').value.replace(/(^\s*)|(\s*$)/g,"").length).toLowerCase() === ProductSearch || item.brand.slice(0, document.getElementById('product-search-input').value.replace(/(^\s*)|(\s*$)/g,"").length).toLowerCase() === ProductSearch
                       })
                       .map((v, i) => {
                         console.log(v)
@@ -947,6 +969,8 @@ function ProductContent(props) {
                         } else if (brandState === '所有品牌') {
                           return item
                         }
+                      }).filter((item) => {
+                        return item.name.slice(0, document.getElementById('product-search-input').value.replace(/(^\s*)|(\s*$)/g,"").length).toLowerCase() === ProductSearch || item.brand.slice(0, document.getElementById('product-search-input').value.replace(/(^\s*)|(\s*$)/g,"").length).toLowerCase() === ProductSearch
                       })
                       .map((v, i) => {
                         console.log(v)
