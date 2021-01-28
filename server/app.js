@@ -31,7 +31,7 @@ app.post("/shoppingcart", function (req, res) {
   var getinsertId = "";
   const sqlInsert =
     "INSERT INTO cool_order (order_no, member_no, name, receiver_address, receiver_cellphone, pickup_store, invoice, date, price, status, coupon) " +
-    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '0', ?) ";
+    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '1', ?) ";
   const sqlInsert2 =
     "INSERT INTO cool_order_detailed ( order_id,product_id,name,amount,size,brand,color,price ) VALUES ( ?,?,?,?,?,?,?,? ) ";
 

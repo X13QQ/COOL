@@ -162,7 +162,7 @@ function ShoppingCart(props) {
                         '-' +
                         today.getDate().toString(), //訂單日期
                   paymentmethod: paymentmethod, //付款方式
-                  coupon: 'coupon', //優惠券
+                  coupon: 'BKRE1', //優惠券
                   price: price, //總價格
                   data: FakeRes,
                 },
