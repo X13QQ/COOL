@@ -108,7 +108,6 @@ function DetailContent(props) {
       }
       getUser()
     }
-    console.log('123')
   }, [ProductBrand, ProductId, FavoriteState, props.whetherLoginParent])
   //
   //
