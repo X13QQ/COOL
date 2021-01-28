@@ -9,8 +9,7 @@ const LineChart = (props) => {
   const type = props.type
   const typeName =
     type === 'REVENUE' ? '銷售金額' : type === 'ORDERCOUNT' ? '訂單數量' : ''
-  const titleText =
-    time === 'MONTH' ? '營業額(月)' : time === 'QUARTER' ? '營業額(季)' : ''
+  const titleText = time === 'MONTH' ? '(月)' : time === 'QUARTER' ? '(季)' : ''
 
   const orderData = props.orderData
 
@@ -79,18 +78,16 @@ const LineChart = (props) => {
       {
         label: `${typeName} ${year}`,
         data: sumAll,
-        borderColor: ['rgba(255,206,86,0.2)'],
-        backgroundColor: ['rgba(255,206,86,0.2)'],
-        pointBackgroundColor: ['rgba(255,206,86,0.2)'],
-        pointBorderColor: ['rgba(255,206,86,0.2)'],
+        fill: true,
+        backgroundColor: 'rgba(75,192,192,0.2)',
+        borderColor: 'rgba(75,192,192,1)',
       },
       {
         label: `${typeName} ${lastyear}`,
         data: lastsumAll,
-        borderColor: ['rgba(255,206,86,0.2)'],
-        backgroundColor: ['rgba(255,206,86,0.2)'],
-        pointBackgroundColor: ['rgba(255,206,86,0.2)'],
-        pointBorderColor: ['rgba(255,206,86,0.2)'],
+        fill: false,
+        backgroundColor: 'rgba(45,15,45,0.2)',
+        borderColor: 'rgba(45,15,45,1)',
       },
     ],
   }

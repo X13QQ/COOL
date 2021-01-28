@@ -1139,6 +1139,9 @@ function HeaderHome(props) {
               </ul>
             </div>
           </nav>
+          <div className="page-title">
+            <h2 className="text-center text-sm-right font-italic position-relative">Let's Share Stories !</h2>
+          </div>
         </div>
 
         {show && modal === 1

@@ -555,7 +555,7 @@ app.get("/news", function (req, res) {
 //營運分析 基本報表
 app.get("/dashboard/report/orderlist", function (req, res) {
   const sqlSelect =
-    "SELECT order_no, date, name, receiver_cellphone AS phone, price " +
+    "SELECT id, order_no, date, name, receiver_cellphone AS phone, price " +
     ", CASE status WHEN '1' THEN '處理中' WHEN '2' THEN '已完成' WHEN '3' THEN '申請退款' ELSE '' END AS status " +
     "FROM cool_order ";
   db.query(sqlSelect, [], (req, result, fields) => {
@@ -563,6 +563,65 @@ app.get("/dashboard/report/orderlist", function (req, res) {
   });
 });
 
+<<<<<<< HEAD
+=======
+//營運分析 基本報表
+app.get("/dashboard/report/orderdetail", function (req, res) {
+  const sqlSelect =
+    "SELECT * " +
+    "FROM cool_order_detailed " +
+    "ORDER BY order_id, CAST(product_id AS signed) ";
+  db.query(sqlSelect, [], (req, result, fields) => {
+    res.send(result);
+  });
+});
+
+//營運分析 基本報表
+// app.get("/dashboard/report/orderlist/chart", function (req, res) {
+//   const time = req.query.time
+//   const type = req.query.type === 'REVENUE' ? 'SUM(price)' : req.query.type === 'ORDERCOUNT' ? ' COUNT(id)' : ''
+//   console.log(type)
+//   const sqlSelect =`
+//     SELECT YEAR(date) AS year, MONTH(date) AS time, ${type} AS sum 
+//     FROM cool_order 
+//     WHERE YEAR(date) in (?, ?) 
+//     GROUP BY YEAR(date), ${time}(date) 
+//     ORDER BY year, time
+//     `;
+//     db.query(sqlSelect, [req.query.year, req.query.lastyear], (req, result, fields) => {
+//       res.send(result);
+//     });
+// });
+
+//營運分析 基本報表
+app.get("/dashboard/report/orderlist/chart", function (req, res) {
+  const sqlSelect =`
+    SELECT YEAR(date) AS year, MONTH(date) AS time, SUM(price) AS price, COUNT(id) AS sum 
+    FROM cool_order 
+    WHERE YEAR(date) in (?, ?) 
+    GROUP BY YEAR(date), MONTH(date) 
+    ORDER BY year, time
+    `;
+    db.query(sqlSelect, [req.query.year, req.query.lastyear], (req, result, fields) => {
+      res.send(result);
+    });
+});
+
+//營運分析 基本報表
+app.get("/dashboard/report/orderlist/doughnutandpie", function (req, res) {
+  const sort = req.query.sort
+  const sqlSelect =`
+    SELECT ${sort}, SUM(amount) AS amount, ROUND(SUM(amount)/(SELECT SUM(amount) FROM cool_order_detailed)*100, 2) AS percent
+    FROM cool_order_detailed 
+    GROUP BY ${sort}
+    ORDER BY amount DESC
+    `;
+    db.query(sqlSelect, [], (req, result, fields) => {
+      res.send(result);
+    });
+});
+
+>>>>>>> 60b4afba0e149b5c3ea0f8fa7406cd09e30e3b70
 app.listen(3001, () => {
   console.log("port 3001");
 });

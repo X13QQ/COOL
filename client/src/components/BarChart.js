@@ -10,7 +10,7 @@ const BarChart = (props) => {
   const typeName =
     type === 'REVENUE' ? '銷售金額' : type === 'ORDERCOUNT' ? '訂單數量' : ''
   const titleText = time === 'MONTH' ? '(月)' : time === 'QUARTER' ? '(季)' : ''
-
+  const count = time === 'MONTH' ? 12 : time === 'QUARTER' ? 4 : 0
   const orderData = props.orderData
 
   // 今年月報表
@@ -77,67 +77,15 @@ const BarChart = (props) => {
       {
         label: `${typeName} ${year}`,
         data: sumAll,
-        borderColor: [
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(255, 99, 132, 0.8)',
-          'rgba(255, 99, 132, 0.8)',
-        ],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(255, 99, 132, 0.2)',
-        ],
+        borderColor: countColor('rgba(255, 99, 132, 0.8)', count),
+        backgroundColor: countColor('rgba(255, 99, 132, 0.2)', count),
         borderWidth: 1,
       },
       {
         label: `${typeName} ${lastyear}`,
         data: lastsumAll,
-        borderColor: [
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-          'rgba(54, 162, 235, 0.8)',
-        ],
-        backgroundColor: [
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-        ],
+        borderColor: countColor('rgba(54, 162, 235, 0.8)', count),
+        backgroundColor: countColor('rgba(54, 162, 235, 0.2)', count),
         borderWidth: 1,
       },
     ],
@@ -181,6 +129,14 @@ function QUARTER(sum) {
       s += Number(el)
     }
   })
+  return arr
+}
+
+function countColor(color, count) {
+  let arr = []
+  for (let i = 0; i < count; i++) {
+    arr.push(color)
+  }
   return arr
 }
 

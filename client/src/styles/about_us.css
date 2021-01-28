@@ -6,7 +6,6 @@ body {
   
   .about-header {
     height: 600px;
-    overflow-x: hidden;
   }
   
   @media (min-width: 1px) {

@@ -6,7 +6,6 @@ body {
 
 .home-header {
   height: 600px;
-  overflow-x: hidden;
 }
 
 @media (min-width: 1px) {
@@ -377,6 +376,45 @@ body {
 .product-hover-menu ul li a {
   color: black;
   font-size: 12px;
+}
+/*  */
+
+
+.home-header .page-title {
+  margin-top: 200px;
+  /* padding: 0px 70px 0px 0px; */
+}
+
+.home-header .page-title h2 {
+  color: white;
+  font-size: 70px;
+  font-weight: 900;
+  right: -100px;
+}
+
+.home-header .page-title h2:before{
+  content: "Let's Share Stories !";
+  position: absolute;
+  top: -10px;
+  left: 210px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.home-header .page-title h2:after{
+  content: "Let's Share Stories !";
+  position: absolute;
+  top: 20px;
+right: -10px;  
+color: rgba(255, 255, 255, 0.3);
+}
+
+@media (min-width: 768px) {
+  .home-header .page-title {
+    padding: 0px 70px 0px 0px;
+  }
+  .home-header .page-title h2 {
+    font-size: 70px;
+  }
 }
 /*  */
 .home-main .shop-now-top {
