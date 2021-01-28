@@ -563,8 +563,6 @@ app.get("/dashboard/report/orderlist", function (req, res) {
   });
 });
 
-<<<<<<< HEAD
-=======
 //營運分析 基本報表
 app.get("/dashboard/report/orderdetail", function (req, res) {
   const sqlSelect =
@@ -621,7 +619,6 @@ app.get("/dashboard/report/orderlist/doughnutandpie", function (req, res) {
     });
 });
 
->>>>>>> 60b4afba0e149b5c3ea0f8fa7406cd09e30e3b70
 app.listen(3001, () => {
   console.log("port 3001");
 });
