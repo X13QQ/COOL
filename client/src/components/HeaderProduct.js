@@ -1099,7 +1099,7 @@ function HeaderProduct(props) {
                     }}
                   >
                     <img
-                      src={'/images/素材/icon/shopping_cart_G.svg'}
+                      src={'/images/素材/icon/shopping_cart_W.svg'}
                       alt={''}
                     ></img>
                     {shoppingCartStorage ? (
