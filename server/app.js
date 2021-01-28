@@ -10,7 +10,7 @@ const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
+  database: process.env.DB_DATABASE
 });
 
 app.use(bodyParser.json());
@@ -201,6 +201,35 @@ app.get("/clothing/:id", function (req, res) {
     }
   );
 });
+
+//clothingBackstage
+app.get("/clothingBackstage/:category", function (req, res) {
+  db.query(
+    "SELECT DISTINCT brand FROM product " + "WHERE category = ?",
+    [req.params.category],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+app.get("/clothingBackstage/:brand/:category", function (req, res) {
+  db.query(
+    "SELECT name FROM product " + "WHERE brand = ? AND category = ?",
+    [req.params.brand,req.params.category],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+
 
 // 會員登錄 註冊 忘記密碼
 app.post("/profile/:logintype", function (req, res) {
@@ -532,37 +561,6 @@ app.get("/dashboard/report/orderlist", function (req, res) {
   db.query(sqlSelect, [], (req, result, fields) => {
     res.send(result);
   });
-});
-
-//營運分析 基本報表
-// app.get("/dashboard/report/orderlist/chart", function (req, res) {
-//   const time = req.query.time
-//   const type = req.query.type === 'REVENUE' ? 'SUM(price)' : req.query.type === 'ORDERCOUNT' ? ' COUNT(id)' : ''
-//   console.log(type)
-//   const sqlSelect =`
-//     SELECT YEAR(date) AS year, MONTH(date) AS time, ${type} AS sum 
-//     FROM cool_order 
-//     WHERE YEAR(date) in (?, ?) 
-//     GROUP BY YEAR(date), ${time}(date) 
-//     ORDER BY year, time
-//     `;
-//     db.query(sqlSelect, [req.query.year, req.query.lastyear], (req, result, fields) => {
-//       res.send(result);
-//     });
-// });
-
-//營運分析 基本報表
-app.get("/dashboard/report/orderlist/chart", function (req, res) {
-  const sqlSelect =`
-    SELECT YEAR(date) AS year, MONTH(date) AS time, SUM(price) AS price, COUNT(id) AS sum 
-    FROM cool_order 
-    WHERE YEAR(date) in (?, ?) 
-    GROUP BY YEAR(date), MONTH(date) 
-    ORDER BY year, time
-    `;
-    db.query(sqlSelect, [req.query.year, req.query.lastyear], (req, result, fields) => {
-      res.send(result);
-    });
 });
 
 app.listen(3001, () => {
