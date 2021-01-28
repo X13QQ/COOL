@@ -46,7 +46,7 @@ function News() {
 
           // 設定資料到ProductRes狀態
           setNewsImages(data)
-          // console.log(data)
+          console.log(data)
         }
       } catch (error) {
         // 發生錯誤的處理情況
@@ -505,10 +505,8 @@ function News() {
                     }
                   }}
                 >
-                  <ul
-                    className="sort-ul  list-unstyled mb-0"
-                    style={{ backgroundColor: 'white' }}
-                  >
+                  <ul className="sort-ul  list-unstyled mb-0">
+                    {/*  */}
                     <li>
                       <a
                         href="#!"
@@ -533,6 +531,7 @@ function News() {
                         從日期最舊
                       </a>
                     </li>
+                    {/*  */}
                   </ul>
                 </div>
               </div>
@@ -603,6 +602,7 @@ function News() {
                               </div>
                             </div>
                           </div>
+                          )
                         </>
                       )
                     }
@@ -664,6 +664,7 @@ function News() {
                             </div>
                           </div>
                         </div>
+                        )
                       </>
                     )
                   })

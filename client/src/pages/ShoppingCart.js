@@ -32,6 +32,7 @@ function ShoppingCart(props) {
   }, [JSON.parse(localStorage.getItem('cartList'))])
 
   useEffect(() => {
+    // console.log('buyerinfo[0]' + JSON.stringify(buyerinfo[0]))
     // console.log(FakeRes)
     const SignUp = (data) => {
       console.log(data)
@@ -140,14 +141,26 @@ function ShoppingCart(props) {
               }
               setbuyer([
                 {
-                  orderno: orderdate + 'xxxx',
-                  member_no: '', //會員編號 從登入狀態抓
+                  orderno: orderdate + '0001',
+                  member_no: '1', //會員編號 從登入狀態抓
                   name: name(), //取件人
                   addresseeaddress: addresseeaddress(), //宅配地址
                   addresseecellphone: addresseecellphone(), //電話
                   pickup_store: pickup_store, //超取店家
                   invoice: invoiceValue, //發票
-                  date: today, //訂單日期
+                  date:
+                    (today.getMonth() + 1).toString().length === 1
+                      ? today.getFullYear().toString() +
+                        '-' +
+                        +'0' +
+                        (today.getMonth() + 1).toString() +
+                        '-' +
+                        today.getDate().toString()
+                      : today.getFullYear().toString() +
+                        '-' +
+                        (today.getMonth() + 1).toString() +
+                        '-' +
+                        today.getDate().toString(), //訂單日期
                   paymentmethod: paymentmethod, //付款方式
                   coupon: 'coupon', //優惠券
                   price: price, //總價格
