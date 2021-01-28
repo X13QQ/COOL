@@ -24,8 +24,8 @@ const credentials = {
   },
 };
 var emailService = require("./lib/email.js")(credentials);
-// 
-// 訂單寫入
+//
+// 正在測試的訂單寫入
 
 app.post("/shoppingcart", function (req, res) {
   var getinsertId = "";
@@ -201,6 +201,35 @@ app.get("/clothing/:id", function (req, res) {
     }
   );
 });
+
+//clothingBackstage
+app.get("/clothingBackstage/:category", function (req, res) {
+  db.query(
+    "SELECT DISTINCT brand FROM product " + "WHERE category = ?",
+    [req.params.category],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+app.get("/clothingBackstage/:brand/:category", function (req, res) {
+  db.query(
+    "SELECT name FROM product " + "WHERE brand = ? AND category = ?",
+    [req.params.brand,req.params.category],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(result);
+      res.send(JSON.stringify(result));
+    }
+  );
+});
+
 
 // 會員登錄 註冊 忘記密碼
 app.post("/profile/:logintype", function (req, res) {

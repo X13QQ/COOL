@@ -18,6 +18,9 @@ function ClothingBackstage() {
 
   const [choose, setChoose] = useState(0)
 
+  const [categoryDatas, setCategoryDatas] = useState(0)
+  const [clothingCategory, setclothingCategory] = useState()
+  const [pdbybrand, setPdbyBrand] = useState([])
   useEffect(() => {
     // async await
     async function getClothing() {
@@ -56,13 +59,65 @@ function ClothingBackstage() {
       .catch((err) => console.log(err))
   }
 
+  useEffect(() => {
+    // async await
+    async function getClothinGbackstage() {
+      try {
+        // 從伺服器得到資料
+        const response = await fetch(
+          'http://localhost:3001/clothingbackstage/' + clothingCategory,
+          {
+            method: 'get',
+          }
+        )
+        if (response.ok) {
+          // 剖析資料為JS的數值
+          const Categorydata = await response.json()
+
+          // // 設定資料到ProductRes狀態
+          setCategoryDatas(Categorydata)
+          console.log(Categorydata)
+        }
+      } catch (error) {
+        // 發生錯誤的處理情況
+        alert('無法得到伺服器資料，請稍後再重試')
+        console.log(error)
+      }
+    }
+    getClothinGbackstage(clothingCategory)
+  }, [clothingCategory])
+
+  async function getproductbybrand(brand, category) {
+    try {
+      // 從伺服器得到資料
+      const response = await fetch(
+        'http://localhost:3001/clothingbackstage/' + brand + '/' + category,
+        {
+          method: 'get',
+        }
+      )
+      if (response.ok) {
+        // 剖析資料為JS的數值
+        const pdbybrand = await response.json()
+
+        // // 設定資料到ProductRes狀態
+        setPdbyBrand(pdbybrand)
+        console.log(pdbybrand)
+      }
+    } catch (error) {
+      // 發生錯誤的處理情況
+      alert('無法得到伺服器資料，請稍後再重試')
+      console.log(error)
+    }
+  }
+
   const modal = () => {
     return (
       <div
         id="what"
         className="clothingbackstage clothing-modal d-flex justify-content-center align-items-center"
         onClick={(e) => {
-          // console.log(e.target.id)
+          console.log(e.target.id)
           if (e.target.id === 'what') {
             setStatus(0)
           }
@@ -105,104 +160,118 @@ function ClothingBackstage() {
             </div>
             <div className="col-6">
               <Accordion defaultActiveKey="0">
-                {clothingData.map((val, key) => {
-                  return (
-                    <Card className="pb-3">
-                      {/* 帽子標籤 ↓ */}
-                      <Accordion.Toggle
-                        as={Card.Header}
-                        eventKey={val.id}
-                        className="row justify-content-between"
-                      >
-                        <a
-                          href="#!"
-                          className="clothing-accordion-a  d-flex align-items-center font-weight-bold text-decoration-none h5"
-                          style={{ color: '#353c1d' }}
+                {/* {clothingData.map((val, key) => {
+                  return ( */}
+                <Card className="pb-3">
+                  {/* 帽子標籤 ↓ */}
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    eventKey={' '}
+                    className="row justify-content-between"
+                  >
+                    <a
+                      href="#!"
+                      className="clothing-accordion-a  d-flex align-items-center font-weight-bold text-decoration-none h5"
+                      style={{ color: '#353c1d' }}
+                    >
+                      <div>
+                        <select
+                          id="choose_category"
+                          className="custom-select clothingbackstage-select"
+                          style={{ width: '200px' }}
+                          onChange={(e) => {
+                            // console.log(e.target)
+                            setclothingCategory(e.target.value)
+                          }}
                         >
-                          <form>
-                            <label for="country">Country</label>
-                            <select id="country" name="country">
-                              <option value="australia">Australia</option>
-                              <option value="canada">Canada</option>
-                              <option value="usa">USA</option>
-                            </select>
-                          </form>
-                          <img
-                            src="images/素材/icon/arrow_G.svg"
-                            style={{
-                              width: '20px',
-                              transform: 'rotate(-90deg)',
-                              position: 'relative',
-                              top: '-3.5px',
-                              margin: '0 0 0 15px',
+                          <option value="1">上衣</option>
+                          <option value="2">帽子</option>
+                          <option value="3">外套</option>
+                          <option value="4">褲子</option>
+                          <option value="5">鞋款</option>
+                          <option value="6">配件</option>
+                        </select>
+                      </div>
+                    </a>
+                    <a href="#!">
+                      <FontAwesomeIcon
+                        className="mx-3"
+                        style={{ cursor: 'pointer' }}
+                        icon={faPlusCircle}
+                      />
+                    </a>
+                    <a href="#!">
+                      <FontAwesomeIcon
+                        className="mx-3"
+                        style={{ cursor: 'pointer' }}
+                        icon={faTrash}
+                      />
+                    </a>
+                  </Accordion.Toggle>
+
+                  <Accordion.Collapse
+                    eventKey={' '}
+                    id={' '}
+                    // className={
+                    //   'clothing-accordion-ul list-unstyled mb-0 ' +
+                    //   (accordionActived ? 'accordion-actived' : '')
+                    // }
+                  >
+                    <li className="px-5">
+                      <div>
+                        <div className="row mx-2 my-2">
+                          <span>品牌：</span>
+                          <select
+                            className="custom-select clothingbackstage-select "
+                            style={{ width: '200px' }}
+                            id="brand"
+                            onChange={(e) => {
+                              console.log(e.target.value)
+                              getproductbybrand(
+                                e.target.value,
+                                document.getElementById('choose_category').value
+                              )
                             }}
-                            alt={' '}
-                          />
-                        </a>
-                        <a href="#!">
-                          <FontAwesomeIcon
-                            className="mx-3"
-                            style={{ cursor: 'pointer' }}
-                            icon={faPlusCircle}
-                          />
-                          <FontAwesomeIcon
-                            className="mx-3"
-                            style={{ cursor: 'pointer' }}
-                            icon={faTrash}
-                          />
-                        </a>
-                      </Accordion.Toggle>
+                          >
+                            {categoryDatas.map((val, key) => {
+                              return (
+                                <option value={val.brand}>{val.brand}</option>
+                              )
+                            })}
+                          </select>
+                        </div>
 
-                      <Accordion.Collapse
-                        eventKey={val.id}
-                        id={`sort${val.id}`}
-                        // className={
-                        //   'clothing-accordion-ul list-unstyled mb-0 ' +
-                        //   (accordionActived ? 'accordion-actived' : '')
-                        // }
-                      >
-                        <li className="px-5">
-                          <div className="">
-                            <DropdownButton
-                              id="dropdown-basic-button"
-                              className="mx-2 my-2"
-                              title="品牌"
-                            >
-                              <Dropdown.Item href="#/action-1">
-                                黑
-                              </Dropdown.Item>
-                            </DropdownButton>
+                        <div className="row mx-2 my-2">
+                          <span>品名：</span>
+                          <select
+                            className="custom-select clothingbackstage-select "
+                            style={{ width: '200px' }}
+                          >
+                            {pdbybrand.map((val, key) => {
+                              return (
+                                <option value={val.name}>{val.name}</option>
+                              )
+                            })}
+                          </select>
+                        </div>
 
-                            <DropdownButton
-                              id="dropdown-basic-button"
-                              className="mx-2 my-2"
-                              title="品名"
-                            >
-                              <Dropdown.Item href="#/action-1">S</Dropdown.Item>
-                            </DropdownButton>
-
-                            <Form.Group controlId="amount" className="row">
-                              <Form.Label
-                                style={{
-                                  fontSize: '16px',
-                                  padding: '0 0 0 28px',
-                                }}
-                                className="mx-2 my-2"
-                              >
-                                金額
-                              </Form.Label>
-                              <Form.Control
-                                type="number"
-                                // placeholder="amount"
-                                className="col-4 mx-2 col-4"
-                              />
-                            </Form.Group>
-                          </div>
-                        </li>
-                      </Accordion.Collapse>
-                    </Card>
-                  )
-                })}
+                        <div className="row mx-2 my-2">
+                          <span>金額：</span>
+                          <select
+                            className="custom-select clothingbackstage-select "
+                            style={{ width: '200px' }}
+                          >
+                            {categoryDatas.map((val, key) => {
+                              return <option value="1">{val.price}</option>
+                            })}
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                  </Accordion.Collapse>
+                </Card>
+                {/* )
+                })} */}
               </Accordion>
             </div>
           </div>
